@@ -1,8 +1,8 @@
-import { Paragraph } from "@/components/paragraph";
-import type { Page } from "@/lib/zod/page";
+import { Paragraph } from '@/components/paragraph'
+import type { Page } from '@/lib/zod/page'
 
 interface PageProps {
-  page: Page;
+  page: Page
 }
 
 export function Page({ page }: PageProps) {
@@ -12,5 +12,5 @@ export function Page({ page }: PageProps) {
         <Paragraph key={paragraph.id} paragraph={paragraph} />
       ))}
     </div>
-  );
+  )
 }

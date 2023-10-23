@@ -1,22 +1,22 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
-import { useState } from "react";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
+import { useState } from 'react'
 
-import { MainMenu, MenuToggle } from "@/components/main-menu/main-menu";
-import { Menu } from "@/lib/zod/menu";
-import SearchIcon from "@/styles/icons/search.svg";
-import WunderIcon from "@/styles/icons/wunder.svg";
+import { MainMenu, MenuToggle } from '@/components/main-menu/main-menu'
+import { Menu } from '@/lib/zod/menu'
+import SearchIcon from '@/styles/icons/search.svg'
+import WunderIcon from '@/styles/icons/wunder.svg'
 
-import { LanguageSwitcher } from "./language-switcher";
-import { UserMenu } from "./user-menu";
+import { LanguageSwitcher } from './language-switcher'
+import { UserMenu } from './user-menu'
 
 interface HeaderProps {
-  menu: Menu;
+  menu: Menu
 }
 
 export function Header({ menu }: HeaderProps) {
-  const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
+  const [isMainMenuOpen, setIsMainMenuOpen] = useState(false)
 
   return (
     <header className="z-50 flex-shrink-0 border-b border-finnishwinter bg-white text-primary-600 md:sticky md:top-0">
@@ -35,29 +35,29 @@ export function Header({ menu }: HeaderProps) {
         setIsOpen={setIsMainMenuOpen}
       />
     </header>
-  );
+  )
 }
 
 function HomeLink() {
-  const { locale } = useRouter();
-  const { t } = useTranslation();
+  const { locale } = useRouter()
+  const { t } = useTranslation()
   return (
     <Link href="/" locale={locale} className="inline">
       <WunderIcon className="w-32" />
-      <span className="sr-only">{t("homepage-link")}</span>
+      <span className="sr-only">{t('homepage-link')}</span>
     </Link>
-  );
+  )
 }
 
 function SearchLink() {
-  const { locale } = useRouter();
-  const { t } = useTranslation();
+  const { locale } = useRouter()
+  const { t } = useTranslation()
   return (
     <Link href="/search" locale={locale} className="hover:underline">
       <span className="sr-only sm:not-sr-only sm:mr-2 sm:inline">
-        {t("search")}
+        {t('search')}
       </span>
       <SearchIcon className="inline-block h-6 w-6" aria-hidden="true" />
     </Link>
-  );
+  )
 }
