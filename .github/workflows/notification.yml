@@ -18,7 +18,7 @@ jobs:
           with:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
-            photo: .github/issues.jpg
+            photo: issues.jpg
         - name: Send Telegram Message for Issue
           uses: appleboy/telegram-action@master
           with:
