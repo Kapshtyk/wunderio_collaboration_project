@@ -18,7 +18,6 @@ jobs:
           with:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
-            disable_web_page_preview: true
             format: html
             message: |
               <b>Event:</b> ${{ github.event_name }} ${{github.event.action}}.
@@ -27,7 +26,7 @@ jobs:
               
               <b>Assignees:</b> ${{ join(github.event.issue.assignees.*.login, ', ') }}
               
-              <a href="${{ github.event.issue.html_url }}">Link to the issue</a>
+              <a href="${{ github.event.issue.html_url }}">${{ github.event.issue.title }}</a>
           
     send_pr_message:
       name: Send PR Message
@@ -47,7 +46,7 @@ jobs:
 
               <b>Reviewers:</b> ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}
 
-              <a href="${{ github.event.pull_request.html_url }}">Link to the PR</a>
+              <a href="${{ github.event.pull_request.html_url }}">${{ github.event.pull_request.title }}</a>
               
     send_review_message:
       name: Send Review Message
