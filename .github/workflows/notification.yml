@@ -19,15 +19,16 @@ jobs:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
             disable_web_page_preview: true
+            photo: .github/issues.jpg
             format: html
             message: |
-              Issue event: ${{ github.event_name }} ${{github.event.action}}.
-              <b>Title: ${{ github.event.issue.title }}</b>
-              <span class="tg-spoiler">Body: ${{ github.event.issue.body }}</span>
+              <b>Event:</b> ${{ github.event_name }} ${{github.event.action}}.
+              <b>Title:</b> ${{ github.event.issue.title }}
+              <b>Body:</b> ${{ github.event.issue.body }}
               
-              URL: ${{ github.event.issue.html_url }}
-              
-              Assignees: ${{ join(github.event.issue.assignees.*.login, ', ') }}
+              <b>Assignees:</b> ${{ join(github.event.issue.assignees.*.login, ', ') }}
+
+              <a href="${{ github.event.issue.html_url }}">Link to the issue</a>
               
     send_pr_message:
       name: Send PR Message
@@ -40,13 +41,13 @@ jobs:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
-              PR Event: ${{ github.event_name }} ${{ github.event.action }}
-              Title: ${{ github.event.pull_request.title }}
-              Body: ${{ github.event.pull_request.body }}
-              
-              URL: ${{ github.event.pull_request.html_url }}
+              <b>Event:</b> ${{ github.event_name }} ${{ github.event.action }}
+              <b>Title:</b> ${{ github.event.pull_request.title }}
+              b>Body:</b> ${{ github.event.pull_request.body }}
 
-              Reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}
+              <b>Reviewers:</b> ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}
+
+              <a href="${{ github.event.pull_request.html_url }}">Link to the PR</a>
               
     send_review_message:
       name: Send Review Message
