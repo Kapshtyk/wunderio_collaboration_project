@@ -19,17 +19,15 @@ jobs:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
             disable_web_page_preview: true
-            photo: .github/issues.jpg
             format: html
             message: |
               <b>Event:</b> ${{ github.event_name }} ${{github.event.action}}.
               <b>Title:</b> ${{ github.event.issue.title }}
               <b>Body:</b> ${{ github.event.issue.body }}
-              
               <b>Assignees:</b> ${{ join(github.event.issue.assignees.*.login, ', ') }}
-
               <a href="${{ github.event.issue.html_url }}">Link to the issue</a>
-              
+            photo: "https://github.com/BCH-Team-2/wunderio/blob/main/.github/issues.jpg"
+          
     send_pr_message:
       name: Send PR Message
       if: github.event_name == 'pull_request'
