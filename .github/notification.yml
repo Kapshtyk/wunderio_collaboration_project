@@ -1,0 +1,25 @@
+name: telegram message
+on: 
+  issues:
+    types: [opened, edited, closed, reopened, assigned]
+  pull_request:
+    types: [opened, edited, closed, reopened, assigned]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+  
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: send telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            ${{ github.actor }} created ${{ github.event_name }} in ${{ github.repository }}.:
+            
+            Issue: ${{ github.event.issue.html_url }}
+            Pull Request: ${{ github.event.pull_request.html_url }}
+            Pull Request Review: ${{ github.event.review.html_url }}
