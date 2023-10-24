@@ -18,8 +18,10 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            ${{ github.actor }} created ${{ github.event_name }} in ${{ github.repository }}.:
+            ${{ github.actor }} created or updated ${{ github.event_name }} ${{github.event_name.title}} in ${{ github.repository }}:
             
             Issue: ${{ github.event.issue.html_url }}
             Pull Request: ${{ github.event.pull_request.html_url }}
             Pull Request Review: ${{ github.event.review.html_url }}
+
+
