@@ -20,12 +20,9 @@ jobs:
           message: |
             ${{ github.actor }} created or updated ${{ github.event_name }}:
 
-            Event details: 
-            Label: ${{ github.event.label }}
-            Assignee: ${{ github.event.assignee }}
-            Title: ${{ github.event.issue.title }} ${{ github.event.pull_request.title }} ${{ github.event.pull_request_review.title }}
-            
-
-            
+              
+            Issue: ${{ github.event.issue.html_url }} for ${{ github.event.issue.assignees }}
+            Pull Request: ${{ github.event.pull_request.html_url }}
+            Pull Request Review: ${{ github.event.review.html_url }}
 
 
