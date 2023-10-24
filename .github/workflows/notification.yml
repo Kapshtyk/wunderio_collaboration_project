@@ -20,9 +20,12 @@ jobs:
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
               Issue Event: ${{ github.event_name }}
-              Issue Title: ${{ github.event.issue.title }}
-              Issue Deadline: ${{ github.event.issue.project_card.fields.finish_date }}
-              Issue URL: ${{ github.event.issue.html_url }}
+              ${{github.event.action}} 
+              ${{ github.event.issue.title }}
+              ${{ github.event.issue.body }}
+              
+              ${{ github.event.issue.html_url }}
+              
               Assignees: ${{ join(github.event.issue.assignees.*.login, ', ') }}
               
     send_pr_message:
@@ -37,7 +40,13 @@ jobs:
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
               PR Event: ${{ github.event_name }}
-              PR URL: ${{ github.event.pull_request.html_url }}
+              ${{ github.event.action }}
+              ${{ github.event.pull_request.title }}
+              ${{ github.event.pull_request.body }}
+              
+              ${{ github.event.pull_request.html_url }}
+
+              Reviewers: ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}
               
     send_review_message:
       name: Send Review Message
@@ -51,4 +60,4 @@ jobs:
             token: ${{ secrets.TELEGRAM_TOKEN }}
             message: |
               PR Review Event: ${{ github.event_name }}
-              Review URL: ${{ github.event.review.html_url }}
+              ${{ github.event.review.html_url }}
