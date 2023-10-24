@@ -13,13 +13,6 @@ jobs:
       if: github.event_name == 'issues'
       runs-on: ubuntu-latest
       steps:
-        - name: Send Telegram Image for Issue
-          uses: appleboy/telegram-action@master
-          with:
-            to: ${{ secrets.TELEGRAM_TO }}
-            token: ${{ secrets.TELEGRAM_TOKEN }}
-            message: send photo message
-            photo: "AgACAgIAAxkBAAMGZTebGJApV4j8NjJpiX9HPeYrq1YAApzPMRvL-MFJSOsMe5me_VYBAAMCAANzAAMwBA"
         - name: Send Telegram Message for Issue
           uses: appleboy/telegram-action@master
           with:
@@ -33,7 +26,6 @@ jobs:
               <b>Body:</b> ${{ github.event.issue.body }}
               <b>Assignees:</b> ${{ join(github.event.issue.assignees.*.login, ', ') }}
               <a href="${{ github.event.issue.html_url }}">Link to the issue</a>
-            photo: "AgACAgIAAxkBAAMGZTebGJApV4j8NjJpiX9HPeYrq1YAApzPMRvL-MFJSOsMe5me_VYBAAMCAANzAAMwBA"
           
     send_pr_message:
       name: Send PR Message
