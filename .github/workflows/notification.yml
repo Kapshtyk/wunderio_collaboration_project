@@ -3,26 +3,52 @@ on:
   issues:
     types: [opened, edited, closed, reopened, assigned]
   pull_request:
-    types: [opened, edited, closed, reopened, assigned]
+    types: [opened, edited, closed, reopened, assigned, review_requested]
   pull_request_review:
     types: [submitted, edited, dismissed]
-  
+
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: send telegram message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            ${{ github.actor }} created or updated ${{ github.event_name }}:
-
+    send_issue_message:
+      name: Send Issue Message
+      if: github.event_name == 'issues'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Send Telegram Message for Issue
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            message: |
+              Issue Event: ${{ github.event_name }}
+              Issue Title: ${{ github.event.issue.title }}
+              Issue Deadline: ${{ github.event.issue.project_card.fields.finish_date }}
+              Issue URL: ${{ github.event.issue.html_url }}
+              Assignees: ${{ join(github.event.issue.assignees.*.login, ', ') }}
               
-            Issue: ${{ github.event.issue.html_url }} for  ${{ join(github.event.issue.assignees.*.login, ', ') }}
-            Pull Request: ${{ github.event.pull_request.html_url }}
-            Pull Request Review: ${{ github.event.review.html_url }}
-
-
+    send_pr_message:
+      name: Send PR Message
+      if: github.event_name == 'pull_request'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Send Telegram Message for PR
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            message: |
+              PR Event: ${{ github.event_name }}
+              PR URL: ${{ github.event.pull_request.html_url }}
+              
+    send_review_message:
+      name: Send Review Message
+      if: github.event_name == 'pull_request_review'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Send Telegram Message for PR Review
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            message: |
+              PR Review Event: ${{ github.event_name }}
+              Review URL: ${{ github.event.review.html_url }}
