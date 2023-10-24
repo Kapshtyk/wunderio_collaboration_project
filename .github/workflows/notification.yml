@@ -24,7 +24,9 @@ jobs:
               <b>Event:</b> ${{ github.event_name }} ${{github.event.action}}.
               <b>Title:</b> ${{ github.event.issue.title }}
               <b>Body:</b> ${{ github.event.issue.body }}
+              
               <b>Assignees:</b> ${{ join(github.event.issue.assignees.*.login, ', ') }}
+              
               <a href="${{ github.event.issue.html_url }}">Link to the issue</a>
           
     send_pr_message:
@@ -37,6 +39,7 @@ jobs:
           with:
             to: ${{ secrets.TELEGRAM_TO }}
             token: ${{ secrets.TELEGRAM_TOKEN }}
+            format: html
             message: |
               <b>Event:</b> ${{ github.event_name }} ${{ github.event.action }}
               <b>Title:</b> ${{ github.event.pull_request.title }}
