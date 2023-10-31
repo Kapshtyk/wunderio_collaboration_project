@@ -128,6 +128,9 @@
         },
         "composer-exit-on-patch-failure": true,
         "patches": {
+            "drupal/webform_rest": {
+                "WebformSubmitResource::$entityTypeManager is deprecated": "https://www.drupal.org/files/issues/2023-07-20/3375829-2.patch"
+            },
             "drupal/subrequests": {
                 "Get same results on different request": "https://www.drupal.org/files/issues/2019-07-18/change_request_type-63049395-09.patch"
             },
