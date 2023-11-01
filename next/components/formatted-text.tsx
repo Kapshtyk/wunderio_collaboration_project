@@ -60,7 +60,7 @@ const options: HTMLReactParserOptions = {
       }
 
       case "p": {
-        return <p className="mb-2">{domToReact(domNode.children, options)}</p>;
+        return <p className="">{domToReact(domNode.children, options)}</p>;
       }
 
       case "input": {

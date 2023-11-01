@@ -152,20 +152,16 @@ export const HeroSchema = z.object({
 export const TestimonialsSchema = z.object({
   type: z.literal("paragraph--testimonials"),
   id: z.string(),
-  field_testimonial_person: z.array(
-    z.object({
-      value: z.string(),
-      format: z.string(),
-      processed: z.string(),
-    }),
-  ),
-  field_testimonial_text: z.array(
-    z.object({
-      value: z.string(),
-      format: z.string(),
-      processed: z.string(),
-    }),
-  ),
+  field_testimonial_person: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+  field_testimonial_text: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
   field_image: z
     .object({
       type: z.literal("media--image"),
