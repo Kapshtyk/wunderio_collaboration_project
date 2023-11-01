@@ -10,7 +10,7 @@ import { LogoStrip } from "@/components/logo-strip";
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
 import { drupal } from "@/lib/drupal/drupal-client";
-import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
+import { ResourceType, getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import {
   ArticleTeaser,
@@ -19,6 +19,7 @@ import {
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 
 import { Divider } from "@/ui/divider";
+import { validateAndCleanupCareers } from "@/lib/zod/careers";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
@@ -78,6 +79,19 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       "page[limit]": 3,
     },
   });
+
+  // TODO: remove this when we have a proper careers page
+  const type = "node--careers" as ResourceType;
+  const careers = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--careers", context,
+    {
+      params: getNodePageJsonApiParams(type).getQueryObject(),
+    },
+
+  );
+  const cleanCar = careers.map((node) => validateAndCleanupCareers(node))
+  // end of TODO
 
   return {
     props: {
