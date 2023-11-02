@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 
 import { Article } from "@/components/article";
-import { Careers } from "@/components/careers";
 import { Meta } from "@/components/meta";
 import { Page } from "@/components/page";
 import {
@@ -22,9 +21,9 @@ import {
   validateAndCleanupArticle,
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
-import { Careers as CareersType, validateAndCleanupCareers } from "@/lib/zod/careers";
 
-const RESOURCE_TYPES = ["node--article", "node--page", "node--careers"];
+
+const RESOURCE_TYPES = ["node--article", "node--page"];
 
 export default function CustomPage({
   resource,
@@ -36,7 +35,6 @@ export default function CustomPage({
       <Meta title={resource.title} metatags={resource.metatag} />
       {resource.type === "node--article" && <Article article={resource} />}
       {resource.type === "node--page" && <Page page={resource} />}
-      {resource.type === "node--careers" && <Careers careers={resource} />}
     </>
   );
 }
@@ -50,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 };
 
 interface PageProps extends CommonPageProps {
-  resource: PageType | ArticleType | CareersType;
+  resource: PageType | ArticleType;
   languageLinks: LanguageLinks;
 }
 
@@ -76,9 +74,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 
   const type = path.jsonapi.resourceName as ResourceType;
 
-  // If we are looking at the path of a frontpage node,
-  // redirect the user to the homepage for that language:
-
   if (type === "node--frontpage") {
     return {
       redirect: {
@@ -87,19 +82,16 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       },
     };
   }
+  const apiParams = getNodePageJsonApiParams(type).getQueryObject()
 
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
     context,
     {
-      params: getNodePageJsonApiParams(type).getQueryObject(),
+      params: apiParams,
     },
   );
 
-  // At this point, we know the path exists and it points to a resource.
-  // If we receive an error, it means something went wrong on Drupal.
-  // We throw an error to tell revalidation to skip this for now.
-  // Revalidation can try again on next request.
   if (!resource) {
     throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
   }
@@ -118,6 +110,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     context,
     drupal,
   );
+
   const languageLinks = createLanguageLinks(nodeTranslations);
 
   const validatedResource =
@@ -125,9 +118,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
         ? validateAndCleanupPage(resource)
-        : type === "node--careers"
-          ? validateAndCleanupCareers(resource)
-          : null
+        : null;
 
   return {
     props: {

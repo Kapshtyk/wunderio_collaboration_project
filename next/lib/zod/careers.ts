@@ -22,6 +22,16 @@ export const CareersSchema = z.object({
   metatag: MetatagsSchema.optional(),
 });
 
+const BasicInfoSchema = z.object({
+  type: z.literal("node--basic_info_related_to_all_positi"),
+  id: z.string(),
+  body: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+});
+
 export function validateAndCleanupCareers(careers: DrupalNode): Careers | null {
   try {
     // Validate the top level fields first.
@@ -59,4 +69,17 @@ export function validateAndCleanupCareers(careers: DrupalNode): Careers | null {
   }
 }
 
+export function validateAndCleanupBasicInfo(
+  basicInfo: DrupalNode,
+): BasicInfo | null {
+  try {
+    return BasicInfoSchema.parse(basicInfo);
+  } catch (error) {
+    const { name = "ZodError", issues = [] } = error;
+    console.log(JSON.stringify({ name, issues, basicInfo }, null, 2));
+    return null;
+  }
+}
+
+export type BasicInfo = z.infer<typeof BasicInfoSchema>;
 export type Careers = z.infer<typeof CareersSchema>;

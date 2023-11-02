@@ -10,7 +10,6 @@ export async function getCommonPageProps(context: GetStaticPropsContext) {
     serverSideTranslations(context.locale),
     getMenus(context),
   ]);
-
   return {
     ...translations,
     menus,
