@@ -2,7 +2,7 @@ import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 
 import { env } from "@/env";
 
-export type ResourceType = "node--frontpage" | "node--page" | "node--article";
+export type ResourceType = "node--frontpage" | "node--page" | "node--article" | "node--services_page";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -66,6 +66,21 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "path",
       "sticky",
     ]);
+  }
+
+  if (resourceType === "node--services_page") {
+    apiParams
+      .addInclude([
+        "field_content_elements",
+        "field_content_elements.field_image.field_media_image",
+      ])
+      .addFields("node--services_page", [
+        "title",
+        "field_content_elements",
+        "path",
+        "status",
+        "metatag",
+      ]);
   }
 
   return apiParams;

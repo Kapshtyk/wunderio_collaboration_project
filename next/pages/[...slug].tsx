@@ -4,6 +4,7 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { Article } from "@/components/article";
 import { Meta } from "@/components/meta";
 import { Page } from "@/components/page";
+import { Services } from "@/components/services";
 import {
   createLanguageLinks,
   LanguageLinks,
@@ -21,8 +22,9 @@ import {
   validateAndCleanupArticle,
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import {Services as ServicesType, validateAndCleanupServices } from "@/lib/zod/services"
 
-const RESOURCE_TYPES = ["node--article", "node--page"];
+const RESOURCE_TYPES = ["node--article", "node--page","node--services_page"];
 
 export default function CustomPage({
   resource,
@@ -34,6 +36,7 @@ export default function CustomPage({
       <Meta title={resource.title} metatags={resource.metatag} />
       {resource.type === "node--article" && <Article article={resource} />}
       {resource.type === "node--page" && <Page page={resource} />}
+      {resource.type === "node--services_page" && <Services services={resource} />}
     </>
   );
 }
@@ -47,7 +50,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 };
 
 interface PageProps extends CommonPageProps {
-  resource: PageType | ArticleType;
+  resource: PageType | ArticleType | ServicesType;
   languageLinks: LanguageLinks;
 }
 
@@ -122,6 +125,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
       ? validateAndCleanupPage(resource)
+      : type === "node--services_page"
+      ? validateAndCleanupServices(resource)
       : null;
 
   return {

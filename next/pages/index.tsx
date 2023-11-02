@@ -10,13 +10,14 @@ import { LogoStrip } from "@/components/logo-strip";
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
 import { drupal } from "@/lib/drupal/drupal-client";
-import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
+import { ResourceType,getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import {
   ArticleTeaser,
   validateAndCleanupArticleTeaser,
 } from "@/lib/zod/article-teaser";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
+import { validateAndCleanupServices } from "@/lib/zod/services";
 
 import { Divider } from "@/ui/divider";
 
@@ -78,6 +79,16 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       "page[limit]": 3,
     },
   });
+  const type = "node--services_page" as ResourceType;
+  const services = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--services_page", context,
+    {
+      params: getNodePageJsonApiParams(type).getQueryObject(),
+    },
+
+  );
+  const cleanSer = services.map((node) => validateAndCleanupServices(node))
 
   return {
     props: {

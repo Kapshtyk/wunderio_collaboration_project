@@ -149,6 +149,13 @@ export const HeroSchema = z.object({
   field_secondary_link: LinkShape.nullable().optional(),
 });
 
+export const HeadingSectionSchema = z.object({
+  type: z.literal("paragraph--heading_section"),
+  id: z.string(),
+  field_heading: z.string(),
+  field_excerpt: z.string(),
+});
+
 export type FormattedText = z.infer<typeof FormattedTextSchema>;
 export type Image = z.infer<typeof ImageSchema>;
 export type Video = z.infer<typeof VideoSchema>;
@@ -158,6 +165,7 @@ export type AccordionItem = z.infer<typeof AccordionItemSchema>;
 export type Hero = z.infer<typeof HeroSchema>;
 export type ListingArticles = z.infer<typeof ListingArticlesSchema>;
 export type FileAttachments = z.infer<typeof FileAttachmentsSchema>;
+export type HeadingSection = z.infer<typeof HeadingSectionSchema>;
 
 export type Paragraph =
   | FormattedText
@@ -168,4 +176,5 @@ export type Paragraph =
   | AccordionItem
   | Hero
   | ListingArticles
-  | FileAttachments;
+  | FileAttachments
+  | HeadingSection;
