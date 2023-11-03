@@ -13,7 +13,8 @@ import { CareersForm } from "@/components/careers-form";
 import { Paragraph } from "@/components/paragraph";
 import { HeadingSection } from "@/lib/zod/paragraph";
 import OpenPositions from "@/components/open-positions";
-import { Breadcrumbs, BreadcrumbsProps } from "@/components/breadcrumbs";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 
 interface CareersPageProps extends LayoutProps {
   careers: Careers;
@@ -65,19 +66,17 @@ export const getStaticProps: GetStaticProps<CareersPageProps> = async (
   const careers = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--careers", context,
       {
-        params: {
-          include: "uid,node_type,uid,field_content_elements,field_content_elements.field_image.field_media_image",
-        }
+        params: getNodePageJsonApiParams("node--careers").getQueryObject()
       },
     )
   ).at(0);
 
+  console.log(careers)
+
   const openPositions = await drupal.getResourceCollectionFromContext<
     DrupalNode[]>("node--open_positions", context,
       {
-        params: {
-          include: "uid,node_type,revision_uid,uid,field_basic_info,field_country,field_office,field_position,field_position_image"
-        }
+        params: getNodePageJsonApiParams("node--open_positions").getQueryObject()
       })
 
   return {

@@ -2,13 +2,38 @@ import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 
 import { env } from "@/env";
 
-export type ResourceType = "node--frontpage" | "node--page" | "node--article";
+export type ResourceType =
+  | "node--frontpage"
+  | "node--page"
+  | "node--article"
+  | "node--careers"
+  | "node--open_positions";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
     "field_site.meta.drupal_internal__target_id",
     env.DRUPAL_SITE_ID,
   );
+
+  if (resourceType === "node--careers") {
+    apiParams
+      .addInclude([
+        "uid",
+        "field_content_elements.field_image.field_media_image",
+      ])
+      .addFields(resourceType, ["title", "field_content_elements", "metatag"]);
+  }
+
+  if (resourceType === "node--open_positions") {
+    apiParams.addInclude([
+      "uid",
+      "field_basic_info",
+      "field_country",
+      "field_office",
+      "field_position",
+      "field_position_image",
+    ]);
+  }
 
   // The page content type has paragraphs, stored in the "field_content_elements" field:
   if (resourceType === "node--page") {
