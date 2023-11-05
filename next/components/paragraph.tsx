@@ -8,6 +8,7 @@ import { ParagraphListingArticles } from "@/components/paragraph--listing-articl
 import { ParagraphText } from "@/components/paragraph--text";
 import { Paragraph } from "@/lib/zod/paragraph";
 import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
+import { ParagraphLinkService } from "./paragraph--link-service";
 
 // Use dynamic imports to defer loading a component until after initial page load: https://nextjs.org/docs/advanced-features/dynamic-import
 const ParagraphVideo = dynamic(() =>
@@ -50,6 +51,9 @@ export function Paragraph({ paragraph }: { paragraph: Paragraph }) {
     }
     case "paragraph--heading_section": {
       return <ParagraphHeadingSection paragraph={paragraph} />
+    }
+    case "paragraph--links_service_page": {
+      return <ParagraphLinkService paragraph={paragraph} />
     }
     default:
       return null;

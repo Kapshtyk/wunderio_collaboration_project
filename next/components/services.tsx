@@ -7,7 +7,6 @@ import { HeadingPage } from "@/components/heading--page";
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { formatDate } from "@/lib/utils";
 import { Services } from "@/lib/zod/services";
-import { HeadingSection } from "@/lib/zod/paragraph";
 import { Paragraph } from "./paragraph";
 
 interface ServicesProps {

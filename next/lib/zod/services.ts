@@ -5,11 +5,13 @@ import { MetatagsSchema } from "@/lib/zod/metatag";
 import {
   HeadingSectionSchema,
   FormattedTextSchema,
+  LinkServiceSchema,
 } from "@/lib/zod/paragraph";
 
 const ServicesElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
   FormattedTextSchema,
+  LinkServiceSchema
 ]);
 
 export const ServicesSchema = z.object({
