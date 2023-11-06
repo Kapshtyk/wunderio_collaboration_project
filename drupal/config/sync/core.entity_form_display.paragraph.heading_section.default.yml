@@ -1,0 +1,32 @@
+uuid: 5b0a8190-0f66-4899-9e5e-a955cc2bc121
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.heading_section.field_excerpt
+    - field.field.paragraph.heading_section.field_heading
+    - paragraphs.paragraphs_type.heading_section
+id: paragraph.heading_section.default
+targetEntityType: paragraph
+bundle: heading_section
+mode: default
+content:
+  field_excerpt:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

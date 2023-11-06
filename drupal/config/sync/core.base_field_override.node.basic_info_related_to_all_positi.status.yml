@@ -1,0 +1,22 @@
+uuid: 02f3bb9a-ed48-46b4-9f8d-a799a1c424af
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.basic_info_related_to_all_positi
+id: node.basic_info_related_to_all_positi.status
+field_name: status
+entity_type: node
+bundle: basic_info_related_to_all_positi
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

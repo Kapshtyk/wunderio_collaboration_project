@@ -1,0 +1,35 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          reset_button_label: Palauta
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Kaikki -'
+      fields:
+        state:
+          label: Tila
+        label:
+          label: Tunnus
+        source_language_1:
+          label: Lähettäjä
+        target_language:
+          label: Osoitteeseen
+        translator:
+          label: Sisältölähde
+        changed:
+          label: Muuttunut
+        operations:
+          label: Toimenpiteet
+      filters:
+        state:
+          expose:
+            label: Tila
+        source_language:
+          expose:
+            label: Lähdekieli
+        translator:
+          expose:
+            label: Sisältölähde

@@ -1,0 +1,43 @@
+uuid: 270d4bbb-0779-41ea-8a13-fa13f2430946
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.links_service_page.field_excerpt
+    - field.field.paragraph.links_service_page.field_heading
+    - field.field.paragraph.links_service_page.field_target_link
+    - paragraphs.paragraphs_type.links_service_page
+  module:
+    - link
+id: paragraph.links_service_page.default
+targetEntityType: paragraph
+bundle: links_service_page
+mode: default
+content:
+  field_excerpt:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_target_link:
+    type: link_default
+    weight: 0
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
