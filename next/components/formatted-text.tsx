@@ -60,7 +60,7 @@ const options: HTMLReactParserOptions = {
       }
 
       case "p": {
-        return <p className="mb-2">{domToReact(domNode.children, options)}</p>;
+        return <p className="">{domToReact(domNode.children, options)}</p>;
       }
 
       case "input": {
@@ -69,6 +69,14 @@ const options: HTMLReactParserOptions = {
         }
 
         return domNode;
+      }
+
+      case "q": {
+        return (
+          <blockquote className="italic">
+            {domToReact(domNode.children, options)}
+          </blockquote>
+        );
       }
 
       default: {

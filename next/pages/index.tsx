@@ -20,6 +20,7 @@ import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 
 import { Divider } from "@/ui/divider";
 
+
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
   promotedArticleTeasers: ArticleTeaser[];
