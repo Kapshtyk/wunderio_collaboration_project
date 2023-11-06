@@ -22,6 +22,7 @@ import {
   validateAndCleanupArticle,
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+
 import {Services as ServicesType, validateAndCleanupServices } from "@/lib/zod/services"
 
 const RESOURCE_TYPES = ["node--article", "node--page","node--services_page"];
@@ -76,9 +77,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 
   const type = path.jsonapi.resourceName as ResourceType;
 
-  // If we are looking at the path of a frontpage node,
-  // redirect the user to the homepage for that language:
-
   if (type === "node--frontpage") {
     return {
       redirect: {
@@ -87,19 +85,16 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       },
     };
   }
+  const apiParams = getNodePageJsonApiParams(type).getQueryObject()
 
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
     context,
     {
-      params: getNodePageJsonApiParams(type).getQueryObject(),
+      params: apiParams,
     },
   );
 
-  // At this point, we know the path exists and it points to a resource.
-  // If we receive an error, it means something went wrong on Drupal.
-  // We throw an error to tell revalidation to skip this for now.
-  // Revalidation can try again on next request.
   if (!resource) {
     throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
   }
@@ -118,14 +113,15 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     context,
     drupal,
   );
+
   const languageLinks = createLanguageLinks(nodeTranslations);
 
   const validatedResource =
     type === "node--article"
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
-      ? validateAndCleanupPage(resource)
-      : type === "node--services_page"
+        ? validateAndCleanupPage(resource)
+        : type === "node--services_page"
       ? validateAndCleanupServices(resource)
       : null;
 

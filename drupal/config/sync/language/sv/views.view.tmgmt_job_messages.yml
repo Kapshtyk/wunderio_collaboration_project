@@ -1,0 +1,16 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          reset_button_label: Återställ
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Alla -'
+      fields:
+        created:
+          label: Skapad
+        name:
+          label: Namn
+      title: Meddelanden

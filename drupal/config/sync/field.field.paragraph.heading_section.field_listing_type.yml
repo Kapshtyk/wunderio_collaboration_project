@@ -1,0 +1,34 @@
+uuid: 87506950-bceb-412c-b2e0-6c4422449d2f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_listing_type
+    - paragraphs.paragraphs_type.heading_section
+    - taxonomy.vocabulary.advisory
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: paragraph.heading_section.field_listing_type
+field_name: field_listing_type
+entity_type: paragraph
+bundle: heading_section
+label: 'Listing type'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      advisory: advisory
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

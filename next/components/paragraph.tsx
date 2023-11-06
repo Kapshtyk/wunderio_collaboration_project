@@ -7,6 +7,7 @@ import { ParagraphLinks } from "@/components/paragraph--links";
 import { ParagraphListingArticles } from "@/components/paragraph--listing-articles";
 import { ParagraphText } from "@/components/paragraph--text";
 import { Paragraph } from "@/lib/zod/paragraph";
+import { ParagraphTestimonials } from "./paragraph--testimonials";
 import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
 import { ParagraphLinkService } from "./paragraph--link-service";
 
@@ -48,6 +49,9 @@ export function Paragraph({ paragraph }: { paragraph: Paragraph }) {
     }
     case "paragraph--file_attachments": {
       return <ParagraphFileAttachments paragraph={paragraph} />;
+    }
+    case "paragraph--testimonials": {
+      return <ParagraphTestimonials paragraph={paragraph} />;
     }
     case "paragraph--heading_section": {
       return <ParagraphHeadingSection paragraph={paragraph} />

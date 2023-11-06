@@ -21,6 +21,7 @@ import { validateAndCleanupServices } from "@/lib/zod/services";
 
 import { Divider } from "@/ui/divider";
 
+
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
   promotedArticleTeasers: ArticleTeaser[];

@@ -1,0 +1,11 @@
+uuid: a42d1f7f-00d7-4858-aa74-330ec4556e99
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.advisory
+id: taxonomy_term.advisory
+target_entity_type_id: taxonomy_term
+target_bundle: advisory
+default_langcode: site_default
+language_alterable: false

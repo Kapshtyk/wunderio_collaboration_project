@@ -1,0 +1,18 @@
+uuid: aebd7751-74c0-4b0a-ad7b-0a9038cb0224
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.careers
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: node.careers
+target_entity_type_id: node
+target_bundle: careers
+default_langcode: site_default
+language_alterable: true

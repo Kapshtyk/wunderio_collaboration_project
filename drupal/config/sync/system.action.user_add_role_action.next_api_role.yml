@@ -1,0 +1,14 @@
+uuid: 2673de0f-1f14-411e-b3c7-ed1077dc01f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.next_api_role
+  module:
+    - user
+id: user_add_role_action.next_api_role
+label: 'Add the next_api_role role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: next_api_role

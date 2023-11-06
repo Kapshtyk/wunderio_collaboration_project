@@ -1,0 +1,21 @@
+uuid: 6c6758c8-e881-431d-9460-c031823a3712
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.positions
+  module:
+    - text
+id: taxonomy_term.positions.description
+field_name: description
+entity_type: taxonomy_term
+bundle: positions
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

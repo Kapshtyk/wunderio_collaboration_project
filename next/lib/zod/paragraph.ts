@@ -149,12 +149,37 @@ export const HeroSchema = z.object({
   field_secondary_link: LinkShape.nullable().optional(),
 });
 
+export const TestimonialsSchema = z.object({
+  type: z.literal("paragraph--testimonials"),
+  id: z.string(),
+  field_testimonial_person: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+  field_testimonial_text: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+  field_image: z
+    .object({
+      type: z.literal("media--image"),
+      id: z.string(),
+      field_media_image: ImageShape.nullable(),
+    })
+    .nullable()
+    .optional(),
+});
+
 export const HeadingSectionSchema = z.object({
   type: z.literal("paragraph--heading_section"),
   id: z.string(),
   field_heading: z.string(),
   field_excerpt: z.string(),
 });
+
+
 export const LinkServiceSchema = z.object({
   type: z.literal("paragraph--links_service_page"),
   id: z.string(),
@@ -173,6 +198,7 @@ export type AccordionItem = z.infer<typeof AccordionItemSchema>;
 export type Hero = z.infer<typeof HeroSchema>;
 export type ListingArticles = z.infer<typeof ListingArticlesSchema>;
 export type FileAttachments = z.infer<typeof FileAttachmentsSchema>;
+export type Testimonials = z.infer<typeof TestimonialsSchema>;
 export type HeadingSection = z.infer<typeof HeadingSectionSchema>;
 export type LinkService = z.infer<typeof LinkServiceSchema>;
 
@@ -186,5 +212,7 @@ export type Paragraph =
   | Hero
   | ListingArticles
   | FileAttachments
+  | Testimonials
+  | HeadingSection
   | HeadingSection
   | LinkService;

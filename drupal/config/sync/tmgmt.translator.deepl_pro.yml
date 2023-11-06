@@ -1,0 +1,14 @@
+uuid: e5442220-3804-4c21-a8c9-13b4e3128d5d
+langcode: en
+status: true
+dependencies:
+  module:
+    - tmgmt_deepl
+name: deepl_pro
+label: 'DeepL API Pro'
+description: 'DeepL API Pro Translator service.'
+auto_accept: null
+weight: null
+plugin: deepl_pro
+settings: {  }
+remote_languages_mappings: {  }
