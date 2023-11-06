@@ -1,0 +1,27 @@
+uuid: b6d22a1b-26f4-482c-aa87-f09610d3f7e6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link_to_a_page
+    - node.type.about_us
+  module:
+    - link
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.about_us.field_link_to_a_page
+field_name: field_link_to_a_page
+entity_type: node
+bundle: about_us
+label: 'Link to a page'
+description: 'Link a page that the teaser is about.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 1
+field_type: link
