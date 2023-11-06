@@ -1,0 +1,16 @@
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          reset_button_label: Palauta
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Kaikki -'
+      fields:
+        created:
+          label: Luotu
+        name:
+          label: Nimi
+      title: Viestit

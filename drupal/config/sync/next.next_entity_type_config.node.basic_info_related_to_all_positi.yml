@@ -1,0 +1,11 @@
+uuid: c4979e97-7fac-4797-abd3-cf48e775589d
+langcode: en
+status: true
+dependencies: {  }
+id: node.basic_info_related_to_all_positi
+site_resolver: site_selector
+configuration:
+  sites:
+    frontend: frontend
+revalidator: ''
+revalidator_configuration: {  }

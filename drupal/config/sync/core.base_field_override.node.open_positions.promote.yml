@@ -1,0 +1,22 @@
+uuid: cb1200b8-1556-4ae9-b65b-3e1db2242ea5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.open_positions
+id: node.open_positions.promote
+field_name: promote
+entity_type: node
+bundle: open_positions
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,23 @@
+uuid: 6bd27575-b048-4617-ab1c-aa2043ad127e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.careers.field_content_elements
+    - node.type.careers
+  module:
+    - user
+id: node.careers.teaser
+targetEntityType: node
+bundle: careers
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_content_elements: true
+  langcode: true
