@@ -15,6 +15,8 @@ import { HeadingSection } from "@/lib/zod/paragraph";
 import OpenPositions from "@/components/open-positions";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
+import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+import { createLanguageLinks } from "@/lib/contexts/language-links-context";
 
 interface CareersPageProps extends LayoutProps {
   careers: Careers;
@@ -25,13 +27,14 @@ export default function CareersPage({
   careers,
   openPositions
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: "Home",
+      title: t("homepage-link"),
       url: "/"
     },
     {
-      title: "Careers",
+      title: t("careers-link"),
       url: "/careers"
     }
   ]
@@ -71,7 +74,13 @@ export const getStaticProps: GetStaticProps<CareersPageProps> = async (
     )
   ).at(0);
 
-  console.log(careers)
+  const nodeTranslations = await getNodeTranslatedVersions(
+    careers,
+    context,
+    drupal,
+  );
+
+  const languageLinks = createLanguageLinks(nodeTranslations)
 
   const openPositions = await drupal.getResourceCollectionFromContext<
     DrupalNode[]>("node--open_positions", context,
@@ -83,7 +92,9 @@ export const getStaticProps: GetStaticProps<CareersPageProps> = async (
     props: {
       ...(await getCommonPageProps(context)),
       careers: validateAndCleanupCareers(careers),
-      openPositions: openPositions.map((node) => validateAndCleanupOpenPositions(node))
+      openPositions: openPositions.map((node) => validateAndCleanupOpenPositions(node)),
+      languageLinks
     },
+    revalidate: 60,
   };
 };

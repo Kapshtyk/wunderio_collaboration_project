@@ -6,7 +6,6 @@ import { Meta } from "@/components/meta";
 
 import {
   createLanguageLinks,
-  LanguageLinks,
 } from "@/lib/contexts/language-links-context";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 
@@ -16,24 +15,25 @@ import { drupal } from "@/lib/drupal/drupal-client";
 import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { BasicInfo, validateAndCleanupBasicInfo } from "@/lib/zod/careers";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 
 interface OpenPositionProps extends LayoutProps {
   openPosition: OpenPositions;
-  /* languageLinks: LanguageLinks; */
   basicInformation: BasicInfo
 }
 
 export default function OpenPosition({
   openPosition, basicInformation
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-
+  const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: "home",
+      title: t("homepage-link"),
       url: "/"
     },
     {
-      title: "careers",
+      title: t("careers-link"),
+
       url: "/careers"
     },
     {
@@ -75,7 +75,9 @@ export const getStaticProps: GetStaticProps<OpenPositionProps> = async (
   context,
 ) => {
   const path: DrupalTranslatedPath =
-    await drupal.translatePathFromContext(context);
+    await drupal.translatePathFromContext(context, {
+      pathPrefix: "/careers",
+    });
 
   if (!path) {
     return {
@@ -92,11 +94,16 @@ export const getStaticProps: GetStaticProps<OpenPositionProps> = async (
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
     context, {
-    params: {
-      include:
-        "uid,uid,field_basic_info,field_country,field_office,field_position,field_position_image"
-    }
+    params: getNodePageJsonApiParams("node--open_positions").getQueryObject()
   });
+
+  const nodeTranslations = await getNodeTranslatedVersions(
+    resource,
+    context,
+    drupal,
+  );
+
+  const languageLinks = createLanguageLinks(nodeTranslations)
 
   if (!resource) {
     throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
@@ -107,20 +114,13 @@ export const getStaticProps: GetStaticProps<OpenPositionProps> = async (
       notFound: true,
     };
   }
-  /*  const nodeTranslations = await getNodeTranslatedVersions(
-     resource,
-     context,
-     drupal,
-   );
- 
-   const languageLinks = createLanguageLinks(nodeTranslations); */
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
       openPosition: validateAndCleanupOpenPositions(resource),
       basicInformation: validateAndCleanupBasicInfo(basicInformation),
-      /* languageLinks, */
+      languageLinks
     },
     revalidate: 60,
   };
