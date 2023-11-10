@@ -18,6 +18,7 @@ import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-pa
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
 
+
 interface CareersPageProps extends LayoutProps {
   careers: Careers;
   openPositions: OpenPositionsType[]
