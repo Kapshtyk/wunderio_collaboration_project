@@ -35,20 +35,20 @@ export default function IndexPage({
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
-      <div className="grid gap-4">
+      {/* <div className="grid gap-4">
         {frontpage?.field_content_elements?.map((paragraph) => (
           <Paragraph paragraph={paragraph} key={paragraph.id} />
         ))}
-      </div>
-      <Divider className="max-w-4xl" />
-      <ContactForm />
-      <Divider className="max-w-4xl" />
-      <ArticleTeasers
+      </div> */}
+      {/* <Divider className="max-w-4xl" /> */}
+      {/* <ContactForm /> */}
+      {/* <Divider className="max-w-4xl" /> */}
+      {/* <ArticleTeasers
         articles={promotedArticleTeasers}
         heading={t("promoted-articles")}
       />
-      <ContactList />
-      <LogoStrip />
+      <ContactList /> */}
+      {/* <LogoStrip /> */}
     </>
   );
 }

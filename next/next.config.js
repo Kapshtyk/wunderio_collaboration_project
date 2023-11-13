@@ -14,6 +14,14 @@ const nextConfig = {
           source: "/sitemap.xml",
           destination: `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/sites/default/files/sitemap.xml`,
         },
+        {
+          source: "/tyourat/:slug*",
+          destination: "/careers/:slug*",
+        },
+        {
+          source: "/karriar/:slug*",
+          destination: "/careers/:slug*",
+        },
       ],
     };
   },
