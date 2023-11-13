@@ -53,6 +53,7 @@ module:
   registration_role: 0
   require_login: 0
   rest: 0
+  restui: 0
   serialization: 0
   simple_oauth: 0
   simple_sitemap: 0

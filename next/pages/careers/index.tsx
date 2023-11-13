@@ -6,6 +6,7 @@ import { LayoutProps } from "@/components/layout";
 
 import { drupal } from "@/lib/drupal/drupal-client";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { resolveWebformContent, Webform } from 'nextjs-drupal-webform';
 
 import { Careers, validateAndCleanupCareers } from "@/lib/zod/careers";
 import { OpenPositions as OpenPositionsType, validateAndCleanupOpenPositions } from "@/lib/zod/open-positions";
@@ -17,6 +18,8 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
+
+import { Carousel } from "@material-tailwind/react";
 
 
 interface CareersPageProps extends LayoutProps {
