@@ -5,13 +5,18 @@ import { MetatagsSchema } from "@/lib/zod/metatag";
 import {
   HeadingSectionSchema,
   FormattedTextSchema,
-  LinkServiceSchema,
+  // LinkServiceSchema,
+  TestimonialsSchema,
+  SubHeadingSectionSchema
+
 } from "@/lib/zod/paragraph";
 
 const ServicesElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
   FormattedTextSchema,
-  LinkServiceSchema
+  // LinkServiceSchema,
+  TestimonialsSchema,
+  SubHeadingSectionSchema
 ]);
 
 export const ServicesSchema = z.object({
@@ -19,6 +24,12 @@ export const ServicesSchema = z.object({
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(ServicesElementsSchema),
+  field_page_types: z.object({
+    name: z.string()
+  }).optional(),
+  field_service_types: z.object({
+    name: z.string()
+  }).nullable(),
   metatag: MetatagsSchema.optional(),
 });
 
@@ -57,6 +68,7 @@ export function validateAndCleanupServices(services: DrupalNode): Services | nul
     console.log(JSON.stringify({ name, issues, services }, null, 2));
     return null;
   }
+
 }
 
 export type Services = z.infer<typeof ServicesSchema>;

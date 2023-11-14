@@ -50,6 +50,9 @@ export const LinkShape = z.object({
   title: z.string(),
   full_url: z.string(),
 });
+export const TaxonomyShape = z.object({
+  name: z.string()
+});
 
 export const ImageSchema = z.object({
   type: z.literal("paragraph--image"),
@@ -188,6 +191,18 @@ export const LinkServiceSchema = z.object({
   field_target_link: z.object({}),
 });
 
+export const SubHeadingSectionSchema = z.object({
+  type: z.literal("paragraph--sub_heading_section"),
+  id: z.string(),
+  field_heading: z.string(),
+  field_excerpt: z.string(),
+})
+// export const ServicesTaxonomySchema = z.object({
+//   type: z.literal("paragraph--services_taxonomy"),
+//   id: z.string(),
+//   field_page_type: z.array(TaxonomyShape)
+// });
+
 
 export type FormattedText = z.infer<typeof FormattedTextSchema>;
 export type Image = z.infer<typeof ImageSchema>;
@@ -201,6 +216,8 @@ export type FileAttachments = z.infer<typeof FileAttachmentsSchema>;
 export type Testimonials = z.infer<typeof TestimonialsSchema>;
 export type HeadingSection = z.infer<typeof HeadingSectionSchema>;
 export type LinkService = z.infer<typeof LinkServiceSchema>;
+export type SubHeadingSection = z.infer<typeof SubHeadingSectionSchema>;
+// export type ServicesTaxonomy = z.infer<typeof ServicesTaxonomySchema>;
 
 export type Paragraph =
   | FormattedText
@@ -214,5 +231,5 @@ export type Paragraph =
   | FileAttachments
   | Testimonials
   | HeadingSection
-  | HeadingSection
-  | LinkService;
+  | LinkService
+  | SubHeadingSection;

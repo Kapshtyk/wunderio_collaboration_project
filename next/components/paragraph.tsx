@@ -6,10 +6,12 @@ import { ParagraphImage } from "@/components/paragraph--image";
 import { ParagraphLinks } from "@/components/paragraph--links";
 import { ParagraphListingArticles } from "@/components/paragraph--listing-articles";
 import { ParagraphText } from "@/components/paragraph--text";
-import { Paragraph } from "@/lib/zod/paragraph";
+import { Paragraph} from "@/lib/zod/paragraph";
 import { ParagraphTestimonials } from "./paragraph--testimonials";
 import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
 import { ParagraphLinkService } from "./paragraph--link-service";
+import { ParagraphSubHeadingSection } from "./sub-heading";
+// import { ParagraphServicesTaxonomy } from "./paragraph--services-taxonomy";
 
 // Use dynamic imports to defer loading a component until after initial page load: https://nextjs.org/docs/advanced-features/dynamic-import
 const ParagraphVideo = dynamic(() =>
@@ -59,6 +61,12 @@ export function Paragraph({ paragraph }: { paragraph: Paragraph }) {
     case "paragraph--links_service_page": {
       return <ParagraphLinkService paragraph={paragraph} />
     }
+    // case "paragraph--sub_heading_section": {
+    //   return <ParagraphSubHeadingSection paragraph={paragraph} />
+    // }
+    // case "paragraph--services_taxonomy": {
+    //   return <ParagraphServicesTaxonomy paragraph={paragraph} />
+    // }
     default:
       return null;
   }

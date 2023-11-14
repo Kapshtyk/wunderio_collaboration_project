@@ -4,7 +4,7 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { Article } from "@/components/article";
 import { Meta } from "@/components/meta";
 import { Page } from "@/components/page";
-import { Services } from "@/components/services";
+// import { Services } from "@/components/services";
 import {
   createLanguageLinks,
   LanguageLinks,
@@ -24,6 +24,7 @@ import {
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 
 import {Services as ServicesType, validateAndCleanupServices } from "@/lib/zod/services"
+import ServicesPage from "./services";
 
 const RESOURCE_TYPES = ["node--article", "node--page","node--services_page"];
 
@@ -37,7 +38,7 @@ export default function CustomPage({
       <Meta title={resource.title} metatags={resource.metatag} />
       {resource.type === "node--article" && <Article article={resource} />}
       {resource.type === "node--page" && <Page page={resource} />}
-      {resource.type === "node--services_page" && <Services services={resource} />}
+      {resource.type === "node--services_page" && <ServicesPage services={resource} />}
     </>
   );
 }

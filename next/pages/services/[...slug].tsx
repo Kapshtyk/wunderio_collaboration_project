@@ -1,127 +1,103 @@
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { useTranslation } from "next-i18next";
+// import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+// import { useTranslation } from "next-i18next";
 
-import { LayoutProps } from "@/components/layout";
-import { Meta } from "@/components/meta";
+// import { LayoutProps } from "@/components/layout";
+// import { Meta } from "@/components/meta";
 
-import {
-  createLanguageLinks,
-  LanguageLinks,
-} from "@/lib/contexts/language-links-context";
-import { getCommonPageProps } from "@/lib/get-common-page-props";
+// import {
+//   createLanguageLinks,
+//   LanguageLinks,
+// } from "@/lib/contexts/language-links-context";
+// import { getCommonPageProps } from "@/lib/get-common-page-props";
 
-import { OpenPositions, validateAndCleanupOpenPositions } from "@/lib/zod/open-positions";
-import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
-import { drupal } from "@/lib/drupal/drupal-client";
-import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
-import { BasicInfo, validateAndCleanupBasicInfo } from "@/lib/zod/careers";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-
-interface OpenPositionProps extends LayoutProps {
-  openPosition: OpenPositions;
-  /* languageLinks: LanguageLinks; */
-  basicInformation: BasicInfo
-}
-
-export default function OpenPosition({
-  openPosition, basicInformation
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-
-  const breadcrumbs = [
-    {
-      title: "home",
-      url: "/"
-    },
-    {
-      title: "careers",
-      url: "/careers"
-    },
-    {
-      title: openPosition.title,
-      url: "/careers/" + openPosition.title
-    }
-  ]
-  return (
-    <>
-      <Meta title={openPosition.title} metatags={openPosition.metatag} />
-      <div className="container">
-        {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
-      </div>
-      <h1 className="text-2xl text-bold">
-        {openPosition.title}
-      </h1>
-      <div
-        dangerouslySetInnerHTML={{ __html: openPosition.body.processed }}
-        className="mt-6 font-serif text-xl leading-loose prose"
-      />
-      <div
-        dangerouslySetInnerHTML={{ __html: basicInformation.body.processed }}
-        className="mt-6 font-serif text-xl leading-loose prose"
-      />
-    </>
-  );
-}
-
-export const getStaticPaths: GetStaticPaths = async (context) => {
-  const paths = await drupal.getStaticPathsFromContext('node--open_positions', context);
-  return {
-    paths: paths,
-    fallback: "blocking",
-  };
-};
+// import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+// import { drupal } from "@/lib/drupal/drupal-client";
+// import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
+// import { BasicInfo, validateAndCleanupBasicInfo } from "@/lib/zod/careers";
+// import { Breadcrumbs } from "@/components/breadcrumbs";
+// import { Services as ServicesType, validateAndCleanupServices} from "@/lib/zod/services";
+// import { getNodePageJsonApiParams, ResourceType } from "@/lib/drupal/get-node-page-json-api-params";
 
 
-export const getStaticProps: GetStaticProps<OpenPositionProps> = async (
-  context,
-) => {
-  const path: DrupalTranslatedPath =
-    await drupal.translatePathFromContext(context);
+// interface ServicesProps extends LayoutProps {
+//   services: ServicesType
+// }
 
-  if (!path) {
-    return {
-      notFound: true,
-    };
-  }
+// export default function ServicesPages({
+//   services
+// }: InferGetStaticPropsType<typeof getStaticProps>) {
 
-  const basicInformation = (
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--basic_info_related_to_all_positi",
-      context)
-  ).at(0);
+//   const breadcrumbs = [
+//     {
+//       title: "home",
+//       url: "/"
+//     },
+//     {
+//       title: "services",
+//       url: "/services"
+//     },
+//     {
+//       title: services.title,
+//       url: "/careers/" + services.title
+//     }
+//   ]
+//   return (
+//     <>
+//       <Meta title={services.title} metatags={services.metatag} />
+//       <div className="container">
+//         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
+//       </div>
+//     </>
+//   );
+// }
 
-  const resource = await drupal.getResourceFromContext<DrupalNode>(
-    path,
-    context, {
-    params: {
-      include:
-        "uid,uid,field_basic_info,field_country,field_office,field_position,field_position_image"
-    }
-  });
+// export const getStaticPaths: GetStaticPaths = async (context) => {
+//   const paths = await drupal.getStaticPathsFromContext('node--services_page', context);
+//   return {
+//     paths: paths,
+//     fallback: "blocking",
+//   };
+// };
 
-  if (!resource) {
-    throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
-  }
 
-  if (!context.preview && resource?.status === false) {
-    return {
-      notFound: true,
-    };
-  }
-  /*  const nodeTranslations = await getNodeTranslatedVersions(
-     resource,
-     context,
-     drupal,
-   );
- 
-   const languageLinks = createLanguageLinks(nodeTranslations); */
+// export const getStaticProps: GetStaticProps<ServicesProps> = async (
+//   context,
+// ) => {
+//   const path: DrupalTranslatedPath =
+//     await drupal.translatePathFromContext(context);
 
-  return {
-    props: {
-      ...(await getCommonPageProps(context)),
-      openPosition: validateAndCleanupOpenPositions(resource),
-      basicInformation: validateAndCleanupBasicInfo(basicInformation),
-      /* languageLinks, */
-    },
-    revalidate: 60,
-  };
-};
+//   if (!path) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+//   const type = path.jsonapi.resourceName as ResourceType;
+
+//   const apiParams = getNodePageJsonApiParams(type).getQueryObject()
+
+//   const resource = await drupal.getResourceFromContext<DrupalNode>(
+//     path,
+//     context, {
+//     params: apiParams
+//   });
+
+//   if (!resource) {
+//     throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
+//   }
+
+//   if (!context.preview && resource?.status === false) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+
+
+//   return {
+//     props: {
+//       ...(await getCommonPageProps(context)),
+//       services: validateAndCleanupServices(resource),
+     
+//     },
+//     revalidate: 60,
+//   };
+// };

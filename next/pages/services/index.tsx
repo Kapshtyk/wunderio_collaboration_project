@@ -1,30 +1,26 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode } from "next-drupal";
+import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
-import { LayoutProps } from "@/components/layout";
 
 import { drupal } from "@/lib/drupal/drupal-client";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 
-import { Careers, validateAndCleanupCareers } from "@/lib/zod/careers";
-import { OpenPositions as OpenPositionsType, validateAndCleanupOpenPositions } from "@/lib/zod/open-positions";
-import { CareersForm } from "@/components/careers-form";
 import { Paragraph } from "@/components/paragraph";
-import { HeadingSection } from "@/lib/zod/paragraph";
-import OpenPositions from "@/components/open-positions";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
-import { Services } from "@/lib/zod/services";
+import { ResourceType, getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
+import { Services, validateAndCleanupServices } from "@/lib/zod/services";
+import { LayoutProps } from "@/components/layout";
+import { SubHeadingSection } from "@/lib/zod/paragraph";
 
-interface ServicesPageProps extends LayoutProps {
-  services: Services;
-  servicePages: ServicePages[]
+interface ServicesProps {
+  mainPage: Services;
+  services: Services [];
+  tags: DrupalTaxonomyTerm[]
 }
 
 export default function ServicesPage({
-  services,
-  servicePages
+  services, mainPage, tags
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const breadcrumbs = [
     {
@@ -32,57 +28,107 @@ export default function ServicesPage({
       url: "/"
     },
     {
-      title: "Careers",
-      url: "/careers"
+      title: "Services",
+      url: "/services"
     }
   ]
 
+  
+ 
+const subHeadings = mainPage.field_content_elements.filter(item=>item.type === "paragraph--sub_heading_section") as SubHeadingSection [];
+
   return (
+
     <>
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      {/* <div className="flex h-[100px] bg-primary-400/40 justify-between">
-        <h1>{headingSection.field_heading}</h1>
-        <span>{headingSection.field_excerpt}</span>
-      </div>
       <div className="grid gap-4">
-        {
-          services.field_content_elements?.map((paragraph) => (
+         {
+          mainPage.field_content_elements?.map((paragraph) => (
             <Paragraph key={paragraph.id} paragraph={paragraph} />
           ))
         }
-      </div>
-      <CareersForm />
-      <OpenPositions openPositions={openPositions} /> */}
+     </div> 
+     {subHeadings.map((subHeading) => (
+        <div key={subHeading.id}>
+          <div className="flex h-[100px] bg-primary-400/40 justify-between">
+          <h1>{subHeading.field_heading}</h1>
+          <span>{subHeading.field_excerpt}</span>
+          </div>
+          {tags
+            .filter((tag) => tag.name === subHeading.field_heading)
+            .map((tag) => (
+              <div key={tag.id}>
+                <h2>{tag.name}</h2>
+                {services
+                  .filter(
+                    (service) =>
+                      service.field_service_types.name === tag.name
+                  )
+                  .map((service) => (
+                    <div key={service.id}>
+                      <h2>{service.title}</h2>
+                      {service.field_content_elements?.map((item) => {
+                        if (
+                          "field_heading" in item &&
+                          "field_excerpt" in item
+                        ) {
+                          if (
+                            item.type === "paragraph--heading_section"
+                          ) {
+                            return (
+                              <p key={item.id}>{item.field_excerpt}</p>
+                            );
+                          }
+                        }
+                        return null;
+                      })}
+                    </div>
+                  ))}
+              </div>
+            ))}
+        </div>
+      ))}
+    
     </>
   );
 }
 
-
-export const getStaticProps: GetStaticProps<ServicesPageProps> = async (
+export const getStaticProps: GetStaticProps<ServicesProps> = async (
   context,
 ) => {
-  const services = (
+  const mainPage = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--services_page", context,
+      {
+        params: getNodePageJsonApiParams("node--services_page").addFilter('title', 'Services').getQueryObject()
+      },
+    )
+  ).at(0);
+  
+  const pages = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--services_page", context,
       {
         params: getNodePageJsonApiParams("node--services_page").getQueryObject()
       },
     )
-  ).at(0);
+  )
+  const tags = (
+    await drupal.getResourceCollectionFromContext<DrupalTaxonomyTerm[]>("taxonomy_term--advisory", context,
+      {
+       
+      },
+    )
+  )
 
-services.field_content_elements.map((e)=> console.log(e.field_listing_type))
-  // const openPositions = await drupal.getResourceCollectionFromContext<
-  //   DrupalNode[]>("node--open_positions", context,
-  //     {
-  //       params: getNodePageJsonApiParams("node--open_positions").getQueryObject()
-  //     })
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
-      // careers: validateAndCleanupCareers(careers),
-      // openPositions: openPositions.map((node) => validateAndCleanupOpenPositions(node))
+      mainPage: validateAndCleanupServices(mainPage),
+      services: pages.filter((node) => node.title !== "Services" ).map((node) => validateAndCleanupServices(node)),
+      tags
     },
   };
 };
+
