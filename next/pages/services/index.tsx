@@ -12,6 +12,7 @@ import { ResourceType, getNodePageJsonApiParams } from "@/lib/drupal/get-node-pa
 import { Services, validateAndCleanupServices } from "@/lib/zod/services";
 import { LayoutProps } from "@/components/layout";
 import { SubHeadingSection } from "@/lib/zod/paragraph";
+import Link from "next/link";
 
 interface ServicesProps {
   mainPage: Services;
@@ -50,9 +51,17 @@ const subHeadings = mainPage.field_content_elements.filter(item=>item.type === "
           ))
         }
      </div> 
+     <div>
+      <p>Jump to:</p>
+      {subHeadings.map((sub)=> (
+        <li>
+          <Link href={`#${sub.id}`} scroll={false}>{sub.field_heading}</Link>
+        </li>
+      ))}
+     </div>
      {subHeadings.map((subHeading) => (
         <div key={subHeading.id}>
-          <div className="flex h-[100px] bg-primary-400/40 justify-between">
+          <div className="flex h-[100px] bg-primary-400/40 justify-between" id={subHeading.id}>
           <h1>{subHeading.field_heading}</h1>
           <span>{subHeading.field_excerpt}</span>
           </div>
@@ -68,7 +77,14 @@ const subHeadings = mainPage.field_content_elements.filter(item=>item.type === "
                   )
                   .map((service) => (
                     <div key={service.id}>
-                      <h2>{service.title}</h2>
+                      <Link 
+                        key={service.id}
+                        href={'services' + service.path.alias}
+                        className="text-primary-600"
+                        >
+                      {service.title}
+                      </Link>
+                     
                       {service.field_content_elements?.map((item) => {
                         if (
                           "field_heading" in item &&

@@ -31,6 +31,9 @@ export const ServicesSchema = z.object({
     name: z.string()
   }).nullable(),
   metatag: MetatagsSchema.optional(),
+  path: z.object({
+    alias: z.string(),
+  }),
 });
 
 export function validateAndCleanupServices(services: DrupalNode): Services | null {
