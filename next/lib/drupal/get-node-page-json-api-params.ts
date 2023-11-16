@@ -102,7 +102,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_content_elements",
         "field_content_elements.field_image.field_media_image",
         "field_page_types",
-        "field_service_types"
+        "field_service_types",
       ])
       .addFields("node--services_page", [
         "title",
@@ -111,7 +111,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "status",
         "metatag",
         "field_page_types",
-        "field_service_types"
+        "field_service_types",
       ])
   }
 

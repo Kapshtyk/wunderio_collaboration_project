@@ -79,12 +79,12 @@ const subHeadings = mainPage.field_content_elements.filter(item=>item.type === "
                     <div key={service.id}>
                       <Link 
                         key={service.id}
-                        href={'services' + service.path.alias}
+                        href={service.path.alias}
                         className="text-primary-600"
                         >
                       {service.title}
                       </Link>
-                     
+
                       {service.field_content_elements?.map((item) => {
                         if (
                           "field_heading" in item &&
@@ -101,6 +101,7 @@ const subHeadings = mainPage.field_content_elements.filter(item=>item.type === "
                         return null;
                       })}
                     </div>
+                   
                   ))}
               </div>
             ))}

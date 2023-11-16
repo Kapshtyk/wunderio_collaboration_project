@@ -15,7 +15,7 @@ const nextConfig = {
           destination: `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/sites/default/files/sitemap.xml`,
         },
         {
-          source: "/services/services",
+          source: "/services",
           destination: "/services"
         }
       ],

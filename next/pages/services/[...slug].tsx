@@ -50,6 +50,7 @@ export default function ServicesPages({
         {services.field_content_elements?.map((paragraph)=> (
           <Paragraph key={paragraph.id} paragraph={paragraph}/>
         ))}
+        
       </div>
     </>
   );
