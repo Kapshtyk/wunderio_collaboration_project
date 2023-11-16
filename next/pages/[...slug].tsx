@@ -21,9 +21,10 @@ import {
   validateAndCleanupArticle,
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import { AboutUs as AboutUsType, validateAndCleanupAboutUs } from "@/lib/zod/about-us";
+import AboutUs from "@/components/about_us";
 
-
-const RESOURCE_TYPES = ["node--article", "node--page"];
+const RESOURCE_TYPES = ["node--article", "node--page","node--about_us"];
 
 export default function CustomPage({
   resource,
@@ -35,6 +36,7 @@ export default function CustomPage({
       <Meta title={resource.title} metatags={resource.metatag} />
       {resource.type === "node--article" && <Article article={resource} />}
       {resource.type === "node--page" && <Page page={resource} />}
+      {resource.type === "node--about_us" && <AboutUs about_us={resource} />}
     </>
   );
 }
@@ -48,7 +50,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 };
 
 interface PageProps extends CommonPageProps {
-  resource: PageType | ArticleType;
+  resource: PageType | ArticleType | AboutUsType ;
   languageLinks: LanguageLinks;
 }
 
@@ -118,6 +120,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
         ? validateAndCleanupPage(resource)
+      : type === "node--about_us"
+      ? validateAndCleanupAboutUs(resource)
         : null;
 
   return {
