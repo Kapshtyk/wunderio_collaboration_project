@@ -1,0 +1,25 @@
+name: telegram message
+on: 
+  pull_request:
+    types: [opened, edited, closed, reopened, assigned, review_requested]
+    
+jobs:
+    send_pr_message:
+      name: Send PR Message
+      if: github.event_name == 'pull_request'
+      runs-on: ubuntu-latest
+      steps:
+        - name: Send Telegram Message for PR
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            format: html
+            message: |
+              <b>Event:</b> ${{ github.event_name }} ${{ github.event.action }}
+              <b>Title:</b> ${{ github.event.pull_request.title }}
+              b>Body:</b> ${{ github.event.pull_request.body }}
+
+              <b>Reviewers:</b> ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}
+
+              <a href="${{ github.event.pull_request.html_url }}">${{ github.event.pull_request.title }}</a>
