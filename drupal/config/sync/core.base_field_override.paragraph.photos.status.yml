@@ -1,17 +1,17 @@
-uuid: 6c0357d3-e6d6-4f22-b0fc-534d1fbd189d
+uuid: e2d39b38-688a-4f16-b191-7011c8f3fdce
 langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.accordion_item
-id: paragraph.accordion_item.status
+    - paragraphs.paragraphs_type.photos
+id: paragraph.photos.status
 field_name: status
 entity_type: paragraph
-bundle: accordion_item
+bundle: photos
 label: Published
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value:
   -
     value: 1

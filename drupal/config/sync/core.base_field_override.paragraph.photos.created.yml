@@ -1,17 +1,17 @@
-uuid: e46bd979-8d68-4b4d-8b85-739f9508f460
+uuid: 2fc568f2-3205-48bc-aab3-f0f83bc21cc5
 langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.accordion_item
-id: paragraph.accordion_item.created
+    - paragraphs.paragraphs_type.photos
+id: paragraph.photos.created
 field_name: created
 entity_type: paragraph
-bundle: accordion_item
+bundle: photos
 label: 'Authored on'
 description: 'The time that the Paragraph was created.'
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

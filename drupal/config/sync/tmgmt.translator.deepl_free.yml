@@ -7,7 +7,7 @@ dependencies:
 name: deepl_free
 label: 'DeepL API Free'
 description: 'DeepL API Free Translator service.'
-auto_accept: false
+auto_accept: true
 weight: null
 plugin: deepl_free
 settings:
