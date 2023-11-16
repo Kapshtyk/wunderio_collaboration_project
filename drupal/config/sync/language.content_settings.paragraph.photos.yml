@@ -1,9 +1,9 @@
-uuid: 292b3be3-06eb-4833-8ee1-9f863e3315f6
+uuid: 5ee74844-33ed-427c-8527-d3e8c29ad296
 langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.photos
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: paragraph.accordion
+id: paragraph.photos
 target_entity_type_id: paragraph
-target_bundle: accordion
+target_bundle: photos
 default_langcode: site_default
-language_alterable: true
+language_alterable: false

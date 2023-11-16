@@ -1,49 +1,50 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
-
-import { LayoutProps } from "@/components/layout";
-
-import { drupal } from "@/lib/drupal/drupal-client";
-import { getCommonPageProps } from "@/lib/get-common-page-props";
-import { resolveWebformContent, Webform } from 'nextjs-drupal-webform';
-
-import { Careers, validateAndCleanupCareers } from "@/lib/zod/careers";
-import { OpenPositions as OpenPositionsType, validateAndCleanupOpenPositions } from "@/lib/zod/open-positions";
-import { CareersForm } from "@/components/careers-form";
-import { Paragraph } from "@/components/paragraph";
-import { HeadingSection } from "@/lib/zod/paragraph";
-import OpenPositions from "@/components/open-positions";
-import { Breadcrumbs } from "@/components/breadcrumbs";
-import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
-import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
-import { createLanguageLinks } from "@/lib/contexts/language-links-context";
-
+import { resolveWebformContent, Webform } from "nextjs-drupal-webform";
 import { Carousel } from "@material-tailwind/react";
 
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CareersForm } from "@/components/careers-form";
+import { LayoutProps } from "@/components/layout";
+import OpenPositions from "@/components/open-positions";
+import { Paragraph } from "@/components/paragraph";
+import { createLanguageLinks } from "@/lib/contexts/language-links-context";
+import { drupal } from "@/lib/drupal/drupal-client";
+import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
+import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { Careers, validateAndCleanupCareers } from "@/lib/zod/careers";
+import {
+  OpenPositions as OpenPositionsType,
+  validateAndCleanupOpenPositions,
+} from "@/lib/zod/open-positions";
+import { HeadingSection } from "@/lib/zod/paragraph";
 
 interface CareersPageProps extends LayoutProps {
   careers: Careers;
-  openPositions: OpenPositionsType[]
+  openPositions: OpenPositionsType[];
 }
 
 export default function CareersPage({
   careers,
-  openPositions
+  openPositions,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
     {
       title: t("homepage-link"),
-      url: "/"
+      url: "/",
     },
     {
       title: t("careers-link"),
-      url: "/careers"
-    }
-  ]
+      url: "/careers",
+    },
+  ];
 
-  const headingSection = careers.field_content_elements.find((element) => element.type === "paragraph--heading_section") as HeadingSection
+  const headingSection = careers.field_content_elements.find(
+    (element) => element.type === "paragraph--heading_section",
+  ) as HeadingSection;
   return (
     <>
       <div className="container">
@@ -54,11 +55,9 @@ export default function CareersPage({
         <span>{headingSection.field_excerpt}</span>
       </div>
       <div className="grid gap-4">
-        {
-          careers.field_content_elements?.map((paragraph) => (
-            <Paragraph key={paragraph.id} paragraph={paragraph} />
-          ))
-        }
+        {careers.field_content_elements?.map((paragraph) => (
+          <Paragraph key={paragraph.id} paragraph={paragraph} />
+        ))}
       </div>
       <CareersForm />
       <OpenPositions openPositions={openPositions} />
@@ -66,14 +65,15 @@ export default function CareersPage({
   );
 }
 
-
 export const getStaticProps: GetStaticProps<CareersPageProps> = async (
   context,
 ) => {
   const careers = (
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--careers", context,
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--careers",
+      context,
       {
-        params: getNodePageJsonApiParams("node--careers").getQueryObject()
+        params: getNodePageJsonApiParams("node--careers").getQueryObject(),
       },
     )
   ).at(0);
@@ -84,20 +84,22 @@ export const getStaticProps: GetStaticProps<CareersPageProps> = async (
     drupal,
   );
 
-  const languageLinks = createLanguageLinks(nodeTranslations)
+  const languageLinks = createLanguageLinks(nodeTranslations);
 
   const openPositions = await drupal.getResourceCollectionFromContext<
-    DrupalNode[]>("node--open_positions", context,
-      {
-        params: getNodePageJsonApiParams("node--open_positions").getQueryObject()
-      })
+    DrupalNode[]
+  >("node--open_positions", context, {
+    params: getNodePageJsonApiParams("node--open_positions").getQueryObject(),
+  });
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
       careers: validateAndCleanupCareers(careers),
-      openPositions: openPositions.map((node) => validateAndCleanupOpenPositions(node)),
-      languageLinks
+      openPositions: openPositions.map((node) =>
+        validateAndCleanupOpenPositions(node),
+      ),
+      languageLinks,
     },
     revalidate: 60,
   };

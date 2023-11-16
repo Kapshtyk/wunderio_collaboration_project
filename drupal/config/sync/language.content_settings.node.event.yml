@@ -1,18 +1,18 @@
-uuid: 292b3be3-06eb-4833-8ee1-9f863e3315f6
+uuid: 7ad9d927-ff17-4ff1-9720-019ddd8e6666
 langcode: en
 status: true
 dependencies:
   config:
-    - paragraphs.paragraphs_type.accordion
+    - node.type.event
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
+    enabled: true
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: paragraph.accordion
-target_entity_type_id: paragraph
-target_bundle: accordion
+id: node.event
+target_entity_type_id: node
+target_bundle: event
 default_langcode: site_default
 language_alterable: true
