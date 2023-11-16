@@ -18,7 +18,7 @@ jobs:
             message: |
               <b>Event:</b> ${{ github.event_name }} ${{ github.event.action }}
               <b>Title:</b> ${{ github.event.pull_request.title }}
-              b>Body:</b> ${{ github.event.pull_request.body }}
+              <b>Body:</b> ${{ github.event.pull_request.body }}
 
               <b>Reviewers:</b> ${{ join(github.event.pull_request.requested_reviewers.*.login, ', ') }}
 
