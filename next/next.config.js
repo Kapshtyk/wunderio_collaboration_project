@@ -15,12 +15,13 @@ const nextConfig = {
           destination: `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/sites/default/files/sitemap.xml`,
         },
         {
-          source: "/tyourat/:slug*",
-          destination: "/careers/:slug*",
+          //We need this because we use node:title as a path pattern and the Finnish and Swedish versions of the Career node have different titles.
+          source: "/tyourat",
+          destination: "/careers",
         },
         {
-          source: "/karriar/:slug*",
-          destination: "/careers/:slug*",
+          source: "/karriar",
+          destination: "/careers",
         },
       ],
     };

@@ -11,7 +11,9 @@ export function ParagraphText({ paragraph }: { paragraph: FormattedTextType }) {
         <HeadingParagraph>{paragraph.field_heading}</HeadingParagraph>
       )}
       <div
-        dangerouslySetInnerHTML={{ __html: paragraph.field_formatted_text.processed }}
+        dangerouslySetInnerHTML={{
+          __html: paragraph.field_formatted_text.processed,
+        }}
         className="mt-6 font-serif text-xl leading-loose prose"
       />
       {/* <FormattedText
