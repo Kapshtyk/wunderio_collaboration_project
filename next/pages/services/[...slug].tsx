@@ -16,14 +16,19 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Services as ServicesType, validateAndCleanupServices} from "@/lib/zod/services";
 import { getNodePageJsonApiParams, ResourceType } from "@/lib/drupal/get-node-page-json-api-params";
 import { Paragraph } from "@/components/paragraph";
+import { HeadingSection } from "@/lib/zod/paragraph";
+import ServicesTypes from "@/components/services-types";
+import SubHeadingSectionComponent from "@/components/services-subHeading-section";
 
 
 interface ServicesProps {
   services: ServicesType
+  allServices: ServicesType
+  servicesTypes: ServicesType [] 
 }
 
 export default function ServicesPages({
-  services
+  services, allServices, servicesTypes
 }: InferGetStaticPropsType<typeof getStaticProps>) {
 
   const breadcrumbs = [
@@ -40,6 +45,7 @@ export default function ServicesPages({
       url: "/services/" + services.title
     }
   ]
+  
   return (
     <>
       <Meta title={services.title} metatags={services.metatag} />
@@ -47,11 +53,14 @@ export default function ServicesPages({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       <div>
-        {services.field_content_elements?.map((paragraph)=> (
-          <Paragraph key={paragraph.id} paragraph={paragraph}/>
-        ))}
-        
+        {services.field_content_elements?.map((paragraph)=> {
+          const { field_excerpt, ...props } = paragraph as HeadingSection;
+         return (
+          <Paragraph key={paragraph.id} paragraph={props}/>
+         )
+        })}
       </div>
+      <ServicesTypes servicesTypes={servicesTypes} allServices={allServices}/>
     </>
   );
 }
@@ -76,6 +85,23 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
       notFound: true,
     };
   }
+
+  const allServices = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--services_page",
+      context, {
+        params: getNodePageJsonApiParams("node--services_page").addFilter('title', 'Services').getQueryObject()
+      })
+  ).at(0);
+
+  const servicesTypes = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--services_page",
+      context, {
+        params: getNodePageJsonApiParams("node--services_page").getQueryObject()
+      })
+  );
+
   const type = path.jsonapi.resourceName as ResourceType;
 
   const apiParams = getNodePageJsonApiParams(type).getQueryObject()
@@ -100,7 +126,9 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
   return {
     props: {
       ...(await getCommonPageProps(context)),
-      services: validateAndCleanupServices(resource),  
+      services: validateAndCleanupServices(resource),
+      allServices: validateAndCleanupServices(allServices),
+      servicesTypes: servicesTypes.filter((node) => node.title !== "Services" ).map((node) => validateAndCleanupServices(node)),
     },
     revalidate: 60,
   };

@@ -197,11 +197,20 @@ export const SubHeadingSectionSchema = z.object({
   field_heading: z.string(),
   field_excerpt: z.string(),
 })
-// export const ServicesTaxonomySchema = z.object({
-//   type: z.literal("paragraph--services_taxonomy"),
-//   id: z.string(),
-//   field_page_type: z.array(TaxonomyShape)
-// });
+
+export const LabelledImageSchema = z.object({
+  type: z.literal("paragraph--labelled_image"),
+  id: z.string(),
+  field_image: z
+  .object({
+    type: z.literal("media--image"),
+    id: z.string(),
+    field_media_image: ImageShape.nullable(),
+  })
+  .nullable()
+  .optional(),
+  field_label: z.string()
+})
 
 
 export type FormattedText = z.infer<typeof FormattedTextSchema>;
@@ -217,7 +226,8 @@ export type Testimonials = z.infer<typeof TestimonialsSchema>;
 export type HeadingSection = z.infer<typeof HeadingSectionSchema>;
 export type LinkService = z.infer<typeof LinkServiceSchema>;
 export type SubHeadingSection = z.infer<typeof SubHeadingSectionSchema>;
-// export type ServicesTaxonomy = z.infer<typeof ServicesTaxonomySchema>;
+export type LabelledImage = z.infer<typeof LabelledImageSchema>;
+
 
 export type Paragraph =
   | FormattedText
@@ -232,4 +242,5 @@ export type Paragraph =
   | Testimonials
   | HeadingSection
   | LinkService
-  | SubHeadingSection;
+  | SubHeadingSection
+  | LabelledImage;

@@ -10,7 +10,7 @@ import { Paragraph} from "@/lib/zod/paragraph";
 import { ParagraphTestimonials } from "./paragraph--testimonials";
 import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
 import { ParagraphLinkService } from "./paragraph--link-service";
-import { ParagraphSubHeadingSection } from "./sub-heading";
+import { ParagraphLabelledImage } from "./paragraph--labelled-image";
 // import { ParagraphServicesTaxonomy } from "./paragraph--services-taxonomy";
 
 // Use dynamic imports to defer loading a component until after initial page load: https://nextjs.org/docs/advanced-features/dynamic-import
@@ -58,15 +58,10 @@ export function Paragraph({ paragraph }: { paragraph: Paragraph }) {
     case "paragraph--heading_section": {
       return <ParagraphHeadingSection paragraph={paragraph} />
     }
-    case "paragraph--links_service_page": {
-      return <ParagraphLinkService paragraph={paragraph} />
+    case "paragraph--labelled_image": {
+      return <ParagraphLabelledImage paragraph={paragraph} />
     }
-    // case "paragraph--sub_heading_section": {
-    //   return <ParagraphSubHeadingSection paragraph={paragraph} />
-    // }
-    // case "paragraph--services_taxonomy": {
-    //   return <ParagraphServicesTaxonomy paragraph={paragraph} />
-    // }
+ 
     default:
       return null;
   }
