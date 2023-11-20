@@ -179,6 +179,21 @@ export const HeadingSectionSchema = z.object({
   field_excerpt: z.string(),
 });
 
+export const WorkCardSchema = z.object({
+  type: z.literal("paragraph--work_card"),
+  id: z.string(),
+  field_image: z
+    .object({
+      type: z.literal("media--image"),
+      id: z.string(),
+      field_media_image: ImageShape.nullable(),
+    })
+    .nullable()
+    .optional(),
+  field_excerpt: z.string(),
+});
+
+
 export type FormattedText = z.infer<typeof FormattedTextSchema>;
 export type Image = z.infer<typeof ImageSchema>;
 export type Video = z.infer<typeof VideoSchema>;
@@ -190,6 +205,7 @@ export type ListingArticles = z.infer<typeof ListingArticlesSchema>;
 export type FileAttachments = z.infer<typeof FileAttachmentsSchema>;
 export type Testimonials = z.infer<typeof TestimonialsSchema>;
 export type HeadingSection = z.infer<typeof HeadingSectionSchema>;
+export type WorkCard = z.infer<typeof WorkCardSchema>;
 
 export type Paragraph =
   | FormattedText
@@ -202,4 +218,6 @@ export type Paragraph =
   | ListingArticles
   | FileAttachments
   | Testimonials
-  | HeadingSection;
+  | HeadingSection
+  | WorkCard
+

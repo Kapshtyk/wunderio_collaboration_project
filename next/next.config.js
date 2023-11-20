@@ -23,6 +23,10 @@ const nextConfig = {
           source: "/karriar",
           destination: "/careers",
         },
+        {
+          source: "/work",
+          destination: "/work"
+        }
       ],
     };
   },

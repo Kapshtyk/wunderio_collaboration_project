@@ -4,6 +4,7 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { Article } from "@/components/article";
 import { Meta } from "@/components/meta";
 import { Page } from "@/components/page";
+
 import {
   createLanguageLinks,
   LanguageLinks,
@@ -22,7 +23,9 @@ import {
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 
+// const RESOURCE_TYPES = ["node--article", "node--page"];
 const RESOURCE_TYPES = ["node--article", "node--page"];
+
 
 export default function CustomPage({
   resource,
@@ -52,8 +55,9 @@ interface PageProps extends CommonPageProps {
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
-  const path: DrupalTranslatedPath =
-    await drupal.translatePathFromContext(context);
+  const path: DrupalTranslatedPath = await drupal.translatePathFromContext(
+    context,
+  );
 
   if (!path) {
     return {
@@ -73,6 +77,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
 
   const type = path.jsonapi.resourceName as ResourceType;
 
+  // If we are looking at the path of a frontpage node,
+  // redirect the user to the homepage for that language:
+
   if (type === "node--frontpage") {
     return {
       redirect: {
@@ -87,10 +94,14 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     path,
     context,
     {
-      params: apiParams,
+      params: getNodePageJsonApiParams(type).getQueryObject(),
     },
   );
 
+  // At this point, we know the path exists and it points to a resource.
+  // If we receive an error, it means something went wrong on Drupal.
+  // We throw an error to tell revalidation to skip this for now.
+  // Revalidation can try again on next request.
   if (!resource) {
     throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
   }
@@ -109,15 +120,14 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     context,
     drupal,
   );
-
   const languageLinks = createLanguageLinks(nodeTranslations);
 
   const validatedResource =
     type === "node--article"
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
-      ? validateAndCleanupPage(resource)
-      : null;
+        ? validateAndCleanupPage(resource)
+        : null;
 
   return {
     props: {
@@ -128,3 +138,4 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     revalidate: 60,
   };
 };
+
