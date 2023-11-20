@@ -19,10 +19,12 @@ import {
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 
 import { Divider } from "@/ui/divider";
+import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
   promotedArticleTeasers: ArticleTeaser[];
+
 }
 
 export default function IndexPage({
@@ -79,6 +81,19 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     },
   });
 
+
+  const aboutUs = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--about_us",
+      context,
+      {
+        params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
+      },
+    )
+  ).at(0);
+  console.log(aboutUs);
+  
+
   return {
     props: {
       ...(await getCommonPageProps(context)),
@@ -86,6 +101,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
         validateAndCleanupArticleTeaser(teaser),
       ),
+      aboutUs: validateAndCleanupAboutUs(aboutUs)
     },
     revalidate: 60,
   };
