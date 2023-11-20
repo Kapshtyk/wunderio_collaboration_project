@@ -1,96 +1,78 @@
-uuid: a05cd50b-5a97-4a70-b5d1-d7ef087d5cb4
+uuid: be3a2978-5dc9-4f9f-902f-1fac1251d72b
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_content_elements
-    - node.type.page
-    - paragraphs.paragraphs_type.accordion
-    - paragraphs.paragraphs_type.file_attachments
+    - node.type.work
     - paragraphs.paragraphs_type.formatted_text
     - paragraphs.paragraphs_type.heading_section
-    - paragraphs.paragraphs_type.hero
     - paragraphs.paragraphs_type.image
-    - paragraphs.paragraphs_type.links
-    - paragraphs.paragraphs_type.listing_articles
-    - paragraphs.paragraphs_type.testimonials
-    - paragraphs.paragraphs_type.video
-    - paragraphs.paragraphs_type.work_card
   module:
     - entity_reference_revisions
     - tmgmt_content
 third_party_settings:
   tmgmt_content:
     excluded: false
-_core:
-  default_config_hash: 8mtvAhPF2U4jLc8oliusJ4b7Fz5wo_pvqIyiBfEnGok
-id: node.page.field_content_elements
+id: node.work.field_content_elements
 field_name: field_content_elements
 entity_type: node
-bundle: page
+bundle: work
 label: 'Content elements'
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      hero: hero
       formatted_text: formatted_text
       image: image
-      accordion: accordion
-      links: links
-      video: video
-      listing_articles: listing_articles
-      file_attachments: file_attachments
-      work_card: work_card
       heading_section: heading_section
-      testimonials: testimonials
     negate: 0
     target_bundles_drag_drop:
       accordion:
-        weight: -11
-        enabled: true
+        weight: -10
+        enabled: false
       accordion_item:
         weight: -12
         enabled: false
       file_attachments:
         weight: 10
-        enabled: true
+        enabled: false
       formatted_text:
         weight: -14
         enabled: true
       heading_section:
-        weight: 17
+        weight: 15
         enabled: true
       hero:
         weight: -15
-        enabled: true
+        enabled: false
       image:
         weight: -13
         enabled: true
       links:
-        weight: -10
-        enabled: true
+        weight: -11
+        enabled: false
       links_service_page:
         weight: 21
         enabled: false
       listing_articles:
         weight: 9
-        enabled: true
+        enabled: false
       testimonials:
-        weight: 23
-        enabled: true
+        weight: 12
+        enabled: false
       video:
         weight: -9
-        enabled: true
+        enabled: false
       work_card:
-        weight: 15
-        enabled: true
+        weight: 27
+        enabled: false
       work_listing:
-        weight: 26
+        weight: 14
         enabled: false
 field_type: entity_reference_revisions

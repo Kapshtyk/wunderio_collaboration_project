@@ -6,6 +6,7 @@ dependencies:
     - field.field.node.page.field_content_elements
     - field.field.node.page.field_excerpt
     - field.field.node.page.field_image
+    - field.field.node.page.field_page_type
     - node.type.page
   module:
     - entity_reference_revisions
@@ -32,6 +33,14 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_page_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
     region: content
 hidden:
   field_image: true
