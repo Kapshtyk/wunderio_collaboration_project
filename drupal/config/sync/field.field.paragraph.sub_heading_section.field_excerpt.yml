@@ -1,19 +1,19 @@
-uuid: 8d979be1-78ac-4685-9a41-3ffbbeedb942
+uuid: ea0eaf3b-c367-4522-a60c-74e4b6b73f09
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.paragraph.field_excerpt
-    - paragraphs.paragraphs_type.links_service_page
+    - paragraphs.paragraphs_type.sub_heading_section
   module:
     - tmgmt_content
 third_party_settings:
   tmgmt_content:
     excluded: false
-id: paragraph.links_service_page.field_excerpt
+id: paragraph.sub_heading_section.field_excerpt
 field_name: field_excerpt
 entity_type: paragraph
-bundle: links_service_page
+bundle: sub_heading_section
 label: Excerpt
 description: "This field is used to store the short excerpt or CTA slogan to be displayed next to the page's h1 heading."
 required: true

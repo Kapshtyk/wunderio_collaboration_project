@@ -1,0 +1,24 @@
+uuid: 7dab2780-4e1a-4fa9-952c-b6d31930015e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_label
+    - paragraphs.paragraphs_type.labelled_image
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: paragraph.labelled_image.field_label
+field_name: field_label
+entity_type: paragraph
+bundle: labelled_image
+label: label
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,14 +1,14 @@
-uuid: 5b0a8190-0f66-4899-9e5e-a955cc2bc121
+uuid: 0b4c335d-3042-4598-9e59-9d7d10ba1394
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.heading_section.field_excerpt
-    - field.field.paragraph.heading_section.field_heading
-    - paragraphs.paragraphs_type.heading_section
-id: paragraph.heading_section.default
+    - field.field.paragraph.sub_heading_section.field_excerpt
+    - field.field.paragraph.sub_heading_section.field_heading
+    - paragraphs.paragraphs_type.sub_heading_section
+id: paragraph.sub_heading_section.default
 targetEntityType: paragraph
-bundle: heading_section
+bundle: sub_heading_section
 mode: default
 content:
   field_excerpt:
@@ -26,11 +26,6 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  translation:
-    weight: 10
-    region: content
-    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true

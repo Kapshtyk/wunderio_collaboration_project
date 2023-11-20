@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.services_page.field_connect_services
     - field.field.node.services_page.field_content_elements
-    - field.field.node.services_page.field_pages
+    - field.field.node.services_page.field_page_types
+    - field.field.node.services_page.field_service_types
     - node.type.services_page
   module:
     - paragraphs
@@ -19,6 +21,16 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_connect_services:
+    type: entity_reference_autocomplete
+    weight: 123
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   field_content_elements:
     type: paragraphs
@@ -39,9 +51,19 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
-  field_pages:
+  field_page_types:
     type: entity_reference_autocomplete
     weight: 121
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_service_types:
+    type: entity_reference_autocomplete
+    weight: 122
     region: content
     settings:
       match_operator: CONTAINS

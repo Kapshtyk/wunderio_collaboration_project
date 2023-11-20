@@ -3,8 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.services_page.field_connect_services
     - field.field.node.services_page.field_content_elements
-    - field.field.node.services_page.field_pages
+    - field.field.node.services_page.field_page_types
+    - field.field.node.services_page.field_service_types
     - node.type.services_page
   module:
     - entity_reference_revisions
@@ -14,6 +16,14 @@ targetEntityType: node
 bundle: services_page
 mode: default
 content:
+  field_connect_services:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
   field_content_elements:
     type: entity_reference_revisions_entity_view
     label: above
@@ -23,13 +33,21 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_pages:
+  field_page_types:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
     weight: 101
+    region: content
+  field_service_types:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
     region: content
   links:
     settings: {  }

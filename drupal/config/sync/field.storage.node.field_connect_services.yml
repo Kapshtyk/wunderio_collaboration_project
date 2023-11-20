@@ -1,16 +1,15 @@
-uuid: f8a62aa3-e0b4-4ad6-9438-b6cd8cc9a529
+uuid: 8358fc5c-48c3-4a49-ac89-80764ff5f41c
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - taxonomy
-id: node.field_pages
-field_name: field_pages
+id: node.field_connect_services
+field_name: field_connect_services
 entity_type: node
 type: entity_reference
 settings:
-  target_type: taxonomy_term
+  target_type: node
 module: core
 locked: false
 cardinality: -1

@@ -1,21 +1,21 @@
-uuid: 87506950-bceb-412c-b2e0-6c4422449d2f
+uuid: 1f81c238-c52c-4370-ad62-17a980eaac94
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.paragraph.field_listing_type
-    - paragraphs.paragraphs_type.heading_section
-    - taxonomy.vocabulary.advisory
+    - field.storage.node.field_page_types
+    - node.type.services_page
+    - taxonomy.vocabulary.page_types
   module:
     - tmgmt_content
 third_party_settings:
   tmgmt_content:
     excluded: false
-id: paragraph.heading_section.field_listing_type
-field_name: field_listing_type
-entity_type: paragraph
-bundle: heading_section
-label: 'Listing type'
+id: node.services_page.field_page_types
+field_name: field_page_types
+entity_type: node
+bundle: services_page
+label: 'Page Type'
 description: ''
 required: false
 translatable: false
@@ -25,7 +25,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      advisory: advisory
+      page_types: page_types
     sort:
       field: name
       direction: asc

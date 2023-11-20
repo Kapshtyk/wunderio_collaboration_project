@@ -1,13 +1,13 @@
-uuid: 096bb66a-123c-4fc4-b3c8-05c62c539ab0
+uuid: 8ef0bbee-b2e8-4ccc-af58-737a2e69eeab
 langcode: en
 status: true
 dependencies:
   module:
-    - paragraphs
+    - node
     - taxonomy
-id: paragraph.field_pages
-field_name: field_pages
-entity_type: paragraph
+id: node.field_service_types
+field_name: field_service_types
+entity_type: node
 type: entity_reference
 settings:
   target_type: taxonomy_term

@@ -1,14 +1,14 @@
-uuid: 403636ba-84d1-4935-bd10-3991798a0071
+uuid: 72ee52bd-d29b-4e7d-9559-131262580dd3
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.heading_section.field_excerpt
-    - field.field.paragraph.heading_section.field_heading
-    - paragraphs.paragraphs_type.heading_section
-id: paragraph.heading_section.default
+    - field.field.paragraph.sub_heading_section.field_excerpt
+    - field.field.paragraph.sub_heading_section.field_heading
+    - paragraphs.paragraphs_type.sub_heading_section
+id: paragraph.sub_heading_section.default
 targetEntityType: paragraph
-bundle: heading_section
+bundle: sub_heading_section
 mode: default
 content:
   field_excerpt:
