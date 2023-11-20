@@ -7,7 +7,9 @@ export type ResourceType =
   | "node--page"
   | "node--article"
   | "node--careers"
-  | "node--open_positions";
+  | "node--open_positions"
+  | "node--work"
+
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -46,6 +48,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_content_elements.field_accordion_items",
         "field_content_elements.field_accordion_items.field_content_elements.field_image.field_media_image",
         "field_content_elements.field_accordion_items.field_content_elements.field_video",
+        "field_page_type"
       ])
       .addFields("node--page", [
         "title",
@@ -53,6 +56,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "path",
         "status",
         "metatag",
+        "field_page_type"
       ]);
   }
 
@@ -92,6 +96,21 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "path",
       "sticky",
     ]);
+  }
+  // The work content type has paragraphs, stored in the "field_content_elements" field:
+  if (resourceType === "node--work") {
+    apiParams
+      .addInclude([
+        "field_content_elements",
+        "field_content_elements.field_image.field_media_image",
+      ])
+      .addFields("node--work", [
+        "title",
+        "field_content_elements",
+        "path",
+        "status",
+        "metatag",
+      ]);
   }
 
   return apiParams;
