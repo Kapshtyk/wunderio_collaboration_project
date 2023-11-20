@@ -1,5 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode } from "next-drupal";
+import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { ArticleTeasers } from "@/components/article-teasers";

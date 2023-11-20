@@ -5,11 +5,13 @@ dependencies:
   config:
     - field.field.node.event.body
     - field.field.node.event.field_content_elements
+    - field.field.node.event.field_event_registration
     - node.type.event
   module:
     - entity_reference_revisions
     - text
     - user
+    - webform
 id: node.event.default
 targetEntityType: node
 bundle: event
@@ -30,6 +32,15 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_event_registration:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 102
     region: content
   links:
     settings: {  }
