@@ -84,7 +84,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       },
     };
   }
-  const apiParams = getNodePageJsonApiParams(type).getQueryObject()
+  const apiParams = getNodePageJsonApiParams(type).getQueryObject();
 
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
