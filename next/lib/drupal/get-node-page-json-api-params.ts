@@ -31,19 +31,19 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
   }
 
   if (resourceType === "node--event") {
-    apiParams
-      .addInclude([
-        "uid",
-        "field_content_elements",
-        "field_content_elements.field_image.field_media_image",
-      ])
-      .addFields(resourceType, [
+    apiParams.addInclude([
+      "uid",
+      "field_content_elements",
+      "field_content_elements.field_image.field_media_image",
+      "field_event_registration",
+    ]);
+    /*  .addFields(resourceType, [
         "title",
         "path",
         "field_content_elements",
         "metatag",
         "body",
-      ]);
+      ]); */
   }
 
   if (resourceType === "node--careers") {

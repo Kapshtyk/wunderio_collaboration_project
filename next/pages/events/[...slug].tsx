@@ -7,7 +7,9 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
+import { Webform } from "@/components/webform";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
+import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { drupal } from "@/lib/drupal/drupal-client";
 import {
   getNodePageJsonApiParams,
@@ -23,11 +25,17 @@ import {
   validateAndCleanupSideEvents,
 } from "@/lib/zod/events";
 import { HeadingSection } from "@/lib/zod/paragraph";
+import {
+  validateAndCleanupWebform,
+  validateAndCleanupWebformFields,
+  Webform as WebformType,
+} from "@/lib/zod/webform";
 
 import NotFoundPage from "../404";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
+  webform: WebformType;
   sideEvents: SideEventsType;
 }
 
@@ -35,8 +43,10 @@ const RESOURCE_TYPES = ["node--event", "node--side_event"];
 
 export default function Event({
   event,
+  webform,
   sideEvents,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  console.log("webform", webform);
   const { t } = useTranslation();
   if (!event) {
     return <NotFoundPage />;
@@ -84,6 +94,7 @@ export default function Event({
           className="mt-6 font-serif text-xl leading-loose prose"
         />
       }
+      <Webform webform={webform} />
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
           sideEvents.map((sideEvent) => (
@@ -129,6 +140,7 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
   let resource;
   let validatedResource;
   let sideEvents = [];
+  let validatedWebform;
 
   if (type === "node--event") {
     resource = await drupal.getResourceFromContext<DrupalNode>(path, context, {
@@ -138,6 +150,7 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
       throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
     }
     validatedResource = validateAndCleanupEvents(resource);
+    // Fetch side events
     sideEvents = await drupal
       .getResourceCollectionFromContext<DrupalNode[]>(
         "node--side_event",
@@ -151,6 +164,25 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
       .then((sideEvents) =>
         sideEvents.map(validateAndCleanupSideEvents).filter(Boolean),
       );
+    // Fetch webform fields for event registration
+    const webformFields = await fetch(
+      absoluteUrl(
+        `/webform_rest/${validatedResource.field_event_registration.resourceIdObjMeta.drupal_internal__target_id}/fields?_format=json`,
+      ),
+    )
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((error) => console.log(error));
+    console.log("webformFields", webformFields)
+    validatedWebform = validateAndCleanupWebform(
+      resource.field_event_registration,
+    );
+    const validatedWebformFields =
+      validateAndCleanupWebformFields(webformFields);
+    if (!validatedWebform || !validatedWebformFields) {
+      throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
+    }
+    validatedWebform.field_webform_fields = validatedWebformFields;
   } else {
     resource = await drupal.getResourceFromContext<DrupalNode>(path, context, {
       params: getNodePageJsonApiParams("node--side_event").getQueryObject(),
@@ -179,6 +211,7 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
     props: {
       ...(await getCommonPageProps(context)),
       event: validatedResource,
+      webform: validatedWebform,
       sideEvents,
       languageLinks,
     },
