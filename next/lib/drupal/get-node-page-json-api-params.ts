@@ -8,6 +8,8 @@ export type ResourceType =
   | "node--article"
   | "node--careers"
   | "node--open_positions"
+  | "node--event"
+  | "node--side_event"
   | "node--work"
 
 
@@ -16,6 +18,35 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
     "field_site.meta.drupal_internal__target_id",
     env.DRUPAL_SITE_ID,
   );
+
+  if (resourceType === "node--side_event") {
+    apiParams
+      .addInclude(["uid", "field_main_event", "field_content_elements"])
+      .addFields(resourceType, [
+        "title",
+        "path",
+        "metatag",
+        "field_content_elements",
+        "field_main_event",
+        "body",
+      ]);
+  }
+
+  if (resourceType === "node--event") {
+    apiParams.addInclude([
+      "uid",
+      "field_content_elements",
+      "field_content_elements.field_image.field_media_image",
+      "field_event_registration",
+    ]);
+    /*  .addFields(resourceType, [
+        "title",
+        "path",
+        "field_content_elements",
+        "metatag",
+        "body",
+      ]); */
+  }
 
   if (resourceType === "node--careers") {
     apiParams

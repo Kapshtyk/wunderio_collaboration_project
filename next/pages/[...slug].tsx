@@ -23,8 +23,6 @@ import {
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 
-
-
 // const RESOURCE_TYPES = ["node--article", "node--page"];
 const RESOURCE_TYPES = ["node--article", "node--page"];
 
@@ -90,6 +88,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       },
     };
   }
+  const apiParams = getNodePageJsonApiParams(type).getQueryObject();
 
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
