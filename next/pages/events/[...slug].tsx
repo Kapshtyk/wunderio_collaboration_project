@@ -173,7 +173,6 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
       .then((response) => response.json())
       .then((data) => data)
       .catch((error) => console.log(error));
-    console.log("webformFields", webformFields)
     validatedWebform = validateAndCleanupWebform(
       resource.field_event_registration,
     );
@@ -190,7 +189,22 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
     if (!resource) {
       throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
     }
+    const webformFields = await fetch(
+      absoluteUrl(
+        `/webform_rest/${resource.field_side_event_registration.resourceIdObjMeta.drupal_internal__target_id}/fields?_format=json`,
+      ),
+    )
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((error) => console.log(error));
+
+    validatedWebform = validateAndCleanupWebform(
+      resource.field_event_registration,
+    );
+    const validatedWebformFields =
+      validateAndCleanupWebformFields(webformFields);
     validatedResource = validateAndCleanupSideEvents(resource);
+
   }
 
   const nodeTranslations = await getNodeTranslatedVersions(

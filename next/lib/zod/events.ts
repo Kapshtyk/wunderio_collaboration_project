@@ -56,6 +56,12 @@ export const SideEventSchema = z.object({
     format: z.string(),
     processed: z.string(),
   }),
+  field_side_event_registration: z.object({
+    id: z.string(),
+    resourceIdObjMeta: z.object({
+      drupal_internal__target_id: z.string(),
+    }),
+  }),
 });
 
 export const SideEventsSchema = z.array(SideEventSchema);

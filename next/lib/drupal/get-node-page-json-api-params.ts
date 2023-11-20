@@ -19,13 +19,19 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   if (resourceType === "node--side_event") {
     apiParams
-      .addInclude(["uid", "field_main_event", "field_content_elements"])
+      .addInclude([
+        "uid",
+        "field_main_event",
+        "field_content_elements",
+        "field_side_event_registration",
+      ])
       .addFields(resourceType, [
         "title",
         "path",
         "metatag",
         "field_content_elements",
         "field_main_event",
+        "field_side_event_registration",
         "body",
       ]);
   }
