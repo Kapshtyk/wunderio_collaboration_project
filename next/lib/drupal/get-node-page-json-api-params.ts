@@ -10,6 +10,7 @@ export type ResourceType =
   | "node--open_positions"
   | "node--event"
   | "node--side_event"
+  | "node--about_us"
   | "node--work"
 
 
@@ -136,6 +137,21 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_content_elements.field_image.field_media_image",
       ])
       .addFields("node--work", [
+        "title",
+        "field_content_elements",
+        "path",
+        "status",
+        "metatag",
+      ]);
+  }
+
+  if (resourceType === "node--about_us") {
+    apiParams
+      .addInclude([
+        "field_content_elements",
+        "field_content_elements.field_image.field_media_image",  
+      ])
+      .addFields("node--about_us", [
         "title",
         "field_content_elements",
         "path",
