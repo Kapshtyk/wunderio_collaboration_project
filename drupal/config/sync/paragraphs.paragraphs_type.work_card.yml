@@ -1,0 +1,10 @@
+uuid: 59817f6e-95af-4cf6-9e2a-2f297647d369
+langcode: en
+status: true
+dependencies: {  }
+id: work_card
+label: Work-Card
+icon_uuid: null
+icon_default: null
+description: 'Paragraph type that contains pic and excerpt for work card in work page'
+behavior_plugins: {  }

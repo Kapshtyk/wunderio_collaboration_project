@@ -1,0 +1,8 @@
+uuid: 2c27da8e-7a6e-4f3d-8e0d-eb757ce8cace
+langcode: en
+status: true
+dependencies: {  }
+name: 'Page type'
+vid: page_type
+description: ''
+weight: 0
