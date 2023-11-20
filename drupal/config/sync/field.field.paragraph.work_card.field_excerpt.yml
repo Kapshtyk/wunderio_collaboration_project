@@ -18,7 +18,7 @@ label: Excerpt
 description: "This field is used to store the short excerpt or CTA slogan to be displayed next to the page's h1 heading."
 required: true
 translatable: false
-default_value: {}
-default_value_callback: ""
-settings: {}
+default_value: {  }
+default_value_callback: ''
+settings: {  }
 field_type: string
