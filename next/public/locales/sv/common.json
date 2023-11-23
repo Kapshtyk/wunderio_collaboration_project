@@ -40,6 +40,10 @@
   "form-label-subject": "Ämne:",
   "form-label-message": "Meddelande:",
   "form-label-submit": "Skicka",
+  "form-label-firstname": "Förnamn:",
+  "form-label-lastname": "Efternamn:",
+  "form-label-age": "Ålder:",
+  "form-label-participant": "Deltagare:",
   "form-thank-you-message": "Tack!",
   "form-send-another-message": "Skicka ett annat meddelande",
   "login-to-fill-form": "Logga in för att fylla i detta formulär.",
@@ -83,5 +87,8 @@
   "reset-your-password": "Återställ ditt lösenord",
   "field-is-required": "{{field}} är obligatoriskt.",
   "events-main-title": "Här hittar du alla våra evenemang",
-  "events-link": "Evenemang"
+  "events-link": "Evenemang",
+  "events-form-title": "Registrering för {{event}}",
+  "events-form-not-auth": "Logga in för att anmäla dig till ett evenemang.",
+  "events-participants": "Deltagare"
 }

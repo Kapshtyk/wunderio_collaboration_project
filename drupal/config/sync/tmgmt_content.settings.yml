@@ -3,4 +3,5 @@ _core:
 embedded_fields:
   node:
     field_basic_info: true
+    field_participant: true
 default_moderation_states: {  }
