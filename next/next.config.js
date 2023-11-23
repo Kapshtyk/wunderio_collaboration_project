@@ -17,7 +17,11 @@ const nextConfig = {
         {
           source: "/services",
           destination: "/services"
-        }
+        },
+        {
+          source: "/palvelut",
+          destination: "/services"
+        },
       ],
     };
   },

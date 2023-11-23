@@ -10,6 +10,7 @@ interface SubHeadingSectionProps {
 }
 
 const SubHeadingSectionComponent = ({subHeading,tags,services}: SubHeadingSectionProps) => {
+console.log("services:", services);
 
   return (
     <>
@@ -24,7 +25,7 @@ const SubHeadingSectionComponent = ({subHeading,tags,services}: SubHeadingSectio
           <div key={tag.id}>
             <h2>{tag.name}</h2>
             {services
-              .filter((service) => service.field_service_types.name === tag.name)
+              .filter((service) => service.field_service_types?.name === tag.name)
               .map((service) => (
                 <div key={service.id}>
                   <Link key={service.id} href={service.path.alias} className="text-primary-600">

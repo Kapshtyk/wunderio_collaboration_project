@@ -1,5 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
+import { DrupalNode, DrupalTaxonomyTerm, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 
@@ -14,8 +14,10 @@ import { LayoutProps } from "@/components/layout";
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import Link from "next/link";
 import SubHeadingSectionComponent from "@/components/services-subHeading-section";
+import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+import { createLanguageLinks } from "@/lib/contexts/language-links-context";
 
-interface ServicesProps {
+interface ServicesProps extends LayoutProps {
   mainPage: Services;
   services: Services [];
   tags: DrupalTaxonomyTerm[]
@@ -75,6 +77,7 @@ const subHeadings = mainPage.field_content_elements.filter(item=>item.type === "
 export const getStaticProps: GetStaticProps<ServicesProps> = async (
   context,
 ) => {
+
   const mainPage = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--services_page", context,
       {
@@ -90,6 +93,9 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
       },
     )
   )
+
+  // console.log(pages);
+  
   const tags = (
     await drupal.getResourceCollectionFromContext<DrupalTaxonomyTerm[]>("taxonomy_term--advisory", context,
       {
@@ -98,13 +104,22 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
     )
   )
 
+  const nodeTranslations = await getNodeTranslatedVersions(
+    mainPage,
+    context,
+    drupal,
+  );
+
+  const languageLinks = createLanguageLinks(nodeTranslations);
+
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
       mainPage: validateAndCleanupServices(mainPage),
       services: pages.filter((node) => node.title !== "Services" ).map((node) => validateAndCleanupServices(node)),
-      tags
+      tags,
+      languageLinks
     },
   };
 };

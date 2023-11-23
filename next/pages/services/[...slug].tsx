@@ -7,7 +7,7 @@ import {
   createLanguageLinks,
   LanguageLinks,
 } from "@/lib/contexts/language-links-context";
-import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { CommonPageProps, getCommonPageProps } from "@/lib/get-common-page-props";
 
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { drupal } from "@/lib/drupal/drupal-client";
@@ -19,12 +19,14 @@ import { Paragraph } from "@/components/paragraph";
 import { HeadingSection } from "@/lib/zod/paragraph";
 import ServicesTypes from "@/components/services-types";
 import SubHeadingSectionComponent from "@/components/services-subHeading-section";
+import { LayoutProps } from "@/components/layout";
 
 
-interface ServicesProps {
+interface ServicesProps extends CommonPageProps{
   services: ServicesType
   allServices: ServicesType
-  servicesTypes: ServicesType [] 
+  servicesTypes: ServicesType []
+  languageLinks: LanguageLinks
 }
 
 export default function ServicesPages({
@@ -78,7 +80,10 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
   context,
 ) => {
   const path: DrupalTranslatedPath =
-    await drupal.translatePathFromContext(context);
+    await drupal.translatePathFromContext(context,
+      {
+        pathPrefix: "/services"
+      });
 
   if (!path) {
     return {
@@ -90,7 +95,7 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
       "node--services_page",
       context, {
-        params: getNodePageJsonApiParams("node--services_page").addFilter('title', 'Services').getQueryObject()
+        params: getNodePageJsonApiParams("node--services_page").addFilter('title', 'Services').getQueryObject(),
       })
   ).at(0);
 
@@ -109,7 +114,8 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
     context, {
-    params: apiParams
+    params: apiParams,
+    pathPrefix: "/services"
   });
 
   if (!resource) {
@@ -121,6 +127,13 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
       notFound: true,
     };
   }
+  const nodeTranslations = await getNodeTranslatedVersions(
+    resource,
+    context,
+    drupal,
+  );
+
+  const languageLinks = createLanguageLinks(nodeTranslations);
 
 
   return {
@@ -129,6 +142,7 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
       services: validateAndCleanupServices(resource),
       allServices: validateAndCleanupServices(allServices),
       servicesTypes: servicesTypes.filter((node) => node.title !== "Services" ).map((node) => validateAndCleanupServices(node)),
+      languageLinks
     },
     revalidate: 60,
   };

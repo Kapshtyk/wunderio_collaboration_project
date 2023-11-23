@@ -9,7 +9,7 @@ interface ServicesTypesProps {
 }
 
 const  ServicesTypes = ({ servicesTypes ,allServices}: ServicesTypesProps) => {
-    console.log("all servicex:",allServices)
+    console.log("all services:",allServices)
     console.log("services:", servicesTypes)
     const subHeadingSections = allServices.field_content_elements.filter((field)=> field.type === "paragraph--sub_heading_section") as SubHeadingSection [];
     return (
@@ -21,7 +21,7 @@ const  ServicesTypes = ({ servicesTypes ,allServices}: ServicesTypesProps) => {
               <div>
                 <p>{subHeadingSection.field_heading}</p>
                 <p>{subHeadingSection.field_excerpt}</p>
-               {servicesTypes.filter((field)=>field.field_service_types.name  === subHeadingSection.field_heading).map((service)=>(
+               {servicesTypes.filter((field)=>field.field_service_types?.name  === subHeadingSection.field_heading).map((service)=>(
                 <div key={service.id}>
                     <Link 
                     href={service.path.alias}
