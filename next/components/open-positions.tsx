@@ -13,16 +13,12 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
   const [choosenCountry, setChoosenCountry] = useState<string>("all");
 
   useMemo(() => {
-    const offices = openPositions.map(
-      (openPosition) => openPosition.field_office.name,
-    );
+    const offices = Array.from(new Set(openPositions.map((openPosition) => openPosition.field_office.name)));
     setOffices(offices);
   }, [openPositions]);
 
   useMemo(() => {
-    const countries = openPositions.map(
-      (openPosition) => openPosition.field_country.name,
-    );
+    const countries = Array.from(new Set(openPositions.map((openPosition) => openPosition.field_country.name)));
     setCountries(countries);
   }, [openPositions]);
 

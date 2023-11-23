@@ -90,21 +90,6 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       },
     )
   ).at(0);
-  console.log(aboutUs);
-
-
-
-  const aboutUs = (
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--about_us",
-      context,
-      {
-        params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
-      },
-    )
-  ).at(0);
-  console.log(aboutUs);
-
 
   return {
     props: {
