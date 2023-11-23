@@ -17,7 +17,7 @@ bundle: sub_heading_section
 label: Excerpt
 description: "This field is used to store the short excerpt or CTA slogan to be displayed next to the page's h1 heading."
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

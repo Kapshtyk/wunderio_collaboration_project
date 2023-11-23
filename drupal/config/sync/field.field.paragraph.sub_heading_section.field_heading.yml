@@ -17,7 +17,7 @@ bundle: sub_heading_section
 label: Heading
 description: 'Heading for the whole accordion'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

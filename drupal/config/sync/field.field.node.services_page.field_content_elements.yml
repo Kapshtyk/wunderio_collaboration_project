@@ -38,8 +38,8 @@ settings:
       links: links
       video: video
       testimonials: testimonials
-      labelled_image: labelled_image
       heading_section: heading_section
+      labelled_image: labelled_image
       sub_heading_section: sub_heading_section
     negate: 0
     target_bundles_drag_drop:

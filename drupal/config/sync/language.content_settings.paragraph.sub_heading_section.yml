@@ -1,9 +1,9 @@
-uuid: 84f8360d-cdcb-47b4-a67d-24ff4c17f8f1
+uuid: da915982-0f75-477e-b4d5-8dbbc7888a2e
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.sub_sevices_types
+    - paragraphs.paragraphs_type.sub_heading_section
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: true
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: taxonomy_term.sub_sevices_types
-target_entity_type_id: taxonomy_term
-target_bundle: sub_sevices_types
+id: paragraph.sub_heading_section
+target_entity_type_id: paragraph
+target_bundle: sub_heading_section
 default_langcode: site_default
-language_alterable: false
+language_alterable: true
