@@ -1,22 +1,20 @@
-uuid: e7222d75-5c32-4a9f-80c5-0a16fe1fc1dd
+uuid: 0a4a803e-df94-4937-90ed-027b4d920d08
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.body
-    - node.type.webform
+    - node.type.people
   module:
     - text
-_core:
-  default_config_hash: '-Qu0UyzQ0jD4TDYq8fOasS-D-vGd3gSwzi15PzRJUD4'
-id: node.webform.body
+id: node.people.body
 field_name: body
 entity_type: node
-bundle: webform
+bundle: people
 label: Body
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:

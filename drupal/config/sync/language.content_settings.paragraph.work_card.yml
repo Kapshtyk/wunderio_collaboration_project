@@ -1,9 +1,9 @@
-uuid: ecf46ced-75d3-4390-8285-b732f52929fb
+uuid: 48700c38-8b82-4920-b6e3-522df96995c6
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.page_type
+    - paragraphs.paragraphs_type.work_card
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: taxonomy_term.page_type
-target_entity_type_id: taxonomy_term
-target_bundle: page_type
+id: paragraph.work_card
+target_entity_type_id: paragraph
+target_bundle: work_card
 default_langcode: site_default
 language_alterable: false

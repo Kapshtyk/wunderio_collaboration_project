@@ -1,21 +1,20 @@
-uuid: 1770d886-91d8-4d1c-bd19-b0978ed13bcc
+uuid: b18a63ec-6023-482e-8b9b-d564251cf095
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.side_event.body
-    - field.field.node.side_event.field_content_elements
-    - field.field.node.side_event.field_main_event
-    - field.field.node.side_event.field_side_event_registration
-    - node.type.side_event
+    - field.field.node.people.body
+    - field.field.node.people.field_image
+    - field.field.node.people.field_personal_data
+    - image.style.thumbnail
+    - node.type.people
   module:
-    - paragraphs
+    - image
     - path
     - text
-    - webform
-id: node.side_event.default
+id: node.people.default
 targetEntityType: node
-bundle: side_event
+bundle: people
 mode: default
 content:
   body:
@@ -34,26 +33,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_content_elements:
-    type: paragraphs
-    weight: 10
+  field_image:
+    type: image_image
+    weight: 3
     region: content
     settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      closed_mode: summary
-      autocollapse: none
-      closed_mode_threshold: 0
-      add_mode: modal
-      form_display_mode: default
-      default_paragraph_type: _none
-      features:
-        add_above: '0'
-        collapse_edit_all: collapse_edit_all
-        duplicate: duplicate
+      progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
-  field_main_event:
+  field_personal_data:
     type: entity_reference_autocomplete
     weight: 122
     region: content
@@ -62,14 +50,6 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_side_event_registration:
-    type: webform_entity_reference_select
-    weight: 123
-    region: content
-    settings:
-      default_data: true
-      webforms: {  }
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -117,11 +97,6 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  translation:
-    weight: 10
-    region: content
-    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

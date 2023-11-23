@@ -1,18 +1,18 @@
-uuid: ecf46ced-75d3-4390-8285-b732f52929fb
+uuid: 15b84ad1-c0d8-4d0a-bc41-e2a24127196a
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.page_type
+    - node.type.people
   module:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
+    enabled: true
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: taxonomy_term.page_type
-target_entity_type_id: taxonomy_term
-target_bundle: page_type
+id: node.people
+target_entity_type_id: node
+target_bundle: people
 default_langcode: site_default
-language_alterable: false
+language_alterable: true

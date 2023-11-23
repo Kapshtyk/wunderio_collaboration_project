@@ -1,9 +1,9 @@
-uuid: ecf46ced-75d3-4390-8285-b732f52929fb
+uuid: 839fdcfe-67c7-4770-b3a7-ffc0826f0fcd
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.page_type
+    - paragraphs.paragraphs_type.event_participants
   module:
     - content_translation
 third_party_settings:
@@ -11,8 +11,8 @@ third_party_settings:
     enabled: false
     bundle_settings:
       untranslatable_fields_hide: '0'
-id: taxonomy_term.page_type
-target_entity_type_id: taxonomy_term
-target_bundle: page_type
+id: paragraph.event_participants
+target_entity_type_id: paragraph
+target_bundle: event_participants
 default_langcode: site_default
 language_alterable: false
