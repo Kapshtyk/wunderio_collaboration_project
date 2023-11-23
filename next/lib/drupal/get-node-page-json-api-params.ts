@@ -11,8 +11,7 @@ export type ResourceType =
   | "node--event"
   | "node--side_event"
   | "node--about_us"
-  | "node--work"
-
+  | "node--work";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -45,6 +44,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_content_elements",
       "field_content_elements.field_image.field_media_image",
       "field_event_registration",
+      "field_participant.field_personal_data",
     ]);
     /*  .addFields(resourceType, [
         "title",
@@ -86,7 +86,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_content_elements.field_accordion_items",
         "field_content_elements.field_accordion_items.field_content_elements.field_image.field_media_image",
         "field_content_elements.field_accordion_items.field_content_elements.field_video",
-        "field_page_type"
+        "field_page_type",
       ])
       .addFields("node--page", [
         "title",
@@ -94,7 +94,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "path",
         "status",
         "metatag",
-        "field_page_type"
+        "field_page_type",
       ]);
   }
 
@@ -155,7 +155,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
     apiParams
       .addInclude([
         "field_content_elements",
-        "field_content_elements.field_image.field_media_image",  
+        "field_content_elements.field_image.field_media_image",
       ])
       .addFields("node--about_us", [
         "title",

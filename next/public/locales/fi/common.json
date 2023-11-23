@@ -40,6 +40,10 @@
   "form-label-email": "Sähköposti:",
   "form-label-subject": "Aihe:",
   "form-label-message": "Viesti:",
+  "form-label-firstname": "Etunimi:",
+  "form-label-lastname": "Sukunimi:",
+  "form-label-age": "Ikä:",
+  "form-label-participant": "Osallistuja:",
   "form-label-submit": "Lähetä",
   "form-thank-you-message": "Kiitos!",
   "form-send-another-message": "Lähetä toinen viesti",
@@ -83,5 +87,8 @@
   "reset-your-password": "Nollaa salasanasi",
   "field-is-required": "'{{field}}' kenttä on pakollinen",
   "events-main-title": "Täältä löydät kaikki tapahtumamme",
-  "events-link": "Tapahtumat"
+  "events-link": "Tapahtumat",
+  "events-form-title": "Ilmoittautuminen {{event}}",
+  "events-form-not-auth": "Kirjaudu sisään rekisteröityäksesi tapahtumaan.",
+  "events-participants": "Osallistujat"
 }

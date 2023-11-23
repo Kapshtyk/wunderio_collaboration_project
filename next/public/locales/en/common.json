@@ -43,7 +43,11 @@
   "form-label-email": "Email:",
   "form-label-subject": "Subject:",
   "form-label-message": "Message:",
-  "form-submit": "Submit",
+  "form-label-firstname": "First name:",
+  "form-label-lastname": "Last name:",
+  "form-label-age": "Age:",
+  "form-label-participant": "Participant:",
+  "form-label-submit": "Submit",
   "form-thank-you-message": "Thanks!",
   "form-send-another-message": "Send another message",
   "login-to-fill-form": "Please log in to fill this form.",
@@ -86,5 +90,8 @@
   "reset-your-password": "Reset your password",
   "field-is-required": "The {{field}} field is required.",
   "events-main-title": "Here you can find all our events",
-  "events-link": "Events"
+  "events-link": "Events",
+  "events-form-title": "Registration for the {{event}}",
+  "events-form-not-auth": "Please log in to register for an event.",
+  "events-participants": "Participants"
 }

@@ -6,7 +6,6 @@ import { useTranslation } from "next-i18next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
-import { Paragraph } from "@/components/paragraph";
 import { Webform } from "@/components/webform";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
@@ -32,6 +31,7 @@ import {
 } from "@/lib/zod/webform";
 
 import NotFoundPage from "../404";
+import { HeadingParagraph } from "@/components/heading--paragraph";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
@@ -46,7 +46,6 @@ export default function Event({
   webform,
   sideEvents,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log("webform", webform);
   const { t } = useTranslation();
   if (!event) {
     return <NotFoundPage />;
@@ -88,13 +87,25 @@ export default function Event({
         <h1>{headingSection.field_heading}</h1>
         <span>{headingSection.field_excerpt}</span>
       </div>
-      {
-        <div
-          dangerouslySetInnerHTML={{ __html: event.body.processed }}
-          className="mt-6 font-serif text-xl leading-loose prose"
-        />
-      }
-      <Webform webform={webform} />
+      <div
+        dangerouslySetInnerHTML={{ __html: event.body.processed }}
+        className="mt-6 font-serif text-xl leading-loose prose"
+      />
+      <>
+        {(event.type === "node--event") && (
+          <>
+            <HeadingParagraph>Participants</HeadingParagraph>
+            {event.field_participant.map((participant) => (
+              <div className="mb-4" key={participant.id}>
+                <h2 className="font-regular text-2xl">{participant.title}</h2>
+                <div className="mt-6 font-serif text-xl leading-loose prose" dangerouslySetInnerHTML={{ __html: participant.body.processed }}></div>
+              </div>
+            ))
+            }
+          </>
+        )}
+      </>
+      <Webform webform={webform} onlyForAuthenticated={true} formTitle={t("events-form-title", { event: event.title })} formMessageIfUnauthenticated={t("events-form-not-auth")} />
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
           sideEvents.map((sideEvent) => (
@@ -146,10 +157,12 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
     resource = await drupal.getResourceFromContext<DrupalNode>(path, context, {
       params: getNodePageJsonApiParams("node--event").getQueryObject(),
     });
+
     if (!resource) {
       throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
     }
     validatedResource = validateAndCleanupEvents(resource);
+    console.log(validatedResource)
     // Fetch side events
     sideEvents = await drupal
       .getResourceCollectionFromContext<DrupalNode[]>(
@@ -199,10 +212,12 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
       .catch((error) => console.log(error));
 
     validatedWebform = validateAndCleanupWebform(
-      resource.field_event_registration,
+      resource.field_side_event_registration,
     );
     const validatedWebformFields =
       validateAndCleanupWebformFields(webformFields);
+    validatedWebform.field_webform_fields = validatedWebformFields;
+    resource.field_side_event_registration = validatedWebform;
     validatedResource = validateAndCleanupSideEvents(resource);
 
   }
@@ -232,3 +247,4 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
     revalidate: 60,
   };
 };
+

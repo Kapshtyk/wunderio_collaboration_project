@@ -14,6 +14,21 @@ const EventsElementsSchema = z.discriminatedUnion("type", [
   ImageSchema,
 ]);
 
+export const ParticipantSchema = z.object({
+  type: z.literal("node--people"),
+  id: z.string(),
+  title: z.string(),
+  body: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+  field_personal_data: z.object({
+    id: z.string(),
+    display_name: z.string(),
+  }),
+});
+
 export const EventsSchema = z.object({
   type: z.literal("node--event"),
   id: z.string(),
@@ -34,6 +49,7 @@ export const EventsSchema = z.object({
       drupal_internal__target_id: z.string(),
     }),
   }),
+  field_participant: z.array(ParticipantSchema).nullable(),
 });
 
 export const SideEventSchema = z.object({
@@ -139,3 +155,4 @@ export function validateAndCleanupSideEvents(
 export type Events = z.infer<typeof EventsSchema>;
 export type SideEvent = z.infer<typeof SideEventSchema>;
 export type SideEvents = z.infer<typeof SideEventsSchema>;
+export type Participant = z.infer<typeof ParticipantSchema>;
