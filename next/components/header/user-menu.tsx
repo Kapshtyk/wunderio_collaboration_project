@@ -1,32 +1,32 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { signOut, useSession } from "next-auth/react";
-import { useTranslation } from "next-i18next";
-import { useState } from "react";
-import clsx from "clsx";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { signOut, useSession } from 'next-auth/react'
+import { useTranslation } from 'next-i18next'
+import { useState } from 'react'
+import clsx from 'clsx'
 
-import { useOnClickOutside } from "@/lib/hooks/use-on-click-outside";
-import AccountIcon from "@/styles/icons/account-circle.svg";
+import { useOnClickOutside } from '@/lib/hooks/use-on-click-outside'
+import AccountIcon from '@/styles/icons/account-circle.svg'
 
 export function UserMenu() {
-  const { locale, asPath, query } = useRouter();
-  const { t } = useTranslation();
-  const { data, status } = useSession();
+  const { locale, asPath, query } = useRouter()
+  const { t } = useTranslation()
+  const { data, status } = useSession()
 
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen((o) => !o);
-  const close = () => setIsOpen(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const toggle = () => setIsOpen((o) => !o)
+  const close = () => setIsOpen(false)
 
   const loginUrl = `/auth/login?callbackUrl=${encodeURIComponent(
-    query.callbackUrl?.toString() || `/${locale}${asPath}`,
-  )}`;
+    query.callbackUrl?.toString() || `/${locale}${asPath}`
+  )}`
 
-  const ref = useOnClickOutside<HTMLDivElement>(close);
+  const ref = useOnClickOutside<HTMLDivElement>(close)
 
-  if (status === "authenticated") {
+  if (status === 'authenticated') {
     return (
       <div ref={ref}>
-        <span className="sr-only">{t("user-menu")}</span>
+        <span className="sr-only">{t('user-menu')}</span>
         <button
           type="button"
           className="hover:underline"
@@ -40,8 +40,8 @@ export function UserMenu() {
         </button>
         <ul
           className={clsx(
-            "absolute z-50 mt-1 w-fit border border-finnishwinter bg-mischka",
-            !isOpen && "hidden",
+            'absolute z-50 mt-1 w-fit border border-finnishwinter bg-mischka',
+            !isOpen && 'hidden'
           )}
         >
           <li>
@@ -50,7 +50,7 @@ export function UserMenu() {
               href="/dashboard"
               onClick={close}
             >
-              {t("user-dashboard")}
+              {t('user-dashboard')}
             </Link>
           </li>
           <li>
@@ -59,27 +59,27 @@ export function UserMenu() {
               className="block w-full p-2 text-left hover:bg-primary-50"
               onClick={() => void signOut()}
             >
-              {t("log-out")}
+              {t('log-out')}
             </button>
           </li>
         </ul>
       </div>
-    );
+    )
   }
 
   return (
     <div ref={ref}>
-      <span className="sr-only">{t("user-menu")}</span>
+      <span className="sr-only">{t('user-menu')}</span>
       <button type="button" className="hover:underline" onClick={toggle}>
         <span className="sr-only capitalize sm:not-sr-only sm:mr-2 sm:inline">
-          {t("account")}
+          {t('account')}
         </span>
         <AccountIcon className="inline-block h-6 w-6" />
       </button>
       <ul
         className={clsx(
-          "absolute z-50 mt-1 w-fit border border-finnishwinter bg-mischka",
-          !isOpen && "hidden",
+          'absolute z-50 mt-1 w-fit border border-finnishwinter bg-mischka',
+          !isOpen && 'hidden'
         )}
       >
         <li>
@@ -88,7 +88,7 @@ export function UserMenu() {
             href={loginUrl}
             onClick={close}
           >
-            {t("log-in")}
+            {t('log-in')}
           </Link>
         </li>
         <li>
@@ -97,10 +97,10 @@ export function UserMenu() {
             href="/auth/register"
             onClick={close}
           >
-            {t("register")}
+            {t('register')}
           </Link>
         </li>
       </ul>
     </div>
-  );
+  )
 }

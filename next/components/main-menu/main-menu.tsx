@@ -1,10 +1,10 @@
-import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useRouter } from 'next/router'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-import { useEffectOnce } from "@/lib/hooks/use-effect-once";
-import { useEventListener } from "@/lib/hooks/use-event-listener";
-import { useOnClickOutside } from "@/lib/hooks/use-on-click-outside";
-import { Menu, MenuItem as MenuItemType } from "@/lib/zod/menu";
+import { useEffectOnce } from '@/lib/hooks/use-effect-once'
+import { useEventListener } from '@/lib/hooks/use-event-listener'
+import { useOnClickOutside } from '@/lib/hooks/use-on-click-outside'
+import { Menu, MenuItem as MenuItemType } from '@/lib/zod/menu'
 
 import {
   MenuBack,
@@ -17,60 +17,58 @@ import {
   MenuRoot,
   MenuSubmenu,
   MenuToggle,
-  MenuTrigger,
-} from "./main-menu.components";
-import { isMenuItemActive } from "./main-menu.utils";
+  MenuTrigger
+} from './main-menu.components'
+import { isMenuItemActive } from './main-menu.utils'
 
 interface MainMenuProps {
-  menu: Menu;
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  menu: Menu
+  isOpen: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export function MainMenu({ menu, isOpen, setIsOpen }: MainMenuProps) {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [didInit, setDidInit] = useState(false);
+  const [didInit, setDidInit] = useState(false)
 
-  const [activeMenu, _setActiveMenu] = useState<MenuItemType["id"] | null>(
-    null,
-  );
-  const setActiveMenu = (id: MenuItemType["id"] | null) => {
+  const [activeMenu, _setActiveMenu] = useState<MenuItemType['id'] | null>(null)
+  const setActiveMenu = (id: MenuItemType['id'] | null) => {
     // Reset submenu when menu changes
-    _setActiveMenu(id);
-    setActiveSubmenu(null);
-  };
+    _setActiveMenu(id)
+    setActiveSubmenu(null)
+  }
 
-  const [activeSubmenu, setActiveSubmenu] = useState<MenuItemType["id"] | null>(
-    null,
-  );
+  const [activeSubmenu, setActiveSubmenu] = useState<MenuItemType['id'] | null>(
+    null
+  )
 
   // Close when Escape key is pressed
-  const close = () => setIsOpen(false);
+  const close = () => setIsOpen(false)
   useEventListener({
-    eventName: "keydown",
-    handler: (event) => "key" in event && event.key === "Escape" && close(),
-  });
+    eventName: 'keydown',
+    handler: (event) => 'key' in event && event.key === 'Escape' && close()
+  })
 
   // Close on click outside
-  const ref = useOnClickOutside<HTMLUListElement>(close);
+  const ref = useOnClickOutside<HTMLUListElement>(close)
 
   // Close when route changes
   useEffectOnce(() => {
-    router.events.on("routeChangeComplete", close);
+    router.events.on('routeChangeComplete', close)
     return () => {
-      router.events.off("routeChangeComplete", close);
-    };
-  });
+      router.events.off('routeChangeComplete', close)
+    }
+  })
 
   useEffect(() => {
     // Prevent body scroll when menu is open
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto'
 
     if (!isOpen) {
       // Reset active menu and submenu when menu closes
-      setActiveMenu(null);
-      setActiveSubmenu(null);
+      setActiveMenu(null)
+      setActiveSubmenu(null)
     } else {
       // Set active menu and submenu when menu opens
       const didSetMenuAndSubmenu = menu.some(
@@ -79,18 +77,18 @@ export function MainMenu({ menu, isOpen, setIsOpen }: MainMenuProps) {
             (subItem) =>
               subItem.items?.some((subSubItem) => {
                 if (isMenuItemActive(router, subSubItem.url)) {
-                  setActiveMenu(item.id);
-                  setActiveSubmenu(subItem.id);
-                  return true;
+                  setActiveMenu(item.id)
+                  setActiveSubmenu(subItem.id)
+                  return true
                 }
-              }),
-          ),
-      );
+              })
+          )
+      )
 
       // Active menu and submenu found, done
       if (didSetMenuAndSubmenu) {
-        setDidInit(true);
-        return;
+        setDidInit(true)
+        return
       }
 
       // User is not on a page matching a submenu item, so try to find a matching top-level menu item
@@ -98,21 +96,21 @@ export function MainMenu({ menu, isOpen, setIsOpen }: MainMenuProps) {
         (item) =>
           item.items?.some((subItem) => {
             if (isMenuItemActive(router, subItem.url)) {
-              setActiveMenu(item.id);
-              setActiveSubmenu(null);
-              return true;
+              setActiveMenu(item.id)
+              setActiveSubmenu(null)
+              return true
             }
-          }),
-      );
+          })
+      )
 
-      setDidInit(true);
+      setDidInit(true)
     }
-  }, [isOpen, menu, router]);
+  }, [isOpen, menu, router])
 
-  const activeMenuTitle = menu.find((i) => i.id === activeMenu)?.title;
+  const activeMenuTitle = menu.find((i) => i.id === activeMenu)?.title
   const activeSubmenuTitle = menu
     .find((i) => i.id === activeMenu)
-    ?.items?.find((i) => i.id === activeSubmenu)?.title;
+    ?.items?.find((i) => i.id === activeSubmenu)?.title
 
   return (
     <MenuContainer isOpen={isOpen && didInit}>
@@ -139,7 +137,7 @@ export function MainMenu({ menu, isOpen, setIsOpen }: MainMenuProps) {
                   <MenuList level={1}>
                     <MenuBack
                       onClick={() => {
-                        setActiveMenu(null);
+                        setActiveMenu(null)
                       }}
                     />
                     <MenuListTitle href={item.url}>
@@ -156,7 +154,7 @@ export function MainMenu({ menu, isOpen, setIsOpen }: MainMenuProps) {
                             <MenuList level={2}>
                               <MenuBack
                                 onClick={() => {
-                                  setActiveSubmenu(item.id);
+                                  setActiveSubmenu(item.id)
                                 }}
                               />
                               <MenuListTitle href={subItem.url}>
@@ -185,7 +183,7 @@ export function MainMenu({ menu, isOpen, setIsOpen }: MainMenuProps) {
         </MenuList>
       </MenuRoot>
     </MenuContainer>
-  );
+  )
 }
 
-export { MenuToggle };
+export { MenuToggle }

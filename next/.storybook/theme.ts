@@ -1,21 +1,21 @@
-import { create } from "@storybook/theming/create";
+import { create } from '@storybook/theming/create'
 
 export default create({
-  base: "dark",
+  base: 'dark',
 
   // Typography
   fontBase: '"Open Sans", sans-serif',
-  fontCode: "monospace",
+  fontCode: 'monospace',
 
   // Branding
-  brandTitle: "Wunder Component Library",
-  brandUrl: "https://wunder.io",
-  brandTarget: "_blank",
+  brandTitle: 'Wunder Component Library',
+  brandUrl: 'https://wunder.io',
+  brandTarget: '_blank',
   // brandImage: "https://storybook.js.org/images/placeholders/350x150.png",
 
   // Main colors
-  colorPrimary: "#5b37bf", // primary-600
-  colorSecondary: "#ff4185", // secondary-400
+  colorPrimary: '#5b37bf', // primary-600
+  colorSecondary: '#ff4185' // secondary-400
 
   // UI
   // appBg: colors.mischka,
@@ -37,4 +37,4 @@ export default create({
   // inputBorder: colors.steelgray,
   // inputTextColor: colors.steelgray,
   // inputBorderRadius: 2,
-});
+})

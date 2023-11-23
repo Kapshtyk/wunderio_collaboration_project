@@ -4,8 +4,8 @@
  * filter in the UI.
  */
 export function getFilterValueDisplay(filterValue: any): string {
-  if (filterValue === undefined || filterValue === null) return "";
-  if (Object.prototype.hasOwnProperty.call(filterValue, "name"))
-    return filterValue.name;
-  return String(filterValue);
+  if (filterValue === undefined || filterValue === null) return ''
+  if (Object.prototype.hasOwnProperty.call(filterValue, 'name'))
+    return filterValue.name
+  return String(filterValue)
 }

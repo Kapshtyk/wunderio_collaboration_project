@@ -1,11 +1,11 @@
-import { ArticlesListing } from "@/components/articles-listing";
-import { HeadingParagraph } from "@/components/heading--paragraph";
-import { ListingArticles } from "@/lib/zod/paragraph";
+import { ArticlesListing } from '@/components/articles-listing'
+import { HeadingParagraph } from '@/components/heading--paragraph'
+import { ListingArticles } from '@/lib/zod/paragraph'
 
 export function ParagraphListingArticles({
-  paragraph,
+  paragraph
 }: {
-  paragraph: ListingArticles;
+  paragraph: ListingArticles
 }) {
   return (
     <>
@@ -14,5 +14,5 @@ export function ParagraphListingArticles({
       )}
       <ArticlesListing listingId={paragraph.id} limit={paragraph.field_limit} />
     </>
-  );
+  )
 }
