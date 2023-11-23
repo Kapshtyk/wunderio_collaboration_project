@@ -1,0 +1,18 @@
+uuid: ad5dd5e8-1f19-4f99-93b5-530b7e565a1d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.basic_info_related_to_all_positi
+id: node.basic_info_related_to_all_positi.changed
+field_name: changed
+entity_type: node
+bundle: basic_info_related_to_all_positi
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

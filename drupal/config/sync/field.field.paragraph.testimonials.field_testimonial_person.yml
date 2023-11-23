@@ -1,0 +1,26 @@
+uuid: 0a1a1781-d800-43ca-a06a-143f9587b8e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_testimonial_person
+    - paragraphs.paragraphs_type.testimonials
+  module:
+    - text
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: paragraph.testimonials.field_testimonial_person
+field_name: field_testimonial_person
+entity_type: paragraph
+bundle: testimonials
+label: 'Testimonial person'
+description: 'You can use this field to store information about the person who provided you with the testimonial.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text

@@ -1,0 +1,22 @@
+uuid: 075617e5-59bf-4027-a800-9e3991da7457
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.offices
+id: taxonomy_term.offices.status
+field_name: status
+entity_type: taxonomy_term
+bundle: offices
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

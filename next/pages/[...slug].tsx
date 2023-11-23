@@ -1,9 +1,10 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { DrupalNode, DrupalTranslatedPath } from 'next-drupal'
 
-import { Article } from '@/components/article'
-import { Meta } from '@/components/meta'
-import { Page } from '@/components/page'
+import { Article } from "@/components/article";
+import { Meta } from "@/components/meta";
+import { Page } from "@/components/page";
+
 import {
   createLanguageLinks,
   LanguageLinks
@@ -18,11 +19,15 @@ import {
 } from '@/lib/get-common-page-props'
 import {
   Article as ArticleType,
-  validateAndCleanupArticle
-} from '@/lib/zod/article'
-import { Page as PageType, validateAndCleanupPage } from '@/lib/zod/page'
+  validateAndCleanupArticle,
+} from "@/lib/zod/article";
+import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import { AboutUs as AboutUsType, validateAndCleanupAboutUs } from "@/lib/zod/about-us";
+import AboutUs from "@/components/about_us";
 
-const RESOURCE_TYPES = ['node--article', 'node--page']
+// const RESOURCE_TYPES = ["node--article", "node--page"];
+const RESOURCE_TYPES = ["node--article", "node--page", "node--about_us"];
+
 
 export default function CustomPage({
   resource
@@ -32,8 +37,9 @@ export default function CustomPage({
   return (
     <>
       <Meta title={resource.title} metatags={resource.metatag} />
-      {resource.type === 'node--article' && <Article article={resource} />}
-      {resource.type === 'node--page' && <Page page={resource} />}
+      {resource.type === "node--article" && <Article article={resource} />}
+      {resource.type === "node--page" && <Page page={resource} />}
+      {resource.type === "node--about_us" && <AboutUs about_us={resource} />}
     </>
   )
 }
@@ -47,13 +53,14 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 }
 
 interface PageProps extends CommonPageProps {
-  resource: PageType | ArticleType
-  languageLinks: LanguageLinks
+  resource: PageType | ArticleType | AboutUsType;
+  languageLinks: LanguageLinks;
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
-  const path: DrupalTranslatedPath =
-    await drupal.translatePathFromContext(context)
+  const path: DrupalTranslatedPath = await drupal.translatePathFromContext(
+    context,
+  );
 
   if (!path) {
     return {
@@ -84,6 +91,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       }
     }
   }
+  const apiParams = getNodePageJsonApiParams(type).getQueryObject();
 
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
@@ -120,9 +128,11 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
   const validatedResource =
     type === 'node--article'
       ? validateAndCleanupArticle(resource)
-      : type === 'node--page'
-      ? validateAndCleanupPage(resource)
-      : null
+      : type === "node--page"
+        ? validateAndCleanupPage(resource)
+        : type === "node--about_us"
+          ? validateAndCleanupAboutUs(resource)
+          : null;
 
   return {
     props: {
@@ -130,6 +140,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       resource: validatedResource,
       languageLinks
     },
-    revalidate: 60
-  }
-}
+    revalidate: 60,
+  };
+};
+

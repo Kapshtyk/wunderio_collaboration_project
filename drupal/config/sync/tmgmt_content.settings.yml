@@ -1,0 +1,7 @@
+_core:
+  default_config_hash: zJBQPBc6SKaZZvDCvMKeZm7_0CH-7OCtq92DRu-vuPs
+embedded_fields:
+  node:
+    field_basic_info: true
+    field_participant: true
+default_moderation_states: {  }

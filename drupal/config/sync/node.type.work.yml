@@ -1,0 +1,18 @@
+uuid: 42bba68f-b35d-46b5-beb5-dda40a88c5d0
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: WorkPage
+type: work
+description: 'This content type is for work page.'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

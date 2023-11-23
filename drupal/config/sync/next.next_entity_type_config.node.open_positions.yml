@@ -1,0 +1,12 @@
+uuid: 580af289-5864-4fe6-ba6e-e675dba0aa87
+langcode: en
+status: true
+dependencies: {  }
+id: node.open_positions
+site_resolver: site_selector
+configuration:
+  sites:
+    frontend: frontend
+  field_name: {  }
+revalidator: ''
+revalidator_configuration: {  }

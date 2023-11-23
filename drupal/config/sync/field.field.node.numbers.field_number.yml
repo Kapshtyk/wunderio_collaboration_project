@@ -1,0 +1,26 @@
+uuid: 2472ceef-0682-407e-ab67-203c787e4286
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_number
+    - node.type.numbers
+  module:
+    - text
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.numbers.field_number
+field_name: field_number
+entity_type: node
+bundle: numbers
+label: Number
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text

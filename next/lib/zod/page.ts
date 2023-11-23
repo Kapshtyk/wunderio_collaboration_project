@@ -10,7 +10,10 @@ import {
   ImageSchema,
   LinksSchema,
   ListingArticlesSchema,
-  VideoSchema
+  VideoSchema,
+  HeadingSectionSchema,
+  TestimonialsSchema,
+  WorkCardSchema
 } from '@/lib/zod/paragraph'
 
 const PageElementsSchema = z.discriminatedUnion('type', [
@@ -21,7 +24,10 @@ const PageElementsSchema = z.discriminatedUnion('type', [
   AccordionSchema,
   HeroSchema,
   ListingArticlesSchema,
-  FileAttachmentsSchema
+  FileAttachmentsSchema,
+  HeadingSectionSchema,
+  TestimonialsSchema,
+  WorkCardSchema
 ])
 
 export const PageSchema = z.object({
@@ -29,6 +35,14 @@ export const PageSchema = z.object({
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(PageElementsSchema),
+  field_page_type: z
+    .object({
+      name: z.string().nullable()
+    })
+    .nullable(),
+  path: z.object({
+    alias: z.string()
+  }),
   metatag: MetatagsSchema.optional()
 })
 

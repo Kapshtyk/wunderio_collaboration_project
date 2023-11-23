@@ -71,6 +71,14 @@ const options: HTMLReactParserOptions = {
         return domNode
       }
 
+      case "q": {
+        return (
+          <blockquote className="italic">
+            {domToReact(domNode.children, options)}
+          </blockquote>
+        );
+      }
+
       default: {
         return undefined
       }

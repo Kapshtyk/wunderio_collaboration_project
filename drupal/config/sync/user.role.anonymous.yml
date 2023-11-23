@@ -1,0 +1,30 @@
+uuid: 6cfb5de2-1595-4d3d-87df-8c8a76af727a
+langcode: en
+status: true
+dependencies:
+  config:
+    - rest.resource.user_registration
+    - rest.resource.webform_rest_complete_submission
+    - rest.resource.webform_rest_elements
+    - rest.resource.webform_rest_fields
+    - rest.resource.webform_rest_submit
+  module:
+    - media
+    - rest
+    - system
+    - webform
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access content'
+  - 'restful get webform_rest_complete_submission'
+  - 'restful get webform_rest_elements'
+  - 'restful get webform_rest_fields'
+  - 'restful post user_registration'
+  - 'restful post webform_rest_submit'
+  - 'view media'
+  - 'view own webform submission'

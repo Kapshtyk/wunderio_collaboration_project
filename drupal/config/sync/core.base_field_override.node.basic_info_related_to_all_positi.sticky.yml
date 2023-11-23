@@ -1,0 +1,22 @@
+uuid: ee761e85-def8-4249-a1e0-cf375c392f9f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.basic_info_related_to_all_positi
+id: node.basic_info_related_to_all_positi.sticky
+field_name: sticky
+entity_type: node
+bundle: basic_info_related_to_all_positi
+label: 'Sticky at top of lists'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

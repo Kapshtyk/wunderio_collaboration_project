@@ -1,6 +1,6 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { DrupalNode } from 'next-drupal'
-import { useTranslation } from 'next-i18next'
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
+import { useTranslation } from "next-i18next";
 
 import { ArticleTeasers } from '@/components/article-teasers'
 import { ContactForm } from '@/components/contact-form'
@@ -18,11 +18,13 @@ import {
 } from '@/lib/zod/article-teaser'
 import { Frontpage, validateAndCleanupFrontpage } from '@/lib/zod/frontpage'
 
-import { Divider } from '@/ui/divider'
+import { Divider } from "@/ui/divider";
+import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 
 interface IndexPageProps extends LayoutProps {
-  frontpage: Frontpage | null
-  promotedArticleTeasers: ArticleTeaser[]
+  frontpage: Frontpage | null;
+  promotedArticleTeasers: ArticleTeaser[];
+
 }
 
 export default function IndexPage({
@@ -34,20 +36,20 @@ export default function IndexPage({
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
-      <div className="grid gap-4">
+      {/* <div className="grid gap-4">
         {frontpage?.field_content_elements?.map((paragraph) => (
           <Paragraph paragraph={paragraph} key={paragraph.id} />
         ))}
-      </div>
-      <Divider className="max-w-4xl" />
-      <ContactForm />
-      <Divider className="max-w-4xl" />
-      <ArticleTeasers
+      </div> */}
+      {/* <Divider className="max-w-4xl" /> */}
+      {/* <ContactForm /> */}
+      {/* <Divider className="max-w-4xl" /> */}
+      {/* <ArticleTeasers
         articles={promotedArticleTeasers}
         heading={t('promoted-articles')}
       />
-      <ContactList />
-      <LogoStrip />
+      <ContactList /> */}
+      {/* <LogoStrip /> */}
     </>
   )
 }
@@ -79,13 +81,24 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     }
   })
 
+  const aboutUs = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--about_us",
+      context,
+      {
+        params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
+      },
+    )
+  ).at(0);
+
   return {
     props: {
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
       promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
-        validateAndCleanupArticleTeaser(teaser)
-      )
+        validateAndCleanupArticleTeaser(teaser),
+      ),
+      aboutUs: validateAndCleanupAboutUs(aboutUs)
     },
     revalidate: 60
   }

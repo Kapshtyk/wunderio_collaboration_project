@@ -1,0 +1,8 @@
+uuid: 48ec9236-a647-4c00-928a-7826b8fe8681
+langcode: en
+status: true
+dependencies: {  }
+name: Positions
+vid: positions
+description: 'List of job positions'
+weight: 0
