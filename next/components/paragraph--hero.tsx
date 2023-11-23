@@ -1,12 +1,12 @@
-import Link from "next/link";
-import clsx from "clsx";
+import Link from 'next/link'
+import clsx from 'clsx'
 
-import { FormattedText } from "@/components/formatted-text";
-import { MediaImage } from "@/components/media--image";
-import { Hero as HeroType } from "@/lib/zod/paragraph";
-import ArrowIcon from "@/styles/icons/arrow-down.svg";
+import { FormattedText } from '@/components/formatted-text'
+import { MediaImage } from '@/components/media--image'
+import { Hero as HeroType } from '@/lib/zod/paragraph'
+import ArrowIcon from '@/styles/icons/arrow-down.svg'
 
-import { buttonVariants } from "@/ui/button";
+import { buttonVariants } from '@/ui/button'
 
 export function ParagraphHero({ paragraph }: { paragraph: HeroType }) {
   return (
@@ -21,8 +21,8 @@ export function ParagraphHero({ paragraph }: { paragraph: HeroType }) {
           <FormattedText
             html={paragraph.field_formatted_text.processed}
             className={clsx(
-              "mb-6 max-w-2xl text-left text-md/xl text-primary-600 sm:text-lg md:text-lg lg:mb-8 lg:text-xl",
-              paragraph.field_heading && "mt-4",
+              'mb-6 max-w-2xl text-left text-md/xl text-primary-600 sm:text-lg md:text-lg lg:mb-8 lg:text-xl',
+              paragraph.field_heading && 'mt-4'
             )}
           />
           <div className="gap-4 sm:text-left">
@@ -30,8 +30,8 @@ export function ParagraphHero({ paragraph }: { paragraph: HeroType }) {
               <Link
                 href={paragraph.field_primary_link.full_url}
                 className={clsx(
-                  buttonVariants({ variant: "primary" }),
-                  "text-base mr-4 inline-flex px-5 py-3",
+                  buttonVariants({ variant: 'primary' }),
+                  'text-base mr-4 inline-flex px-5 py-3'
                 )}
               >
                 {paragraph.field_primary_link.title}
@@ -43,8 +43,8 @@ export function ParagraphHero({ paragraph }: { paragraph: HeroType }) {
               <Link
                 href={paragraph.field_secondary_link.full_url}
                 className={clsx(
-                  buttonVariants({ variant: "secondary" }),
-                  "text-base mt-3 inline-flex px-5 py-3 sm:mt-0",
+                  buttonVariants({ variant: 'secondary' }),
+                  'text-base mt-3 inline-flex px-5 py-3 sm:mt-0'
                 )}
               >
                 {paragraph.field_secondary_link.title}
@@ -62,5 +62,5 @@ export function ParagraphHero({ paragraph }: { paragraph: HeroType }) {
         </div>
       </div>
     </section>
-  );
+  )
 }

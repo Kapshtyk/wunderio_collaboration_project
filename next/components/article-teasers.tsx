@@ -1,20 +1,20 @@
-import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import clsx from "clsx";
+import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
+import clsx from 'clsx'
 
-import { ArticleTeaser } from "@/components/article-teaser";
-import { ArticleTeaser as ArticleTeaserType } from "@/lib/zod/article-teaser";
-import ArrowIcon from "@/styles/icons/arrow-down.svg";
+import { ArticleTeaser } from '@/components/article-teaser'
+import { ArticleTeaser as ArticleTeaserType } from '@/lib/zod/article-teaser'
+import ArrowIcon from '@/styles/icons/arrow-down.svg'
 
-import { buttonVariants } from "@/ui/button";
+import { buttonVariants } from '@/ui/button'
 
 interface LatestArticlesProps {
-  articles?: ArticleTeaserType[];
-  heading: string;
+  articles?: ArticleTeaserType[]
+  heading: string
 }
 
 export function ArticleTeasers({ articles, heading }: LatestArticlesProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <>
       <h2 className="text-heading-sm font-bold md:text-heading-md">
@@ -28,20 +28,20 @@ export function ArticleTeasers({ articles, heading }: LatestArticlesProps) {
         ))}
       </ul>
       <div className="flex items-center justify-center">
-        {!articles?.length && <p className="py-4">{t("no-content-found")}</p>}
+        {!articles?.length && <p className="py-4">{t('no-content-found')}</p>}
         {articles?.length && (
           <Link
             href="/all-articles"
             className={clsx(
-              buttonVariants({ variant: "primary" }),
-              "text-base mr-4 mt-4 inline-flex px-5 py-3",
+              buttonVariants({ variant: 'primary' }),
+              'text-base mr-4 mt-4 inline-flex px-5 py-3'
             )}
           >
-            {t("all-articles")}
+            {t('all-articles')}
             <ArrowIcon aria-hidden className="ml-3 h-6 w-6 -rotate-90" />
           </Link>
         )}
       </div>
     </>
-  );
+  )
 }

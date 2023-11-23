@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { Links } from "@/lib/zod/paragraph";
-import ArrowIcon from "@/styles/icons/arrow-down.svg";
+import { Links } from '@/lib/zod/paragraph'
+import ArrowIcon from '@/styles/icons/arrow-down.svg'
 
 export function ParagraphLinks({ paragraph }: { paragraph: Links }) {
-  if (!paragraph.field_links?.length) return null;
+  if (!paragraph.field_links?.length) return null
 
   return (
     <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -23,5 +23,5 @@ export function ParagraphLinks({ paragraph }: { paragraph: Links }) {
         </Link>
       ))}
     </ul>
-  );
+  )
 }

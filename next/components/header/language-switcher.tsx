@@ -1,31 +1,31 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
-import clsx from "clsx";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
+import { useEffect, useState } from 'react'
+import clsx from 'clsx'
 
-import { useLanguageLinks } from "@/lib/contexts/language-links-context";
-import { useOnClickOutside } from "@/lib/hooks/use-on-click-outside";
-import LanguageIcon from "@/styles/icons/language.svg";
+import { useLanguageLinks } from '@/lib/contexts/language-links-context'
+import { useOnClickOutside } from '@/lib/hooks/use-on-click-outside'
+import LanguageIcon from '@/styles/icons/language.svg'
 
 export function LanguageSwitcher() {
-  const languageLinks = useLanguageLinks();
-  const { locale, locales } = useRouter();
+  const languageLinks = useLanguageLinks()
+  const { locale, locales } = useRouter()
 
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen((o) => !o);
-  const close = () => setIsOpen(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const toggle = () => setIsOpen((o) => !o)
+  const close = () => setIsOpen(false)
 
   // Close on locale change
-  useEffect(close, [locale]);
+  useEffect(close, [locale])
 
   // Close on click outside
-  const ref = useOnClickOutside<HTMLDivElement>(close);
-  const { t } = useTranslation();
+  const ref = useOnClickOutside<HTMLDivElement>(close)
+  const { t } = useTranslation()
 
   return (
     <div ref={ref}>
-      <span className="sr-only">{t("language-switcher")}</span>
+      <span className="sr-only">{t('language-switcher')}</span>
       <button
         type="button"
         className="hover:underline"
@@ -39,14 +39,14 @@ export function LanguageSwitcher() {
       </button>
       <ul
         className={clsx(
-          "absolute z-50 mt-1 w-fit border border-finnishwinter bg-mischka",
-          !isOpen && "hidden",
+          'absolute z-50 mt-1 w-fit border border-finnishwinter bg-mischka',
+          !isOpen && 'hidden'
         )}
       >
         {locales
           .filter((l) => l !== locale)
           .map((l) => {
-            const { name, path } = languageLinks[l];
+            const { name, path } = languageLinks[l]
             return (
               <li key={l}>
                 <Link
@@ -57,9 +57,9 @@ export function LanguageSwitcher() {
                   {name}
                 </Link>
               </li>
-            );
+            )
           })}
       </ul>
     </div>
-  );
+  )
 }

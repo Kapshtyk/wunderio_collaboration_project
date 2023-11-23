@@ -1,20 +1,20 @@
-import Image from "next/image";
-import Link from "next/link";
-import { HTMLAttributes } from "react";
+import Image from 'next/image'
+import Link from 'next/link'
+import { HTMLAttributes } from 'react'
 import {
   DOMNode,
   domToReact,
   Element,
-  HTMLReactParserOptions,
-} from "html-react-parser";
-import parse from "html-react-parser";
+  HTMLReactParserOptions
+} from 'html-react-parser'
+import parse from 'html-react-parser'
 
-import { isRelative } from "@/lib/utils";
+import { isRelative } from '@/lib/utils'
 
-import { env } from "@/env";
+import { env } from '@/env'
 
 const isElement = (domNode: DOMNode): domNode is Element =>
-  domNode.type === "tag";
+  domNode.type === 'tag'
 
 const options: HTMLReactParserOptions = {
   /*
@@ -23,14 +23,14 @@ const options: HTMLReactParserOptions = {
    * For example, return `null` to remove it, or some other component to replace it.
    */
   replace: (domNode) => {
-    if (!isElement(domNode)) return;
+    if (!isElement(domNode)) return
 
     switch (domNode.name) {
-      case "img": {
-        const { src, alt, width = 100, height = 100 } = domNode.attribs;
+      case 'img': {
+        const { src, alt, width = 100, height = 100 } = domNode.attribs
 
-        const numberWidth = Number(width);
-        const numberHeight = Number(height);
+        const numberWidth = Number(width)
+        const numberHeight = Number(height)
 
         if (isRelative(src)) {
           return (
@@ -41,34 +41,34 @@ const options: HTMLReactParserOptions = {
               alt={alt}
               className="max-w-full object-cover"
             />
-          );
+          )
         }
-        break;
+        break
       }
 
-      case "a": {
-        const { href } = domNode.attribs;
+      case 'a': {
+        const { href } = domNode.attribs
 
         if (href && isRelative(href)) {
           return (
             <Link href={href} className="hyperlink underline">
               {domToReact(domNode.children, options)}
             </Link>
-          );
+          )
         }
-        break;
+        break
       }
 
-      case "p": {
-        return <p className="">{domToReact(domNode.children, options)}</p>;
+      case 'p': {
+        return <p className="mb-2">{domToReact(domNode.children, options)}</p>
       }
 
-      case "input": {
-        if (domNode.attribs.value === "") {
-          delete domNode.attribs.value;
+      case 'input': {
+        if (domNode.attribs.value === '') {
+          delete domNode.attribs.value
         }
 
-        return domNode;
+        return domNode
       }
 
       case "q": {
@@ -80,16 +80,16 @@ const options: HTMLReactParserOptions = {
       }
 
       default: {
-        return undefined;
+        return undefined
       }
     }
-  },
-};
+  }
+}
 
 interface FormattedTextProps extends HTMLAttributes<HTMLDivElement> {
-  html: string;
+  html: string
 }
 
 export function FormattedText({ html, ...props }: FormattedTextProps) {
-  return <div {...props}>{parse(html, options)}</div>;
+  return <div {...props}>{parse(html, options)}</div>
 }

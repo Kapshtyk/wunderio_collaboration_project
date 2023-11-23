@@ -1,22 +1,22 @@
 const siteConfig = {
-  defaultLocale: "en",
+  defaultLocale: 'en',
   locales: {
     en: {
-      name: "English",
-      path: "/",
-      langcode: "en",
+      name: 'English',
+      path: '/',
+      langcode: 'en'
     },
     fi: {
-      name: "Suomi",
-      path: "/fi",
-      langcode: "fi",
+      name: 'Suomi',
+      path: '/fi',
+      langcode: 'fi'
     },
     sv: {
-      name: "Svenska",
-      path: "/sv",
-      langcode: "sv",
-    },
-  },
-};
+      name: 'Svenska',
+      path: '/sv',
+      langcode: 'sv'
+    }
+  }
+}
 
-module.exports = siteConfig;
+module.exports = siteConfig
