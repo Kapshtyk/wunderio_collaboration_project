@@ -14,14 +14,14 @@ function getValueFacet(aggregations, fieldName) {
     return [
       {
         field: fieldName,
-        type: "value",
+        type: 'value',
         data: aggregations[fieldName].buckets.map((bucket) => ({
           // Boolean values and date values require using `key_as_string`
           value: bucket.key_as_string || bucket.key,
-          count: bucket.doc_count,
-        })),
-      },
-    ];
+          count: bucket.doc_count
+        }))
+      }
+    ]
   }
 }
 
@@ -32,17 +32,17 @@ function getValueFacet(aggregations, fieldName) {
  */
 export function buildStateFacets(aggregations) {
   // Get the facets from the tags field value.
-  const tags = getValueFacet(aggregations, "tags");
+  const tags = getValueFacet(aggregations, 'tags')
 
   // Get the facets from the category field value.
-  const content_type = getValueFacet(aggregations, "content_type");
+  const content_type = getValueFacet(aggregations, 'content_type')
 
   const facets = {
     ...(tags && { tags }),
-    ...(content_type && { content_type }),
-  };
+    ...(content_type && { content_type })
+  }
 
   if (Object.keys(facets).length > 0) {
-    return facets;
+    return facets
   }
 }

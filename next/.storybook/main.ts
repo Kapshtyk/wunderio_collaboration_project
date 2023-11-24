@@ -1,19 +1,19 @@
-import type { StorybookConfig } from "@storybook/nextjs";
+import type { StorybookConfig } from '@storybook/nextjs'
 
 const config: StorybookConfig = {
-  stories: ["../stories/**/*.mdx", "../stories/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ['../stories/**/*.mdx', '../stories/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "storybook-react-i18next",
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    'storybook-react-i18next'
   ],
   framework: {
-    name: "@storybook/nextjs",
-    options: {},
+    name: '@storybook/nextjs',
+    options: {}
   },
   docs: {
-    autodocs: "tag",
+    autodocs: 'tag'
   },
   webpackFinal: async (config) => {
     config.module!.rules = [
@@ -22,27 +22,27 @@ const config: StorybookConfig = {
         // Remove existing Storybook loaders for SVG files:
         if (/svg/.test(rule.test)) {
           // @ts-ignore
-          return { ...rule, exclude: /\.svg$/i };
+          return { ...rule, exclude: /\.svg$/i }
         }
-        return rule;
+        return rule
       }),
       // Use @svgr to load SVG files as React components:
       {
         test: /\.svg$/i,
         issuer: /\.tsx$/i,
-        loader: "@svgr/webpack",
-      },
-    ];
+        loader: '@svgr/webpack'
+      }
+    ]
 
     // Since storybook does not need SSR, alias next-i18next to react-i18next:
     config.resolve!.alias = {
       ...config.resolve!.alias,
-      "next-i18next": "react-i18next",
-    };
+      'next-i18next': 'react-i18next'
+    }
 
     // Return the altered config
-    return config;
-  },
-};
+    return config
+  }
+}
 
-export default config;
+export default config

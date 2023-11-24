@@ -1,75 +1,75 @@
-import type { GetStaticPropsContext } from "next";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
-import { useForm } from "react-hook-form";
+import type { GetStaticPropsContext } from 'next'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
+import { useForm } from 'react-hook-form'
 
-import { ErrorRequired } from "@/components/error-required";
-import { Meta } from "@/components/meta";
-import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { ErrorRequired } from '@/components/error-required'
+import { Meta } from '@/components/meta'
+import { getCommonPageProps } from '@/lib/get-common-page-props'
 
-import { Button } from "@/ui/button";
-import { Input } from "@/ui/input";
-import { Label } from "@/ui/label";
-import { StatusMessage } from "@/ui/status-message";
+import { Button } from '@/ui/button'
+import { Input } from '@/ui/input'
+import { Label } from '@/ui/label'
+import { StatusMessage } from '@/ui/status-message'
 
 type Inputs = {
-  name: string;
-  email: string;
-};
+  name: string
+  email: string
+}
 
 export default function Register() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
     setError,
-    clearErrors,
-  } = useForm<Inputs>();
+    clearErrors
+  } = useForm<Inputs>()
 
-  const router = useRouter();
+  const router = useRouter()
   const onSubmit = async (data: Inputs) => {
-    clearErrors("root.serverError");
+    clearErrors('root.serverError')
     const response = await fetch(`/api/register`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify({
         mail: data.email,
-        name: data.name,
+        name: data.name
       }),
       // Send the current language as header:
       headers: {
-        "accept-language": router.locale || "fi",
-      },
-    });
+        'accept-language': router.locale || 'fi'
+      }
+    })
     if (!response.ok) {
-      const body = await response.json();
+      const body = await response.json()
       console.error(
-        "Error registering user",
+        'Error registering user',
         response.status,
-        JSON.stringify(body),
-      );
-      setError("root.serverError", {
+        JSON.stringify(body)
+      )
+      setError('root.serverError', {
         type: String(response.status),
-        message: body.error,
-      });
+        message: body.error
+      })
     }
-  };
+  }
 
   if (isSubmitSuccessful) {
     return (
       <StatusMessage level="success">
-        <p className="mb-4">{t("register-success")}</p>
+        <p className="mb-4">{t('register-success')}</p>
       </StatusMessage>
-    );
+    )
   }
   return (
     <>
-      <Meta title={t("register")} metatags={[]} />
+      <Meta title={t('register')} metatags={[]} />
       <div className="max-w-md pb-16 pt-8 font-work">
         {errors.root && errors.root.serverError && (
           <StatusMessage level="error">
             <p className="mb-4">
-              Server error. Message: {errors.root.serverError.message}, Status:{" "}
+              Server error. Message: {errors.root.serverError.message}, Status:{' '}
               {errors.root.serverError.type}
             </p>
           </StatusMessage>
@@ -80,48 +80,48 @@ export default function Register() {
           className="flex w-full max-w-2xl flex-col gap-4"
         >
           <div className="mb-6">
-            <Label htmlFor="email">{t("email")}</Label>
+            <Label htmlFor="email">{t('email')}</Label>
             <Input
               id="email"
               type="email"
               autoComplete="email"
-              {...register("email", {
-                required: true,
+              {...register('email', {
+                required: true
               })}
-              aria-invalid={errors.email ? "true" : "false"}
+              aria-invalid={errors.email ? 'true' : 'false'}
               className="inset-0 h-12 w-full rounded border border-neu-200 p-2 text-body-sm text-neu-400 ring-offset-4 focus:ring-4"
             />
-            {errors.email && errors.email.type === "required" && (
-              <ErrorRequired fieldTranslatedLabelKey={"email"} />
+            {errors.email && errors.email.type === 'required' && (
+              <ErrorRequired fieldTranslatedLabelKey={'email'} />
             )}
           </div>
           <div className="mb-6">
-            <Label htmlFor="name">{t("username")}</Label>
+            <Label htmlFor="name">{t('username')}</Label>
             <Input
               id="name"
               type="text"
               autoComplete="name"
-              aria-invalid={errors.name ? "true" : "false"}
-              {...register("name", {
-                required: true,
+              aria-invalid={errors.name ? 'true' : 'false'}
+              {...register('name', {
+                required: true
               })}
               className="inset-0 h-12 w-full rounded border border-neu-200 p-2 text-body-sm text-neu-400 ring-offset-4 focus:ring-4"
             />
-            {errors.name && errors.name.type === "required" && (
-              <ErrorRequired fieldTranslatedLabelKey={"name"} />
+            {errors.name && errors.name.type === 'required' && (
+              <ErrorRequired fieldTranslatedLabelKey={'name'} />
             )}
           </div>
-          <Button type="submit">{t("register")}</Button>
+          <Button type="submit">{t('register')}</Button>
         </form>
       </div>
     </>
-  );
+  )
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
   return {
     props: {
-      ...(await getCommonPageProps(context)),
-    },
-  };
+      ...(await getCommonPageProps(context))
+    }
+  }
 }

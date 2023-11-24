@@ -13,7 +13,9 @@ dependencies:
     - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.links
     - paragraphs.paragraphs_type.listing_articles
+    - paragraphs.paragraphs_type.testimonials
     - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.work_card
   module:
     - entity_reference_revisions
     - tmgmt_content
@@ -44,7 +46,6 @@ settings:
       video: video
       listing_articles: listing_articles
       file_attachments: file_attachments
-      heading_section: heading_section
     negate: 0
     target_bundles_drag_drop:
       accordion:
@@ -79,8 +80,14 @@ settings:
         enabled: true
       testimonials:
         weight: 23
-        enabled: false
+        enabled: true
       video:
         weight: -9
         enabled: true
+      work_card:
+        weight: 15
+        enabled: true
+      work_listing:
+        weight: 26
+        enabled: false
 field_type: entity_reference_revisions

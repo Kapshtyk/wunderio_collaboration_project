@@ -1,46 +1,46 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { Input } from "@/ui/input";
-import { Label } from "@/ui/label";
+import { Input } from '@/ui/input'
+import { Label } from '@/ui/label'
 
 const meta: Meta<typeof Input> = {
-  title: "Library/Input",
+  title: 'Library/Input',
   component: Input,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   args: {
-    placeholder: "Type something...",
-    disabled: false,
+    placeholder: 'Type something...',
+    disabled: false
   },
   argTypes: {
     disabled: {
-      description: "Determines whether the input is disabled or not.",
+      description: 'Determines whether the input is disabled or not.',
       table: {
         type: {
-          summary: "boolean",
-        },
+          summary: 'boolean'
+        }
       },
-      control: "boolean",
-    },
-  },
-};
+      control: 'boolean'
+    }
+  }
+}
 
-export default meta;
-type Story = StoryObj<typeof Input>;
+export default meta
+type Story = StoryObj<typeof Input>
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Disabled: Story = {
   args: {
     placeholder: null,
-    disabled: true,
-  },
-};
+    disabled: true
+  }
+}
 
 export const Password: Story = {
   args: {
-    type: "password",
-  },
-};
+    type: 'password'
+  }
+}
 
 export const InputWithLabel: Story = {
   render: (args) => (
@@ -52,5 +52,5 @@ export const InputWithLabel: Story = {
       <Label htmlFor="input">My custom label</Label>
       <Input id="input" {...args} />
     </>
-  ),
-};
+  )
+}

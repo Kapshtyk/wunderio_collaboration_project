@@ -1,7 +1,7 @@
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 export function LoadingSpinner() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <div className="grid place-items-center" role="status">
@@ -21,7 +21,7 @@ export function LoadingSpinner() {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">{t("loading")}</span>
+      <span className="sr-only">{t('loading')}</span>
     </div>
-  );
+  )
 }

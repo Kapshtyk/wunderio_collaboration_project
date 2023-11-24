@@ -1,15 +1,15 @@
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 export function ErrorRequired({
-  fieldTranslatedLabelKey,
+  fieldTranslatedLabelKey
 }: {
-  fieldTranslatedLabelKey: string;
+  fieldTranslatedLabelKey: string
 }) {
-  const { t } = useTranslation();
-  const translatedFieldLabel = t(fieldTranslatedLabelKey);
+  const { t } = useTranslation()
+  const translatedFieldLabel = t(fieldTranslatedLabelKey)
   return (
     <span role="alert" className="text-error">
-      {t("field-is-required", { field: translatedFieldLabel })}
+      {t('field-is-required', { field: translatedFieldLabel })}
     </span>
-  );
+  )
 }

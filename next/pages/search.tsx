@@ -1,6 +1,6 @@
-import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
+import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import {
   ErrorBoundary,
   Facet,
@@ -8,58 +8,58 @@ import {
   Results,
   SearchBox,
   SearchProvider,
-  WithSearch,
-} from "@elastic/react-search-ui";
-import { SearchDriverOptions } from "@elastic/search-ui";
+  WithSearch
+} from '@elastic/react-search-ui'
+import { SearchDriverOptions } from '@elastic/search-ui'
 
-import { HeadingPage } from "@/components/heading--page";
-import { Meta } from "@/components/meta";
-import { SearchBoxInput } from "@/components/search/search-box-input";
-import { MultiCheckboxFacet } from "@/components/search/search-multicheckbox-facet";
-import { Pagination } from "@/components/search/search-pagination";
-import { PagingInfoView } from "@/components/search/search-paging-info";
-import { SearchResult } from "@/components/search/search-result";
+import { HeadingPage } from '@/components/heading--page'
+import { Meta } from '@/components/meta'
+import { SearchBoxInput } from '@/components/search/search-box-input'
+import { MultiCheckboxFacet } from '@/components/search/search-multicheckbox-facet'
+import { Pagination } from '@/components/search/search-pagination'
+import { PagingInfoView } from '@/components/search/search-paging-info'
+import { SearchResult } from '@/components/search/search-result'
 import {
   CommonPageProps,
-  getCommonPageProps,
-} from "@/lib/get-common-page-props";
-import { buildRequest } from "@/lib/search-ui-helpers/buildRequest";
-import { buildState } from "@/lib/search-ui-helpers/buildState";
-import { runRequest } from "@/lib/search-ui-helpers/runRequest";
-import { useNextRouting } from "@/lib/search-ui-helpers/useNextRouting";
+  getCommonPageProps
+} from '@/lib/get-common-page-props'
+import { buildRequest } from '@/lib/search-ui-helpers/buildRequest'
+import { buildState } from '@/lib/search-ui-helpers/buildState'
+import { runRequest } from '@/lib/search-ui-helpers/runRequest'
+import { useNextRouting } from '@/lib/search-ui-helpers/useNextRouting'
 
 export default function SearchPage() {
-  const { t } = useTranslation();
-  const router = useRouter();
+  const { t } = useTranslation()
+  const router = useRouter()
 
   const config: SearchDriverOptions = {
     debug: false,
     hasA11yNotifications: true,
     apiConnector: null,
     onSearch: async (state) => {
-      const { resultsPerPage } = state;
-      const requestBody = buildRequest(state);
-      const responseJson = await runRequest(requestBody, router.locale);
-      return buildState(responseJson, resultsPerPage, state);
-    },
-  };
+      const { resultsPerPage } = state
+      const requestBody = buildRequest(state)
+      const responseJson = await runRequest(requestBody, router.locale)
+      return buildState(responseJson, resultsPerPage, state)
+    }
+  }
 
   // useNextRouting is a custom hook that will integrate with Next Router with Search UI config
   // config is search-ui configuration.
   // baseUrl is the path to the search page
-  const combinedConfig = useNextRouting(config, `/${router.locale}/search`);
+  const combinedConfig = useNextRouting(config, `/${router.locale}/search`)
 
   return (
     <>
-      <Meta title={t("search")} metatags={[]} />
+      <Meta title={t('search')} metatags={[]} />
 
-      <HeadingPage>{t("search")}</HeadingPage>
+      <HeadingPage>{t('search')}</HeadingPage>
 
       <SearchProvider config={combinedConfig}>
         <WithSearch
           mapContextToProps={({ wasSearched, results }) => ({
             wasSearched,
-            results,
+            results
           })}
         >
           {({ wasSearched, results }) => (
@@ -80,16 +80,16 @@ export default function SearchPage() {
               <div className="flex flex-col md:flex-row">
                 <aside className="mr-2 w-56">
                   {wasSearched && results.length > 0 && (
-                    <div className="py-2" aria-label={t("filter-search")}>
+                    <div className="py-2" aria-label={t('filter-search')}>
                       <Facet
                         view={MultiCheckboxFacet}
                         field="tags"
-                        label={t("tags")}
+                        label={t('tags')}
                       />
                       <Facet
                         view={MultiCheckboxFacet}
                         field="content_type"
-                        label={t("content-type")}
+                        label={t('content-type')}
                       />
                     </div>
                   )}
@@ -106,23 +106,23 @@ export default function SearchPage() {
                 </div>
               </div>
               {wasSearched && results.length === 0 && (
-                <div>{t("no-results-found")}</div>
+                <div>{t('no-results-found')}</div>
               )}
             </ErrorBoundary>
           )}
         </WithSearch>
       </SearchProvider>
     </>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps<CommonPageProps> = async (
-  context,
+  context
 ) => {
   return {
     props: {
-      ...(await getCommonPageProps(context)),
+      ...(await getCommonPageProps(context))
     },
-    revalidate: 60,
-  };
-};
+    revalidate: 60
+  }
+}

@@ -1,13 +1,13 @@
-import { buildStateFacets } from "./buildStateFacets";
+import { buildStateFacets } from './buildStateFacets'
 
 function buildTotalPages(resultsPerPage, totalResults) {
-  if (!resultsPerPage) return 0;
-  if (totalResults === 0) return 1;
-  return Math.ceil(totalResults / resultsPerPage);
+  if (!resultsPerPage) return 0
+  if (totalResults === 0) return 1
+  return Math.ceil(totalResults / resultsPerPage)
 }
 
 function buildTotalResults(hits) {
-  return hits.total.value;
+  return hits.total.value
 }
 
 function getHighlight(hit, fieldName) {
@@ -16,10 +16,10 @@ function getHighlight(hit, fieldName) {
     !hit.highlight[fieldName] ||
     hit.highlight[fieldName].length < 1
   ) {
-    return;
+    return
   }
 
-  return hit.highlight[fieldName][0];
+  return hit.highlight[fieldName][0]
 }
 
 /**
@@ -30,29 +30,29 @@ function getHighlight(hit, fieldName) {
 function buildResults(hits) {
   const addEachKeyValueToObject = (acc, [key, value]) => ({
     ...acc,
-    [key]: value,
-  });
+    [key]: value
+  })
 
   const toObject = (value, snippet) => {
-    return { raw: value, ...(snippet && { snippet }) };
-  };
+    return { raw: value, ...(snippet && { snippet }) }
+  }
 
   return hits.map((record) => {
     return Object.entries(record._source)
       .map(([fieldName, fieldValue]) => [
         fieldName,
-        toObject(fieldValue, getHighlight(record, fieldName)),
+        toObject(fieldValue, getHighlight(record, fieldName))
       ])
-      .reduce(addEachKeyValueToObject, {});
-  });
+      .reduce(addEachKeyValueToObject, {})
+  })
 }
 
-const getPagingStart = (state) => (state.current - 1) * state.resultsPerPage;
+const getPagingStart = (state) => (state.current - 1) * state.resultsPerPage
 
 const getPagingEnd = (state, totalResults) => {
-  const pagingEnd = state.current * state.resultsPerPage;
-  return pagingEnd < totalResults ? pagingEnd : totalResults;
-};
+  const pagingEnd = state.current * state.resultsPerPage
+  return pagingEnd < totalResults ? pagingEnd : totalResults
+}
 
 /*
   Converts an Elasticsearch response to new application state
@@ -68,14 +68,14 @@ const getPagingEnd = (state, totalResults) => {
   We do similar things for facets and totals.
 */
 export function buildState(response, resultsPerPage, state) {
-  const results = buildResults(response.hits.hits);
-  const totalResults = buildTotalResults(response.hits);
-  const totalPages = buildTotalPages(resultsPerPage, totalResults);
-  const facets = buildStateFacets(response.aggregations);
-  const requestId = "";
-  const resultSearchTerm = state?.searchTerm || "";
-  const pagingStart = getPagingStart(state);
-  const pagingEnd = getPagingEnd(state, totalResults);
+  const results = buildResults(response.hits.hits)
+  const totalResults = buildTotalResults(response.hits)
+  const totalPages = buildTotalPages(resultsPerPage, totalResults)
+  const facets = buildStateFacets(response.aggregations)
+  const requestId = ''
+  const resultSearchTerm = state?.searchTerm || ''
+  const pagingStart = getPagingStart(state)
+  const pagingEnd = getPagingEnd(state, totalResults)
   return {
     results,
     totalPages,
@@ -86,6 +86,6 @@ export function buildState(response, resultsPerPage, state) {
     rawResponse: null,
     wasSearched: true,
     pagingStart,
-    pagingEnd,
-  };
+    pagingEnd
+  }
 }

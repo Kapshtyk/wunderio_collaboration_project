@@ -1,95 +1,95 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode } from "next-drupal";
+import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
-import { ArticleTeasers } from "@/components/article-teasers";
-import { ContactForm } from "@/components/contact-form";
-import { ContactList } from "@/components/contact-list";
-import { LayoutProps } from "@/components/layout";
-import { LogoStrip } from "@/components/logo-strip";
-import { Meta } from "@/components/meta";
-import { Paragraph } from "@/components/paragraph";
-import { drupal } from "@/lib/drupal/drupal-client";
-import { ResourceType,getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
-import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { ArticleTeasers } from '@/components/article-teasers'
+import { ContactForm } from '@/components/contact-form'
+import { ContactList } from '@/components/contact-list'
+import { LayoutProps } from '@/components/layout'
+import { LogoStrip } from '@/components/logo-strip'
+import { Meta } from '@/components/meta'
+import { Paragraph } from '@/components/paragraph'
+import { drupal } from '@/lib/drupal/drupal-client'
+import { ResourceType, getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
+import { getCommonPageProps } from '@/lib/get-common-page-props'
 import {
   ArticleTeaser,
-  validateAndCleanupArticleTeaser,
-} from "@/lib/zod/article-teaser";
-import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
-// import { validateAndCleanupServices } from "@/lib/zod/services";
+  validateAndCleanupArticleTeaser
+} from '@/lib/zod/article-teaser'
+import { Frontpage, validateAndCleanupFrontpage } from '@/lib/zod/frontpage'
 
 import { Divider } from "@/ui/divider";
-
+import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
   promotedArticleTeasers: ArticleTeaser[];
+
 }
 
 export default function IndexPage({
   frontpage,
-  promotedArticleTeasers,
+  promotedArticleTeasers
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
-      <div className="grid gap-4">
+      {/* <div className="grid gap-4">
         {frontpage?.field_content_elements?.map((paragraph) => (
           <Paragraph paragraph={paragraph} key={paragraph.id} />
         ))}
-      </div>
-      <Divider className="max-w-4xl" />
-      <ContactForm />
-      <Divider className="max-w-4xl" />
-      <ArticleTeasers
+      </div> */}
+      {/* <Divider className="max-w-4xl" /> */}
+      {/* <ContactForm /> */}
+      {/* <Divider className="max-w-4xl" /> */}
+      {/* <ArticleTeasers
         articles={promotedArticleTeasers}
-        heading={t("promoted-articles")}
+        heading={t('promoted-articles')}
       />
-      <ContactList />
-      <LogoStrip />
+      <ContactList /> */}
+      {/* <LogoStrip /> */}
     </>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps<IndexPageProps> = async (
-  context,
+  context
 ) => {
   const frontpage = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--frontpage",
+      'node--frontpage',
       context,
       {
-        params: getNodePageJsonApiParams("node--frontpage").getQueryObject(),
-      },
+        params: getNodePageJsonApiParams('node--frontpage').getQueryObject()
+      }
     )
-  ).at(0);
+  ).at(0)
 
   const promotedArticleTeasers = await drupal.getResourceCollectionFromContext<
     DrupalNode[]
-  >("node--article", context, {
+  >('node--article', context, {
     params: {
-      "filter[status]": 1,
-      "filter[langcode]": context.locale,
-      "filter[promote]": 1,
-      "fields[node--article]": "title,path,field_image,uid,created",
-      include: "field_image,uid",
-      sort: "-sticky,-created",
-      "page[limit]": 3,
-    },
-  });
-  // const type = "node--services_page" as ResourceType;
-  // const services = await drupal.getResourceCollectionFromContext<
-  //   DrupalNode[]
-  // >("node--services_page", context,
-  //   {
-  //     params: getNodePageJsonApiParams(type).getQueryObject(),
-  //   },
+      'filter[status]': 1,
+      'filter[langcode]': context.locale,
+      'filter[promote]': 1,
+      'fields[node--article]': 'title,path,field_image,uid,created',
+      include: 'field_image,uid',
+      sort: '-sticky,-created',
+      'page[limit]': 3
+    }
+  })
 
-  // );
-  // const cleanSer = services.map((node) => validateAndCleanupServices(node))
+  const aboutUs = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--about_us",
+      context,
+      {
+        params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
+      },
+    )
+  ).at(0);
 
   return {
     props: {
@@ -98,7 +98,8 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
         validateAndCleanupArticleTeaser(teaser),
       ),
+      aboutUs: validateAndCleanupAboutUs(aboutUs)
     },
-    revalidate: 60,
-  };
-};
+    revalidate: 60
+  }
+}
