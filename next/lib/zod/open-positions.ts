@@ -1,49 +1,49 @@
-import { DrupalNode } from "next-drupal";
-import { z } from "zod";
+import { DrupalNode } from 'next-drupal'
+import { z } from 'zod'
 
-import { MetatagsSchema } from "@/lib/zod/metatag";
+import { MetatagsSchema } from '@/lib/zod/metatag'
 
 export const OpenPositionsSchema = z.object({
-  type: z.literal("node--open_positions"),
+  type: z.literal('node--open_positions'),
   id: z.string(),
   title: z.string(),
   body: z.object({
     value: z.string(),
     format: z.string(),
-    processed: z.string(),
+    processed: z.string()
   }),
   field_basic_info: z.object({
     body: z.object({
       value: z.string(),
       format: z.string(),
-      processed: z.string(),
-    }),
+      processed: z.string()
+    })
   }),
   field_country: z.object({
-    name: z.string(),
+    name: z.string()
   }),
   field_office: z.object({
-    name: z.string(),
+    name: z.string()
   }),
   field_position: z.object({
-    name: z.string(),
+    name: z.string()
   }),
   metatag: MetatagsSchema.optional(),
   path: z.object({
-    alias: z.string(),
-  }),
-});
+    alias: z.string()
+  })
+})
 
 export function validateAndCleanupOpenPositions(
-  openPositions: DrupalNode,
+  openPositions: DrupalNode
 ): OpenPositions | null {
   try {
-    return OpenPositionsSchema.parse(openPositions);
+    return OpenPositionsSchema.parse(openPositions)
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
-    console.log(JSON.stringify({ name, issues, openPositions }, null, 2));
-    return null;
+    const { name = 'ZodError', issues = [] } = error
+    console.log(JSON.stringify({ name, issues, openPositions }, null, 2))
+    return null
   }
 }
 
-export type OpenPositions = z.infer<typeof OpenPositionsSchema>;
+export type OpenPositions = z.infer<typeof OpenPositionsSchema>
