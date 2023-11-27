@@ -1,13 +1,13 @@
-import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import Link from 'next/link'
+import React, { useMemo, useState } from 'react'
 
-import { Events } from "@/lib/zod/events";
+import { Events } from '@/lib/zod/events'
 
 interface EventsProps {
-  events: Events[];
+  events: Events[]
 }
 const Events = ({ events }: EventsProps) => {
-  if (!events) return null;
+  if (!events) return null
 
   return (
     <div className="flex gap-4 flex-wrap">
@@ -23,7 +23,7 @@ const Events = ({ events }: EventsProps) => {
         </Link>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Events;
+export default Events

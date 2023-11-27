@@ -1,6 +1,6 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
-import { useTranslation } from "next-i18next";
+import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { DrupalNode, DrupalTaxonomyTerm } from 'next-drupal'
+import { useTranslation } from 'next-i18next'
 
 import { ArticleTeasers } from '@/components/article-teasers'
 import { ContactForm } from '@/components/contact-form'
@@ -12,19 +12,18 @@ import { Paragraph } from '@/components/paragraph'
 import { drupal } from '@/lib/drupal/drupal-client'
 import { getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
 import { getCommonPageProps } from '@/lib/get-common-page-props'
+import { validateAndCleanupAboutUs } from '@/lib/zod/about-us'
 import {
   ArticleTeaser,
   validateAndCleanupArticleTeaser
 } from '@/lib/zod/article-teaser'
 import { Frontpage, validateAndCleanupFrontpage } from '@/lib/zod/frontpage'
 
-import { Divider } from "@/ui/divider";
-import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
+import { Divider } from '@/ui/divider'
 
 interface IndexPageProps extends LayoutProps {
-  frontpage: Frontpage | null;
-  promotedArticleTeasers: ArticleTeaser[];
-
+  frontpage: Frontpage | null
+  promotedArticleTeasers: ArticleTeaser[]
 }
 
 export default function IndexPage({
@@ -83,20 +82,20 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
 
   const aboutUs = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--about_us",
+      'node--about_us',
       context,
       {
-        params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
-      },
+        params: getNodePageJsonApiParams('node--about_us').getQueryObject()
+      }
     )
-  ).at(0);
+  ).at(0)
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
       promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
-        validateAndCleanupArticleTeaser(teaser),
+        validateAndCleanupArticleTeaser(teaser)
       ),
       aboutUs: validateAndCleanupAboutUs(aboutUs)
     },
