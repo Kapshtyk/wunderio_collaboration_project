@@ -26,13 +26,14 @@ interface ServicesProps extends LayoutProps {
 export default function ServicesPage({
   services, mainPage, tags
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const {t} = useTranslation();
   const breadcrumbs = [
     {
-      title: "Home",
+      title: t("Home"),
       url: "/"
     },
     {
-      title: "Services",
+      title: t("Services"),
       url: "/services"
     }
   ]
@@ -58,7 +59,7 @@ const subHeadings = mainPage.field_content_elements.filter(item=>item.type === "
       <p>Jump to:</p>
       {subHeadings.map((sub)=> (
         <li>
-          <Link href={`#${sub.id}`} scroll={false}>{sub.field_heading}</Link>
+          <Link href={`#${sub.id}`} scroll={false} style={{scrollMarginTop:"20px"}}>{sub.field_heading}</Link>
         </li>
       ))}
      </div>

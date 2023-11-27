@@ -32,14 +32,15 @@ interface ServicesProps extends CommonPageProps{
 export default function ServicesPages({
   services, allServices, servicesTypes
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const {t} = useTranslation();
 
   const breadcrumbs = [
     {
-      title: "home",
+      title: t("home"),
       url: "/"
     },
     {
-      title: "services",
+      title: t("services"),
       url: "/services"
     },
     {
