@@ -115,7 +115,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   // The article content type has an image field, and author information:
   if (resourceType === "node--article") {
-    apiParams.addInclude(["field_image", "uid"]);
+    apiParams.addInclude(["field_image", "uid", "field_tags"]);
     apiParams.addFields(resourceType, [
       "title",
       "body",
@@ -127,6 +127,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_excerpt",
       "path",
       "sticky",
+      "field_tags"
     ]);
   }
   // The work content type has paragraphs, stored in the "field_content_elements" field:
@@ -149,7 +150,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
     apiParams
       .addInclude([
         "field_content_elements",
-        "field_content_elements.field_image.field_media_image",  
+        "field_content_elements.field_image.field_media_image",
       ])
       .addFields("node--about_us", [
         "title",

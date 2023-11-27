@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     )
   ).at(0);
   console.log(aboutUs);
-  
+
 
   return {
     props: {

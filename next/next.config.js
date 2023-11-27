@@ -26,6 +26,10 @@ const nextConfig = {
         {
           source: "/work",
           destination: "/work"
+        },
+        {
+          source: "/tyo",
+          destination: "/work"
         }
       ],
     };

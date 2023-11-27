@@ -10,56 +10,111 @@ import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-vers
 import { drupal } from "@/lib/drupal/drupal-client";
 import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { Page, validateAndCleanupPage } from "@/lib/zod/page";
+import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { getNodePageJsonApiParams, ResourceType } from "@/lib/drupal/get-node-page-json-api-params";
 import { Paragraph } from "@/components/paragraph";
 import NotFoundPage from "../404";
+import { WorkWorkCard } from "@/components/workWorkCard";
+import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
+import { WorkArticleCard } from "@/components/workArticleCard";
 
 
 interface WorkPageProps {
-    workPage: Page;
+    currentWorkPage: PageType;
+    allPages: PageType[];
+    allArticles: Article[];
 }
 
 export default function WorkPage({
-    workPage
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+    currentWorkPage,
+    allPages,
+    allArticles,
 
+}: InferGetStaticPropsType<typeof getStaticProps>) {
+    const { t } = useTranslation();
     const breadcrumbs = [
         {
-            title: "Home",
+            title: t("Home"),
             url: "/"
         },
         {
-            title: "Work",
+            title: t("Work"),
             url: "/work"
         },
         {
-            title: workPage.title,
-            url: "/work/" + workPage.title
+            title: (currentWorkPage.title),
+            url: "/work/" + currentWorkPage.title
         }
     ]
-    console.log("work", workPage);
+    console.log("CurrentWorkPage", currentWorkPage);
+
+    const allowedWorkPageTitles = [
+        "Tikkurila",
+        "Luke.fi",
+        "Fortum",
+        "HUS – Helsinki University Hospital",
+    ].filter(Boolean);
+
 
     return (
-        workPage && workPage.field_page_type && workPage.field_page_type.name === "Work" ? (
+        currentWorkPage && currentWorkPage.field_page_type && currentWorkPage.field_page_type.name === "Work" ? (
             <>
-                <Meta title={workPage.title} metatags={workPage.metatag} />
+                <Meta title={currentWorkPage.title} metatags={currentWorkPage.metatag} />
                 <div className="container">
                     {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
                 </div>
 
                 <div>
-                    {workPage.field_content_elements.map((paragraph) => (
+                    {currentWorkPage.field_content_elements.map((paragraph) => (
                         <Paragraph key={paragraph.id} paragraph={paragraph} />
                     ))}
                 </div>
+
+
+                {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
+                    <div className="mt-20">
+                        <h1 className="font-bold my-4">RELATED CONTENT</h1>
+                        <div className="flex space-x-6">
+
+                            {allPages
+                                .filter((workPages) => workPages.field_page_type?.name === "Work")
+                                .filter((workPages) => workPages.title !== currentWorkPage.title)
+                                .slice(0, 4)
+                                .map((workPage) => (
+                                    <WorkWorkCard workPage={workPage} />
+                                ))}
+                        </div>
+                    </div>
+                ) : null
+                }
+
+                {
+                    currentWorkPage.title === "Trimble" ? (
+                        <div className="mt-20">
+                            <h1 className="font-bold mb-4">RELATED CONTENT</h1>
+                            <div className="grid grid-cols-3 gap-3">
+
+                                {allArticles
+                                    .filter((workArticles) =>
+                                        workArticles.field_tags.some((field_tag) => field_tag?.name === "Drupal")
+                                    )
+                                    .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+                                    .slice(0, 3)
+                                    .map((workArticle) => (
+                                        <WorkArticleCard workArticle={workArticle} />
+                                    ))}
+                            </div>
+                        </div>
+                    ) : null
+                }
             </>
+
         ) : <NotFoundPage />
     )
 }
 
 export const getStaticPaths: GetStaticPaths = async (context) => {
-    const paths = await drupal.getStaticPathsFromContext('node--page', context);
+    const paths = await drupal.getStaticPathsFromContext('node--page', context,);
     return {
         paths: paths,
         fallback: "blocking",
@@ -71,7 +126,9 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     context,
 ) => {
     const path: DrupalTranslatedPath =
-        await drupal.translatePathFromContext(context);
+        await drupal.translatePathFromContext(context,
+            { pathPrefix: "/work" }
+        );
 
     if (!path) {
         return {
@@ -85,8 +142,18 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
         path,
         context, {
         params: getNodePageJsonApiParams(type).getQueryObject(),
+        pathPrefix: "/work"
+
 
     });
+
+    const nodeTranslations = await getNodeTranslatedVersions(
+        resource,
+        context,
+        drupal,
+    );
+
+    const languageLinks = createLanguageLinks(nodeTranslations);
 
     if (!resource) {
         throw new Error(`Failed to fetch resource: ${path.jsonapi.individual}`);
@@ -97,19 +164,29 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
             notFound: true,
         };
     }
-    /*  const nodeTranslations = await getNodeTranslatedVersions(
-       resource,
-       context,
-       drupal,
-     );
-   
-     const languageLinks = createLanguageLinks(nodeTranslations); */
+
+
+    const pages = await drupal.getResourceCollectionFromContext<
+        DrupalNode[]>("node--page", context,
+            {
+                params: getNodePageJsonApiParams("node--page").getQueryObject()
+            });
+
+    const articles = await drupal.getResourceCollectionFromContext<
+        DrupalNode[]>("node--article", context,
+            {
+                params: getNodePageJsonApiParams("node--article").getQueryObject()
+            });
 
     return {
         props: {
             ...(await getCommonPageProps(context)),
-            workPage: validateAndCleanupPage(resource),
-            /* languageLinks, */
+            currentWorkPage: validateAndCleanupPage(resource),
+            allPages: pages.map((node) => validateAndCleanupPage(node)),
+            allArticles: articles.map((node) => validateAndCleanupArticle(node)),
+            languageLinks,
+
+
         },
         revalidate: 60,
     };
