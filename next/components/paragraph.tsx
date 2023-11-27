@@ -8,8 +8,8 @@ import { ParagraphListingArticles } from '@/components/paragraph--listing-articl
 import { ParagraphText } from '@/components/paragraph--text'
 import { Paragraph } from '@/lib/zod/paragraph'
 
-import { ParagraphTestimonials } from "./paragraph--testimonials";
-import { ParagraphHeadingSection } from "./paragraph--heading-section";
+import { ParagraphHeadingSection } from './paragraph--heading-section'
+import { ParagraphTestimonials } from './paragraph--testimonials'
 // import { ParagraphWorkCard } from "./paragraph--work-card";
 
 // Use dynamic imports to defer loading a component until after initial page load: https://nextjs.org/docs/advanced-features/dynamic-import
@@ -51,11 +51,11 @@ export function Paragraph({ paragraph }: { paragraph: Paragraph }) {
     case 'paragraph--file_attachments': {
       return <ParagraphFileAttachments paragraph={paragraph} />
     }
-    case "paragraph--testimonials": {
-      return <ParagraphTestimonials paragraph={paragraph} />;
+    case 'paragraph--testimonials': {
+      return <ParagraphTestimonials paragraph={paragraph} />
     }
-    case "paragraph--heading_section": {
-      return <ParagraphHeadingSection paragraph={paragraph} />;
+    case 'paragraph--heading_section': {
+      return <ParagraphHeadingSection paragraph={paragraph} />
     }
     // case "paragraph--work_card": {
     //   return <ParagraphWorkCard paragraph={paragraph} />;

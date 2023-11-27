@@ -1,48 +1,55 @@
-import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import Link from 'next/link'
+import React, { useMemo, useState } from 'react'
 
-import { OpenPositions } from "@/lib/zod/open-positions";
+import { OpenPositions } from '@/lib/zod/open-positions'
 
 interface OpenPositionsProps {
-  openPositions: OpenPositions[];
+  openPositions: OpenPositions[]
 }
 const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
-  const [offices, setOffices] = useState<string[]>([]);
-  const [countries, setCountries] = useState<string[]>([]);
-  const [choosenOffice, setChoosenOffice] = useState<string>("all");
-  const [choosenCountry, setChoosenCountry] = useState<string>("all");
+  const [offices, setOffices] = useState<string[]>([])
+  const [countries, setCountries] = useState<string[]>([])
+  const [choosenOffice, setChoosenOffice] = useState<string>('all')
+  const [choosenCountry, setChoosenCountry] = useState<string>('all')
 
   useMemo(() => {
-    const offices = Array.from(new Set(openPositions.map((openPosition) => openPosition.field_office.name)));
-    setOffices(offices);
-  }, [openPositions]);
+    const offices = Array.from(
+      new Set(
+        openPositions.map((openPosition) => openPosition.field_office.name)
+      )
+    )
+    setOffices(offices)
+  }, [openPositions])
 
   useMemo(() => {
-    const countries = Array.from(new Set(openPositions.map((openPosition) => openPosition.field_country.name)));
-    setCountries(countries);
-  }, [openPositions]);
+    const countries = Array.from(
+      new Set(
+        openPositions.map((openPosition) => openPosition.field_country.name)
+      )
+    )
+    setCountries(countries)
+  }, [openPositions])
 
-  if (!openPositions) return null;
+  if (!openPositions) return null
 
   const filteredPositions = openPositions.filter((openPosition) => {
-    if (choosenOffice === "all" && choosenCountry === "all")
-      return openPosition;
-    if (choosenOffice === "all" && choosenCountry !== "all")
-      return openPosition.field_country.name === choosenCountry;
-    if (choosenOffice !== "all" && choosenCountry === "all")
-      return openPosition.field_office.name === choosenOffice;
+    if (choosenOffice === 'all' && choosenCountry === 'all') return openPosition
+    if (choosenOffice === 'all' && choosenCountry !== 'all')
+      return openPosition.field_country.name === choosenCountry
+    if (choosenOffice !== 'all' && choosenCountry === 'all')
+      return openPosition.field_office.name === choosenOffice
     return (
       openPosition.field_office.name === choosenOffice &&
       openPosition.field_country.name === choosenCountry
-    );
-  });
+    )
+  })
 
   return (
     <>
       <div className="flex gap-4 mb-4">
         <select
           onChange={(e) => {
-            setChoosenOffice(e.target.value);
+            setChoosenOffice(e.target.value)
           }}
         >
           <option value="all">All</option>
@@ -54,7 +61,7 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
         </select>
         <select
           onChange={(e) => {
-            setChoosenCountry(e.target.value);
+            setChoosenCountry(e.target.value)
           }}
         >
           <option value="all">All</option>
@@ -75,7 +82,7 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
             <div className="p-4 w-52 h-52 rounded-md shadow-sm bg-primary-50">
               <h3>{openPosition.title}</h3>
               <span>
-                {openPosition.field_country.name},{" "}
+                {openPosition.field_country.name},{' '}
                 {openPosition.field_office.name}
               </span>
             </div>
@@ -83,7 +90,7 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default OpenPositions;
+export default OpenPositions

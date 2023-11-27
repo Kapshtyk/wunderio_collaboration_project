@@ -12,7 +12,7 @@ export function ParagraphText({ paragraph }: { paragraph: FormattedTextType }) {
       )}
       <div
         dangerouslySetInnerHTML={{
-          __html: paragraph.field_formatted_text.processed,
+          __html: paragraph.field_formatted_text.processed
         }}
         className="mt-6 font-serif text-xl leading-loose prose"
       />

@@ -48,7 +48,6 @@ export default function SearchPage() {
   // config is search-ui configuration.
   // baseUrl is the path to the search page
   const combinedConfig = useNextRouting(config, `/${router.locale}/search`)
-
   return (
     <>
       <Meta title={t('search')} metatags={[]} />
