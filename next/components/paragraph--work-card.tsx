@@ -1,17 +1,15 @@
-import { WorkCard as WorkCardType } from "@/lib/zod/paragraph";
-import { Media } from "@/components/media";
+import { Media } from '@/components/media'
+import { WorkCard as WorkCardType } from '@/lib/zod/paragraph'
 
 export function ParagraphWorkCard({ paragraph }: { paragraph: WorkCardType }) {
-    return (
-
+  return (
+    <div>
+      <div className="justify-between w-5/6">
         <div>
-            <div className="justify-between w-5/6">
-                <div >< Media media={paragraph.field_image} priority={true} /></div>
-                <p className="pt-2">{paragraph.field_excerpt}</p>
-
-            </div>
+          <Media media={paragraph.field_image} priority={true} />
         </div>
-
-    )
-
+        <p className="pt-2">{paragraph.field_excerpt}</p>
+      </div>
+    </div>
+  )
 }

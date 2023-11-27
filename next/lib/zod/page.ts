@@ -6,13 +6,13 @@ import {
   AccordionSchema,
   FileAttachmentsSchema,
   FormattedTextSchema,
+  HeadingSectionSchema,
   HeroSchema,
   ImageSchema,
   LinksSchema,
   ListingArticlesSchema,
-  VideoSchema,
-  HeadingSectionSchema,
   TestimonialsSchema,
+  VideoSchema,
   WorkCardSchema
 } from '@/lib/zod/paragraph'
 
