@@ -32,6 +32,7 @@ import {
 } from '@/lib/zod/webform'
 
 import NotFoundPage from '../404'
+import { FormattedText } from '@/components/formatted-text'
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType
@@ -87,10 +88,7 @@ export default function Event({
         <h1>{headingSection.field_heading}</h1>
         <span>{headingSection.field_excerpt}</span>
       </div>
-      <div
-        dangerouslySetInnerHTML={{ __html: event.body.processed }}
-        className="mt-6 font-serif text-xl leading-loose prose"
-      />
+      <FormattedText html={event.body.processed} />
       <>
         {event.type === 'node--event' && (
           <>
@@ -98,12 +96,7 @@ export default function Event({
             {event.field_participant.map((participant) => (
               <div className="mb-4" key={participant.id}>
                 <h2 className="font-regular text-2xl">{participant.title}</h2>
-                <div
-                  className="mt-6 font-serif text-xl leading-loose prose"
-                  dangerouslySetInnerHTML={{
-                    __html: participant.body.processed
-                  }}
-                ></div>
+                <FormattedText html={participant.body.processed} />
               </div>
             ))}
           </>
