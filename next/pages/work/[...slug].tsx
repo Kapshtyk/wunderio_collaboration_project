@@ -57,7 +57,7 @@ export default function WorkPage({
 
 
     return (
-        currentWorkPage && currentWorkPage.field_page_type && currentWorkPage.field_page_type.name === "Work" ? (
+        currentWorkPage && currentWorkPage.field_page_types && currentWorkPage.field_page_types.name === "Work" ? (
             <>
                 <Meta title={currentWorkPage.title} metatags={currentWorkPage.metatag} />
                 <div className="container">
@@ -77,7 +77,7 @@ export default function WorkPage({
                         <div className="flex space-x-6">
 
                             {allPages
-                                .filter((workPages) => workPages.field_page_type?.name === "Work")
+                                .filter((workPages) => workPages.field_page_types?.name === "Work")
                                 .filter((workPages) => workPages.title !== currentWorkPage.title)
                                 .slice(0, 4)
                                 .map((workPage) => (

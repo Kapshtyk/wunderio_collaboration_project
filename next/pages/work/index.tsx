@@ -122,7 +122,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
             });
 
     const tags = (
-        await drupal.getResourceCollectionFromContext<DrupalTaxonomyTerm[]>("taxonomy_term--page_type", context,
+        await drupal.getResourceCollectionFromContext<DrupalTaxonomyTerm[]>("taxonomy_term--page_types", context,
             {
 
             },

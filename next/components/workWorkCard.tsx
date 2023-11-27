@@ -20,7 +20,7 @@ export function WorkWorkCard({ workPage }) {
                 <p className="text-base text-sm text-secondary-900">
                     <Link href="/work">
                         <span className="hover:underline">
-                            {workPage.field_page_type.name.toUpperCase()}
+                            {workPage.field_page_types.name.toUpperCase()}
                         </span>
                     </Link>
                 </p>

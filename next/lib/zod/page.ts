@@ -35,7 +35,7 @@ export const PageSchema = z.object({
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(PageElementsSchema),
-  field_page_type: z.object({
+  field_page_types: z.object({
     name: z.string().nullable(),
   }).nullable(),
   path: z.object({

@@ -13,7 +13,7 @@ export function WorkCards({ allPages, tags }) {
             {tags.map((tag: DrupalTaxonomyTerm) => (
                 <div className="grid grid-cols-3 gap-6" key={tag.id}>
                     {allPages
-                        .filter((workPage: PageType) => workPage.field_page_type?.name === tag.name)
+                        .filter((workPage: PageType) => workPage.field_page_types?.name === tag.name)
                         .map((workPage: PageType) => (
                             <div key={workPage.id}>
                                 {workPage.field_content_elements &&

@@ -28,6 +28,14 @@ const nextConfig = {
           destination: '/work'
         },
         {
+          source: '/tyo',
+          destination: '/work'
+        },
+        {
+          source: '/arbete',
+          destination: '/work'
+        },
+        {
           source: "/services",
           destination: "/services"
         },
