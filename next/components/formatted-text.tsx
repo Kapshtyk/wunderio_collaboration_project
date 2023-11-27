@@ -25,6 +25,8 @@ const options: HTMLReactParserOptions = {
   replace: (domNode) => {
     if (!isElement(domNode)) return
 
+    //< <img src alt data-entity-uuid data-entity-type height width data-caption data-align>
+
     switch (domNode.name) {
       case 'img': {
         const { src, alt, width = 100, height = 100 } = domNode.attribs
@@ -44,6 +46,58 @@ const options: HTMLReactParserOptions = {
           )
         }
         break
+      }
+
+      case 'strong': {
+        return <strong className="font-bold">{domToReact(domNode.children, options)}</strong>
+      }
+
+      case 'em': {
+        return <em className="italic">{domToReact(domNode.children, options)}</em>
+      }
+
+      case 'br': {
+        return <br className="mb-4 border-b-2 border-red-500" />
+      }
+
+      case 'h2': {
+        return (
+          <h2 className="text-2xl font-bold mb-4">
+            {domToReact(domNode.children, options)}
+          </h2>
+        )
+      }
+
+      case 'h3': {
+        return (
+          <h3 className="text-xl font-bold mb-4">
+            {domToReact(domNode.children, options)}
+          </h3>
+        )
+      }
+
+      case 'h4': {
+        return (
+          <h4 className="text-lg font-bold mb-4">
+            {domToReact(domNode.children, options)}
+          </h4>
+        )
+      }
+
+      case 'h5': {
+        return (
+          <h5 className="text-base font-bold mb-4">
+            {domToReact(domNode.children, options)}
+          </h5>
+        )
+      }
+
+      case 'h6': {
+        return (
+          <h6 className="text-sm font-bold mb-4">
+            {domToReact(domNode.children, options)}
+          </h6>
+        )
       }
 
       case 'a': {
@@ -76,6 +130,22 @@ const options: HTMLReactParserOptions = {
           <blockquote className="italic">
             {domToReact(domNode.children, options)}
           </blockquote>
+        )
+      }
+
+      case 'ul': {
+        return (
+          <ul className="list-disc list-inside">
+            {domToReact(domNode.children, options)}
+          </ul>
+        )
+      }
+
+      case 'li': {
+        return (
+          <li className="mb-2">
+            {domToReact(domNode.children, options)}
+          </li>
         )
       }
 
