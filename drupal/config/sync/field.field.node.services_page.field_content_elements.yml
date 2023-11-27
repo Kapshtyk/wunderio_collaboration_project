@@ -7,8 +7,12 @@ dependencies:
     - node.type.services_page
     - paragraphs.paragraphs_type.formatted_text
     - paragraphs.paragraphs_type.heading_section
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.labelled_image
     - paragraphs.paragraphs_type.links
+    - paragraphs.paragraphs_type.sub_heading_section
     - paragraphs.paragraphs_type.testimonials
+    - paragraphs.paragraphs_type.video
   module:
     - entity_reference_revisions
     - tmgmt_content
@@ -30,9 +34,13 @@ settings:
   handler_settings:
     target_bundles:
       formatted_text: formatted_text
+      image: image
       links: links
+      video: video
       testimonials: testimonials
       heading_section: heading_section
+      labelled_image: labelled_image
+      sub_heading_section: sub_heading_section
     negate: 0
     target_bundles_drag_drop:
       accordion:
@@ -55,20 +63,26 @@ settings:
         enabled: false
       image:
         weight: -13
-        enabled: false
+        enabled: true
+      labelled_image:
+        weight: 15
+        enabled: true
       links:
         weight: -11
-        enabled: true
-      links_service_page:
-        weight: 21
         enabled: true
       listing_articles:
         weight: 9
         enabled: false
+      services_taxonomy:
+        weight: 14
+        enabled: false
+      sub_heading_section:
+        weight: 15
+        enabled: true
       testimonials:
         weight: 12
         enabled: true
       video:
         weight: -9
-        enabled: false
+        enabled: true
 field_type: entity_reference_revisions

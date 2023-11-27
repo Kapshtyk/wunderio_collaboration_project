@@ -46,9 +46,6 @@ settings:
       video: video
       listing_articles: listing_articles
       file_attachments: file_attachments
-      work_card: work_card
-      heading_section: heading_section
-      testimonials: testimonials
     negate: 0
     target_bundles_drag_drop:
       accordion:

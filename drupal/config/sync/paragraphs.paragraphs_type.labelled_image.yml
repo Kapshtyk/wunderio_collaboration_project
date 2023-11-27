@@ -1,0 +1,10 @@
+uuid: 5dbbd375-2b1c-4748-b74d-dd5cb3421e8a
+langcode: en
+status: true
+dependencies: {  }
+id: labelled_image
+label: 'Labelled Image'
+icon_uuid: null
+icon_default: null
+description: 'This is used to add image with label'
+behavior_plugins: {  }

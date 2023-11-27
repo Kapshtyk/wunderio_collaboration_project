@@ -1,0 +1,32 @@
+uuid: 0b4c335d-3042-4598-9e59-9d7d10ba1394
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.sub_heading_section.field_excerpt
+    - field.field.paragraph.sub_heading_section.field_heading
+    - paragraphs.paragraphs_type.sub_heading_section
+id: paragraph.sub_heading_section.default
+targetEntityType: paragraph
+bundle: sub_heading_section
+mode: default
+content:
+  field_excerpt:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_heading:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

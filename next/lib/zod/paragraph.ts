@@ -48,8 +48,11 @@ export const DocumentShape = z.object({
 
 export const LinkShape = z.object({
   title: z.string(),
-  full_url: z.string()
-})
+  full_url: z.string(),
+});
+export const TaxonomyShape = z.object({
+  name: z.string()
+});
 
 export const ImageSchema = z.object({
   type: z.literal('paragraph--image'),
@@ -193,6 +196,35 @@ export const WorkCardSchema = z.object({
   field_excerpt: z.string()
 })
 
+export const LinkServiceSchema = z.object({
+  type: z.literal("paragraph--links_service_page"),
+  id: z.string(),
+  field_heading: z.string(),
+  field_excerpt: z.string(),
+  field_target_link: z.object({}),
+});
+
+export const SubHeadingSectionSchema = z.object({
+  type: z.literal("paragraph--sub_heading_section"),
+  id: z.string(),
+  field_heading: z.string(),
+  field_excerpt: z.string(),
+})
+
+export const LabelledImageSchema = z.object({
+  type: z.literal("paragraph--labelled_image"),
+  id: z.string(),
+  field_image: z
+  .object({
+    type: z.literal("media--image"),
+    id: z.string(),
+    field_media_image: ImageShape.nullable(),
+  })
+  .nullable()
+  .optional(),
+  field_label: z.string()
+})
+
 export type FormattedText = z.infer<typeof FormattedTextSchema>
 export type Image = z.infer<typeof ImageSchema>
 export type Video = z.infer<typeof VideoSchema>
@@ -205,6 +237,9 @@ export type FileAttachments = z.infer<typeof FileAttachmentsSchema>
 export type Testimonials = z.infer<typeof TestimonialsSchema>
 export type HeadingSection = z.infer<typeof HeadingSectionSchema>
 export type WorkCard = z.infer<typeof WorkCardSchema>
+export type LinkService = z.infer<typeof LinkServiceSchema>;
+export type SubHeadingSection = z.infer<typeof SubHeadingSectionSchema>;
+export type LabelledImage = z.infer<typeof LabelledImageSchema>;
 
 export type Paragraph =
   | FormattedText
@@ -219,3 +254,6 @@ export type Paragraph =
   | Testimonials
   | HeadingSection
   | WorkCard
+  | LinkService
+  | SubHeadingSection
+  | LabelledImage;

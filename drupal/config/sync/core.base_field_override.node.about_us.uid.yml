@@ -1,13 +1,13 @@
-uuid: 8911f6e2-a596-4e79-b7b5-64839b7f8927
+uuid: 902188b8-a852-4c93-b469-f5e36fa1f57d
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.services_page
-id: node.services_page.uid
+    - node.type.about_us
+id: node.about_us.uid
 field_name: uid
 entity_type: node
-bundle: services_page
+bundle: about_us
 label: 'Authored by'
 description: 'The username of the content author.'
 required: false

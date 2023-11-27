@@ -1,13 +1,13 @@
-uuid: 56aa04ef-c4cb-450b-9caa-afc670be66bb
+uuid: c548f284-416f-4a3a-9aa1-fcc7cb6be196
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.services_page
-id: node.services_page.sticky
+    - node.type.about_us
+id: node.about_us.sticky
 field_name: sticky
 entity_type: node
-bundle: services_page
+bundle: about_us
 label: 'Sticky at top of lists'
 description: ''
 required: false

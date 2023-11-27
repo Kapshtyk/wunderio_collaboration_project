@@ -1,13 +1,13 @@
-uuid: e907cdd4-16c1-4101-b050-09434ce2a80a
+uuid: d1f416da-1567-43dd-8f22-45136a06e8ac
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.services_page
-id: node.services_page.title
+    - node.type.numbers
+id: node.numbers.title
 field_name: title
 entity_type: node
-bundle: services_page
+bundle: numbers
 label: Title
 description: ''
 required: true

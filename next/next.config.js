@@ -11,8 +11,8 @@ const nextConfig = {
     return {
       beforeFiles: [
         {
-          source: '/sitemap.xml',
-          destination: `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/sites/default/files/sitemap.xml`
+          source: "/sitemap.xml",
+          destination: `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/sites/default/files/sitemap.xml`,
         },
         {
           //We need this because we use node:title as a path pattern and the Finnish and Swedish versions of the Career node have different titles.
@@ -26,9 +26,21 @@ const nextConfig = {
         {
           source: '/work',
           destination: '/work'
-        }
-      ]
-    }
+        },
+        {
+          source: "/services",
+          destination: "/services"
+        },
+        {
+          source: "/palvelut",
+          destination: "/services"
+        },
+        {
+          source: "/tjänster",
+          destination: "/services"
+        },
+      ],
+    };
   },
   webpack(config) {
     config.module.rules.push({

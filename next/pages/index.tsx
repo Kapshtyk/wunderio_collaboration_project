@@ -10,7 +10,7 @@ import { LogoStrip } from '@/components/logo-strip'
 import { Meta } from '@/components/meta'
 import { Paragraph } from '@/components/paragraph'
 import { drupal } from '@/lib/drupal/drupal-client'
-import { getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
+import { ResourceType, getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
 import { getCommonPageProps } from '@/lib/get-common-page-props'
 import { validateAndCleanupAboutUs } from '@/lib/zod/about-us'
 import {
