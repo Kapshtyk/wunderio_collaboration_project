@@ -1,0 +1,25 @@
+uuid: f8fc5ed3-3f14-47c4-a6f2-05937ca62d14
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.services_taxonomy.field_page_type
+    - paragraphs.paragraphs_type.services_taxonomy
+id: paragraph.services_taxonomy.default
+targetEntityType: paragraph
+bundle: services_taxonomy
+mode: default
+content:
+  field_page_type:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

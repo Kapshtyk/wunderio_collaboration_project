@@ -9,8 +9,10 @@ import { ParagraphText } from "@/components/paragraph--text";
 import { Paragraph } from "@/lib/zod/paragraph";
 
 import { ParagraphTestimonials } from "./paragraph--testimonials";
-import { ParagraphHeadingSection } from "./paragraph--heading-section";
-// import { ParagraphWorkCard } from "./paragraph--work-card";
+import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
+import { ParagraphLinkService } from "./paragraph--link-service";
+import { ParagraphLabelledImage } from "./paragraph--labelled-image";
+// import { ParagraphServicesTaxonomy } from "./paragraph--services-taxonomy";
 
 // Use dynamic imports to defer loading a component until after initial page load: https://nextjs.org/docs/advanced-features/dynamic-import
 const ParagraphVideo = dynamic(() =>
@@ -55,11 +57,12 @@ export function Paragraph({ paragraph }: { paragraph: Paragraph }) {
       return <ParagraphTestimonials paragraph={paragraph} />;
     }
     case "paragraph--heading_section": {
-      return <ParagraphHeadingSection paragraph={paragraph} />;
+      return <ParagraphHeadingSection paragraph={paragraph} />
     }
-    // case "paragraph--work_card": {
-    //   return <ParagraphWorkCard paragraph={paragraph} />;
-    // }
+    case "paragraph--labelled_image": {
+      return <ParagraphLabelledImage paragraph={paragraph} />
+    }
+
     default:
       return null;
   }

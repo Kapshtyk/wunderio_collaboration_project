@@ -3,4 +3,6 @@ _core:
 embedded_fields:
   node:
     field_basic_info: true
-default_moderation_states: {  }
+    field_participant: true
+    field_service_types: true
+default_moderation_states: {}

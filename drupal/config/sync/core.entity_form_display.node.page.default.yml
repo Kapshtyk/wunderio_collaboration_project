@@ -63,7 +63,7 @@ content:
     third_party_settings: {  }
   field_page_type:
     type: entity_reference_autocomplete
-    weight: 27
+    weight: 26
     region: content
     settings:
       match_operator: CONTAINS

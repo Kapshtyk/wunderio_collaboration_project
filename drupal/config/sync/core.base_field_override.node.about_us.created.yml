@@ -1,13 +1,13 @@
-uuid: 0b1efd59-1e6a-42d0-abd9-f90a571fd5df
+uuid: 149802e4-4b8f-4fca-a7de-a97ed436a1aa
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.services_page
-id: node.services_page.created
+    - node.type.about_us
+id: node.about_us.created
 field_name: created
 entity_type: node
-bundle: services_page
+bundle: about_us
 label: 'Authored on'
 description: 'The time that the node was created.'
 required: false

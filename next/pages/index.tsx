@@ -2,16 +2,17 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
-import { ArticleTeasers } from "@/components/article-teasers";
-import { ContactForm } from "@/components/contact-form";
-import { ContactList } from "@/components/contact-list";
-import { LayoutProps } from "@/components/layout";
-import { LogoStrip } from "@/components/logo-strip";
-import { Meta } from "@/components/meta";
-import { Paragraph } from "@/components/paragraph";
-import { drupal } from "@/lib/drupal/drupal-client";
-import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
-import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { ArticleTeasers } from '@/components/article-teasers'
+import { ContactForm } from '@/components/contact-form'
+import { ContactList } from '@/components/contact-list'
+import { LayoutProps } from '@/components/layout'
+import { LogoStrip } from '@/components/logo-strip'
+import { Meta } from '@/components/meta'
+import { Paragraph } from '@/components/paragraph'
+import { drupal } from '@/lib/drupal/drupal-client'
+import { ResourceType, getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
+import { getCommonPageProps } from '@/lib/get-common-page-props'
+import { validateAndCleanupAboutUs } from '@/lib/zod/about-us'
 import {
   ArticleTeaser,
   validateAndCleanupArticleTeaser,
@@ -19,7 +20,6 @@ import {
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 
 import { Divider } from "@/ui/divider";
-import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;

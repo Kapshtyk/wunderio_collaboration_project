@@ -1,15 +1,15 @@
-uuid: d83726a8-842b-408b-8cc4-a7e1e9007a97
+uuid: a07d3511-af19-4363-9f4a-bdadbc4421d8
 langcode: en
 status: true
 dependencies:
   config:
-    - node.type.services_page
+    - node.type.numbers
   module:
     - metatag
-id: node.services_page.metatag
+id: node.numbers.metatag
 field_name: metatag
 entity_type: node
-bundle: services_page
+bundle: numbers
 label: 'Metatags (Hidden field for JSON support)'
 description: 'The computed meta tags for the entity.'
 required: false

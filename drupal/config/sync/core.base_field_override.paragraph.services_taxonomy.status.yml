@@ -1,0 +1,22 @@
+uuid: 2f9d783e-66cf-4cc0-bc7f-947659eb4fb5
+langcode: en
+status: true
+dependencies:
+  config:
+    - paragraphs.paragraphs_type.services_taxonomy
+id: paragraph.services_taxonomy.status
+field_name: status
+entity_type: paragraph
+bundle: services_taxonomy
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
