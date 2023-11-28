@@ -15,7 +15,18 @@ export const ArticleBaseSchema = z.object({
   }),
   title: z.string(),
   field_image: ImageShape.nullable(),
-  field_excerpt: z.string().optional().nullable()
+  field_excerpt: z.string().optional().nullable(),
+  field_tags: z
+    .array(
+      z.object({
+        name: z.string().nullable()
+      })
+    )
+    .nullable()
+    .optional(),
+  path: z.object({
+    alias: z.string()
+  })
 })
 
 const ArticleSchema = ArticleBaseSchema.extend({
