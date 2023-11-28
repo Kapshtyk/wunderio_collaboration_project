@@ -1,4 +1,4 @@
-uuid: 5447c10a-fc11-4c58-9135-19ce873df6a2
+uuid: 6796bf96-47a5-4f28-844a-dc0efc45ecff
 langcode: en
 status: true
 dependencies:
@@ -18,11 +18,11 @@ bundle: event
 label: Body
 description: ''
 required: false
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: false
+  display_summary: true
   required_summary: false
   allowed_formats: {  }
 field_type: text_with_summary
