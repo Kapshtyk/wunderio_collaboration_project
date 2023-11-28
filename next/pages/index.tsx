@@ -2,17 +2,20 @@ import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
-import { ArticleTeasers } from '@/components/article-teasers'
-import { ContactForm } from '@/components/contact-form'
-import { ContactList } from '@/components/contact-list'
-import { LayoutProps } from '@/components/layout'
-import { LogoStrip } from '@/components/logo-strip'
-import { Meta } from '@/components/meta'
-import { Paragraph } from '@/components/paragraph'
-import { drupal } from '@/lib/drupal/drupal-client'
-import { ResourceType, getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
-import { getCommonPageProps } from '@/lib/get-common-page-props'
-import { validateAndCleanupAboutUs } from '@/lib/zod/about-us'
+import { ArticleTeasers } from "@/components/article-teasers";
+import { ContactForm } from "@/components/contact-form";
+import { ContactList } from "@/components/contact-list";
+import { LayoutProps } from "@/components/layout";
+import { LogoStrip } from "@/components/logo-strip";
+import { Meta } from "@/components/meta";
+import { Paragraph } from "@/components/paragraph";
+import { drupal } from "@/lib/drupal/drupal-client";
+import {
+  getNodePageJsonApiParams,
+  ResourceType,
+} from "@/lib/drupal/get-node-page-json-api-params";
+import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 import {
   ArticleTeaser,
   validateAndCleanupArticleTeaser,
@@ -24,7 +27,6 @@ import { Divider } from "@/ui/divider";
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
   promotedArticleTeasers: ArticleTeaser[];
-
 }
 
 export default function IndexPage({
@@ -81,7 +83,6 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     },
   });
 
-
   const aboutUs = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
       "node--about_us",
@@ -93,7 +94,6 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
   ).at(0);
   console.log(aboutUs);
 
-
   return {
     props: {
       ...(await getCommonPageProps(context)),
@@ -101,7 +101,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
         validateAndCleanupArticleTeaser(teaser),
       ),
-      aboutUs: validateAndCleanupAboutUs(aboutUs)
+      aboutUs: validateAndCleanupAboutUs(aboutUs),
     },
     revalidate: 60,
   };

@@ -1,7 +1,6 @@
 import { Paragraph } from "@/components/paragraph";
 import { AboutUs } from "@/lib/zod/about-us";
 
-
 interface AboutUsProps {
   about_us: AboutUs;
 }

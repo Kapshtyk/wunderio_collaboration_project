@@ -51,7 +51,7 @@ export const LinkShape = z.object({
   full_url: z.string(),
 });
 export const TaxonomyShape = z.object({
-  name: z.string()
+  name: z.string(),
 });
 
 export const ImageSchema = z.object({
@@ -193,8 +193,8 @@ export const WorkCardSchema = z.object({
     })
     .nullable()
     .optional(),
-  field_excerpt: z.string()
-})
+  field_excerpt: z.string(),
+});
 
 export const LinkServiceSchema = z.object({
   type: z.literal("paragraph--links_service_page"),
@@ -209,7 +209,7 @@ export const SubHeadingSectionSchema = z.object({
   id: z.string(),
   field_heading: z.string(),
   field_excerpt: z.string(),
-})
+});
 
 export const LabelledImageSchema = z.object({
   type: z.literal("paragraph--labelled_image"),
@@ -222,21 +222,21 @@ export const LabelledImageSchema = z.object({
     })
     .nullable()
     .optional(),
-  field_label: z.string()
-})
+  field_label: z.string(),
+});
 
-export type FormattedText = z.infer<typeof FormattedTextSchema>
-export type Image = z.infer<typeof ImageSchema>
-export type Video = z.infer<typeof VideoSchema>
-export type Links = z.infer<typeof LinksSchema>
-export type Accordion = z.infer<typeof AccordionSchema>
-export type AccordionItem = z.infer<typeof AccordionItemSchema>
-export type Hero = z.infer<typeof HeroSchema>
-export type ListingArticles = z.infer<typeof ListingArticlesSchema>
-export type FileAttachments = z.infer<typeof FileAttachmentsSchema>
-export type Testimonials = z.infer<typeof TestimonialsSchema>
-export type HeadingSection = z.infer<typeof HeadingSectionSchema>
-export type WorkCard = z.infer<typeof WorkCardSchema>
+export type FormattedText = z.infer<typeof FormattedTextSchema>;
+export type Image = z.infer<typeof ImageSchema>;
+export type Video = z.infer<typeof VideoSchema>;
+export type Links = z.infer<typeof LinksSchema>;
+export type Accordion = z.infer<typeof AccordionSchema>;
+export type AccordionItem = z.infer<typeof AccordionItemSchema>;
+export type Hero = z.infer<typeof HeroSchema>;
+export type ListingArticles = z.infer<typeof ListingArticlesSchema>;
+export type FileAttachments = z.infer<typeof FileAttachmentsSchema>;
+export type Testimonials = z.infer<typeof TestimonialsSchema>;
+export type HeadingSection = z.infer<typeof HeadingSectionSchema>;
+export type WorkCard = z.infer<typeof WorkCardSchema>;
 export type LinkService = z.infer<typeof LinkServiceSchema>;
 export type SubHeadingSection = z.infer<typeof SubHeadingSectionSchema>;
 export type LabelledImage = z.infer<typeof LabelledImageSchema>;

@@ -23,7 +23,7 @@ const AboutUsElementsSchema = z.discriminatedUnion("type", [
   HeroSchema,
   ListingArticlesSchema,
   FileAttachmentsSchema,
-  HeadingSectionSchema
+  HeadingSectionSchema,
 ]);
 
 export const AboutUsSchema = z.object({

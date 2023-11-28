@@ -24,28 +24,16 @@ const nextConfig = {
           destination: "/careers",
         },
         {
-          source: '/work',
-          destination: '/work'
-        },
-        {
-          source: '/tyo',
-          destination: '/work'
-        },
-        {
-          source: '/arbete',
-          destination: '/work'
-        },
-        {
           source: "/services",
-          destination: "/services"
+          destination: "/services",
         },
         {
           source: "/palvelut",
-          destination: "/services"
+          destination: "/services",
         },
         {
           source: "/tjänster",
-          destination: "/services"
+          destination: "/services",
         },
       ],
     };
