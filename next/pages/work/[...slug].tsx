@@ -8,7 +8,7 @@ import {
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { drupal } from "@/lib/drupal/drupal-client";
-import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
+import { DrupalNode, DrupalTaxonomyTerm, DrupalTranslatedPath } from "next-drupal";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { getNodePageJsonApiParams, ResourceType } from "@/lib/drupal/get-node-page-json-api-params";
@@ -23,12 +23,14 @@ interface WorkPageProps {
     currentWorkPage: PageType;
     allPages: PageType[];
     allArticles: Article[];
+    tags: DrupalTaxonomyTerm[];
 }
 
 export default function WorkPage({
     currentWorkPage,
     allPages,
     allArticles,
+    tags,
 
 }: InferGetStaticPropsType<typeof getStaticProps>) {
     const { t } = useTranslation();
@@ -52,12 +54,12 @@ export default function WorkPage({
         "Tikkurila",
         "Luke.fi",
         "Fortum",
-        "HUS – Helsinki University Hospital",
+        "HUS - Helsinki University Hospital",
     ].filter(Boolean);
 
 
     return (
-        currentWorkPage && currentWorkPage.field_page_types && currentWorkPage.field_page_types.name === "Work" ? (
+        tags.map((tag) => currentWorkPage && currentWorkPage.field_page_types && currentWorkPage.field_page_types.name === tag.name) ? (
             <>
                 <Meta title={currentWorkPage.title} metatags={currentWorkPage.metatag} />
                 <div className="container">
@@ -74,16 +76,18 @@ export default function WorkPage({
                 {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
                     <div className="mt-20">
                         <h1 className="font-bold my-4">RELATED CONTENT</h1>
-                        <div className="flex space-x-6">
+                        {tags.map((tag) => (
+                            <div className="flex space-x-6">
 
-                            {allPages
-                                .filter((workPages) => workPages.field_page_types?.name === "Work")
-                                .filter((workPages) => workPages.title !== currentWorkPage.title)
-                                .slice(0, 4)
-                                .map((workPage) => (
-                                    <WorkWorkCard workPage={workPage} />
-                                ))}
-                        </div>
+                                {allPages
+                                    .filter((workPages) => workPages.field_page_types?.name === tag.name)
+                                    .filter((workPages) => workPages.title !== currentWorkPage.title)
+                                    .slice(0, 4)
+                                    .map((workPage) => (
+                                        <WorkWorkCard workPage={workPage} />
+                                    ))}
+                            </div>
+                        ))}
                     </div>
                 ) : null
                 }
@@ -142,7 +146,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
         path,
         context, {
         params: getNodePageJsonApiParams(type).getQueryObject(),
-        pathPrefix: "/work"
+        //pathPrefix: "/work"
 
 
     });
@@ -178,6 +182,14 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
                 params: getNodePageJsonApiParams("node--article").getQueryObject()
             });
 
+    const tags = (
+        await drupal.getResourceCollectionFromContext<DrupalTaxonomyTerm[]>("taxonomy_term--page_types", context,
+            {
+
+            },
+        )
+    )
+
     return {
         props: {
             ...(await getCommonPageProps(context)),
@@ -185,6 +197,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
             allPages: pages.map((node) => validateAndCleanupPage(node)),
             allArticles: articles.map((node) => validateAndCleanupArticle(node)),
             languageLinks,
+            tags,
 
 
         },
