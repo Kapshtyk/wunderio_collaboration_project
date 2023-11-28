@@ -88,6 +88,7 @@
   "field-is-required": "{{field}} är obligatoriskt.",
   "events-main-title": "Här hittar du alla våra evenemang",
   "events-link": "Evenemang",
+  "work-link": "Arbete",
   "events-form-title": "Registrering för {{event}}",
   "events-form-not-auth": "Logga in för att anmäla dig till ett evenemang.",
   "events-participants": "Deltagare"

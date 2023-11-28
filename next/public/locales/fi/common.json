@@ -90,5 +90,6 @@
   "events-link": "Tapahtumat",
   "events-form-title": "Ilmoittautuminen {{event}}",
   "events-form-not-auth": "Kirjaudu sisään rekisteröityäksesi tapahtumaan.",
-  "events-participants": "Osallistujat"
+  "events-participants": "Osallistujat",
+  "work-link": "Työ"
 }
