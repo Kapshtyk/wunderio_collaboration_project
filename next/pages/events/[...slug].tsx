@@ -89,8 +89,8 @@ export default function Event({
           paragraph={element}
         />))
       }
-      <FormattedText html={event.body.processed} />
-      <>
+      < FormattedText html={event.body.processed} />
+      {<>
         {(event.type === "node--event") && (
           <>
             <HeadingParagraph>Participants</HeadingParagraph>
@@ -103,7 +103,7 @@ export default function Event({
             }
           </>
         )}
-      </>
+      </>}
       <Webform webform={webform} onlyForAuthenticated={true} formTitle={t("events-form-title", { event: event.title })} formMessageIfUnauthenticated={t("events-form-not-auth")} />
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&

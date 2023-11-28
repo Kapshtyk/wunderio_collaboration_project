@@ -145,8 +145,6 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     { pathPrefix: "/work" },
   );
 
-  console.log("path:", path)
-
   if (!path) {
     return {
       notFound: true,
