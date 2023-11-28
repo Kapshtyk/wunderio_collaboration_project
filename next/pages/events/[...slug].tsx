@@ -32,6 +32,7 @@ import {
 } from "@/lib/zod/webform";
 
 import NotFoundPage from "../404";
+import { FormattedText } from "@/components/formatted-text";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
@@ -75,25 +76,19 @@ export default function Event({
     });
   }
 
-  const headingSection = event.field_content_elements.find(
-    (element) => element.type === "paragraph--heading_section",
-  ) as HeadingSection;
   return (
     <>
       <Meta title={event.title} metatags={event.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <div className="flex h-[100px] bg-primary-400/40 justify-between">
-        <h1>{headingSection.field_heading}</h1>
-        <span>{headingSection.field_excerpt}</span>
-      </div>
-      {
-        <div
-          dangerouslySetInnerHTML={{ __html: event.body.processed }}
-          className="mt-6 font-serif text-xl leading-loose prose"
-        />
+      {event.field_content_elements?.map((element) => (
+        <Paragraph
+          key={element.id}
+          paragraph={element}
+        />))
       }
+      <FormattedText html={event.body.processed} />
       <Webform webform={webform} />
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
