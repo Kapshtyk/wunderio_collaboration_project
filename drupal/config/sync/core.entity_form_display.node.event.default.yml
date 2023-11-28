@@ -6,7 +6,6 @@ dependencies:
     - field.field.node.event.body
     - field.field.node.event.field_content_elements
     - field.field.node.event.field_event_registration
-    - field.field.node.event.field_participant
     - node.type.event
   module:
     - paragraphs
@@ -60,16 +59,6 @@ content:
     settings:
       default_data: true
       webforms: {  }
-    third_party_settings: {  }
-  field_participant:
-    type: entity_reference_autocomplete
-    weight: 123
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

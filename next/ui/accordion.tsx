@@ -1,15 +1,15 @@
-import * as AccordionUI from '@radix-ui/react-accordion'
+import * as AccordionUI from "@radix-ui/react-accordion";
 
-import ChevronIcon from '@/styles/icons/chevron-down.svg'
-import ListIcon from '@/styles/icons/list.svg'
+import ChevronIcon from "@/styles/icons/chevron-down.svg";
+import ListIcon from "@/styles/icons/list.svg";
 
 interface AccordionProps {
-  heading?: string | React.ReactNode
+  heading?: string | React.ReactNode;
   items: Array<{
-    id: string
-    heading: string | React.ReactNode
-    content: React.ReactNode
-  }>
+    id: string;
+    heading: string | React.ReactNode;
+    content: React.ReactNode;
+  }>;
 }
 export function Accordion({ heading, items }: AccordionProps) {
   return (
@@ -42,5 +42,5 @@ export function Accordion({ heading, items }: AccordionProps) {
         ))}
       </AccordionUI.Root>
     </div>
-  )
+  );
 }

@@ -2,46 +2,46 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { DrupalNode } from 'next-drupal'
 import { useTranslation } from 'next-i18next'
 
-import { Breadcrumbs } from '@/components/breadcrumbs'
-import { CareersForm } from '@/components/careers-form'
-import { LayoutProps } from '@/components/layout'
-import OpenPositions from '@/components/open-positions'
-import { Paragraph } from '@/components/paragraph'
-import { createLanguageLinks } from '@/lib/contexts/language-links-context'
-import { drupal } from '@/lib/drupal/drupal-client'
-import { getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
-import { getNodeTranslatedVersions } from '@/lib/drupal/get-node-translated-versions'
-import { getCommonPageProps } from '@/lib/get-common-page-props'
-import { Careers, validateAndCleanupCareers } from '@/lib/zod/careers'
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { CareersForm } from "@/components/careers-form";
+import { LayoutProps } from "@/components/layout";
+import OpenPositions from "@/components/open-positions";
+import { Paragraph } from "@/components/paragraph";
+import { createLanguageLinks } from "@/lib/contexts/language-links-context";
+import { drupal } from "@/lib/drupal/drupal-client";
+import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
+import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { Careers, validateAndCleanupCareers } from "@/lib/zod/careers";
 import {
   OpenPositions as OpenPositionsType,
+
   validateAndCleanupOpenPositions
 } from '@/lib/zod/open-positions'
+  validateAndCleanupOpenPositions,
+} from "@/lib/zod/open-positions";
 
 interface CareersPageProps extends LayoutProps {
-  careers: Careers
-  openPositions: OpenPositionsType[]
+  careers: Careers;
+  openPositions: OpenPositionsType[];
 }
 
 export default function CareersPage({
   careers,
-  openPositions
+  openPositions,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t('homepage-link'),
-      url: '/'
+      title: t("homepage-link"),
+      url: "/",
     },
     {
-      title: t('careers-link'),
-      url: '/careers'
-    }
-  ]
+      title: t("careers-link"),
+      url: "/careers",
+    },
+  ];
 
-  /* const headingSection = careers.field_content_elements.find(
-    (element) => element.type === 'paragraph--heading_section'
-  ) as HeadingSection */
   return (
     <>
       <div className="container">
@@ -59,47 +59,47 @@ export default function CareersPage({
       <CareersForm />
       <OpenPositions openPositions={openPositions} />
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps<CareersPageProps> = async (
-  context
+  context,
 ) => {
   const careers = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      'node--careers',
+      "node--careers",
       context,
       {
-        params: getNodePageJsonApiParams('node--careers').getQueryObject()
-      }
+        params: getNodePageJsonApiParams("node--careers").getQueryObject(),
+      },
     )
-  ).at(0)
+  ).at(0);
 
   console.log(careers)
 
   const nodeTranslations = await getNodeTranslatedVersions(
     careers,
     context,
-    drupal
-  )
+    drupal,
+  );
 
-  const languageLinks = createLanguageLinks(nodeTranslations)
+  const languageLinks = createLanguageLinks(nodeTranslations);
 
   const openPositions = await drupal.getResourceCollectionFromContext<
     DrupalNode[]
-  >('node--open_positions', context, {
-    params: getNodePageJsonApiParams('node--open_positions').getQueryObject()
-  })
+  >("node--open_positions", context, {
+    params: getNodePageJsonApiParams("node--open_positions").getQueryObject(),
+  });
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
       careers: validateAndCleanupCareers(careers),
       openPositions: openPositions.map((node) =>
-        validateAndCleanupOpenPositions(node)
+        validateAndCleanupOpenPositions(node),
       ),
-      languageLinks
+      languageLinks,
     },
-    revalidate: 60
-  }
-}
+    revalidate: 60,
+  };
+};

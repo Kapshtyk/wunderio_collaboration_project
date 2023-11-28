@@ -1,6 +1,6 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { DrupalNode, DrupalTaxonomyTerm } from 'next-drupal'
-import { useTranslation } from 'next-i18next'
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
+import { useTranslation } from "next-i18next";
 
 import { ArticleTeasers } from '@/components/article-teasers'
 import { ContactForm } from '@/components/contact-form'
@@ -15,22 +15,23 @@ import { getCommonPageProps } from '@/lib/get-common-page-props'
 import { validateAndCleanupAboutUs } from '@/lib/zod/about-us'
 import {
   ArticleTeaser,
-  validateAndCleanupArticleTeaser
-} from '@/lib/zod/article-teaser'
-import { Frontpage, validateAndCleanupFrontpage } from '@/lib/zod/frontpage'
+  validateAndCleanupArticleTeaser,
+} from "@/lib/zod/article-teaser";
+import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 
-import { Divider } from '@/ui/divider'
+import { Divider } from "@/ui/divider";
 
 interface IndexPageProps extends LayoutProps {
-  frontpage: Frontpage | null
-  promotedArticleTeasers: ArticleTeaser[]
+  frontpage: Frontpage | null;
+  promotedArticleTeasers: ArticleTeaser[];
+
 }
 
 export default function IndexPage({
   frontpage,
-  promotedArticleTeasers
+  promotedArticleTeasers,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
     <>
@@ -45,60 +46,63 @@ export default function IndexPage({
       {/* <Divider className="max-w-4xl" /> */}
       {/* <ArticleTeasers
         articles={promotedArticleTeasers}
-        heading={t('promoted-articles')}
+        heading={t("promoted-articles")}
       />
       <ContactList /> */}
       {/* <LogoStrip /> */}
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps<IndexPageProps> = async (
-  context
+  context,
 ) => {
   const frontpage = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      'node--frontpage',
+      "node--frontpage",
       context,
       {
-        params: getNodePageJsonApiParams('node--frontpage').getQueryObject()
-      }
+        params: getNodePageJsonApiParams("node--frontpage").getQueryObject(),
+      },
     )
-  ).at(0)
+  ).at(0);
 
   const promotedArticleTeasers = await drupal.getResourceCollectionFromContext<
     DrupalNode[]
-  >('node--article', context, {
+  >("node--article", context, {
     params: {
-      'filter[status]': 1,
-      'filter[langcode]': context.locale,
-      'filter[promote]': 1,
-      'fields[node--article]': 'title,path,field_image,uid,created',
-      include: 'field_image,uid',
-      sort: '-sticky,-created',
-      'page[limit]': 3
-    }
-  })
+      "filter[status]": 1,
+      "filter[langcode]": context.locale,
+      "filter[promote]": 1,
+      "fields[node--article]": "title,path,field_image,uid,created",
+      include: "field_image,uid",
+      sort: "-sticky,-created",
+      "page[limit]": 3,
+    },
+  });
+
 
   const aboutUs = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      'node--about_us',
+      "node--about_us",
       context,
       {
-        params: getNodePageJsonApiParams('node--about_us').getQueryObject()
-      }
+        params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
+      },
     )
-  ).at(0)
+  ).at(0);
+  console.log(aboutUs);
+
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
       promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
-        validateAndCleanupArticleTeaser(teaser)
+        validateAndCleanupArticleTeaser(teaser),
       ),
       aboutUs: validateAndCleanupAboutUs(aboutUs)
     },
-    revalidate: 60
-  }
-}
+    revalidate: 60,
+  };
+};
