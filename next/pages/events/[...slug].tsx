@@ -33,6 +33,7 @@ import {
 
 import NotFoundPage from "../404";
 import { FormattedText } from "@/components/formatted-text";
+import { HeadingParagraph } from "@/components/heading--paragraph";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
@@ -89,7 +90,21 @@ export default function Event({
         />))
       }
       <FormattedText html={event.body.processed} />
-      <Webform webform={webform} />
+      <>
+        {(event.type === "node--event") && (
+          <>
+            <HeadingParagraph>Participants</HeadingParagraph>
+            {event.field_participant.map((participant) => (
+              <div className="mb-4" key={participant.id}>
+                <h2 className="font-regular text-2xl">{participant.title}</h2>
+                <div className="mt-6 font-serif text-xl leading-loose prose" dangerouslySetInnerHTML={{ __html: participant.body.processed }}></div>
+              </div>
+            ))
+            }
+          </>
+        )}
+      </>
+      <Webform webform={webform} onlyForAuthenticated={true} formTitle={t("events-form-title", { event: event.title })} formMessageIfUnauthenticated={t("events-form-not-auth")} />
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
           sideEvents.map((sideEvent) => (
