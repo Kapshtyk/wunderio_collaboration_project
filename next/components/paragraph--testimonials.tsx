@@ -1,12 +1,12 @@
-import { Media } from '@/components/media'
-import { Testimonials } from '@/lib/zod/paragraph'
+import { Media } from "@/components/media";
+import { Testimonials } from "@/lib/zod/paragraph";
 
-import { FormattedText } from './formatted-text'
+import { FormattedText } from "./formatted-text";
 
 export function ParagraphTestimonials({
-  paragraph
+  paragraph,
 }: {
-  paragraph: Testimonials
+  paragraph: Testimonials;
 }) {
   return (
     <div className="border-l-2 max-w-xs border-graysuit p-2 pl-4 flex gap-2 justify-between">
@@ -20,5 +20,5 @@ export function ParagraphTestimonials({
         <FormattedText html={paragraph.field_testimonial_text.processed} />
       </div>
     </div>
-  )
+  );
 }

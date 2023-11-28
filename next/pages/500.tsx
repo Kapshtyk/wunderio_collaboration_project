@@ -1,37 +1,37 @@
-import { GetStaticProps } from 'next'
-import Link from 'next/link'
-import { useTranslation } from 'next-i18next'
+import { GetStaticProps } from "next";
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
-import { HeadingPage } from '@/components/heading--page'
-import { Meta } from '@/components/meta'
+import { HeadingPage } from "@/components/heading--page";
+import { Meta } from "@/components/meta";
 import {
   CommonPageProps,
-  getCommonPageProps
-} from '@/lib/get-common-page-props'
+  getCommonPageProps,
+} from "@/lib/get-common-page-props";
 
 export default function NotFoundPage() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <>
-      <Meta title={t('Error')} metatags={[]} />
-      <HeadingPage>{t('Error')}</HeadingPage>
+      <Meta title={t("Error")} metatags={[]} />
+      <HeadingPage>{t("Error")}</HeadingPage>
       <p className="mt-8 text-lg">
-        {t('There was an error.')}{' '}
+        {t("There was an error.")}{" "}
         <Link href="/" className="hyperlink underline">
-          {t('Go back to the homepage?')}
+          {t("Go back to the homepage?")}
         </Link>
       </p>
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps<CommonPageProps> = async (
-  context
+  context,
 ) => {
   return {
     props: {
-      ...(await getCommonPageProps(context))
+      ...(await getCommonPageProps(context)),
     },
-    revalidate: 60
-  }
-}
+    revalidate: 60,
+  };
+};

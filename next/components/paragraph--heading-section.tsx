@@ -1,11 +1,11 @@
-import { HeadingSection as HeadingSectionType } from '@/lib/zod/paragraph'
+import { HeadingSection as HeadingSectionType } from "@/lib/zod/paragraph";
 
-import { HeadingParagraph } from './heading--paragraph'
+import { HeadingParagraph } from "./heading--paragraph";
 
 export function ParagraphHeadingSection({
-  paragraph
+  paragraph,
 }: {
-  paragraph: HeadingSectionType
+  paragraph: HeadingSectionType;
 }) {
   return (
     <>
@@ -16,5 +16,5 @@ export function ParagraphHeadingSection({
         <p>{paragraph.field_excerpt}</p>
       </div>
     </>
-  )
+  );
 }

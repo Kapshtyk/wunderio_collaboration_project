@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 const MetatagSchema = z
   .object({
@@ -7,11 +7,11 @@ const MetatagSchema = z
       name: z.string().optional(),
       content: z.string().optional(),
       href: z.string().optional(),
-      rel: z.string().optional()
-    })
+      rel: z.string().optional(),
+    }),
   })
-  .optional()
+  .optional();
 
-export const MetatagsSchema = z.array(MetatagSchema)
+export const MetatagsSchema = z.array(MetatagSchema);
 
-export type Metatag = z.infer<typeof MetatagSchema>
+export type Metatag = z.infer<typeof MetatagSchema>;

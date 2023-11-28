@@ -3,12 +3,11 @@ import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
 import {
-  HeadingSectionSchema,
   FormattedTextSchema,
-  TestimonialsSchema,
-  SubHeadingSectionSchema,
+  HeadingSectionSchema,
   LabelledImageSchema,
-
+  SubHeadingSectionSchema,
+  TestimonialsSchema,
 } from "@/lib/zod/paragraph";
 
 const ServicesElementsSchema = z.discriminatedUnion("type", [
@@ -16,7 +15,7 @@ const ServicesElementsSchema = z.discriminatedUnion("type", [
   FormattedTextSchema,
   TestimonialsSchema,
   SubHeadingSectionSchema,
-  LabelledImageSchema
+  LabelledImageSchema,
 ]);
 
 export const ServicesSchema = z.object({
@@ -24,19 +23,25 @@ export const ServicesSchema = z.object({
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(ServicesElementsSchema),
-  field_page_types: z.object({
-    name: z.string()
-  }).optional(),
-  field_service_types: z.object({
-    name: z.string()
-  }).nullable(),
+  field_page_types: z
+    .object({
+      name: z.string(),
+    })
+    .optional(),
+  field_service_types: z
+    .object({
+      name: z.string(),
+    })
+    .nullable(),
   metatag: MetatagsSchema.optional(),
   path: z.object({
     alias: z.string(),
   }),
 });
 
-export function validateAndCleanupServices(services: DrupalNode): Services | null {
+export function validateAndCleanupServices(
+  services: DrupalNode,
+): Services | null {
   try {
     // Validate the top level fields first.
     const topLevelServicesData = ServicesSchema.omit({
@@ -71,7 +76,6 @@ export function validateAndCleanupServices(services: DrupalNode): Services | nul
     console.log(JSON.stringify({ name, issues, services }, null, 2));
     return null;
   }
-
 }
 
 export type Services = z.infer<typeof ServicesSchema>;

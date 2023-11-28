@@ -1,5 +1,5 @@
-import { Media } from '@/components/media'
-import { WorkCard as WorkCardType } from '@/lib/zod/paragraph'
+import { Media } from "@/components/media";
+import { WorkCard as WorkCardType } from "@/lib/zod/paragraph";
 
 export function ParagraphWorkCard({ paragraph }: { paragraph: WorkCardType }) {
   return (
@@ -11,5 +11,5 @@ export function ParagraphWorkCard({ paragraph }: { paragraph: WorkCardType }) {
         <p className="pt-2">{paragraph.field_excerpt}</p>
       </div>
     </div>
-  )
+  );
 }

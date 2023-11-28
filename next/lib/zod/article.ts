@@ -1,17 +1,17 @@
-import { DrupalNode } from 'next-drupal'
-import { z } from 'zod'
+import { DrupalNode } from "next-drupal";
+import { z } from "zod";
 
-import { MetatagsSchema } from '@/lib/zod/metatag'
-import { ImageShape } from '@/lib/zod/paragraph'
+import { MetatagsSchema } from "@/lib/zod/metatag";
+import { ImageShape } from "@/lib/zod/paragraph";
 
 export const ArticleBaseSchema = z.object({
-  type: z.literal('node--article'),
+  type: z.literal("node--article"),
   id: z.string(),
   created: z.string(),
   sticky: z.boolean().optional(),
   uid: z.object({
     id: z.string(),
-    display_name: z.string()
+    display_name: z.string(),
   }),
   title: z.string(),
   field_image: ImageShape.nullable(),
@@ -19,31 +19,31 @@ export const ArticleBaseSchema = z.object({
   field_tags: z
     .array(
       z.object({
-        name: z.string().nullable()
-      })
+        name: z.string().nullable(),
+      }),
     )
     .nullable()
     .optional(),
   path: z.object({
-    alias: z.string()
-  })
-})
+    alias: z.string(),
+  }),
+});
 
 const ArticleSchema = ArticleBaseSchema.extend({
   metatag: MetatagsSchema.optional(),
   body: z.object({
-    processed: z.string()
-  })
-})
+    processed: z.string(),
+  }),
+});
 
 export function validateAndCleanupArticle(article: DrupalNode): Article | null {
   try {
-    return ArticleSchema.parse(article)
+    return ArticleSchema.parse(article);
   } catch (error) {
-    const { name = 'ZodError', issues = [] } = error
-    console.log(JSON.stringify({ name, issues, article }, null, 2))
-    return null
+    const { name = "ZodError", issues = [] } = error;
+    console.log(JSON.stringify({ name, issues, article }, null, 2));
+    return null;
   }
 }
 
-export type Article = z.infer<typeof ArticleSchema>
+export type Article = z.infer<typeof ArticleSchema>;

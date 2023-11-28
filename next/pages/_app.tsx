@@ -1,28 +1,28 @@
-import '@/styles/globals.css'
+import "@/styles/globals.css";
 
-import { AppProps } from 'next/app'
-import { Session } from 'next-auth'
-import { SessionProvider } from 'next-auth/react'
-import { appWithTranslation } from 'next-i18next'
-import React, { useState } from 'react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { AppProps } from "next/app";
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
+import { appWithTranslation } from "next-i18next";
+import React, { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { Layout } from '@/components/layout'
+import { Layout } from "@/components/layout";
 import {
   LanguageLinks,
-  LanguageLinksProvider
-} from '@/lib/contexts/language-links-context'
-import { CommonPageProps } from '@/lib/get-common-page-props'
-import { inter, overpass } from '@/styles/fonts'
+  LanguageLinksProvider,
+} from "@/lib/contexts/language-links-context";
+import { CommonPageProps } from "@/lib/get-common-page-props";
+import { inter, overpass } from "@/styles/fonts";
 
 interface PageProps extends CommonPageProps {
-  languageLinks?: LanguageLinks
-  session?: Session
+  languageLinks?: LanguageLinks;
+  session?: Session;
 }
 
 function App({ Component, pageProps }: AppProps<PageProps>) {
-  const [queryClient] = useState(() => new QueryClient())
-  const { menus, languageLinks, session, ...restPageProps } = pageProps
+  const [queryClient] = useState(() => new QueryClient());
+  const { menus, languageLinks, session, ...restPageProps } = pageProps;
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
@@ -35,7 +35,7 @@ function App({ Component, pageProps }: AppProps<PageProps>) {
         </Fonts>
       </QueryClientProvider>
     </SessionProvider>
-  )
+  );
 }
 
 function Fonts({ children }: { children: React.ReactNode }) {
@@ -45,7 +45,7 @@ function Fonts({ children }: { children: React.ReactNode }) {
     >
       {children}
     </div>
-  )
+  );
 }
 
-export default appWithTranslation(App)
+export default appWithTranslation(App);

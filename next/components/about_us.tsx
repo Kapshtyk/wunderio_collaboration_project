@@ -1,8 +1,8 @@
-import { Paragraph } from '@/components/paragraph'
-import { AboutUs } from '@/lib/zod/about-us'
+import { Paragraph } from "@/components/paragraph";
+import { AboutUs } from "@/lib/zod/about-us";
 
 interface AboutUsProps {
-  about_us: AboutUs
+  about_us: AboutUs;
 }
 
 export default function AboutUs({ about_us }: AboutUsProps) {
@@ -12,5 +12,5 @@ export default function AboutUs({ about_us }: AboutUsProps) {
         <Paragraph key={paragraph.id} paragraph={paragraph} />
       ))}
     </div>
-  )
+  );
 }
