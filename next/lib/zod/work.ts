@@ -2,22 +2,12 @@ import { DrupalNode } from 'next-drupal'
 import { z } from 'zod'
 
 import { MetatagsSchema } from '@/lib/zod/metatag'
-import {
-  FormattedTextSchema,
-  HeadingSectionSchema,
-  ImageSchema,
-  LinksSchema
-} from '@/lib/zod/paragraph'
+import { HeadingSectionSchema } from '@/lib/zod/paragraph'
 
-const WorkElementsSchema = z.discriminatedUnion('type', [
-  HeadingSectionSchema,
-  ImageSchema,
-  LinksSchema,
-  FormattedTextSchema
-])
+const WorkElementsSchema = z.discriminatedUnion('type', [HeadingSectionSchema])
 
 export const WorkSchema = z.object({
-  type: z.literal('node--work'),
+  type: z.literal('node--work_main_page'),
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(WorkElementsSchema),
