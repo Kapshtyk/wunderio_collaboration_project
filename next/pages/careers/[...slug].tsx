@@ -15,6 +15,7 @@ import {
   OpenPositions,
   validateAndCleanupOpenPositions,
 } from "@/lib/zod/open-positions";
+import { FormattedText } from "@/components/formatted-text";
 
 interface OpenPositionProps extends LayoutProps {
   openPosition: OpenPositions;
@@ -48,14 +49,8 @@ export default function OpenPosition({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       <h1 className="text-2xl text-bold">{openPosition.title}</h1>
-      <div
-        dangerouslySetInnerHTML={{ __html: openPosition.body.processed }}
-        className="mt-6 font-serif text-xl leading-loose prose"
-      />
-      <div
-        dangerouslySetInnerHTML={{ __html: basicInformation.body.processed }}
-        className="mt-6 font-serif text-xl leading-loose prose"
-      />
+      <FormattedText html={openPosition.body.processed} />
+      <FormattedText html={basicInformation.body.processed} />
     </>
   );
 }

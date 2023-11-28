@@ -13,10 +13,13 @@ display:
           label: Tila
           settings:
             format_custom_true: Julkaistu
+        changed:
+          label: Päivitetty
         operations:
           label: Toimenpiteet
       exposed_form:
         options:
+          submit_button: Suodatus
           reset_button_label: Palauta
       filters:
         title:

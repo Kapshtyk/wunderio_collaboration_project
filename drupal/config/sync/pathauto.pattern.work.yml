@@ -1,4 +1,4 @@
-uuid: 7af9cc01-9826-480e-945a-bf9c2cf63f54
+uuid: 865f4b8f-4604-4273-b083-ca68903715f0
 langcode: en
 status: true
 dependencies:
@@ -7,16 +7,16 @@ dependencies:
 id: work
 label: Work
 type: 'canonical_entities:node'
-pattern: '[node:title]'
+pattern: '[node:field_page_type_tag]'
 selection_criteria:
-  b3d298fb-4158-4ad3-ba9f-44dc63d11b14:
+  fe689680-dd5f-48f9-9792-1531805a7ef0:
     id: 'entity_bundle:node'
     negate: false
-    uuid: b3d298fb-4158-4ad3-ba9f-44dc63d11b14
+    uuid: fe689680-dd5f-48f9-9792-1531805a7ef0
     context_mapping:
       node: node
     bundles:
-      work: work
+      work_main_page: work_main_page
 selection_logic: and
 weight: -5
 relationships: {  }

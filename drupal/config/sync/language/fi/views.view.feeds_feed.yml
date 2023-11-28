@@ -1,0 +1,34 @@
+label: Feeds
+display:
+  default:
+    display_options:
+      exposed_form:
+        options:
+          reset_button_label: Palauta
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Kaikki -'
+      fields:
+        title:
+          label: Otsikko
+        type:
+          label: Tyyppi
+        name:
+          label: Tekijä
+        changed:
+          label: Päivitetty
+        operations:
+          label: Toimenpiteet
+      filters:
+        title:
+          expose:
+            label: Otsikko
+        type:
+          expose:
+            label: Tyyppi
+      title: Feeds
+  page_1:
+    display_options:
+      menu:
+        title: Feeds

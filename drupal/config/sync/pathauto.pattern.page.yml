@@ -9,12 +9,12 @@ _core:
 id: page
 label: Page
 type: 'canonical_entities:node'
-pattern: '[node:title]'
+pattern: '[node:field_page_type:entity]/[node:title]'
 selection_criteria:
-  d114ceff-36fc-42f6-b842-9a8714f27824:
+  83a724c3-810e-4850-b168-67b16aa5e302:
     id: 'entity_bundle:node'
     negate: false
-    uuid: d114ceff-36fc-42f6-b842-9a8714f27824
+    uuid: 83a724c3-810e-4850-b168-67b16aa5e302
     context_mapping:
       node: node
     bundles:

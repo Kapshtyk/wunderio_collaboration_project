@@ -1,0 +1,24 @@
+display:
+  default:
+    display_options:
+      title: Loggar
+      fields:
+        import_id:
+          label: ID
+        uid:
+          label: User
+        sources_value:
+          label: Källor
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Alla -'
+      exposed_form:
+        options:
+          reset_button_label: Återställ
+  page_1:
+    display_options:
+      menu:
+        title: Översikt
+      tab_options:
+        title: Loggar

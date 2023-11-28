@@ -87,5 +87,8 @@
   "field-is-required": "The {{field}} field is required.",
   "events-main-title": "Here you can find all our events",
   "events-link": "Events",
+  "events-form-title": "Registration for the {{event}}",
+  "events-form-not-auth": "Please log in to register for an event.",
+  "events-participants": "Participants",
   "work-link": "Work"
 }
