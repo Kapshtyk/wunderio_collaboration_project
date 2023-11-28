@@ -3,15 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  @import '_focus-visible.css';
+  @import "_focus-visible.css";
 }
 
 @layer components {
   .hyperlink {
     @apply flex items-center text-primary-600 visited:text-secondary-900 hover:underline;
 
-    &[href^="https://"]::after
-    {
+    &[href^="https://"]::after {
       @apply ml-1 inline-block h-[1em] w-[1em];
       content: url(./icons/external.svg);
     }

@@ -1,5 +1,0 @@
-name: team2_cascade_deletion
-type: module
-description: Provides functionality for cascading deletion of nodes
-package: Custom
-core_version_requirement: ^9 || ^10

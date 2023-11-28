@@ -1,29 +1,29 @@
-import '../styles/globals.css'
-import i18n from './i18next'
-import { Preview } from '@storybook/react'
+import "../styles/globals.css";
+import { Preview } from "@storybook/react";
+import i18n from "./i18next";
 
 const preview: Preview = {
   parameters: {
     backgrounds: {
-      default: 'light'
+      default: "light",
     },
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/
-      }
+        date: /Date$/,
+      },
     },
-    i18n
+    i18n,
   },
   globals: {
-    locale: 'en',
+    locale: "en",
     locales: {
-      en: 'English',
-      fi: 'Suomi',
-      sv: 'Svenska'
-    }
-  }
-}
+      en: "English",
+      fi: "Suomi",
+      sv: "Svenska",
+    },
+  },
+};
 
-export default preview
+export default preview;

@@ -6,13 +6,11 @@ dependencies:
     - field.field.node.side_event.body
     - field.field.node.side_event.field_content_elements
     - field.field.node.side_event.field_main_event
-    - field.field.node.side_event.field_side_event_registration
     - node.type.side_event
   module:
     - entity_reference_revisions
     - text
     - user
-    - webform
 id: node.side_event.default
 targetEntityType: node
 bundle: side_event
@@ -41,15 +39,6 @@ content:
       link: true
     third_party_settings: {  }
     weight: 102
-    region: content
-  field_side_event_registration:
-    type: webform_entity_reference_entity_view
-    label: above
-    settings:
-      source_entity: true
-      lazy: false
-    third_party_settings: {  }
-    weight: 103
     region: content
   links:
     settings: {  }

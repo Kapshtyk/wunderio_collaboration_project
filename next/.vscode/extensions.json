@@ -2,11 +2,6 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
-    "esbenp.prettier-vscode",
-    "figma.figma-vscode-extension",
-    "mhutchie.git-graph",
-    "eamodio.gitlens",
-    "formulahendry.auto-rename-tag",
-    "bradlc.vscode-tailwindcss"
+    "esbenp.prettier-vscode"
   ]
 }

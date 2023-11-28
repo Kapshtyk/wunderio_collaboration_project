@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { Button } from '@/ui/button'
+import { Button } from "@/ui/button";
 import {
   Modal,
   ModalContent,
   ModalDescription,
   ModalHeader,
   ModalTitle,
-  ModalTrigger
-} from '@/ui/modal'
+  ModalTrigger,
+} from "@/ui/modal";
 
 const meta: Meta<typeof Modal> = {
-  title: 'Library/Modal',
+  title: "Library/Modal",
   component: Modal,
-  tags: ['autodocs']
-}
+  tags: ["autodocs"],
+};
 
-export default meta
-type Story = StoryObj<typeof Modal>
+export default meta;
+type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
   render: () => (
@@ -56,5 +56,5 @@ export const Default: Story = {
         </p>
       </ModalContent>
     </Modal>
-  )
-}
+  ),
+};

@@ -1,6 +1,6 @@
-import { ResultViewProps } from '@elastic/react-search-ui-views'
+import { ResultViewProps } from "@elastic/react-search-ui-views";
 
-import { Badge } from '@/ui/badge'
+import { Badge } from "@/ui/badge";
 
 export function SearchResult({ result }: ResultViewProps) {
   return (
@@ -15,5 +15,5 @@ export function SearchResult({ result }: ResultViewProps) {
         </Badge>
       </a>
     </li>
-  )
+  );
 }

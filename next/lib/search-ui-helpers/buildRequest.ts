@@ -1,13 +1,13 @@
-import { buildRequestFilter } from './buildRequestFilter'
+import { buildRequestFilter } from "./buildRequestFilter";
 
 function buildFrom(current, resultsPerPage) {
-  if (!current || !resultsPerPage) return
-  return (current - 1) * resultsPerPage
+  if (!current || !resultsPerPage) return;
+  return (current - 1) * resultsPerPage;
 }
 
 function buildSort(sortDirection, sortField) {
   if (sortDirection && sortField) {
-    return [{ [`${sortField}.keyword`]: sortDirection }]
+    return [{ [`${sortField}.keyword`]: sortDirection }];
   }
 }
 
@@ -18,41 +18,41 @@ function buildMatch(searchTerm) {
       match: {
         title: {
           query: searchTerm,
-          operator: 'and',
-          boost: 5
-        }
-      }
+          operator: "and",
+          boost: 5,
+        },
+      },
     },
     // Match body field:
     {
       match: {
         body: {
           query: searchTerm,
-          operator: 'and',
-          boost: 3
-        }
-      }
+          operator: "and",
+          boost: 3,
+        },
+      },
     },
     // Match phrase for trigram fields:
     {
-      match_phrase: { 'title.trigram': { query: searchTerm } }
+      match_phrase: { "title.trigram": { query: searchTerm } },
     },
     {
-      match_phrase: { 'body.trigram': { query: searchTerm } }
+      match_phrase: { "body.trigram": { query: searchTerm } },
     },
     // Term query for the tags field:
-    { term: { tags: searchTerm } }
-  ]
+    { term: { tags: searchTerm } },
+  ];
 
   // Build the dis max query.
   const dis_max_query = {
     dis_max: {
       queries: multi_match_query,
-      tie_breaker: 0.7
-    }
-  }
+      tie_breaker: 0.7,
+    },
+  };
 
-  return searchTerm ? dis_max_query : { match_all: { boost: 1.0 } }
+  return searchTerm ? dis_max_query : { match_all: { boost: 1.0 } };
 }
 
 /*
@@ -80,14 +80,14 @@ export function buildRequest(state) {
     resultsPerPage,
     searchTerm,
     sortDirection,
-    sortField
-  } = state
+    sortField,
+  } = state;
 
-  const sort = buildSort(sortDirection, sortField)
-  const match = buildMatch(searchTerm)
-  const size = resultsPerPage
-  const from = buildFrom(current, resultsPerPage)
-  const filter = buildRequestFilter(filters)
+  const sort = buildSort(sortDirection, sortField);
+  const match = buildMatch(searchTerm);
+  const size = resultsPerPage;
+  const from = buildFrom(current, resultsPerPage);
+  const filter = buildRequestFilter(filters);
 
   const body = {
     // Static query Configuration
@@ -99,12 +99,12 @@ export function buildRequest(state) {
 
     // Define any source filtering here:
     // https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
-    _source: ['id', 'link', 'title', 'excerpt', 'path', 'user', 'content_type'],
+    _source: ["id", "link", "title", "excerpt", "path", "user", "content_type"],
 
     // Define aggregations here:
     aggs: {
-      tags: { terms: { field: 'tags' } },
-      content_type: { terms: { field: 'content_type' } }
+      tags: { terms: { field: "tags" } },
+      content_type: { terms: { field: "content_type" } },
     },
 
     // Dynamic values based on current Search UI state
@@ -113,15 +113,15 @@ export function buildRequest(state) {
     query: {
       bool: {
         must: [match],
-        ...(filter && { filter })
-      }
+        ...(filter && { filter }),
+      },
     },
     // https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-sort.html
     ...(sort && { sort }),
     // https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-from-size.html
     ...(size && { size }),
-    ...(from && { from })
-  }
+    ...(from && { from }),
+  };
 
-  return body
+  return body;
 }

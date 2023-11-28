@@ -1,63 +1,63 @@
-import { useRouter } from 'next/router'
-import { useTranslation } from 'next-i18next'
-import { useForm } from 'react-hook-form'
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
+import { useForm } from "react-hook-form";
 
-import { AuthGate } from '@/components/auth-gate'
+import { AuthGate } from "@/components/auth-gate";
 
-import { Button } from '@/ui/button'
-import { Input } from '@/ui/input'
-import { Label } from '@/ui/label'
-import { StatusMessage } from '@/ui/status-message'
-import { Textarea } from '@/ui/textarea'
+import { Button } from "@/ui/button";
+import { Input } from "@/ui/input";
+import { Label } from "@/ui/label";
+import { StatusMessage } from "@/ui/status-message";
+import { Textarea } from "@/ui/textarea";
 
 type Inputs = {
-  name: string
-  email: string
-  subject: string
-  message: string
-}
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
 
 export function ContactForm() {
-  const router = useRouter()
-  const { t } = useTranslation()
+  const router = useRouter();
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitSuccessful }
-  } = useForm<Inputs>()
+    formState: { isSubmitSuccessful },
+  } = useForm<Inputs>();
 
   const onSubmit = async (data: Inputs) => {
     const response = await fetch(`/api/contact`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         name: data.name,
         email: data.email,
         message: data.message,
-        subject: data.subject
+        subject: data.subject,
       }),
       // This will record the submission with the right language:
       headers: {
-        'accept-language': router.locale
-      }
-    })
+        "accept-language": router.locale,
+      },
+    });
 
     if (!response.ok) {
-      alert('Error!')
+      alert("Error!");
     }
-  }
+  };
 
-  const onErrors = (errors) => console.error(errors)
+  const onErrors = (errors) => console.error(errors);
 
   if (isSubmitSuccessful) {
     return (
       <StatusMessage level="success" className="mx-auto w-full max-w-3xl">
-        <p className="mb-4">{t('form-thank-you-message')}</p>
+        <p className="mb-4">{t("form-thank-you-message")}</p>
         <Button type="button" onClick={() => reset()}>
-          {t('form-send-another-message')}
+          {t("form-send-another-message")}
         </Button>
       </StatusMessage>
-    )
+    );
   }
 
   return (
@@ -66,54 +66,54 @@ export function ContactForm() {
       className="mx-auto mb-4 flex max-w-3xl flex-col gap-5 rounded border border-finnishwinter bg-white p-4 shadow-md transition-all hover:shadow-md"
     >
       <h2 className="text-heading-sm font-bold md:text-heading-md">
-        {t('form-title')}
+        {t("form-title")}
       </h2>
-      <AuthGate text={t('login-to-fill-form')}>
+      <AuthGate text={t("login-to-fill-form")}>
         <>
-          <p>{t('form-description')}</p>
+          <p>{t("form-description")}</p>
           <div>
-            <Label htmlFor="name">{t('form-label-name')}</Label>
+            <Label htmlFor="name">{t("form-label-name")}</Label>
             <Input
               type="text"
               id="name"
-              {...register('name', {
-                required: true
+              {...register("name", {
+                required: true,
               })}
             />
           </div>
           <div>
-            <Label htmlFor="email">{t('form-label-email')}</Label>
+            <Label htmlFor="email">{t("form-label-email")}</Label>
             <Input
               type="email"
               id="email"
-              {...register('email', {
-                required: true
+              {...register("email", {
+                required: true,
               })}
             />
           </div>
           <div>
-            <Label htmlFor="subject">{t('form-label-subject')}</Label>
+            <Label htmlFor="subject">{t("form-label-subject")}</Label>
             <Input
               type="text"
               id="subject"
-              {...register('subject', {
-                required: true
+              {...register("subject", {
+                required: true,
               })}
             />
           </div>
           <div>
-            <Label htmlFor="message">{t('form-label-message')}</Label>
+            <Label htmlFor="message">{t("form-label-message")}</Label>
             <Textarea
               id="message"
-              {...register('message', {
-                required: true
+              {...register("message", {
+                required: true,
               })}
             />
           </div>
 
-          <Button type="submit">{t('form-submit')}</Button>
+          <Button type="submit">{t("form-submit")}</Button>
         </>
       </AuthGate>
     </form>
-  )
+  );
 }
