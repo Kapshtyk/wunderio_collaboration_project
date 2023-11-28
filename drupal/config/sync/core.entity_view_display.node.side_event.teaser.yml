@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.side_event.body
     - field.field.node.side_event.field_content_elements
     - field.field.node.side_event.field_main_event
+    - field.field.node.side_event.field_side_event_registration
     - node.type.side_event
   module:
     - text
@@ -32,4 +33,5 @@ content:
 hidden:
   field_content_elements: true
   field_main_event: true
+  field_side_event_registration: true
   langcode: true
