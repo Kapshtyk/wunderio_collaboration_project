@@ -12,7 +12,7 @@ export type ResourceType =
   | 'node--side_event'
   | 'node--about_us'
   | 'node--work'
-  | 'node--services_page';
+  | 'node--services_page'
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -181,27 +181,25 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       ])
   }
 
-  if (resourceType === "node--services_page") {
+  if (resourceType === 'node--services_page') {
     apiParams
       .addInclude([
-        "field_connect_services",
-        "field_content_elements",
-        "field_content_elements.field_image.field_media_image",
-        "field_page_types",
-        "field_service_types",
+        'field_connect_services',
+        'field_content_elements',
+        'field_content_elements.field_image.field_media_image',
+        'field_page_types',
+        'field_service_types'
       ])
-      .addFields("node--services_page", [
-        "title",
-        "field_content_elements",
-        "path",
-        "status",
-        "metatag",
-        "field_page_types",
-        "field_service_types",
+      .addFields('node--services_page', [
+        'title',
+        'field_content_elements',
+        'path',
+        'status',
+        'metatag',
+        'field_page_types',
+        'field_service_types'
       ])
   }
-
-
 
   return apiParams;
 }
