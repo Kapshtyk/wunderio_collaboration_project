@@ -1,0 +1,38 @@
+uuid: 6b214cdc-5e27-4f69-acef-b4df2581a5f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_page_type_tag
+    - node.type.work_main_page
+    - taxonomy.vocabulary.page_types
+  content:
+    - 'taxonomy_term:page_types:da7a9755-ccda-4a7c-9af4-20e6061721a2'
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.work_main_page.field_page_type_tag
+field_name: field_page_type_tag
+entity_type: node
+bundle: work_main_page
+label: 'Page type'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: da7a9755-ccda-4a7c-9af4-20e6061721a2
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      page_types: page_types
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,25 @@
+uuid: 2431632e-0aec-414f-a802-65bc61c22203
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.work_main_page.field_content_elements
+    - field.field.node.work_main_page.field_page_type_tag
+    - node.type.work_main_page
+  module:
+    - user
+id: node.work_main_page.teaser
+targetEntityType: node
+bundle: work_main_page
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_content_elements: true
+  field_page_type_tag: true
+  langcode: true

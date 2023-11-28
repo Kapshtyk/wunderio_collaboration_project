@@ -1,8 +1,8 @@
-uuid: 266afb4e-8aff-4e41-bdd9-1781d289bebb
+uuid: 47487f8f-c5c2-4c08-b89c-a465ca2d723a
 langcode: en
 status: true
 dependencies: {  }
-name: 'Page types'
+name: page_types
 vid: page_types
-description: 'tags for defining services, work and wunderpedia pages'
+description: ''
 weight: 0

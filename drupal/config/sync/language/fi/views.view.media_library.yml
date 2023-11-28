@@ -2,6 +2,7 @@ display:
   default:
     display_title: Oletus
     display_options:
+      title: Media
       fields:
         media_bulk_form:
           action_title: Toiminto
@@ -50,6 +51,8 @@ display:
           label: Nimi
         uid:
           label: Tekijä
+        changed:
+          label: Päivitetty
       filters:
         name:
           expose:
