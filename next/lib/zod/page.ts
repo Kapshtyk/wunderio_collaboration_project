@@ -6,14 +6,14 @@ import {
   AccordionSchema,
   FileAttachmentsSchema,
   FormattedTextSchema,
+  HeadingSectionSchema,
   HeroSchema,
   ImageSchema,
   LinksSchema,
   ListingArticlesSchema,
-  VideoSchema,
-  HeadingSectionSchema,
   TestimonialsSchema,
-  WorkCardSchema
+  VideoSchema,
+  WorkCardSchema,
 } from "@/lib/zod/paragraph";
 
 const PageElementsSchema = z.discriminatedUnion("type", [
@@ -27,7 +27,7 @@ const PageElementsSchema = z.discriminatedUnion("type", [
   FileAttachmentsSchema,
   HeadingSectionSchema,
   TestimonialsSchema,
-  WorkCardSchema
+  WorkCardSchema,
 ]);
 
 export const PageSchema = z.object({
@@ -35,9 +35,11 @@ export const PageSchema = z.object({
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(PageElementsSchema),
-  field_page_types: z.object({
-    name: z.string().nullable(),
-  }).nullable(),
+  field_page_type: z
+    .object({
+      name: z.string().nullable(),
+    })
+    .nullable(),
   path: z.object({
     alias: z.string(),
   }),

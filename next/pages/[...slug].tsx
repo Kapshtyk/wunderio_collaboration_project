@@ -1,10 +1,10 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 
+import AboutUs from "@/components/about_us";
 import { Article } from "@/components/article";
 import { Meta } from "@/components/meta";
 import { Page } from "@/components/page";
-
 import {
   createLanguageLinks,
   LanguageLinks,
@@ -18,16 +18,17 @@ import {
   getCommonPageProps,
 } from "@/lib/get-common-page-props";
 import {
+  AboutUs as AboutUsType,
+  validateAndCleanupAboutUs,
+} from "@/lib/zod/about-us";
+import {
   Article as ArticleType,
   validateAndCleanupArticle,
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
-import { AboutUs as AboutUsType, validateAndCleanupAboutUs } from "@/lib/zod/about-us";
-import AboutUs from "@/components/about_us";
 
 // const RESOURCE_TYPES = ["node--article", "node--page"];
-const RESOURCE_TYPES = ["node--article", "node--page","node--about_us"];
-
+const RESOURCE_TYPES = ["node--article", "node--page", "node--about_us"];
 
 export default function CustomPage({
   resource,
@@ -53,14 +54,14 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 };
 
 interface PageProps extends CommonPageProps {
-  resource: PageType | ArticleType | AboutUsType ;
+  resource: PageType | ArticleType | AboutUsType;
   languageLinks: LanguageLinks;
 }
 
 export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
-  const path: DrupalTranslatedPath = await drupal.translatePathFromContext(
-    context,
-  );
+  const path: DrupalTranslatedPath =
+    await drupal.translatePathFromContext(context);
+
 
   if (!path) {
     return {
@@ -129,9 +130,9 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     type === "node--article"
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
-          ? validateAndCleanupPage(resource)
-      : type === "node--about_us"
-      ? validateAndCleanupAboutUs(resource)
+        ? validateAndCleanupPage(resource)
+        : type === "node--about_us"
+          ? validateAndCleanupAboutUs(resource)
           : null;
 
   return {
@@ -143,4 +144,3 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     revalidate: 60,
   };
 };
-

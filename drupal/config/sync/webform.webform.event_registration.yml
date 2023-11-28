@@ -16,22 +16,18 @@ description: '<p>An event registration webform template.</p>'
 categories:
   - events
 elements: |-
-  first_name:
-    '#type': textfield
-    '#title': 'First name'
-    '#required': true
-    '#format_items': comma
-  last_name:
-    '#type': textfield
-    '#title': 'Last name'
-    '#required': true
-    '#format_items': comma
   email:
     '#type': email
     '#title': Email
     '#required': true
     '#unique': true
     '#unique_user': true
+    '#format_items': comma
+  name:
+    '#type': textfield
+    '#title': Name
+    '#required': true
+    '#unique': true
     '#format_items': comma
   actions:
     '#type': webform_actions

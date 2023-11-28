@@ -86,5 +86,6 @@
   "reset-your-password": "Reset your password",
   "field-is-required": "The {{field}} field is required.",
   "events-main-title": "Here you can find all our events",
-  "events-link": "Events"
+  "events-link": "Events",
+  "work-link": "Work"
 }

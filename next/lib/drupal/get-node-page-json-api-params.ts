@@ -3,16 +3,16 @@ import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { env } from "@/env";
 
 export type ResourceType =
-  | 'node--frontpage'
-  | 'node--page'
-  | 'node--article'
-  | 'node--careers'
-  | 'node--open_positions'
-  | 'node--event'
-  | 'node--side_event'
-  | 'node--about_us'
-  | 'node--work'
-  | 'node--services_page'
+  | "node--frontpage"
+  | "node--page"
+  | "node--article"
+  | "node--careers"
+  | "node--open_positions"
+  | "node--event"
+  | "node--side_event"
+  | "node--about_us"
+  | "node--work_main_page"
+  | "node--services_page";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -71,25 +71,24 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   // The page content type has paragraphs, stored in the "field_content_elements" field:
   if (resourceType === "node--page") {
-    apiParams
-      .addInclude([
-        "field_content_elements",
-        "field_content_elements.field_image.field_media_image",
-        "field_content_elements.field_video",
-        "field_content_elements.field_file_attachments.field_media_document",
-        "field_content_elements.field_accordion_items",
-        "field_content_elements.field_accordion_items.field_content_elements.field_image.field_media_image",
-        "field_content_elements.field_accordion_items.field_content_elements.field_video",
-        "field_page_types"
-      ])
-      .addFields("node--page", [
+    apiParams.addInclude([
+      "field_content_elements",
+      "field_content_elements.field_image.field_media_image",
+      "field_content_elements.field_video",
+      "field_content_elements.field_file_attachments.field_media_document",
+      "field_content_elements.field_accordion_items",
+      "field_content_elements.field_accordion_items.field_content_elements.field_image.field_media_image",
+      "field_content_elements.field_accordion_items.field_content_elements.field_video",
+      "field_page_type",
+    ]);
+    /*   .addFields("node--page", [
         "title",
         "field_content_elements",
         "path",
         "status",
         "metatag",
-        "field_page_types"
-      ]);
+        "field_page_type",
+      ]); */
   }
 
   // The frontpage content type has paragraphs, stored in the "field_content_elements" field:
@@ -127,17 +126,14 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_excerpt",
       "path",
       "sticky",
-      "field_tags"
+      "field_tags",
     ]);
   }
   // The work content type has paragraphs, stored in the "field_content_elements" field:
-  if (resourceType === "node--work") {
+  if (resourceType === "node--work_main_page") {
     apiParams
-      .addInclude([
-        "field_content_elements",
-        "field_content_elements.field_image.field_media_image",
-      ])
-      .addFields("node--work", [
+      .addInclude(["field_content_elements"])
+      .addFields("node--work_main_page", [
         "title",
         "field_content_elements",
         "path",
@@ -178,27 +174,27 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "metatag",
         "field_page_types",
         "field_service_types",
-      ])
+      ]);
   }
 
-  if (resourceType === 'node--services_page') {
+  if (resourceType === "node--services_page") {
     apiParams
       .addInclude([
-        'field_connect_services',
-        'field_content_elements',
-        'field_content_elements.field_image.field_media_image',
-        'field_page_types',
-        'field_service_types'
+        "field_connect_services",
+        "field_content_elements",
+        "field_content_elements.field_image.field_media_image",
+        "field_page_types",
+        "field_service_types",
       ])
-      .addFields('node--services_page', [
-        'title',
-        'field_content_elements',
-        'path',
-        'status',
-        'metatag',
-        'field_page_types',
-        'field_service_types'
-      ])
+      .addFields("node--services_page", [
+        "title",
+        "field_content_elements",
+        "path",
+        "status",
+        "metatag",
+        "field_page_types",
+        "field_service_types",
+      ]);
   }
 
   return apiParams;

@@ -1,6 +1,8 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { DrupalNode } from 'next-drupal'
-import { useTranslation } from 'next-i18next'
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { DrupalNode } from "next-drupal";
+import { useTranslation } from "next-i18next";
+import { resolveWebformContent, Webform } from "nextjs-drupal-webform";
+import { Carousel } from "@material-tailwind/react";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { CareersForm } from "@/components/careers-form";
@@ -15,11 +17,9 @@ import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { Careers, validateAndCleanupCareers } from "@/lib/zod/careers";
 import {
   OpenPositions as OpenPositionsType,
-
-  validateAndCleanupOpenPositions
-} from '@/lib/zod/open-positions'
   validateAndCleanupOpenPositions,
 } from "@/lib/zod/open-positions";
+import { HeadingSection } from "@/lib/zod/paragraph";
 
 interface CareersPageProps extends LayoutProps {
   careers: Careers;
@@ -42,15 +42,18 @@ export default function CareersPage({
     },
   ];
 
+  const headingSection = careers.field_content_elements.find(
+    (element) => element.type === "paragraph--heading_section",
+  ) as HeadingSection;
   return (
     <>
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      {/*   <div className="flex h-[100px] bg-primary-400/40 justify-between">
+      <div className="flex h-[100px] bg-primary-400/40 justify-between">
         <h1>{headingSection?.field_heading}</h1>
         <span>{headingSection?.field_excerpt}</span>
-      </div> */}
+      </div>
       <div className="grid gap-4">
         {careers.field_content_elements?.map((paragraph) => (
           <Paragraph key={paragraph.id} paragraph={paragraph} />
@@ -74,8 +77,6 @@ export const getStaticProps: GetStaticProps<CareersPageProps> = async (
       },
     )
   ).at(0);
-
-  console.log(careers)
 
   const nodeTranslations = await getNodeTranslatedVersions(
     careers,

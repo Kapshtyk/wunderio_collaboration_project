@@ -1,4 +1,3 @@
-
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
@@ -30,15 +29,12 @@ interface WebformProps {
  * @returns {JSX.Element} - The webform component.
  */
 export function Webform({ webform }: WebformProps) {
-  const fieldInputs = Object.keys(webform.field_webform_fields).map((key) => key)
+  const fieldInputs = Object.keys(webform.field_webform_fields).map(
+    (key) => key,
+  );
   const router = useRouter();
   const { t } = useTranslation();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState,
-  } = useForm<FieldInputs>();
+  const { register, handleSubmit, reset, formState } = useForm<FieldInputs>();
 
   const onSubmit = async (data: FieldInputs) => {
     const response = await fetch(`/api/webform`, {
@@ -94,13 +90,13 @@ export function Webform({ webform }: WebformProps) {
                 max: webform.field_webform_fields[key]["#max"],
               })}
             />
-            {formState.errors[key] && (
-              <p>{formState.errors[key].message}</p>
-            )}
+            {formState.errors[key] && <p>{formState.errors[key].message}</p>}
           </div>
         );
       })}
-      <Button disabled={!formState.isValid} type="submit">{t("form-submit")}</Button>
+      <Button disabled={!formState.isValid} type="submit">
+        {t("form-submit")}
+      </Button>
     </form>
   );
 }

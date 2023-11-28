@@ -1,0 +1,21 @@
+uuid: 83aeb16a-b3e7-476f-9168-166d12720f52
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.event_participants.field_participants
+    - paragraphs.paragraphs_type.event_participants
+id: paragraph.event_participants.default
+targetEntityType: paragraph
+bundle: event_participants
+mode: default
+content:
+  field_participants:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

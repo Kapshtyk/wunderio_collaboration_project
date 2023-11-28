@@ -83,5 +83,6 @@
   "reset-your-password": "Återställ ditt lösenord",
   "field-is-required": "{{field}} är obligatoriskt.",
   "events-main-title": "Här hittar du alla våra evenemang",
-  "events-link": "Evenemang"
+  "events-link": "Evenemang",
+  "work-link": "Arbete"
 }

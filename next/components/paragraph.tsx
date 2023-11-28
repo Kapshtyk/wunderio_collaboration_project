@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 
 import { ParagraphFileAttachments } from "@/components/paragraph--file-attachments";
+import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
 import { ParagraphHero } from "@/components/paragraph--hero";
 import { ParagraphImage } from "@/components/paragraph--image";
 import { ParagraphLinks } from "@/components/paragraph--links";
@@ -8,10 +9,9 @@ import { ParagraphListingArticles } from "@/components/paragraph--listing-articl
 import { ParagraphText } from "@/components/paragraph--text";
 import { Paragraph } from "@/lib/zod/paragraph";
 
-import { ParagraphTestimonials } from "./paragraph--testimonials";
-import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
-import { ParagraphLinkService } from "./paragraph--link-service";
 import { ParagraphLabelledImage } from "./paragraph--labelled-image";
+import { ParagraphLinkService } from "./paragraph--link-service";
+import { ParagraphTestimonials } from "./paragraph--testimonials";
 // import { ParagraphServicesTaxonomy } from "./paragraph--services-taxonomy";
 
 // Use dynamic imports to defer loading a component until after initial page load: https://nextjs.org/docs/advanced-features/dynamic-import
@@ -57,10 +57,10 @@ export function Paragraph({ paragraph }: { paragraph: Paragraph }) {
       return <ParagraphTestimonials paragraph={paragraph} />;
     }
     case "paragraph--heading_section": {
-      return <ParagraphHeadingSection paragraph={paragraph} />
+      return <ParagraphHeadingSection paragraph={paragraph} />;
     }
     case "paragraph--labelled_image": {
-      return <ParagraphLabelledImage paragraph={paragraph} />
+      return <ParagraphLabelledImage paragraph={paragraph} />;
     }
 
     default:

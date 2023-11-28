@@ -16,6 +16,13 @@ export const WebformFieldsSchema = z.object({
       "#required": z.boolean(),
     })
     .optional(),
+  name: z
+    .object({
+      "#type": z.literal("textfield"),
+      "#title": z.literal("Name"),
+      "#required": z.boolean(),
+    })
+    .optional(),
   email: z
     .object({
       "#type": z.literal("email"),
@@ -32,11 +39,13 @@ export const WebformFieldsSchema = z.object({
       "#max": z.number().optional(),
     })
     .optional(),
-  participant: z.object({
-    "#type": z.literal("checkbox"),
-    "#title": z.literal("Participant"),
-    "#required": z.boolean().optional(),
-  }),
+  participant: z
+    .object({
+      "#type": z.literal("checkbox"),
+      "#title": z.literal("Participant"),
+      "#required": z.boolean().optional(),
+    })
+    .optional(),
 });
 
 export const WebformSchema = z.object({
