@@ -12,7 +12,8 @@ export type ResourceType =
   | 'node--side_event'
   | 'node--about_us'
   | 'node--work'
-  | 'node--services_page';
+  | 'node--services_page'
+  | 'node--office_locations';
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -184,6 +185,23 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "metatag",
         "field_page_types",
         "field_service_types",
+      ])
+  }
+
+  if (resourceType === "node--office_locations") {
+    apiParams      
+    .addInclude([
+      "uuid",
+      "field_office_address",
+      "field_address"
+    ])
+      .addFields("node--office_locations", [
+        "title",
+        "path",
+        "status",
+        "metatag",
+        "field_office_address",
+        "field_address",
       ])
   }
 
