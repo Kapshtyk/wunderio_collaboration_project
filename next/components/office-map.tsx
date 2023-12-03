@@ -1,62 +1,47 @@
 import { absoluteUrl } from '@/lib/drupal/absolute-url';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { OfficeLocations } from '@/lib/zod/office-locations';
+import { off } from 'process';
 
-const OfficeLocations = () => {
-  const [officeLocations, setOfficeLocations] = useState([]);
+interface MapsProps {
+    maps: OfficeLocations [],
+  }
 
-  useEffect(() => {
-    const fetchOfficeLocations = async () => {
-      try {
-        const response = await fetch(absoluteUrl('/en/jsonapi/views/office_address_marker/block_1'));
-        if (!response.ok) {
-          throw new Error('Failed to fetch office locations from Drupal.');
-        }
-        const data = await response.json();
-        setOfficeLocations(data.data || []);
-      } catch (error) {
-        console.error('Error fetching office locations:', error.message);
-      }
-    };
+const OfficeLocationsMap = ({maps}: MapsProps) => {
+    const [markers, setMarkers] = useState([]);
 
-    fetchOfficeLocations();
-  }, []);
+    useEffect(()=> {
+        const newMarkers = maps.map((office) => ({
+            position: {
+                lat: office.field_address_coordinates.lat,
+                lon: office.field_address_coordinates.lon,
+            },
+            title: office.title
+        }));
 
-  const markers = officeLocations.map(location => ({
-    position: {
-      lat: location.attributes.field_office_address.lat,
-      lng: location.attributes.field_office_address.lon,
-    },
-    title: location.attributes.title,
-  }));
+        setMarkers(newMarkers);
+    },[maps]);
 
+
+  console.log('maps', maps);
+  
  
   return (
     <div>
-      <h2>Office Locations</h2>
-      <LoadScript googleMapsApiKey='AIzaSyAPOAfyCoKl19xTBSbDeR20v2LkTCebaDE'>
+      <LoadScript googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY as string}>
       <GoogleMap
-          center={markers.length > 0 ? markers[0].position : { lat: 0, lng: 0 }}
-          zoom={13}
+          center={markers.length > 0 ? markers[0].position :{lat:0, lng:0}}
+          zoom={14}
           mapContainerStyle={{ height: '400px', width: '100%' }}
         >
-          {markers.map((marker, index) => (
+        {markers.map((marker, index) => (
             <Marker key={index} position={marker.position} title={marker.title} />
           ))}
         </GoogleMap>
    </LoadScript>
-
-   {officeLocations.map((office)=> (
-    <div className='flex'>
-        <div className='flex flex-col'>
-        <h3>{office.attributes.field_address?.locality}</h3> 
-       <p>{office.attributes.field_address?.address_line1}</p>
-       <p>{office.attributes.field_address?.postal_code} <span>{office.attributes.field_address?.administrative_area}</span></p>
-        </div>
-    </div>
-   ))}
     </div>
   );
 };
 
-export default OfficeLocations;
+export default OfficeLocationsMap;

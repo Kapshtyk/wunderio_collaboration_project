@@ -84,7 +84,6 @@ export default function ServicesPage({
           services={services}
         />
       ))}
-      <OfficeLocations/>
     </>
   );
 }

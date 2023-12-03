@@ -13,7 +13,8 @@ export type ResourceType =
   | 'node--about_us'
   | 'node--work_main_page'
   | 'node--services_page'
-  | 'node--office_locations';
+  | 'node--office_locations'
+  | 'node--contact_us';
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -166,19 +167,33 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
     apiParams      
     .addInclude([
       "uuid",
-      "field_office_address",
-      "field_address"
+      "field_address_coordinates"
     ])
       .addFields("node--office_locations", [
         "title",
         "path",
         "status",
         "metatag",
-        "field_office_address",
-        "field_address",
+        "field_address_coordinates",
+        "field_city",
+        "field_country_name",
+        "field_postal_code",
+        "field_street_address"
       ])
   }
 
+  if (resourceType === "node--contact_us") {
+    apiParams      
+    .addInclude([
+      "uid",
+      "field_content_elements", 
+    ])
+      .addFields("node--office_locations", [
+        "title",
+        "metatag",
+        "field_content_elements",
+      ])
+  }
 
   return apiParams
 }

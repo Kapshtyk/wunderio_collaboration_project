@@ -3,13 +3,6 @@ import { z } from 'zod'
 
 import { MetatagsSchema } from '@/lib/zod/metatag'
 
-export const AddressSchema = z.object({
-    address_line1:z.string(),
-    address_line2:z.string().nullable(),
-    postal_code:z.string(),
-    locality:z.string(),
-    administrative_area:z.string()
-});
 
 export const GeofieldSchema = z.object({
     lat:z.number(),
@@ -20,12 +13,14 @@ export const OfficeLocationsSchema = z.object({
   type: z.literal('node--office_locations'),
   id: z.string(),
   title: z.string(),
-  field_office_address: GeofieldSchema,
-  field_address: AddressSchema,
+  field_address_coordinates: GeofieldSchema,
+  field_office_address: z.string(),
+  field_office_email:z.string(),
   metatag: MetatagsSchema.optional(),
   path: z.object({
     alias: z.string().nullable()
-  })
+  }),
+
 })
 
 export function validateAndCleanupOfficeLocations(
