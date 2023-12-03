@@ -7,7 +7,7 @@ dependencies:
     - node.type.basic_info_related_to_all_positi
     - node.type.open_positions
   content:
-    - 'node:basic_info_related_to_all_positi:e271489c-234d-4873-a5fe-67e5b48725c5'
+    - 'node:basic_info_related_to_all_positi:9891a2ec-3ad7-4f25-a444-6fdead2f0f4d'
   module:
     - tmgmt_content
 third_party_settings:
@@ -23,7 +23,7 @@ required: false
 translatable: true
 default_value:
   -
-    target_uuid: e271489c-234d-4873-a5fe-67e5b48725c5
+    target_uuid: 9891a2ec-3ad7-4f25-a444-6fdead2f0f4d
 default_value_callback: ''
 settings:
   handler: 'default:node'

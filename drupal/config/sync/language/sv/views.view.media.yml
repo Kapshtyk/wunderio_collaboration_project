@@ -1,7 +1,9 @@
+label: Media
 display:
   default:
     display_title: Förvald
     display_options:
+      title: Media
       fields:
         media_bulk_form:
           action_title: Åtgärd
@@ -19,9 +21,8 @@ display:
           label: Status
           settings:
             format_custom_true: Publicerad
-          separator: ', '
         changed:
-          separator: ', '
+          label: Uppdaterad
         operations:
           label: Funktioner
       pager:
@@ -30,6 +31,7 @@ display:
             items_per_page_options_all_label: '- Alla -'
       exposed_form:
         options:
+          submit_button: Filtrera
           reset_button_label: Återställ
           exposed_sorts_label: 'Sortera efter'
           sort_asc_label: Stigande
@@ -46,3 +48,8 @@ display:
         langcode:
           expose:
             label: Språk
+  media_page_list:
+    display_title: Media
+    display_options:
+      menu:
+        title: Media

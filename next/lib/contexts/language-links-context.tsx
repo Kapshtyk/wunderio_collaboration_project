@@ -1,26 +1,26 @@
-import { GetStaticPropsContext } from 'next'
-import { createContext, useContext } from 'react'
+import { GetStaticPropsContext } from "next";
+import { createContext, useContext } from "react";
 
-import siteConfig from '@/site.config'
+import siteConfig from "@/site.config";
 
-export type LanguageLinks = typeof siteConfig.locales
+export type LanguageLinks = typeof siteConfig.locales;
 export type Translations = Readonly<
   Partial<Record<keyof LanguageLinks, `/${string}`>>
->
+>;
 
-const LanguageLinksContext = createContext(siteConfig.locales)
+const LanguageLinksContext = createContext(siteConfig.locales);
 
 /**
  * From the site config and available node translations, create links to be used in the language switcher.
  */
 export function createLanguageLinks(
-  nodeTranslations?: Translations
+  nodeTranslations?: Translations,
 ): LanguageLinks {
-  const languageLinks = JSON.parse(JSON.stringify(siteConfig.locales))
+  const languageLinks = JSON.parse(JSON.stringify(siteConfig.locales));
   Object.entries(nodeTranslations).forEach(([key, path]) => {
-    languageLinks[key].path = path
-  })
-  return languageLinks
+    languageLinks[key].path = path;
+  });
+  return languageLinks;
 }
 
 /**
@@ -32,16 +32,16 @@ export function createLanguageLinks(
  */
 export function createLanguageLinksForNextOnlyPage(
   path: string,
-  context: GetStaticPropsContext
+  context: GetStaticPropsContext,
 ): LanguageLinks {
-  const languageLinks = JSON.parse(JSON.stringify(siteConfig.locales))
+  const languageLinks = JSON.parse(JSON.stringify(siteConfig.locales));
   context.locales.forEach((locale) => {
     languageLinks[locale].path =
-      languageLinks[locale].path === '/'
+      languageLinks[locale].path === "/"
         ? path
-        : `${languageLinks[locale].path}${path}`
-  })
-  return languageLinks
+        : `${languageLinks[locale].path}${path}`;
+  });
+  return languageLinks;
 }
 
 /**
@@ -49,21 +49,21 @@ export function createLanguageLinksForNextOnlyPage(
  */
 export function LanguageLinksProvider({
   languageLinks,
-  children
+  children,
 }: {
-  languageLinks?: typeof siteConfig.locales
-  children: React.ReactNode
+  languageLinks?: typeof siteConfig.locales;
+  children: React.ReactNode;
 }) {
   return (
     <LanguageLinksContext.Provider value={languageLinks || siteConfig.locales}>
       {children}
     </LanguageLinksContext.Provider>
-  )
+  );
 }
 
 /**
  * Access the language links from the language links context.
  */
 export function useLanguageLinks() {
-  return useContext(LanguageLinksContext)
+  return useContext(LanguageLinksContext);
 }

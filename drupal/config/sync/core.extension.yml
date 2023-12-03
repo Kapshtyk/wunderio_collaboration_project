@@ -12,6 +12,7 @@ module:
   config_split: 0
   config_translation: 0
   consumers: 0
+  csv_serialization: 0
   datetime: 0
   datetime_range: 0
   dblog: 0
@@ -19,6 +20,8 @@ module:
   dynamic_page_cache: 0
   editor: 0
   entity_reference_revisions: 0
+  feeds: 0
+  feeds_log: 0
   field: 0
   field_ui: 0
   file: 0
@@ -47,6 +50,8 @@ module:
   menu_ui: 0
   metatag: 0
   migrate: 0
+  migrate_drupal: 0
+  migrate_drupal_ui: 0
   migrate_plus: 0
   migrate_source_csv: 0
   migrate_tools: 0
@@ -58,6 +63,7 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  phpass: 0
   redirect: 0
   registration_role: 0
   require_login: 0
@@ -81,6 +87,7 @@ module:
   tour: 0
   update: 0
   user: 0
+  views_data_export: 0
   views_ui: 0
   webform: 0
   webform_node: 0

@@ -109,6 +109,8 @@ const options: HTMLReactParserOptions = {
               {domToReact(domNode.children, options)}
             </Link>
           )
+        } else if (href) {
+          return <Link href={href} target='_blank'>{domToReact(domNode.children, options)}{'=>'}</Link>
         }
         break
       }

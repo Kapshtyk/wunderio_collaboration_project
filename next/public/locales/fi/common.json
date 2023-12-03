@@ -40,10 +40,6 @@
   "form-label-email": "Sähköposti:",
   "form-label-subject": "Aihe:",
   "form-label-message": "Viesti:",
-  "form-label-firstname": "Etunimi:",
-  "form-label-lastname": "Sukunimi:",
-  "form-label-age": "Ikä:",
-  "form-label-participant": "Osallistuja:",
   "form-label-submit": "Lähetä",
   "form-thank-you-message": "Kiitos!",
   "form-send-another-message": "Lähetä toinen viesti",
@@ -90,5 +86,6 @@
   "events-link": "Tapahtumat",
   "events-form-title": "Ilmoittautuminen {{event}}",
   "events-form-not-auth": "Kirjaudu sisään rekisteröityäksesi tapahtumaan.",
-  "events-participants": "Osallistujat"
+  "events-participants": "Osallistujat",
+  "work-link": "Työ"
 }

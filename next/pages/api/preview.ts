@@ -1,10 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from "next";
 
-import { drupal } from '@/lib/drupal/drupal-client'
+import { drupal } from "@/lib/drupal/drupal-client";
 
 export default async function handler(
   request: NextApiRequest,
-  response: NextApiResponse
+  response: NextApiResponse,
 ) {
-  return await drupal.preview(request, response)
+  return await drupal.preview(request, response);
 }

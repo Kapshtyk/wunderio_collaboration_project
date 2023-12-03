@@ -1,10 +1,19 @@
-## Link to issue:
+## Link to ticket:
 
-[Add link to issue]
+[Add link to ticket]
+
+## Link to feature environment:
+
+[Add link to feature environment]
 
 ## Changes proposed in this PR:
 
 [Explain what was done and why. You can also add screenshots here if it helps.]
+
+## How to test:
+
+1. Do this
+2. Then do that
 
 ## Best practices:
 
