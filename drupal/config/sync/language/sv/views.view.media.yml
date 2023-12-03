@@ -5,14 +5,23 @@ display:
       fields:
         media_bulk_form:
           action_title: Åtgärd
+        thumbnail__target_id:
+          separator: ', '
+        name:
+          separator: ', '
         bundle:
           label: Typ
+          separator: ', '
         uid:
           label: Författare
+          separator: ', '
         status:
           label: Status
           settings:
             format_custom_true: Publicerad
+          separator: ', '
+        changed:
+          separator: ', '
         operations:
           label: Funktioner
       pager:
@@ -22,6 +31,9 @@ display:
       exposed_form:
         options:
           reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
       filters:
         bundle:
           expose:

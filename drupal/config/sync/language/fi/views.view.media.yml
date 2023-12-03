@@ -5,14 +5,23 @@ display:
       fields:
         media_bulk_form:
           action_title: Toiminto
+        thumbnail__target_id:
+          separator: ', '
+        name:
+          separator: ', '
         bundle:
           label: Tyyppi
+          separator: ', '
         uid:
           label: Tekijä
+          separator: ', '
         status:
           label: Tila
           settings:
             format_custom_true: Julkaistu
+          separator: ', '
+        changed:
+          separator: ', '
         operations:
           label: Toimenpiteet
       pager:
@@ -22,6 +31,9 @@ display:
       exposed_form:
         options:
           reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       filters:
         bundle:
           expose:

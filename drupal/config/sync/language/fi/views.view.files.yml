@@ -5,6 +5,7 @@ display:
       fields:
         filename:
           label: Nimi
+          separator: ', '
         status:
           label: Tila
       pager:
@@ -14,6 +15,9 @@ display:
       exposed_form:
         options:
           reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       filters:
         status:
           expose:

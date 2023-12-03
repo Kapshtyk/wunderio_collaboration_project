@@ -12,8 +12,13 @@ display:
       exposed_form:
         options:
           reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       filters:
         status:
+          expose:
+            label: 'Julkaisun tila'
           group_info:
             label: Julkaistu
             group_items:
@@ -30,6 +35,8 @@ display:
       fields:
         media_bulk_form:
           action_title: Toiminto
+        name:
+          separator: ', '
         edit_media:
           text: Muokkaa
         delete_media:

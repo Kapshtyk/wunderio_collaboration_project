@@ -12,8 +12,13 @@ display:
       exposed_form:
         options:
           reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
       filters:
         status:
+          expose:
+            label: 'Status för publicering'
           group_info:
             label: Publicerad
             group_items:
@@ -30,6 +35,8 @@ display:
       fields:
         media_bulk_form:
           action_title: Åtgärd
+        name:
+          separator: ', '
         edit_media:
           text: Redigera
         delete_media:
