@@ -14,6 +14,10 @@ import {
 } from "@/lib/contexts/language-links-context";
 import { CommonPageProps } from "@/lib/get-common-page-props";
 import { inter, overpass } from "@/styles/fonts";
+import GoogleAnalytics from "@/components/google-analytics";
+
+import { env } from "@/env";
+import Cookies from "@/components/cookies";
 
 interface PageProps extends CommonPageProps {
   languageLinks?: LanguageLinks;
@@ -30,6 +34,8 @@ function App({ Component, pageProps }: AppProps<PageProps>) {
           <LanguageLinksProvider languageLinks={languageLinks}>
             <Layout menus={menus}>
               <Component {...restPageProps} />
+              <GoogleAnalytics GA_MEASUREMENT_ID='G-0NBMKF7795' />
+              <Cookies />
             </Layout>
           </LanguageLinksProvider>
         </Fonts>

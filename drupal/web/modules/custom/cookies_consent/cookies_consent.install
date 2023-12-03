@@ -1,0 +1,113 @@
+<?php
+
+use Drupal\Core\File\FileSystemInterface;
+
+/**
+ * Implements hook_schema().
+ */
+function cookies_consent_schema()
+{
+    $schema['cookies_consent'] = array(
+        'description' => 'Table to store cookies consent information',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for the consent entry.',
+                'type' => 'serial',
+                'unsigned' => true,
+                'not null' => true,
+            ),
+            'isFunctionalCookiesAvailable' => array(
+                'description' => 'Indicates if user provided consent for functional cookies.',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => true,
+                'default' => 0,
+            ),
+            'isAnalyticsCookiesAvailable' => array(
+                'description' => 'Indicates if user provided consent for analytics cookies.',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => true,
+                'default' => 0,
+            ),
+            'isPerformanceCookiesAvailable' => array(
+                'description' => 'Indicates if user provided consent for performance cookies.',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => true,
+                'default' => 0,
+            ),
+            'isAdvertisingCookiesAvailable' => array(
+                'description' => 'Indicates if user provided consent for advertising cookies.',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => true,
+                'default' => 0,
+            ),
+            'consentDate' => array(
+                'description' => 'Date of consent.',
+                'type' => 'datetime',
+                'mysql_type' => 'datetime',
+                'not null' => true,
+            ),
+            'expirationDate' => array(
+                'description' => 'Date of consent expiration.',
+                'type' => 'datetime',
+                'mysql_type' => 'datetime',
+                'not null' => true,
+            ),
+        ),
+        'primary key' => array('id'),
+    );
+
+    return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function cookies_consent_install()
+{
+    $table_name = 'cookies_consent';
+    $schema = cookies_consent_schema();
+
+    if (!\Drupal::database()->schema()->tableExists($table_name)) {
+        \Drupal::database()->schema()->createTable($table_name, $schema[$table_name]);
+    }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function cookies_consent_uninstall()
+{
+    $table_name = 'cookies_consent';
+
+    $connection = \Drupal::database();
+
+    $headings = [
+        'id',
+        'isFunctionalCookiesAvailable',
+        'isAnalyticsCookiesAvailable',
+        'isPerformanceCookiesAvailable',
+        'isAdvertisingCookiesAvailable',
+        'consentDate',
+        'expirationDate',
+    ];
+    $result = $connection->select($table_name)->fields($table_name)->execute()->fetchAll();
+
+    $directory = 'public://backup';
+    \Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
+
+    $file = $directory . '/cookies_consent_dump_' . date('Y-m-d_H-i-s') . '.csv';
+
+    $handle = fopen($file, 'w');
+
+    fputcsv($handle, $headings);
+
+    foreach ($result as $row) {
+        fputcsv($handle, (array)$row);
+    }
+
+    fclose($handle);
+}
