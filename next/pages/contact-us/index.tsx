@@ -58,8 +58,10 @@ export default function ContactUsPage({
       <div>
         {maps.map((address) => (
             <div>
-                {address.field_office_address}
-                <p>{address.field_office_email}</p>
+              {address.field_office_address.split(', ').map((word, index) => (
+                <p key={index}>{word}</p>
+            ))}
+                <p><a href={`mailto:${address.field_office_email}`} className="hyperlink">{address.field_office_email}</a></p>
             </div>
         ))}
       </div>
