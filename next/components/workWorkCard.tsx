@@ -14,7 +14,7 @@ export function WorkWorkCard({ workPage }) {
         .filter((element: Paragraph) => element.type === "paragraph--work_card")
         .map((paragraph: WorkCard) => (
           <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
-            <Link href={"/work" + workPage.path.alias}>
+            <Link href={workPage.path.alias}>
               <MediaImage
                 className="rounded-sm h-60 hover:saturate-150"
                 media={paragraph.field_image}
@@ -27,13 +27,13 @@ export function WorkWorkCard({ workPage }) {
         <p className="text-base text-sm text-secondary-900">
           <Link href="/work">
             <span className="hover:underline">
-              {workPage.field_page_types.name.toUpperCase()}
+              {workPage.field_page_type.name.toUpperCase()}
             </span>
           </Link>
         </p>
       </div>
 
-      <Link href={"/work" + workPage.path.alias}>
+      <Link href={workPage.path.alias}>
         <div className="p-6">
           <h1 className="text-primary-600 font-bold hover:underline">
             {workPage.title}
