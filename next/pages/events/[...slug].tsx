@@ -4,6 +4,8 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { FormattedText } from "@/components/formatted-text";
+import { HeadingParagraph } from "@/components/heading--paragraph";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
@@ -32,8 +34,6 @@ import {
 } from "@/lib/zod/webform";
 
 import NotFoundPage from "../404";
-import { FormattedText } from "@/components/formatted-text";
-import { HeadingParagraph } from "@/components/heading--paragraph";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
@@ -84,27 +84,35 @@ export default function Event({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       {event.field_content_elements?.map((element) => (
-        <Paragraph
-          key={element.id}
-          paragraph={element}
-        />))
+        <Paragraph key={element.id} paragraph={element} />
+      ))}
+      <FormattedText html={event.body.processed} />
+      {
+        <>
+          {event.type === "node--event" && (
+            <>
+              <HeadingParagraph>Participants</HeadingParagraph>
+              {event.field_participant.map((participant) => (
+                <div className="mb-4" key={participant.id}>
+                  <h2 className="font-regular text-2xl">{participant.title}</h2>
+                  <div
+                    className="mt-6 font-serif text-xl leading-loose prose"
+                    dangerouslySetInnerHTML={{
+                      __html: participant.body.processed,
+                    }}
+                  ></div>
+                </div>
+              ))}
+            </>
+          )}
+        </>
       }
-      < FormattedText html={event.body.processed} />
-      {<>
-        {(event.type === "node--event") && (
-          <>
-            <HeadingParagraph>Participants</HeadingParagraph>
-            {event.field_participant.map((participant) => (
-              <div className="mb-4" key={participant.id}>
-                <h2 className="font-regular text-2xl">{participant.title}</h2>
-                <div className="mt-6 font-serif text-xl leading-loose prose" dangerouslySetInnerHTML={{ __html: participant.body.processed }}></div>
-              </div>
-            ))
-            }
-          </>
-        )}
-      </>}
-      <Webform webform={webform} onlyForAuthenticated={true} formTitle={t("events-form-title", { event: event.title })} formMessageIfUnauthenticated={t("events-form-not-auth")} />
+      <Webform
+        webform={webform}
+        onlyForAuthenticated={true}
+        formTitle={t("events-form-title", { event: event.title })}
+        formMessageIfUnauthenticated={t("events-form-not-auth")}
+      />
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
           sideEvents.map((sideEvent) => (

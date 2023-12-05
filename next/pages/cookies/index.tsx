@@ -4,6 +4,7 @@ import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import CookiesComponent from "@/components/cookies";
 import Events from "@/components/events";
 import { HeadingPage } from "@/components/heading--page";
 import { LayoutProps } from "@/components/layout";
@@ -20,19 +21,14 @@ import {
   Events as EventsType,
   validateAndCleanupEvents,
 } from "@/lib/zod/events";
-import CookiesComponent from "@/components/cookies";
 
-export default function Cookies({
-}: InferGetStaticPropsType<typeof getStaticProps>) {
-
-  return <CookiesComponent />
-
+export default function Cookies({}: InferGetStaticPropsType<
+  typeof getStaticProps
+>) {
+  return <CookiesComponent />;
 }
 
-export const getStaticProps: GetStaticProps = async (
-  context,
-) => {
-
+export const getStaticProps: GetStaticProps = async (context) => {
   const languageLinks = createLanguageLinksForNextOnlyPage("/cookies", context);
   return {
     props: {
@@ -42,4 +38,3 @@ export const getStaticProps: GetStaticProps = async (
     revalidate: 60,
   };
 };
-

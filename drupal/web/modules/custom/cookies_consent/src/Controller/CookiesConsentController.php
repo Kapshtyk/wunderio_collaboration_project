@@ -17,6 +17,7 @@ class CookiesConsentController extends ControllerBase {
     $request = \Drupal::request();
     $content = $request->getContent();
     $body = json_decode($content, TRUE);
+    \Drupal::logger('cookies_consent')->notice('Cookies consent data: ' . print_r($body, TRUE));
 
     if (empty($body)) {
       return new JsonResponse(['error' => 'Invalid request data'], 400);
@@ -27,20 +28,26 @@ class CookiesConsentController extends ControllerBase {
 
       $currentDate = new \DateTime();
       $expirationDate = new \DateTime();
-      $expirationDate->add(new \DateInterval('P1Y'));
+      $expirationDate->add(new \DateInterval('P6M'));
 
-      $database->insert('cookies_consent')
+      $query = $database->insert('cookies_consent')
         ->fields([
-          'isFunctionalCookiesAvailable' => $body['isFunctionalCookiesAvailable'],
-          'isAnalyticsCookiesAvailable' => $body['isAnalyticsCookiesAvailable'],
-          'isPerformanceCookiesAvailable' => $body['isPerformanceCookiesAvailable'],
-          'isAdvertisingCookiesAvailable' => $body['isAdvertisingCookiesAvailable'],
+          'isNecessaryCookiesAvailable' => 1,
+          'isFunctionalCookiesAvailable' => $body['isFunctionalCookiesAvailable'] == true ? 1 : 0,
+          'isAnalyticsCookiesAvailable' => $body['isAnalyticsCookiesAvailable'] == true ? 1 : 0,
+          'isPerformanceCookiesAvailable' => $body['isPerformanceCookiesAvailable'] == true ? 1 : 0,
+          'isAdvertisingCookiesAvailable' => $body['isAdvertisingCookiesAvailable'] == true ? 1 : 0,
           'consentDate' => $currentDate->format('Y-m-d H:i:s'),
           'expirationDate' => $expirationDate->format('Y-m-d H:i:s'),
         ])
         ->execute();
 
-      return new JsonResponse(['message' => 'Data inserted successfully'], 200);
+      if ($query) {
+          $insertedId = $database->lastInsertId();
+          return new JsonResponse(['message' => 'Data inserted successfully', 'id' => $insertedId], 200);
+      } else {
+          return new JsonResponse(['error' => 'Error occurred while inserting data'], 500);
+      }
     }
     catch (\Exception $e) {
       return new JsonResponse(['error' => 'Error occurred while inserting data'], 500);
@@ -60,10 +67,11 @@ class CookiesConsentController extends ControllerBase {
       '#type' => 'table',
       '#header' => [
         'ID',
-        'Functional Cookies',
-        'Analytics Cookies',
-        'Performance Cookies',
-        'Advertising Cookies',
+        'Necessary',
+        'Functional',
+        'Analytics',
+        'Performance',
+        'Advertising',
         'Consent Date',
         'Expiration Date',
       ],
@@ -78,10 +86,11 @@ class CookiesConsentController extends ControllerBase {
 
       $build['content']['#rows'][] = [
         $value->id,
-        $value->isFunctionalCookiesAvailable === 1 ? 'Yes' : 'No',
-        $value->isAnalyticsCookiesAvailable === 1 ? 'Yes' : 'No',
-        $value->isPerformanceCookiesAvailable === 1 ? 'Yes' : 'No',
-        $value->isAdvertisingCookiesAvailable === 1 ? 'Yes' : 'No',
+        $value->isNecessaryCookiesAvailable === '1' ? 'Yes' : 'No',
+        $value->isFunctionalCookiesAvailable === '1' ? 'Yes' : 'No',
+        $value->isAnalyticsCookiesAvailable === '1' ? 'Yes' : 'No',
+        $value->isPerformanceCookiesAvailable === '1' ? 'Yes' : 'No',
+        $value->isAdvertisingCookiesAvailable === '1' ? 'Yes' : 'No',
         $formattedConsentDate,
         $formattedExpirationDate,
       ];

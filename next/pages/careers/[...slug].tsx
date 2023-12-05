@@ -3,6 +3,7 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { FormattedText } from "@/components/formatted-text";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
@@ -15,7 +16,6 @@ import {
   OpenPositions,
   validateAndCleanupOpenPositions,
 } from "@/lib/zod/open-positions";
-import { FormattedText } from "@/components/formatted-text";
 
 interface OpenPositionProps extends LayoutProps {
   openPosition: OpenPositions;

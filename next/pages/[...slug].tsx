@@ -62,7 +62,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
   const path: DrupalTranslatedPath =
     await drupal.translatePathFromContext(context);
 
-
   if (!path) {
     return {
       notFound: true,
@@ -130,10 +129,10 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     type === "node--article"
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
-        ? validateAndCleanupPage(resource)
-        : type === "node--about_us"
-          ? validateAndCleanupAboutUs(resource)
-          : null;
+      ? validateAndCleanupPage(resource)
+      : type === "node--about_us"
+      ? validateAndCleanupAboutUs(resource)
+      : null;
 
   return {
     props: {

@@ -16,6 +16,13 @@ function cookies_consent_schema()
                 'unsigned' => true,
                 'not null' => true,
             ),
+            'isNecessaryCookiesAvailable' => array(
+                'description' => 'Indicates if user provided consent for necessary cookies.',
+                'type' => 'int',
+                'size' => 'tiny',
+                'not null' => true,
+                'default' => 1,
+            ),
             'isFunctionalCookiesAvailable' => array(
                 'description' => 'Indicates if user provided consent for functional cookies.',
                 'type' => 'int',
@@ -87,6 +94,7 @@ function cookies_consent_uninstall()
 
     $headings = [
         'id',
+        'isNecessaryCookiesAvailable',
         'isFunctionalCookiesAvailable',
         'isAnalyticsCookiesAvailable',
         'isPerformanceCookiesAvailable',

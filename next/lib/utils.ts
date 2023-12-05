@@ -20,6 +20,11 @@ export function formatDateComplete(input: string, locale: string): string {
   });
 }
 
+export function getCurrentDateInMySqlFormat(): string {
+  const date = new Date();
+  return date.toISOString().slice(0, 19).replace("T", " ");
+}
+
 export function isRelative(url: string) {
   return !new RegExp("^(?:[a-z]+:)?//", "i").test(url);
 }
