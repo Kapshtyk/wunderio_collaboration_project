@@ -2,17 +2,32 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
+import { GeofieldSchema } from "./office-locations";
 import {
   FormattedTextSchema,
   HeadingSectionSchema,
   ImageSchema,
 } from "@/lib/zod/paragraph";
 
+
 const EventsElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
   FormattedTextSchema,
   ImageSchema,
 ]);
+
+export const VenueSchema = z.object({
+  type: z.literal("node--venue"),
+  id: z.string(),
+  title: z.string(),
+  body: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+  field_venue_coordinates: GeofieldSchema,
+  field_venue_address: z.string()
+})
 
 export const ParticipantSchema = z.object({
   type: z.literal("node--people"),
@@ -47,9 +62,14 @@ export const EventsSchema = z.object({
     id: z.string(),
     resourceIdObjMeta: z.object({
       drupal_internal__target_id: z.string(),
-    }),
+    }).nullable().optional(),
   }),
   field_participant: z.array(ParticipantSchema).nullable(),
+  field_venue: z.object({
+    title: z.string(),
+    field_venue_coordinates: GeofieldSchema,
+    field_venue_address: z.string()
+  })
 });
 
 export const SideEventSchema = z.object({
@@ -152,7 +172,20 @@ export function validateAndCleanupSideEvents(
   }
 }
 
+export function validateAndCleanupVenue(
+  venue: DrupalNode,
+): Venue | null {
+  try {
+    return VenueSchema.parse(venue);
+  } catch (error) {
+    const { name = "ZodError", issues = [] } = error;
+    console.log(JSON.stringify({ name, issues, venue }, null, 2));
+    return null;
+  }
+}
+
 export type Events = z.infer<typeof EventsSchema>;
 export type SideEvent = z.infer<typeof SideEventSchema>;
 export type SideEvents = z.infer<typeof SideEventsSchema>;
 export type Participant = z.infer<typeof ParticipantSchema>;
+export type Venue = z.infer<typeof VenueSchema>;

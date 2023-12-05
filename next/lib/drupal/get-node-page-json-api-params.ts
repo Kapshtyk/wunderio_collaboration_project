@@ -14,7 +14,8 @@ export type ResourceType =
   | 'node--work_main_page'
   | 'node--services_page'
   | 'node--office_locations'
-  | 'node--contact_us';
+  | 'node--contact_us'
+  | 'node--venue';
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -42,6 +43,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_content_elements.field_image.field_media_image",
       "field_event_registration",
       "field_participant",
+      "field_venue"
     ]);
     /*  .addFields(resourceType, [
         "title",
@@ -192,6 +194,19 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "title",
         "metatag",
         "field_content_elements",
+      ])
+  }
+  if (resourceType === "node--venue") {
+    apiParams      
+    .addInclude([
+      "uid",
+      "field_venue_coordinates", 
+    ])
+      .addFields("node--office_locations", [
+        "title",
+        "metatag",
+        "field_venue_coordinates",
+        "field_venue_address"
       ])
   }
 
