@@ -42,16 +42,17 @@ const Cookies = () => {
         <div className={`min-h-[250px] ${currentMenu === 'consent' ? 'block' : 'hidden'}`}>
           <h2>Our website uses cookies</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quas repellat assumenda blanditiis? Esse voluptate inventore aperiam sunt modi, blanditiis nihil ducimus laboriosam rerum nam? Repudiandae ipsa dolore quod cumque?</div>
-      </p>
-      <div className={`min-h-[250px] ${currentMenu === 'preferences' ? 'block' : 'hidden'}`}>Consequuntur quas repellat assumenda blanditiis? Esse voluptate inventore aperiam sunt modi, blanditiis nihil ducimus laboriosam rerum nam? Repudiandae ipsa dolore quod cumque?</div>
-      <div className={`min-h-[250px] ${currentMenu === 'about' ? 'block' : 'hidden'}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quas repellat assumenda blanditiis? Esse voluptate inventore aperiam sunt modi.</div>
-      <button className='px-5 py-2 text-gray-300 rounded-md border-gray-900'>Decline</button>
-      <button className='bg-gray-900 px-5 py-2 text-white rounded-lg' onClick={e => handleAcceptAll()}>Allow Cookies</button>
-    </div >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quas repellat assumenda blanditiis? Esse voluptate inventore aperiam sunt modi, blanditiis nihil ducimus laboriosam rerum nam? Repudiandae ipsa dolore quod cumque?</p>
+          <div className={`min-h-[250px] ${currentMenu === 'preferences' ? 'block' : 'hidden'}`}>Consequuntur quas repellat assumenda blanditiis? Esse voluptate inventore aperiam sunt modi, blanditiis nihil ducimus laboriosam rerum nam? Repudiandae ipsa dolore quod cumque?</div>
+          <div className={`min-h-[250px] ${currentMenu === 'about' ? 'block' : 'hidden'}`}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quas repellat assumenda blanditiis? Esse voluptate inventore aperiam sunt modi.</div>
+          <button className='px-5 py-2 text-gray-300 rounded-md border-gray-900'>Decline</button>
+          <button className='bg-gray-900 px-5 py-2 text-white rounded-lg' onClick={e => handleAcceptAll()}>Allow Cookies</button>
+        </div >
+      </div >
     </div >
   )
 }
+
 
 
 export default Cookies
