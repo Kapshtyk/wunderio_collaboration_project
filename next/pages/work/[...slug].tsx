@@ -29,16 +29,15 @@ import NotFoundPage from "../404";
 
 interface WorkPageProps {
   currentWorkPage: PageType;
-  allPages: PageType[];
+  allWorkPages: PageType[];
   allArticles: Article[];
-  tags: DrupalTaxonomyTerm[];
 }
 
 export default function WorkPage({
   currentWorkPage,
-  allPages,
+  allWorkPages,
   allArticles,
-  tags,
+
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
@@ -62,12 +61,11 @@ export default function WorkPage({
     "Fortum",
     "HUS - Helsinki University Hospital",
   ].filter(Boolean);
-
-  return tags.map(
-    (tag) =>
-      currentWorkPage &&
-      currentWorkPage.field_page_types &&
-      currentWorkPage.field_page_types.name === tag.name,
+  //
+  return (
+    currentWorkPage &&
+    currentWorkPage.field_page_type &&
+    currentWorkPage.field_page_type.name === "Work"
   ) ? (
     <>
       <Meta title={currentWorkPage.title} metatags={currentWorkPage.metatag} />
@@ -84,21 +82,16 @@ export default function WorkPage({
       {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
         <div className="mt-20">
           <h1 className="font-bold my-4">RELATED CONTENT</h1>
-          {tags.map((tag) => (
-            <div className="flex space-x-6">
-              {allPages
-                .filter(
-                  (workPages) => workPages.field_page_types?.name === tag.name,
-                )
-                .filter(
-                  (workPages) => workPages.title !== currentWorkPage.title,
-                )
-                .slice(0, 4)
-                .map((workPage) => (
-                  <WorkWorkCard workPage={workPage} />
-                ))}
-            </div>
-          ))}
+          <div className="flex space-x-6">
+            {allWorkPages
+              .filter(
+                (workPages) => workPages.title !== currentWorkPage.title,
+              )
+              .slice(0, 4)
+              .map((workPage) => (
+                <WorkWorkCard workPage={workPage} />
+              ))}
+          </div>
         </div>
       ) : null}
 
@@ -161,8 +154,6 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     },
   );
 
-  /*   console.log("resource:", resource);
-   */
   const nodeTranslations = await getNodeTranslatedVersions(
     resource,
     context,
@@ -185,7 +176,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     "node--page",
     context,
     {
-      params: getNodePageJsonApiParams("node--page").getQueryObject(),
+      params: getNodePageJsonApiParams("node--page").addFilter('field_page_type.name', 'Work').getQueryObject(),
     },
   );
 
@@ -197,18 +188,13 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     },
   );
 
-  const tags = await drupal.getResourceCollectionFromContext<
-    DrupalTaxonomyTerm[]
-  >("taxonomy_term--page_types", context, {});
-
   return {
     props: {
       ...(await getCommonPageProps(context)),
       currentWorkPage: validateAndCleanupPage(resource),
-      allPages: pages.map((node) => validateAndCleanupPage(node)),
+      allWorkPages: pages.map((node) => validateAndCleanupPage(node)),
       allArticles: articles.map((node) => validateAndCleanupArticle(node)),
       languageLinks,
-      tags,
     },
     revalidate: 60,
   };
