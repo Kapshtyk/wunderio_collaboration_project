@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { Fragment, useEffect, useState } from "react";
 
 import ArrowIcon from "@/styles/icons/arrow-down.svg";
+import CookiesIcon from "@/styles/icons/cookies.svg";
 
 import { Button } from "@/ui/button";
 import { Accordion } from "@/ui/accordion";
@@ -18,6 +19,7 @@ const Cookies = () => {
 
   const [currentMenu, setCurrentMenu] = useState("consent");
   const [isClient, setIsClient] = useState(false);
+  const [isConsentDateAvailable, setIsConsentDateAvailable] = useState(true);
 
   // All these booleans are using within eval() function
   const [isNecessaryCookiesAvailable, setIsNecessaryCookiesAvailable] = useState(true);
@@ -39,6 +41,8 @@ const Cookies = () => {
         setIsAnalyticsCookiesAvailable(jsonData.isAnalyticsCookiesAvailable);
         setIsPerformanceCookiesAvailable(jsonData.isPerformanceCookiesAvailable);
         setIsAdvertisingCookiesAvailable(jsonData.isAdvertisingCookiesAvailable);
+      } else {
+        setIsConsentDateAvailable(false);
       }
     };
     checkConsentCookie();
@@ -88,6 +92,7 @@ const Cookies = () => {
     } else {
       addToCookie(body, null);
     }
+    setIsConsentDateAvailable(true);
   }
 
   const mainButtons = () => {
@@ -219,6 +224,14 @@ const Cookies = () => {
         ),
       }
     })
+  }
+
+  if (isConsentDateAvailable) {
+    return (<div className='fixed left-0 bottom-0 rounded-full overflow-hidden'>
+      <Button variant="tertiary" size="sm" onClick={() => setIsConsentDateAvailable(false)}>
+        <CookiesIcon aria-description="cookies settings page" className="h-8 w-8 opacity-50" />
+      </Button>
+    </div>)
   }
 
   return (
