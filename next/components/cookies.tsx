@@ -78,7 +78,7 @@ const Cookies = () => {
         consentDate: getCurrentDateInMySqlFormat(),
       }
     }
-    const response = await fetch("/api/cookiez", {
+    const response = await fetch("/api/cookies", {
       method: "POST",
       body: JSON.stringify(body),
     })
