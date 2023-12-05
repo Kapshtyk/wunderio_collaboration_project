@@ -12,7 +12,8 @@ export type ResourceType =
   | "node--side_event"
   | "node--about_us"
   | "node--work_main_page"
-  | "node--services_page";
+  | "node--services_page"
+  | "node--numbers";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -161,6 +162,20 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_page_types",
         "field_service_types",
       ]);
+  }
+  if (resourceType === "node--numbers") {
+    apiParams.addInclude([
+      "field_numbers_type",
+    ])
+      .addFields("node--numbers", [
+        "uid",
+        "title",
+        "body",
+        "field_number",
+        "field_text",
+        "field_numbers_type",
+        "path",
+      ])
   }
 
   return apiParams;
