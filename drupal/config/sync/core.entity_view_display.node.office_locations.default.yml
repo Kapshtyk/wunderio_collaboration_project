@@ -4,10 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.office_locations.field_address_coordinates
-    - field.field.node.office_locations.field_city
-    - field.field.node.office_locations.field_country_name
-    - field.field.node.office_locations.field_postal_code
-    - field.field.node.office_locations.field_street_address
+    - field.field.node.office_locations.field_office_address
+    - field.field.node.office_locations.field_office_email
     - node.type.office_locations
   module:
     - styled_google_map
@@ -82,37 +80,20 @@ content:
     third_party_settings: {  }
     weight: 8
     region: content
-  field_city:
+  field_office_address:
     type: string
     label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 7
+    weight: 9
     region: content
-  field_country_name:
-    type: string
+  field_office_email:
+    type: basic_string
     label: above
-    settings:
-      link_to_entity: false
+    settings: {  }
     third_party_settings: {  }
-    weight: 4
-    region: content
-  field_postal_code:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 5
-    region: content
-  field_street_address:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 6
+    weight: 10
     region: content
   links:
     settings: {  }

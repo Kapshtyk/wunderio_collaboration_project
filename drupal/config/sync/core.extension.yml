@@ -2,7 +2,6 @@ _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
 module:
   action: 0
-  address: 0
   admin_toolbar: 0
   automated_cron: 0
   block: 0
@@ -27,7 +26,6 @@ module:
   file: 0
   filter: 0
   geocoder: 0
-  geocoder_address: 0
   geocoder_ajax_prepopulate: 0
   geocoder_field: 0
   geocoder_geofield: 0

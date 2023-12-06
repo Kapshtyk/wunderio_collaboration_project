@@ -4,10 +4,8 @@ status: true
 dependencies:
   config:
     - field.field.node.office_locations.field_address_coordinates
-    - field.field.node.office_locations.field_city
-    - field.field.node.office_locations.field_country_name
-    - field.field.node.office_locations.field_postal_code
-    - field.field.node.office_locations.field_street_address
+    - field.field.node.office_locations.field_office_address
+    - field.field.node.office_locations.field_office_email
     - node.type.office_locations
   module:
     - geofield_map
@@ -55,7 +53,7 @@ content:
       hide_geocode_address: false
       hide_coordinates: false
       geoaddress_field:
-        field: '0'
+        field: field_office_address
         hidden: false
         disabled: true
       map_geocoder:
@@ -69,37 +67,21 @@ content:
           delay: 800
           options: ''
     third_party_settings: {  }
-  field_city:
+  field_office_address:
     type: string_textfield
-    weight: 13
+    weight: 27
     region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_country_name:
-    type: string_textfield
-    weight: 10
+  field_office_email:
+    type: email_default
+    weight: 28
     region: content
     settings:
-      size: 60
       placeholder: ''
-    third_party_settings: {  }
-  field_postal_code:
-    type: string_textfield
-    weight: 12
-    region: content
-    settings:
       size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_street_address:
-    type: string_textfield
-    weight: 11
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select

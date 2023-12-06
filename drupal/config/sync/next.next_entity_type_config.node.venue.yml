@@ -1,0 +1,11 @@
+uuid: c221ecf7-dc4c-4681-800e-6bc1db72b12d
+langcode: en
+status: true
+dependencies: {  }
+id: node.venue
+site_resolver: site_selector
+configuration:
+  sites:
+    frontend: frontend
+revalidator: ''
+revalidator_configuration: {  }

@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.event.field_content_elements
     - field.field.node.event.field_event_registration
     - field.field.node.event.field_participant
+    - field.field.node.event.field_venue
     - node.type.event
   module:
     - text
@@ -34,4 +35,5 @@ hidden:
   field_content_elements: true
   field_event_registration: true
   field_participant: true
+  field_venue: true
   langcode: true

@@ -5,10 +5,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.office_locations.field_address_coordinates
-    - field.field.node.office_locations.field_city
-    - field.field.node.office_locations.field_country_name
-    - field.field.node.office_locations.field_postal_code
-    - field.field.node.office_locations.field_street_address
+    - field.field.node.office_locations.field_office_address
+    - field.field.node.office_locations.field_office_email
     - node.type.office_locations
   module:
     - user
@@ -24,8 +22,6 @@ content:
     region: content
 hidden:
   field_address_coordinates: true
-  field_city: true
-  field_country_name: true
-  field_postal_code: true
-  field_street_address: true
+  field_office_address: true
+  field_office_email: true
   langcode: true
