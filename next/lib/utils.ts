@@ -20,6 +20,11 @@ export function formatDateComplete(input: string, locale: string): string {
   });
 }
 
+export function getCurrentDateInMySqlFormat(): string {
+  const date = new Date();
+  return date.toISOString().slice(0, 19).replace("T", " ");
+}
+
 export function isRelative(url: string) {
   return !new RegExp("^(?:[a-z]+:)?//", "i").test(url);
 }
@@ -55,4 +60,10 @@ export const getFileType = (file: string) => {
     return fileType;
   }
   return null;
+};
+
+export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
+  window.gtag("config", GA_MEASUREMENT_ID, {
+    page_path: url,
+  });
 };

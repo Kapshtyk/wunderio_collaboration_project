@@ -1,6 +1,6 @@
-uuid: 818d9265-ef29-488e-a7df-98a72784c2d3
+uuid: 0de42493-f5a0-4b93-8631-ac82f5cda906
 langcode: en
-status: closed
+status: open
 dependencies: {  }
 _core:
   default_config_hash: uRLwN71qd0670d-JtU-pAHbXWBi7lG6dcb_XPLfcEh4
@@ -8,11 +8,11 @@ weight: 0
 open: null
 close: null
 uid: 1
-template: true
+template: false
 archive: false
-id: event_registration
-title: 'Event registration'
-description: '<p>An event registration webform template.</p>'
+id: new_form
+title: 'New form'
+description: ''
 categories:
   - events
 elements: |-

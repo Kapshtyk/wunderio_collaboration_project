@@ -62,6 +62,7 @@
     },
     "require-dev": {
         "drupal/core-dev": "^10.0",
+        "squizlabs/php_codesniffer": "*",
         "wunderio/code-quality": "^2.2"
     },
     "conflict": {

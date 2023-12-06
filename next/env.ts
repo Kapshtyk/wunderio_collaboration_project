@@ -19,6 +19,7 @@ export const env = isStorybook
       client: {
         NEXT_PUBLIC_DRUPAL_BASE_URL: zod.string().url(),
         NEXT_PUBLIC_FRONTEND_URL: zod.string().url(),
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: zod.string().optional(),
       },
       runtimeEnv: {
         /* eslint-disable n/no-process-env */
@@ -30,6 +31,7 @@ export const env = isStorybook
         NEXT_IMAGE_DOMAIN: process.env.NEXT_IMAGE_DOMAIN,
         NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
         NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
         /* eslint-enable n/no-process-env */
       },
     });
