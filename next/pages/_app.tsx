@@ -7,6 +7,8 @@ import { appWithTranslation } from "next-i18next";
 import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import Cookies from "@/components/cookies";
+import GoogleAnalytics from "@/components/google-analytics";
 import { Layout } from "@/components/layout";
 import {
   LanguageLinks,
@@ -15,11 +17,12 @@ import {
 import { CommonPageProps } from "@/lib/get-common-page-props";
 import { inter, overpass } from "@/styles/fonts";
 
+import { env } from "@/env";
+
 interface PageProps extends CommonPageProps {
   languageLinks?: LanguageLinks;
   session?: Session;
 }
-
 function App({ Component, pageProps }: AppProps<PageProps>) {
   const [queryClient] = useState(() => new QueryClient());
   const { menus, languageLinks, session, ...restPageProps } = pageProps;
@@ -30,6 +33,8 @@ function App({ Component, pageProps }: AppProps<PageProps>) {
           <LanguageLinksProvider languageLinks={languageLinks}>
             <Layout menus={menus}>
               <Component {...restPageProps} />
+              <GoogleAnalytics GA_MEASUREMENT_ID="G-0NBMKF7795" />
+              <Cookies />
             </Layout>
           </LanguageLinksProvider>
         </Fonts>

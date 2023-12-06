@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
 import { LogoStrip } from "@/components/logo-strip";
+import { Paragraph } from "@/components/paragraph";
 import { WorkCards } from "@/components/work-cards";
 import { WorkArticleCard } from "@/components/workArticleCard";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
@@ -16,7 +17,6 @@ import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { HeadingSection } from "@/lib/zod/paragraph";
 import { validateAndCleanupWork, Work } from "@/lib/zod/work";
-import { Paragraph } from "@/components/paragraph";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
@@ -100,7 +100,9 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
       "node--work_main_page",
       context,
       {
-        params: getNodePageJsonApiParams("node--work_main_page").getQueryObject(),
+        params: getNodePageJsonApiParams(
+          "node--work_main_page",
+        ).getQueryObject(),
       },
     )
   ).at(0);
@@ -117,7 +119,9 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     "node--page",
     context,
     {
-      params: getNodePageJsonApiParams("node--page").addFilter('field_page_type.name', 'Work').getQueryObject()
+      params: getNodePageJsonApiParams("node--page")
+        .addFilter("field_page_type.name", "Work")
+        .getQueryObject(),
     },
   );
 
