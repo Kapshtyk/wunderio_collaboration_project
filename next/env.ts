@@ -20,6 +20,7 @@ export const env = isStorybook
         NEXT_PUBLIC_DRUPAL_BASE_URL: zod.string().url(),
         NEXT_PUBLIC_FRONTEND_URL: zod.string().url(),
         NEXT_PUBLIC_GA_MEASUREMENT_ID: zod.string().optional(),
+        NEXT_PUBLIC_GOOGLE_MAPS_KEY: zod.string()
       },
       runtimeEnv: {
         /* eslint-disable n/no-process-env */
@@ -32,6 +33,7 @@ export const env = isStorybook
         NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
         NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
         NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
+        NEXT_PUBLIC_GOOGLE_MAPS_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
         /* eslint-enable n/no-process-env */
       },
     });

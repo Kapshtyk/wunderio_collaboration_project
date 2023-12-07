@@ -115,6 +115,8 @@ services:
         MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless"]}}, "http://chrome:9515"]'
         # GA4 tracking ID
         NEXT_PUBLIC_GA_MEASUREMENT_ID: G-0NBMKF7795
+        # Google Map API
+        NEXT_PUBLIC_GOOGLE_MAPS_KEY: AIzaSyDFHz-zBARgR11y63cmaFJ3lTFUfcEaKSA
 
   # This service handles the frontend part of the application
   node:

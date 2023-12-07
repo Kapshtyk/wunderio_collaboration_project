@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, MarkerF, useLoadScript } from '@react-google-maps/api';
 import { OfficeLocations } from '@/lib/zod/office-locations';
-import { off } from 'process';
+import { env } from '@/env';
 
 interface MapsProps {
     maps: OfficeLocations [],
@@ -22,6 +22,14 @@ const OfficeLocationsMap = ({maps}: MapsProps) => {
         setMarkers(newMarkers);
     },[maps]);
 
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
+      });
+    
+      if (!isLoaded) {
+        return <p>Loading...</p>;
+      }
+
 
   console.log('maps', maps);
   
@@ -29,7 +37,6 @@ const OfficeLocationsMap = ({maps}: MapsProps) => {
   return (
     <div>
         <h2>Our Offices</h2>
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}>
       <GoogleMap
           center={markers.length > 0 ? markers[0].position :{lat:0, lng:0}}
           zoom={5}
@@ -39,7 +46,6 @@ const OfficeLocationsMap = ({maps}: MapsProps) => {
             <MarkerF key={index} position={marker.position} title={marker.title} />
           ))}
         </GoogleMap>
-   </LoadScript>
     </div>
   );
 };

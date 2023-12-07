@@ -4,10 +4,12 @@ import { z } from "zod";
 import { MetatagsSchema } from "@/lib/zod/metatag";
 import {
   HeadingSectionSchema,
+  FormattedTextSchema
 } from "@/lib/zod/paragraph";
 
 const ContactUsElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
+  FormattedTextSchema
 ]);
 
 export const ContactUsSchema = z.object({

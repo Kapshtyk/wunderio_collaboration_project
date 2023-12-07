@@ -24,7 +24,7 @@ export const VenueSchema = z.object({
     value: z.string(),
     format: z.string(),
     processed: z.string(),
-  }),
+  }).nullable().optional(),
   field_venue_coordinates: GeofieldSchema,
   field_venue_address: z.string()
 })
@@ -57,7 +57,7 @@ export const EventsSchema = z.object({
     value: z.string(),
     format: z.string(),
     processed: z.string(),
-  }),
+  }).nullable().optional(),
   field_event_registration: z.object({
     id: z.string(),
     resourceIdObjMeta: z.object({

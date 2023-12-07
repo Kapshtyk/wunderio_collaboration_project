@@ -34,6 +34,8 @@ import {
 } from "@/lib/zod/webform";
 
 import NotFoundPage from "../404";
+import EventMapModal from "@/components/event-map-modal";
+import { useState } from "react";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
@@ -48,7 +50,10 @@ export default function Event({
   webform,
   sideEvents,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log("webform", webform);
+  // console.log("webform", webform);
+  console.log("event", event);
+
+  
   const { t } = useTranslation();
   if (!event) {
     return <NotFoundPage />;
@@ -77,6 +82,7 @@ export default function Event({
     });
   }
 
+
   return (
     <>
       <Meta title={event.title} metatags={event.metatag} />
@@ -103,6 +109,12 @@ export default function Event({
                   ></div>
                 </div>
               ))}
+              <HeadingParagraph>Venue</HeadingParagraph>
+              
+              <p>{event.field_venue.field_venue_address}</p>
+              <EventMapModal
+              lat={event.field_venue.field_venue_coordinates.lat}
+              lng={event.field_venue.field_venue_coordinates.lon}/>
             </>
           )}
         </>
