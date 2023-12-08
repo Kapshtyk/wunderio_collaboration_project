@@ -11,7 +11,6 @@ module:
   config_split: 0
   config_translation: 0
   consumers: 0
-  cookies_consent: 0
   csv_serialization: 0
   datetime: 0
   datetime_range: 0
@@ -70,7 +69,6 @@ module:
   system: 0
   taxonomy: 0
   team2_cascade_deletion: 0
-  team2_cookies_consent: 0
   text: 0
   tmgmt: 0
   tmgmt_content: 0
