@@ -113,8 +113,6 @@ services:
         PHP_IDE_CONFIG: serverName=appserver
         # PHPUnit settings. @see: .lando/phpunit.sh
         MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless"]}}, "http://chrome:9515"]'
-        # GA4 tracking ID
-        NEXT_PUBLIC_GA_MEASUREMENT_ID: G-0NBMKF7795
 
   # This service handles the frontend part of the application
   node:
@@ -139,6 +137,8 @@ services:
         NEXT_PUBLIC_DRUPAL_BASE_URL: https://next-drupal-starterkit.lndo.site
         NEXT_IMAGE_DOMAIN: next-drupal-starterkit.lndo.site
         NEXT_PUBLIC_FRONTEND_URL: https://frontend.lndo.site
+        NEXT_PUBLIC_MATOMO_URL: frontendlndosite.matomo.cloud
+        NEXT_PUBLIC_MATOMO_CONTAINER_ID: YijLmEPP
         # Environment variables for next_auth:
         NEXTAUTH_SECRET: nextauth_secret_not_secure_used_only_locally
         NEXTAUTH_URL: https://frontend.lndo.site

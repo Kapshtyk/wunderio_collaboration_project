@@ -19,7 +19,8 @@ export const env = isStorybook
       client: {
         NEXT_PUBLIC_DRUPAL_BASE_URL: zod.string().url(),
         NEXT_PUBLIC_FRONTEND_URL: zod.string().url(),
-        NEXT_PUBLIC_GA_MEASUREMENT_ID: zod.string().optional(),
+        NEXT_PUBLIC_MATOMO_URL: zod.string(),
+        NEXT_PUBLIC_MATOMO_CONTAINER_ID: zod.string(),
       },
       runtimeEnv: {
         /* eslint-disable n/no-process-env */
@@ -31,7 +32,8 @@ export const env = isStorybook
         NEXT_IMAGE_DOMAIN: process.env.NEXT_IMAGE_DOMAIN,
         NEXT_PUBLIC_DRUPAL_BASE_URL: process.env.NEXT_PUBLIC_DRUPAL_BASE_URL,
         NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
-        NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.GA_MEASUREMENT_ID,
+        NEXT_PUBLIC_MATOMO_URL: "frontendlndosite.matomo.cloud",
+        NEXT_PUBLIC_MATOMO_CONTAINER_ID: "YijLmEPP",
         /* eslint-enable n/no-process-env */
       },
     });

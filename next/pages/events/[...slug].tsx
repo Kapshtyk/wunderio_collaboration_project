@@ -26,7 +26,6 @@ import {
   validateAndCleanupEvents,
   validateAndCleanupSideEvents,
 } from "@/lib/zod/events";
-import { HeadingSection } from "@/lib/zod/paragraph";
 import {
   validateAndCleanupWebform,
   validateAndCleanupWebformFields,
@@ -48,7 +47,6 @@ export default function Event({
   webform,
   sideEvents,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log("webform", webform);
   const { t } = useTranslation();
   if (!event) {
     return <NotFoundPage />;
@@ -191,7 +189,6 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
       .then((response) => response.json())
       .then((data) => data)
       .catch((error) => console.log(error));
-    console.log("webformFields", webformFields);
     validatedWebform = validateAndCleanupWebform(
       resource.field_event_registration,
     );
