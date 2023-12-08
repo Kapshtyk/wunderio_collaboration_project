@@ -1,0 +1,32 @@
+display:
+  default:
+    display_title: Huvud
+    display_options:
+      fields:
+        import_id:
+          label: ID
+          separator: ', '
+        start:
+          separator: ', '
+        end:
+          separator: ', '
+        uid:
+          separator: ', '
+        sources_value:
+          label: Källor
+          separator: ', '
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Alla -'
+      exposed_form:
+        options:
+          submit_button: Applicera
+          reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
+  page_1:
+    display_options:
+      menu:
+        title: Översikt

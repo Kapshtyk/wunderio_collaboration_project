@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_content_elements
     - node.type.contact_us
+    - paragraphs.paragraphs_type.formatted_text
     - paragraphs.paragraphs_type.heading_section
   module:
     - entity_reference_revisions
@@ -26,6 +27,7 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
+      formatted_text: formatted_text
       heading_section: heading_section
     negate: 0
     target_bundles_drag_drop:
@@ -43,7 +45,7 @@ settings:
         enabled: false
       formatted_text:
         weight: -14
-        enabled: false
+        enabled: true
       heading_section:
         weight: 15
         enabled: true
