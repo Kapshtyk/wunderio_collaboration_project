@@ -15,7 +15,8 @@ export type ResourceType =
   | 'node--services_page'
   | 'node--office_locations'
   | 'node--contact_us'
-  | 'node--venue';
+  | 'node--venue'
+  | 'node--legal_document';
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -207,6 +208,14 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "metatag",
         "field_venue_coordinates",
         "field_venue_address"
+      ])
+  }
+  if (resourceType === "node--legal_document") {
+    apiParams      
+      .addFields("node--legal_document", [
+        "title",
+        "body",
+        "metatag",
       ])
   }
 

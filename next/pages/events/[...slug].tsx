@@ -82,7 +82,10 @@ export default function Event({
     });
   }
 
-
+  const [showMap, setShowMap] = useState(false);
+  const toggleMap = () => {
+    setShowMap((prevShowMap) => !prevShowMap);
+  };
   return (
     <>
       <Meta title={event.title} metatags={event.metatag} />
@@ -112,9 +115,11 @@ export default function Event({
               <HeadingParagraph>Venue</HeadingParagraph>
               
               <p>{event.field_venue.field_venue_address}</p>
-              <EventMapModal
+              <button onClick={toggleMap}>{showMap ? 'Hide map' : 'Show map'}</button>
+              {showMap && <EventMapModal
               lat={event.field_venue.field_venue_coordinates.lat}
               lng={event.field_venue.field_venue_coordinates.lon}/>
+              }
             </>
           )}
         </>
