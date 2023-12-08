@@ -5,7 +5,7 @@ use Drupal\Core\File\FileSystemInterface;
 /**
  * Implements hook_schema().
  */
-function cookies_consent_schema()
+function team2_cookies_consent_schema()
 {
     $schema['cookies_consent'] = array(
         'description' => 'Table to store cookies consent information',
@@ -73,10 +73,10 @@ function cookies_consent_schema()
 /**
  * Implements hook_install().
  */
-function cookies_consent_install()
+function team2_cookies_consent_install()
 {
     $table_name = 'cookies_consent';
-    $schema = cookies_consent_schema();
+    $schema = team2_cookies_consent_schema();
 
     if (!\Drupal::database()->schema()->tableExists($table_name)) {
         \Drupal::database()->schema()->createTable($table_name, $schema[$table_name]);
@@ -86,7 +86,7 @@ function cookies_consent_install()
 /**
  * Implements hook_uninstall().
  */
-function cookies_consent_uninstall()
+function team2_cookies_consent_uninstall()
 {
     $table_name = 'cookies_consent';
 

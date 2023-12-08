@@ -60,9 +60,11 @@ export default function WorkPage({
         </div>
       </div>
 
-      {<div>
-        <WorkCards allWorkPages={allWorkPages} />
-      </div>}
+      {
+        <div>
+          <WorkCards allWorkPages={allWorkPages} />
+        </div>
+      }
 
       <div className="my-20">
         <h1 className="font-bold">OUR CLIENTS</h1>

@@ -1,7 +1,7 @@
 cookies_consent.add_consent:
   path: '/cookies_consent/add-consent'
   defaults:
-    _controller: '\Drupal\cookies_consent\Controller\CookiesConsentController::insert'
+    _controller: '\Drupal\team2_cookies_consent\Controller\CookiesConsentController::insert'
   requirements:
     _permission: 'access content'
     _role: 'next_api_role'
@@ -10,8 +10,8 @@ cookies_consent.add_consent:
 cookies_consent.consent_list:
   path: '/cookies_consent/consent-list'
   defaults:
-    _controller: '\Drupal\cookies_consent\Controller\CookiesConsentController::display'
-    _title: 'List of consent for cookies'
+    _controller: '\Drupal\team2_cookies_consent\Controller\CookiesConsentController::display'
+    _title: 'Cookie consent list'
   requirements:
-    _permission: 'access content'
+    _permission: 'administer site configuration'
 
