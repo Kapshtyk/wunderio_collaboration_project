@@ -8,8 +8,8 @@ import React, { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Cookies from "@/components/cookies";
-import GoogleAnalytics from "@/components/google-analytics";
 import { Layout } from "@/components/layout";
+import Matomo from "@/components/matomo";
 import {
   LanguageLinks,
   LanguageLinksProvider,
@@ -32,8 +32,11 @@ function App({ Component, pageProps }: AppProps<PageProps>) {
         <Fonts>
           <LanguageLinksProvider languageLinks={languageLinks}>
             <Layout menus={menus}>
+              <Matomo
+                MATOMO_URL={env.NEXT_PUBLIC_MATOMO_URL}
+                MATOMO_CONTAINER={env.NEXT_PUBLIC_MATOMO_CONTAINER_ID}
+              />
               <Component {...restPageProps} />
-              <GoogleAnalytics GA_MEASUREMENT_ID="G-0NBMKF7795" />
               <Cookies />
             </Layout>
           </LanguageLinksProvider>

@@ -29,7 +29,9 @@ export function Accordion({ heading, description, items }: AccordionProps) {
                   aria-hidden
                   className="h-6 w-6 shrink-0 text-primary-600 group-aria-expanded:rotate-180"
                 />
-                <span className="grow text-left flex justify-between">{item.heading}</span>
+                <span className="grow text-left flex justify-between">
+                  {item.heading}
+                </span>
               </AccordionUI.Trigger>
             </AccordionUI.Header>
             <AccordionUI.Content className="rounded-b border border-t-0 border-finnishwinter bg-white p-6 text-md">
