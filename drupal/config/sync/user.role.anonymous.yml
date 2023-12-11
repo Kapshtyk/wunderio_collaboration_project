@@ -21,6 +21,7 @@ weight: 0
 is_admin: false
 permissions:
   - 'access content'
+  - 'access user profiles'
   - 'restful get webform_rest_complete_submission'
   - 'restful get webform_rest_elements'
   - 'restful get webform_rest_fields'
