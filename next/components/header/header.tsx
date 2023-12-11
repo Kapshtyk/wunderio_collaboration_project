@@ -17,7 +17,6 @@ interface HeaderProps {
 }
 
 export function Header({ menu }: HeaderProps) {
-  console.log('menu', menu)
   const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
 
   return (

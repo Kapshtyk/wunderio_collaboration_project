@@ -28,29 +28,36 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
   return (
     isClient &&
     <NavigationMenu>
-      <NavigationMenuList className="text-sm font-semibold text-steelgray after:">
+      <NavigationMenuList className="text-sm font-semibold text-steelgray">
         {menu.map((item) => (
           item.items ? (
             <NavigationMenuItem key={item.title}>
               <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>
-                {item.title}
+                <Link href={item.url}>
+                  {item.title}
+                </Link>
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="bg-white">
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-3 lg:w-[600px] text-start">
-                  {item.items.map((component) => (
-                    <ListItem
-                      key={component.title}
-                      title={component.title}
-                      href={component.url}
-                    >
-                      {component.description}
-                    </ListItem>
+              <NavigationMenuContent className="bg-white/90 backdrop-blur-sm">
+                <ul className="grid w-[400px] gap-3 p-6 md:w-[500px] md:grid-cols-3 lg:w-[600px] text-start">
+                  {item.items.map((item) => (
+                    <li>
+                      <div key={item.id} className="text-sm p-2 font-medium font-inter leading-none mb-5">{item.title}</div>
+                      <ul className="mt-2">
+                        {item.items?.map((item, index) => (
+                          index <= 2 && (
+                            <ListItem key={item.id} href={item.url}>
+                              <p className="p-2 text-scapaflow font-regular font-inter">{item.title}</p>
+                            </ListItem>
+                          )
+                        ))}
+                      </ul>
+                    </li>
                   ))}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
           ) : (
-            <NavigationMenuItem>
+            <NavigationMenuItem key={item.title}>
               <Link href={item.url} >
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   {item.title}
@@ -60,7 +67,7 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
           )
         ))}
       </NavigationMenuList>
-    </NavigationMenu>
+    </NavigationMenu >
   );
 }
 
@@ -69,22 +76,21 @@ const ListItem = React.forwardRef<
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
-    <li className="bg-white">
+    <li>
       <Link
         href={props.href ?? ""}
         ref={ref}
         className={clsx(
-          "block text-primary-500 bg-accent-orange select-none space-y-1 rounded-md p-3 no-underline outline-none transition-colors hover:bg-white hover:text-stone focus:bg-white focus:text-stone",
+          "block text-primary-500 select-none rounded-md py-2 no-underline outline-none transition-colors hover:bg-white hover:text-stone focus:bg-white focus:text-stone",
           className,
         )}
         {...props}
       >
-        <div className="text-sm font-medium leading-none">{title}</div>
         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
           {children}
         </p>
       </Link>
-    </li>
+    </li >
   );
 });
 ListItem.displayName = "ListItem";
