@@ -4,6 +4,8 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { FormattedText } from "@/components/formatted-text";
+import { HeadingParagraph } from "@/components/heading--paragraph";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
@@ -24,7 +26,6 @@ import {
   validateAndCleanupEvents,
   validateAndCleanupSideEvents,
 } from "@/lib/zod/events";
-import { HeadingSection } from "@/lib/zod/paragraph";
 import {
   validateAndCleanupWebform,
   validateAndCleanupWebformFields,
@@ -32,8 +33,8 @@ import {
 } from "@/lib/zod/webform";
 
 import NotFoundPage from "../404";
-import { FormattedText } from "@/components/formatted-text";
-import { HeadingParagraph } from "@/components/heading--paragraph";
+import EventMapModal from "@/components/event-map-modal";
+import { useState } from "react";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
@@ -48,7 +49,6 @@ export default function Event({
   webform,
   sideEvents,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  console.log("webform", webform);
   const { t } = useTranslation();
   if (!event) {
     return <NotFoundPage />;
@@ -77,6 +77,10 @@ export default function Event({
     });
   }
 
+  const [showMap, setShowMap] = useState(false);
+  const toggleMap = () => {
+    setShowMap((prevShowMap) => !prevShowMap);
+  };
   return (
     <>
       <Meta title={event.title} metatags={event.metatag} />
@@ -84,27 +88,43 @@ export default function Event({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       {event.field_content_elements?.map((element) => (
-        <Paragraph
-          key={element.id}
-          paragraph={element}
-        />))
+        <Paragraph key={element.id} paragraph={element} />
+      ))}
+      <FormattedText html={event.body.processed} />
+      {
+        <>
+          {event.type === "node--event" && (
+            <>
+              <HeadingParagraph>Participants</HeadingParagraph>
+              {event.field_participant.map((participant) => (
+                <div className="mb-4" key={participant.id}>
+                  <h2 className="font-regular text-2xl">{participant.title}</h2>
+                  <div
+                    className="mt-6 font-serif text-xl leading-loose prose"
+                    dangerouslySetInnerHTML={{
+                      __html: participant.body.processed,
+                    }}
+                  ></div>
+                </div>
+              ))}
+              <HeadingParagraph>Venue</HeadingParagraph>
+              
+              <p>{event.field_venue.field_venue_address}</p>
+              <button onClick={toggleMap}>{showMap ? 'Hide map' : 'Show map'}</button>
+              {showMap && <EventMapModal
+              lat={event.field_venue.field_venue_coordinates.lat}
+              lng={event.field_venue.field_venue_coordinates.lon}/>
+              }
+            </>
+          )}
+        </>
       }
-      < FormattedText html={event.body.processed} />
-      {<>
-        {(event.type === "node--event") && (
-          <>
-            <HeadingParagraph>Participants</HeadingParagraph>
-            {event.field_participant.map((participant) => (
-              <div className="mb-4" key={participant.id}>
-                <h2 className="font-regular text-2xl">{participant.title}</h2>
-                <div className="mt-6 font-serif text-xl leading-loose prose" dangerouslySetInnerHTML={{ __html: participant.body.processed }}></div>
-              </div>
-            ))
-            }
-          </>
-        )}
-      </>}
-      <Webform webform={webform} onlyForAuthenticated={true} formTitle={t("events-form-title", { event: event.title })} formMessageIfUnauthenticated={t("events-form-not-auth")} />
+      <Webform
+        webform={webform}
+        onlyForAuthenticated={true}
+        formTitle={t("events-form-title", { event: event.title })}
+        formMessageIfUnauthenticated={t("events-form-not-auth")}
+      />
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
           sideEvents.map((sideEvent) => (
@@ -183,7 +203,6 @@ export const getStaticProps: GetStaticProps<EventProps> = async (context) => {
       .then((response) => response.json())
       .then((data) => data)
       .catch((error) => console.log(error));
-    console.log("webformFields", webformFields);
     validatedWebform = validateAndCleanupWebform(
       resource.field_event_registration,
     );

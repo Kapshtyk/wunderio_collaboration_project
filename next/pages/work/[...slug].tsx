@@ -41,7 +41,6 @@ export default function WorkPage({
   allWorkPages,
   allArticles,
   numbers,
-
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
@@ -66,11 +65,9 @@ export default function WorkPage({
     "HUS - Helsinki University Hospital",
   ].filter(Boolean);
   //
-  return (
-    currentWorkPage &&
+  return currentWorkPage &&
     currentWorkPage.field_page_type &&
-    currentWorkPage.field_page_type.name === "Work"
-  ) ? (
+    currentWorkPage.field_page_type.name === "Work" ? (
     <>
       <Meta title={currentWorkPage.title} metatags={currentWorkPage.metatag} />
       <div className="container">
@@ -109,9 +106,7 @@ export default function WorkPage({
           <h1 className="font-bold my-4">RELATED CONTENT</h1>
           <div className="flex space-x-6">
             {allWorkPages
-              .filter(
-                (workPages) => workPages.title !== currentWorkPage.title,
-              )
+              .filter((workPages) => workPages.title !== currentWorkPage.title)
               .slice(0, 4)
               .map((workPage) => (
                 <WorkWorkCard workPage={workPage} />
@@ -201,7 +196,9 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     "node--page",
     context,
     {
-      params: getNodePageJsonApiParams("node--page").addFilter('field_page_type.name', 'Work').getQueryObject(),
+      params: getNodePageJsonApiParams("node--page")
+        .addFilter("field_page_type.name", "Work")
+        .getQueryObject(),
     },
   );
 

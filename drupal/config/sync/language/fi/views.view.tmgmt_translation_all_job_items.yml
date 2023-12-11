@@ -1,9 +1,14 @@
 display:
   default:
+    display_title: Isäntä
     display_options:
       exposed_form:
         options:
+          submit_button: Käytä
           reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         options:
           expose:
@@ -17,10 +22,17 @@ display:
           label: Tyyppi
         source_language:
           label: Lähettäjä
+          separator: ', '
         target_language:
           label: Osoitteeseen
+          separator: ', '
+        word_count:
+          separator: ', '
+        tags_count:
+          separator: ', '
         changed:
           label: Muuttunut
+          separator: ', '
         operations:
           label: Toimenpiteet
       filters:
