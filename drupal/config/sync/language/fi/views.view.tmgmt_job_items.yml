@@ -1,9 +1,14 @@
 display:
   default:
+    display_title: Isäntä
     display_options:
       exposed_form:
         options:
+          submit_button: Käytä
           reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         options:
           expose:
@@ -15,6 +20,10 @@ display:
           label: Tunnus
         type:
           label: Tyyppi
+        word_count:
+          separator: ', '
+        tags_count:
+          separator: ', '
         changed:
           label: Muuttunut
         operations:
@@ -27,5 +36,8 @@ display:
           label: Tunnus
         type:
           label: Tyyppi
+        word_count:
+          separator: ', '
         changed:
           label: Muuttunut
+          separator: ', '

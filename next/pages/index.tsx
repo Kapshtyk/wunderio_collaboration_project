@@ -23,6 +23,7 @@ import {
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 
 import { Divider } from "@/ui/divider";
+import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
@@ -94,6 +95,16 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
   ).at(0);
   console.log(aboutUs);
 
+  const legalDocument = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--legal_document",
+      context,
+      {
+        params: getNodePageJsonApiParams("node--legal_document").getQueryObject(),
+      },
+    )
+  ).at(0);
+
   return {
     props: {
       ...(await getCommonPageProps(context)),
@@ -102,6 +113,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
         validateAndCleanupArticleTeaser(teaser),
       ),
       aboutUs: validateAndCleanupAboutUs(aboutUs),
+      legalDocument: validateAndCleanupLegalDocument(legalDocument)
     },
     revalidate: 60,
   };

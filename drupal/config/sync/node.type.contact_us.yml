@@ -1,0 +1,18 @@
+uuid: 4581c14f-80a9-4a13-a2a6-10cea6b443eb
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Contact Us'
+type: contact_us
+description: 'This content type can be used to create contact us page'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

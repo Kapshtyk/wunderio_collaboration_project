@@ -1,10 +1,13 @@
 display:
   default:
+    display_title: Huvud
     display_options:
       exposed_form:
         options:
-          submit_button: Filtrera
           reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
       pager:
         options:
           expose:
@@ -12,6 +15,7 @@ display:
       fields:
         redirect_source__path:
           label: Från
+          separator: ', '
         created:
           label: Skapad
       filters:

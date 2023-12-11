@@ -1,0 +1,21 @@
+uuid: 959cdd7c-1fc6-4588-95e1-bf6b57605db5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_venue_coordinates
+    - node.type.venue
+  module:
+    - geofield
+id: node.venue.field_venue_coordinates
+field_name: field_venue_coordinates
+entity_type: node
+bundle: venue
+label: 'Venue Coordinates'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geofield

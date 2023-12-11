@@ -1,10 +1,13 @@
 display:
   default:
+    display_title: Isäntä
     display_options:
       exposed_form:
         options:
-          submit_button: Suodatus
           reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         options:
           expose:
@@ -12,6 +15,7 @@ display:
       fields:
         redirect_source__path:
           label: Lähettäjä
+          separator: ', '
         created:
           label: Luotu
       filters:

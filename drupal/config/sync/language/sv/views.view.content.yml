@@ -7,20 +7,22 @@ display:
       fields:
         title:
           label: Titel
+        type:
+          separator: ', '
         name:
           label: Författare
         status:
           label: Status
           settings:
             format_custom_true: Publicerad
-        changed:
-          label: Uppdaterad
         operations:
           label: Funktioner
       exposed_form:
         options:
-          submit_button: Filtrera
           reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
       filters:
         title:
           expose:

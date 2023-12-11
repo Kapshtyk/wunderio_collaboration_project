@@ -1,9 +1,14 @@
 display:
   default:
+    display_title: Huvud
     display_options:
       exposed_form:
         options:
+          submit_button: Applicera
           reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
       pager:
         options:
           expose:
@@ -11,12 +16,15 @@ display:
       fields:
         state:
           label: Läge
+          separator: ', '
         label:
           label: Etikett
         source_language_1:
           label: Från
+          separator: ', '
         target_language:
           label: Till
+          separator: ', '
         translator:
           label: Leverantör
         progress:

@@ -5,6 +5,7 @@ import AboutUs from "@/components/about_us";
 import { Article } from "@/components/article";
 import { Meta } from "@/components/meta";
 import { Page } from "@/components/page";
+import LegalDocument from "@/components/legal-document";
 import {
   createLanguageLinks,
   LanguageLinks,
@@ -26,9 +27,10 @@ import {
   validateAndCleanupArticle,
 } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import { LegalDocument as LegalDocumentType, validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
 
 // const RESOURCE_TYPES = ["node--article", "node--page"];
-const RESOURCE_TYPES = ["node--article", "node--page", "node--about_us"];
+const RESOURCE_TYPES = ["node--article", "node--page", "node--about_us", "node--legal_document"];
 
 export default function CustomPage({
   resource,
@@ -41,6 +43,7 @@ export default function CustomPage({
       {resource.type === "node--article" && <Article article={resource} />}
       {resource.type === "node--page" && <Page page={resource} />}
       {resource.type === "node--about_us" && <AboutUs about_us={resource} />}
+      {resource.type === "node--legal_document" && <LegalDocument legal_document={resource} />}
     </>
   );
 }
@@ -54,7 +57,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 };
 
 interface PageProps extends CommonPageProps {
-  resource: PageType | ArticleType | AboutUsType;
+  resource: PageType | ArticleType | AboutUsType | LegalDocumentType;
   languageLinks: LanguageLinks;
 }
 
@@ -132,6 +135,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       ? validateAndCleanupPage(resource)
       : type === "node--about_us"
       ? validateAndCleanupAboutUs(resource)
+      : type === "node--legal_document"
+      ? validateAndCleanupLegalDocument(resource)
       : null;
 
   return {
