@@ -1,0 +1,22 @@
+uuid: c119b63e-843c-42ca-bc35-dfed1f333e96
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.basic_info_related_to_all_positi
+id: node.basic_info_related_to_all_positi.promote
+field_name: promote
+entity_type: node
+bundle: basic_info_related_to_all_positi
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

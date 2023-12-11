@@ -1,0 +1,16 @@
+uuid: 2249047a-c7aa-45a3-84df-70aa7638a46a
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.contact_us
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.contact_us
+target_entity_type_id: node
+target_bundle: contact_us
+default_langcode: site_default
+language_alterable: true

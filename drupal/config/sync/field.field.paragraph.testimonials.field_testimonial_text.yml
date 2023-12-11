@@ -1,0 +1,26 @@
+uuid: 1aea7f27-8717-41d0-828a-1b1f57b1b22c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_testimonial_text
+    - paragraphs.paragraphs_type.testimonials
+  module:
+    - text
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: paragraph.testimonials.field_testimonial_text
+field_name: field_testimonial_text
+entity_type: paragraph
+bundle: testimonials
+label: 'Testimonial text'
+description: 'This section should contain the text of the testimonial.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

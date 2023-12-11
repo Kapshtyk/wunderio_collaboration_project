@@ -1,0 +1,24 @@
+uuid: c0b5a1da-68e8-4ffe-b7ed-b96984333320
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.basic_info_related_to_all_positi
+  module:
+    - text
+id: node.basic_info_related_to_all_positi.body
+field_name: body
+entity_type: node
+bundle: basic_info_related_to_all_positi
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+  required_summary: false
+  allowed_formats: {  }
+field_type: text_with_summary

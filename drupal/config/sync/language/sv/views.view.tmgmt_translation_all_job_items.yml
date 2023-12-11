@@ -1,0 +1,46 @@
+display:
+  default:
+    display_title: Huvud
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Applicera
+          reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Alla -'
+      fields:
+        state:
+          label: Läge
+        label:
+          label: Etikett
+        type:
+          label: Typ
+        source_language:
+          label: Från
+          separator: ', '
+        target_language:
+          label: Till
+          separator: ', '
+        progress:
+          label: Framsteg
+        word_count:
+          separator: ', '
+        tags_count:
+          separator: ', '
+        changed:
+          label: Ändrad
+          separator: ', '
+        operations:
+          label: Funktioner
+      filters:
+        state:
+          group_info:
+            label: Läge
+        source_language:
+          expose:
+            label: Källspråk

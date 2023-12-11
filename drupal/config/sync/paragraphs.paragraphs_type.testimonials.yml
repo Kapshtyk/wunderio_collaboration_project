@@ -1,0 +1,10 @@
+uuid: 48e2aa1f-4555-41e9-8385-2068255b0c91
+langcode: en
+status: true
+dependencies: {  }
+id: testimonials
+label: Testimonials
+icon_uuid: null
+icon_default: null
+description: 'This paragraph is for storing the short testimonials.'
+behavior_plugins: {  }

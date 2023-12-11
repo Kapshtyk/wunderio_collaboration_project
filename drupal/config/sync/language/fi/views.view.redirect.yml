@@ -1,0 +1,30 @@
+display:
+  default:
+    display_title: Isäntä
+    display_options:
+      exposed_form:
+        options:
+          reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Kaikki -'
+      fields:
+        redirect_source__path:
+          label: Lähettäjä
+          separator: ', '
+        created:
+          label: Luotu
+      filters:
+        redirect_source__path:
+          expose:
+            label: Lähettäjä
+        redirect_redirect__uri:
+          expose:
+            label: Osoitteeseen
+        language:
+          expose:
+            label: 'Alkuperäinen kieli'

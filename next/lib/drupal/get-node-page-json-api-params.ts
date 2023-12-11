@@ -179,7 +179,6 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_suffix",
         "field_text",
         "field_numbers_type",
-        "path",
       ])
   }
 

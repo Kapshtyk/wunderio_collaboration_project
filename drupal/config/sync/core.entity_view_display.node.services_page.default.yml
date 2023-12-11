@@ -1,0 +1,58 @@
+uuid: da742066-b88e-4c56-a5af-3dd11c19b1bf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.services_page.field_connect_services
+    - field.field.node.services_page.field_content_elements
+    - field.field.node.services_page.field_page_types
+    - field.field.node.services_page.field_service_types
+    - node.type.services_page
+  module:
+    - entity_reference_revisions
+    - user
+id: node.services_page.default
+targetEntityType: node
+bundle: services_page
+mode: default
+content:
+  field_connect_services:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_content_elements:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_page_types:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_service_types:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

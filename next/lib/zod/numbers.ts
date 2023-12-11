@@ -14,7 +14,7 @@ export const NumbersSchema = z.object({
         processed: z.string(),
     }).optional().nullable(),
     field_num: z.number().nullable().optional(),
-    field_suffix: z.string().optional().nullable(),
+    field_suffix: z.string().nullable().optional(),
     field_text: z.object({
         value: z.string(),
         format: z.string(),
@@ -23,9 +23,6 @@ export const NumbersSchema = z.object({
     field_numbers_type: z.object({
         name: z.string(),
     }),
-    path: z.object({
-        alias: z.string(),
-    }).optional().nullable(),
     metatag: MetatagsSchema.optional(),
 });
 

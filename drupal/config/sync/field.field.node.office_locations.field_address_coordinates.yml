@@ -1,0 +1,25 @@
+uuid: ad523ff0-3c79-41fb-a7b5-0391e138eaa4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_address_coordinates
+    - node.type.office_locations
+  module:
+    - geofield
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.office_locations.field_address_coordinates
+field_name: field_address_coordinates
+entity_type: node
+bundle: office_locations
+label: 'Address coordinates'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geofield

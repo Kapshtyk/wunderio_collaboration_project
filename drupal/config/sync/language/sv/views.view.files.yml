@@ -1,0 +1,30 @@
+display:
+  default:
+    display_title: Förvald
+    display_options:
+      fields:
+        filename:
+          label: Namn
+          separator: ', '
+        status:
+          label: Status
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Alla -'
+      exposed_form:
+        options:
+          reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
+      filters:
+        status:
+          expose:
+            label: Status
+  page_2:
+    display_options:
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Alla -'

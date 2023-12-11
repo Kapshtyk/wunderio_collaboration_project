@@ -1,0 +1,38 @@
+display:
+  default:
+    display_title: Huvud
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Applicera
+          reset_button_label: Återställ
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande
+      pager:
+        options:
+          expose:
+            items_per_page_options_all_label: '- Alla -'
+      fields:
+        title:
+          label: Titel
+          separator: ', '
+        type:
+          label: Typ
+          separator: ', '
+        name:
+          label: Författare
+          separator: ', '
+        changed:
+          separator: ', '
+        imported:
+          separator: ', '
+        operations:
+          label: Funktioner
+      filters:
+        title:
+          expose:
+            label: Titel
+        type:
+          expose:
+            label: Typ

@@ -1,0 +1,31 @@
+uuid: 6e1b4f0c-3a0c-4479-9d86-7a63694d63eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.careers.field_content_elements
+    - node.type.careers
+  module:
+    - entity_reference_revisions
+    - user
+id: node.careers.default
+targetEntityType: node
+bundle: careers
+mode: default
+content:
+  field_content_elements:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

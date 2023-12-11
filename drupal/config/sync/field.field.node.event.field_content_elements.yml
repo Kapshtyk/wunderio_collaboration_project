@@ -1,0 +1,85 @@
+uuid: 19c8c019-1019-4235-9882-265abfda1afd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_elements
+    - node.type.event
+    - paragraphs.paragraphs_type.heading_section
+    - paragraphs.paragraphs_type.image
+  module:
+    - entity_reference_revisions
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.event.field_content_elements
+field_name: field_content_elements
+entity_type: node
+bundle: event
+label: 'Content elements'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      image: image
+      heading_section: heading_section
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: -10
+        enabled: false
+      accordion_item:
+        weight: -12
+        enabled: false
+      event_participants:
+        weight: 20
+        enabled: false
+      file_attachments:
+        weight: 10
+        enabled: false
+      formatted_text:
+        weight: -14
+        enabled: false
+      heading_section:
+        weight: 15
+        enabled: true
+      hero:
+        weight: -15
+        enabled: false
+      image:
+        weight: -13
+        enabled: true
+      labelled_image:
+        weight: 26
+        enabled: false
+      links:
+        weight: -11
+        enabled: false
+      listing_articles:
+        weight: 9
+        enabled: false
+      photos:
+        weight: 24
+        enabled: false
+      services_taxonomy:
+        weight: 30
+        enabled: false
+      sub_heading_section:
+        weight: 31
+        enabled: false
+      testimonials:
+        weight: 12
+        enabled: false
+      video:
+        weight: -9
+        enabled: false
+      work_card:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions
