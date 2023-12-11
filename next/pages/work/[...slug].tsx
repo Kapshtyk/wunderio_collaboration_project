@@ -26,17 +26,21 @@ import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 
 import NotFoundPage from "../404";
+import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
+import Numbers from "@/components/numbers";
 
 interface WorkPageProps {
   currentWorkPage: PageType;
   allWorkPages: PageType[];
   allArticles: Article[];
+  numbers: NumbersType[];
 }
 
 export default function WorkPage({
   currentWorkPage,
   allWorkPages,
   allArticles,
+  numbers,
 
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
@@ -78,6 +82,27 @@ export default function WorkPage({
           <Paragraph key={paragraph.id} paragraph={paragraph} />
         ))}
       </div>
+
+      {currentWorkPage.title === "Luke.fi" ? (
+        <div >
+          <Numbers numbers={numbers.filter((lukeNumbers) => lukeNumbers.field_numbers_type.name === "Work-Luke-Numbers")} />
+        </div>
+
+      ) : null}
+
+      {currentWorkPage.title === "Ministry of Defence of Latvia" ? (
+        <div >
+          <Numbers numbers={numbers.filter((lukeNumbers) => lukeNumbers.field_numbers_type.name === "Work-MinistryOfDefenceLatvia-Numbers")} />
+        </div>
+
+      ) : null}
+
+      {currentWorkPage.title === "Finavia" ? (
+        <div >
+          <Numbers numbers={numbers.filter((lukeNumbers) => lukeNumbers.field_numbers_type.name === "Work-Finavia-Numbers")} />
+        </div>
+
+      ) : null}
 
       {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
         <div className="mt-20">
@@ -188,12 +213,21 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     },
   );
 
+  const numbers = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--numbers",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--numbers").getQueryObject()
+    },
+  );
+
   return {
     props: {
       ...(await getCommonPageProps(context)),
       currentWorkPage: validateAndCleanupPage(resource),
       allWorkPages: pages.map((node) => validateAndCleanupPage(node)),
       allArticles: articles.map((node) => validateAndCleanupArticle(node)),
+      numbers: numbers.map((node) => validateAndCleanupNumbers(node)),
       languageLinks,
     },
     revalidate: 60,

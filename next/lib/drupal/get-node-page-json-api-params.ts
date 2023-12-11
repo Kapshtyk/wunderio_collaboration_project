@@ -116,11 +116,12 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   // The article content type has an image field, and author information:
   if (resourceType === "node--article") {
-    apiParams.addInclude(["field_image", "uid", "field_tags"]);
+    apiParams.addInclude(["field_image", "uid", "field_tags", "uid.field_profile_picture"]);
     apiParams.addFields(resourceType, [
       "title",
       "body",
       "uid",
+      "uid.field_profile_picture",
       "created",
       "field_image",
       "status",
@@ -171,7 +172,8 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "uid",
         "title",
         "body",
-        "field_number",
+        "field_num",
+        "field_suffix",
         "field_text",
         "field_numbers_type",
         "path",

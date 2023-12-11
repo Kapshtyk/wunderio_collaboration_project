@@ -13,11 +13,8 @@ export const NumbersSchema = z.object({
         format: z.string(),
         processed: z.string(),
     }).optional().nullable(),
-    field_number: z.object({
-        value: z.string(),
-        format: z.string(),
-        processed: z.string(),
-    }),
+    field_num: z.number().nullable().optional(),
+    field_suffix: z.string().optional().nullable(),
     field_text: z.object({
         value: z.string(),
         format: z.string(),

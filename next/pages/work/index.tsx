@@ -17,17 +17,21 @@ import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { HeadingSection } from "@/lib/zod/paragraph";
 import { validateAndCleanupWork, Work } from "@/lib/zod/work";
 import { Paragraph } from "@/components/paragraph";
+import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
+import Numbers from "@/components/numbers";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
   allWorkPages: PageType[];
   allArticles: Article[];
+  wunderNumbers: NumbersType[];
 }
 
 export default function WorkPage({
   mainPage,
   allWorkPages,
   allArticles,
+  wunderNumbers,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
@@ -70,11 +74,15 @@ export default function WorkPage({
       </div>
 
       <div>
+        <Numbers numbers={wunderNumbers} />
+      </div>
+
+      <div>
         <h1 className="font-bold mb-4">MORE ABOUT OUR CLIENTS</h1>
         <div className="grid grid-cols-3 gap-3">
           {allArticles
             .filter((workArticles) =>
-              workArticles.field_tags.some(
+              workArticles.field_tags?.some(
                 (field_tag) => field_tag?.name === "Client",
               ),
             )
@@ -84,7 +92,7 @@ export default function WorkPage({
             )
             .slice(0, 3)
             .map((workArticle) => (
-              <WorkArticleCard workArticle={workArticle} />
+              <WorkArticleCard key={workArticle.id} workArticle={workArticle} />
             ))}
         </div>
       </div>
@@ -131,12 +139,21 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     },
   );
 
+  const numbers = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--numbers",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--numbers").addFilter('field_numbers_type.name', 'Wunder in Numbers').getQueryObject()
+    },
+  );
+
   return {
     props: {
       ...(await getCommonPageProps(context)),
       mainPage: validateAndCleanupWork(mainPage),
       allWorkPages: pages.map((node) => validateAndCleanupPage(node)),
       allArticles: articles.map((node) => validateAndCleanupArticle(node)),
+      wunderNumbers: numbers.map((node) => validateAndCleanupNumbers(node)),
       languageLinks,
     },
   };
