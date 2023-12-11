@@ -10,23 +10,26 @@ import WunderIcon from "@/styles/icons/wunder.svg";
 
 import { LanguageSwitcher } from "./language-switcher";
 import { UserMenu } from "./user-menu";
+import { NavigationMenuDemo } from "../navigation-menu/nav-menu";
 
 interface HeaderProps {
   menu: Menu;
 }
 
 export function Header({ menu }: HeaderProps) {
+  console.log('menu', menu)
   const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
 
   return (
     <header className="z-50 flex-shrink-0 border-b border-finnishwinter bg-white text-primary-600 md:sticky md:top-0">
-      <nav className="mx-auto flex max-w-6xl flex-row items-center justify-between px-6 py-4">
+      <nav className="mx-auto relative flex px-6 sm:px-28 h-20 flex-row items-center justify-between py-4">
         <HomeLink />
+        <NavigationMenuDemo menu={menu} />
         <div className="flex flex-row items-center justify-end gap-6 sm:gap-8">
           <SearchLink />
-          <UserMenu />
+          {/* <UserMenu /> */}
           <LanguageSwitcher />
-          <MenuToggle isOpen={isMainMenuOpen} setIsOpen={setIsMainMenuOpen} />
+          {/*  <MenuToggle isOpen={isMainMenuOpen} setIsOpen={setIsMainMenuOpen} /> */}
         </div>
       </nav>
       <MainMenu
