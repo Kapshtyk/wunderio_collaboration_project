@@ -5,6 +5,7 @@ dependencies:
   module:
     - rest
     - serialization
+    - user
     - webform
 _core:
   default_config_hash: KhEak59YJ1ORyFtjAGixvDd6aYyUoEogJRixv10GPeQ
@@ -107,8 +108,9 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'view own webform submission'
       cache:
         type: tag
         options: {  }
@@ -198,6 +200,7 @@ display:
         - url
         - url.query_args
         - user
+        - user.permissions
       tags: {  }
   rest_export_1:
     id: rest_export_1
@@ -220,7 +223,9 @@ display:
         options: {  }
       display_extenders: {  }
       path: rest/my-webform-submissions
-      auth: {  }
+      auth:
+        - oauth2
+        - cookie
     cache_metadata:
       max-age: 0
       contexts:
@@ -229,4 +234,5 @@ display:
         - request_format
         - url
         - user
+        - user.permissions
       tags: {  }

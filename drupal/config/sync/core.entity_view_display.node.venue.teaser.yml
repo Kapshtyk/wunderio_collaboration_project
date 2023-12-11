@@ -5,8 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.venue.body
-    - field.field.node.venue.field_venue_address
-    - field.field.node.venue.field_venue_coordinates
     - node.type.venue
   module:
     - text
@@ -30,6 +28,4 @@ content:
     weight: 100
     region: content
 hidden:
-  field_venue_address: true
-  field_venue_coordinates: true
   langcode: true
