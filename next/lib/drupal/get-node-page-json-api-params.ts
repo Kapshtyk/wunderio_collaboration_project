@@ -13,6 +13,7 @@ export type ResourceType =
   | 'node--about_us'
   | 'node--work_main_page'
   | 'node--services_page'
+  | 'node--numbers'
   | 'node--office_locations'
   | 'node--contact_us'
   | 'node--venue'
@@ -120,11 +121,12 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   // The article content type has an image field, and author information:
   if (resourceType === "node--article") {
-    apiParams.addInclude(["field_image", "uid", "field_tags"]);
+    apiParams.addInclude(["field_image", "uid", "field_tags", "uid.field_profile_picture"]);
     apiParams.addFields(resourceType, [
       "title",
       "body",
       "uid",
+      "uid.field_profile_picture",
       "created",
       "field_image",
       "status",
@@ -165,13 +167,28 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_service_types",
       ]);
   }
+  if (resourceType === "node--numbers") {
+    apiParams.addInclude([
+      "field_numbers_type",
+    ])
+      .addFields("node--numbers", [
+        "uid",
+        "title",
+        "body",
+        "field_num",
+        "field_suffix",
+        "field_text",
+        "field_numbers_type",
+        "path",
+      ])
+  }
 
   if (resourceType === "node--office_locations") {
-    apiParams      
-    .addInclude([
-      "uuid",
-      "field_address_coordinates"
-    ])
+    apiParams
+      .addInclude([
+        "uuid",
+        "field_address_coordinates"
+      ])
       .addFields("node--office_locations", [
         "title",
         "path",
@@ -186,11 +203,11 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
   }
 
   if (resourceType === "node--contact_us") {
-    apiParams      
-    .addInclude([
-      "uid",
-      "field_content_elements", 
-    ])
+    apiParams
+      .addInclude([
+        "uid",
+        "field_content_elements",
+      ])
       .addFields("node--office_locations", [
         "title",
         "metatag",
@@ -198,11 +215,11 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       ])
   }
   if (resourceType === "node--venue") {
-    apiParams      
-    .addInclude([
-      "uid",
-      "field_venue_coordinates", 
-    ])
+    apiParams
+      .addInclude([
+        "uid",
+        "field_venue_coordinates",
+      ])
       .addFields("node--office_locations", [
         "title",
         "metatag",
@@ -211,7 +228,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       ])
   }
   if (resourceType === "node--legal_document") {
-    apiParams      
+    apiParams
       .addFields("node--legal_document", [
         "title",
         "body",
