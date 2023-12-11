@@ -1,0 +1,31 @@
+uuid: eee65c1d-e6da-4e4f-8c42-23d83272e081
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.contact_us.field_content_elements
+    - node.type.contact_us
+  module:
+    - entity_reference_revisions
+    - user
+id: node.contact_us.default
+targetEntityType: node
+bundle: contact_us
+mode: default
+content:
+  field_content_elements:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

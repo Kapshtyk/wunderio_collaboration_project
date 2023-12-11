@@ -7,6 +7,7 @@ dependencies:
     - field.field.node.event.field_content_elements
     - field.field.node.event.field_event_registration
     - field.field.node.event.field_participant
+    - field.field.node.event.field_venue
     - node.type.event
   module:
     - entity_reference_revisions
@@ -50,6 +51,14 @@ content:
       link: true
     third_party_settings: {  }
     weight: 103
+    region: content
+  field_venue:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
     region: content
   links:
     settings: {  }

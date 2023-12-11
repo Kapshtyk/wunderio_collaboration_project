@@ -1,0 +1,27 @@
+uuid: 2ef62092-bdc5-4afa-96b8-fc8dc56b98f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.office_locations.field_address_coordinates
+    - field.field.node.office_locations.field_office_address
+    - field.field.node.office_locations.field_office_email
+    - node.type.office_locations
+  module:
+    - user
+id: node.office_locations.teaser
+targetEntityType: node
+bundle: office_locations
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_address_coordinates: true
+  field_office_address: true
+  field_office_email: true
+  langcode: true

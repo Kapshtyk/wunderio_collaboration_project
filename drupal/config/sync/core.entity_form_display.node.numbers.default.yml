@@ -114,4 +114,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_num: true
+  field_numbers_type: true
+  field_suffix: true
