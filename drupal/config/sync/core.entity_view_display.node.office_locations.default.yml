@@ -1,0 +1,104 @@
+uuid: 8e836633-a9b1-4463-a86f-f17e6b12d2ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.office_locations.field_address_coordinates
+    - field.field.node.office_locations.field_office_address
+    - field.field.node.office_locations.field_office_email
+    - node.type.office_locations
+  module:
+    - styled_google_map
+    - user
+id: node.office_locations.default
+targetEntityType: node
+bundle: office_locations
+mode: default
+content:
+  field_address_coordinates:
+    type: styled_google_map_default
+    label: above
+    settings:
+      width: 450px
+      height: 400px
+      gestureHandling: cooperative
+      style:
+        maptype: ROADMAP
+        style: '[]'
+        pin: ''
+        pin_width: ''
+        pin_height: ''
+      map_center:
+        center_coordinates: ''
+      popup:
+        choice: '0'
+        view_mode: default
+        text: label
+        default_state: '0'
+        second_click: '0'
+        close_button_source: ''
+        open_event: click
+        shadow_style: '0'
+        padding: '13'
+        border_radius: '7'
+        border_width: '1'
+        border_color: '#cccccc'
+        background_color: '#ffffff'
+        min_width: auto
+        max_width: auto
+        min_height: auto
+        max_height: auto
+        arrow_style: '0'
+        arrow_size: '10'
+        arrow_position: '50'
+        disable_autopan: '0'
+        hide_close_button: '0'
+        disable_animation: '1'
+        classes:
+          content_container: sgmpopup-content-wrapper
+          background: sgmpopup-content
+          arrow: sgmpopup-arrow
+          arrow_outer: sgmpopup-arrow-outer
+          arrow_inner: sgmpopup-arrow-inner
+        label: 0
+      zoom:
+        default: '15'
+        max: '17'
+        min: '5'
+      directions:
+        type: SELECTABLE
+        enabled: 0
+        steps: 0
+      maptypecontrol: '1'
+      scalecontrol: '1'
+      rotatecontrol: '1'
+      draggable: '1'
+      mobile_draggable: '1'
+      streetviewcontrol: '1'
+      zoomcontrol: '1'
+      fullscreen: 0
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_office_address:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_office_email:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

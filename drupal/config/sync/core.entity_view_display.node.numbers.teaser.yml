@@ -30,6 +30,9 @@ content:
     weight: 100
     region: content
 hidden:
+  field_num: true
   field_number: true
+  field_numbers_type: true
+  field_suffix: true
   field_text: true
   langcode: true

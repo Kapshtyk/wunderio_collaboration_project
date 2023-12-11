@@ -3,16 +3,21 @@ import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { env } from "@/env";
 
 export type ResourceType =
-  | "node--frontpage"
-  | "node--page"
-  | "node--article"
-  | "node--careers"
-  | "node--open_positions"
-  | "node--event"
-  | "node--side_event"
-  | "node--about_us"
-  | "node--work_main_page"
-  | "node--services_page";
+  | 'node--frontpage'
+  | 'node--page'
+  | 'node--article'
+  | 'node--careers'
+  | 'node--open_positions'
+  | 'node--event'
+  | 'node--side_event'
+  | 'node--about_us'
+  | 'node--work_main_page'
+  | 'node--services_page'
+  | 'node--numbers'
+  | 'node--office_locations'
+  | 'node--contact_us'
+  | 'node--venue'
+  | 'node--legal_document';
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -40,6 +45,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_content_elements.field_image.field_media_image",
       "field_event_registration",
       "field_participant",
+      "field_venue"
     ]);
     /*  .addFields(resourceType, [
         "title",
@@ -115,11 +121,12 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   // The article content type has an image field, and author information:
   if (resourceType === "node--article") {
-    apiParams.addInclude(["field_image", "uid", "field_tags"]);
+    apiParams.addInclude(["field_image", "uid", "field_tags", "uid.field_profile_picture"]);
     apiParams.addFields(resourceType, [
       "title",
       "body",
       "uid",
+      "uid.field_profile_picture",
       "created",
       "field_image",
       "status",
@@ -149,7 +156,6 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_connect_services",
         "field_content_elements",
         "field_content_elements.field_image.field_media_image",
-        "field_page_types",
         "field_service_types",
       ])
       .addFields("node--services_page", [
@@ -158,10 +164,77 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "path",
         "status",
         "metatag",
-        "field_page_types",
         "field_service_types",
       ]);
   }
+  if (resourceType === "node--numbers") {
+    apiParams.addInclude([
+      "field_numbers_type",
+    ])
+      .addFields("node--numbers", [
+        "uid",
+        "title",
+        "body",
+        "field_num",
+        "field_suffix",
+        "field_text",
+        "field_numbers_type",
+        "path",
+      ])
+  }
 
-  return apiParams;
+  if (resourceType === "node--office_locations") {
+    apiParams
+      .addInclude([
+        "uuid",
+        "field_address_coordinates"
+      ])
+      .addFields("node--office_locations", [
+        "title",
+        "path",
+        "status",
+        "metatag",
+        "field_address_coordinates",
+        "field_city",
+        "field_country_name",
+        "field_postal_code",
+        "field_street_address"
+      ])
+  }
+
+  if (resourceType === "node--contact_us") {
+    apiParams
+      .addInclude([
+        "uid",
+        "field_content_elements",
+      ])
+      .addFields("node--office_locations", [
+        "title",
+        "metatag",
+        "field_content_elements",
+      ])
+  }
+  if (resourceType === "node--venue") {
+    apiParams
+      .addInclude([
+        "uid",
+        "field_venue_coordinates",
+      ])
+      .addFields("node--office_locations", [
+        "title",
+        "metatag",
+        "field_venue_coordinates",
+        "field_venue_address"
+      ])
+  }
+  if (resourceType === "node--legal_document") {
+    apiParams
+      .addFields("node--legal_document", [
+        "title",
+        "body",
+        "metatag",
+      ])
+  }
+
+  return apiParams
 }
