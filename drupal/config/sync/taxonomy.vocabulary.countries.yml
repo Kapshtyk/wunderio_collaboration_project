@@ -1,8 +1,0 @@
-uuid: 3f38a386-4dc4-415a-a855-6fdbc31dc411
-langcode: en
-status: true
-dependencies: {  }
-name: Countries
-vid: countries
-description: "List of countries with Wunder's offices"
-weight: 0

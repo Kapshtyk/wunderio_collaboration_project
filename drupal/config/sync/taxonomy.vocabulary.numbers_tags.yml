@@ -1,8 +1,0 @@
-uuid: 7b06b2f5-b852-429f-b673-1155be69989b
-langcode: en
-status: true
-dependencies: {  }
-name: Numbers_tags
-vid: numbers_tags
-description: 'This taxonomy is used to filter different numbers contents to be displayed in certain pages'
-weight: 0

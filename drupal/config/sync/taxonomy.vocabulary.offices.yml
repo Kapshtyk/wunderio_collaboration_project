@@ -1,8 +1,0 @@
-uuid: 178ed881-9da3-4a91-9d7a-b57434d6185a
-langcode: en
-status: true
-dependencies: {  }
-name: Offices
-vid: offices
-description: 'List of cities where Wudner has an office'
-weight: 0
