@@ -69,8 +69,8 @@ module.exports = {
     },
 
     fontFamily: {
-      inter: ["--font-inter", ...defaultTheme.fontFamily.sans],
       overpass: ["--font-overpass", ...defaultTheme.fontFamily.sans],
+      inter: ["--font-inter", ...defaultTheme.fontFamily.sans],
     },
     fontSize: {
       xs: ["0.75rem", { lineHeight: "1.33" }],
