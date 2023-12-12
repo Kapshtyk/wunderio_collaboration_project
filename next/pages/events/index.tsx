@@ -26,10 +26,6 @@ export default function EventsPage({
   const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t("homepage-link"),
-      url: "/",
-    },
-    {
       title: t("events-link"),
       url: "/events",
     },
@@ -41,7 +37,7 @@ export default function EventsPage({
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <HeadingPage>{t("events-main-title")}</HeadingPage>
+      <HeadingPage title={t("events-main-title")} description={t("events-main-description")} />
       <Events events={events} />
     </>
   );

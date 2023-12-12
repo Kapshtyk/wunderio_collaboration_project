@@ -3,7 +3,60 @@
 @tailwind utilities;
 
 @layer base {
-  @import "_focus-visible.css";
+  @import "_focus-visible.css"; 
+}
+
+@layer base {
+  :root {
+    --primary-900: 38 29 161;
+    --primary-800: 36 41 174;
+    --primary-700: 77 47 182;
+    --primary-600: 91 55 191;
+    --primary-500: 101 60 197;
+    --primary-400: 125 89 206;
+    --primary-300: 149 119 215;
+    --primary-200: 180 159 226;
+    --primary-100: 210 197 237;
+    --primary-50: 237 231 248;
+
+    --secondary-900: 158 0 93;
+    --secondary-800: 195 10 99;
+    --secondary-700: 216 16 102;
+    --secondary-600: 239 20 107;
+    --secondary-500: 255 24 110;
+    --secondary-400: 255 65 133;
+    --secondary-300: 255 102 157;
+    --secondary-200: 255 147 185;
+    --secondary-100: 255 190 213;
+    --secondary-50: 255 229 238;
+
+    --tranquil: 247 255 255;
+    --martinique: 47 41 66;
+    --primary: var(--primary-500);
+
+    --accent-hugs: 158 0 93;
+    --accent-bittersweet: 255 112 96;
+    --accent-evergreen: 10 100 80;
+    --accent-fog: 186 162 255;
+    --accent-mellow: 255 244 138;
+    --accent-rose: 255 199 232;
+    --accent-orange: 254 173 44;
+    --accent-peach-fuzz: 255 190 152;
+  
+    --steelgray: 34 31 45;
+    --scapaflow: 85 81 97;
+    --stone: 118 114 131;
+    --topaz: 155 152 164;
+    --graysuit: 196 194 204;
+    --finnishwinter: 231 230 235;
+    --micshka: 247 247 248;
+    --white: 255 255 255;
+
+    --error: 204 0 102;
+    --success: 0 127 108;
+    --warning: 157 106 0;
+    --info: 20 121 146;
+  }
 }
 
 @layer components {
