@@ -37,7 +37,7 @@ export function Layout({ menus, children }: LayoutProps) {
         </SkipToContentLink>
         <Header menu={menus.main} />
         <main className="grow bg-mischka" id="main-content">
-          <div className="mx-auto max-w-6xl px-6 py-8">{children}</div>
+          <div className="mx-auto max-w-6xl px-6">{children}</div>
         </main>
         <Footer menu={menus.footer} />
       </div>

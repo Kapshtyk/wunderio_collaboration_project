@@ -29,10 +29,6 @@ export default function OpenPosition({
   const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t("homepage-link"),
-      url: "/",
-    },
-    {
       title: t("careers-link"),
 
       url: "/careers",

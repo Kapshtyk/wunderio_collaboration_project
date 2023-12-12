@@ -49,7 +49,7 @@ function App({ Component, pageProps }: AppProps<PageProps>) {
 function Fonts({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className={`${inter.variable} ${overpass.variable} font-overpass antialiased`}
+      className={`${overpass.className} ${inter.className} font-overpass antialiased`}
     >
       {children}
     </div>

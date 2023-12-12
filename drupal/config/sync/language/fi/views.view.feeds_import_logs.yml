@@ -1,32 +1,24 @@
 display:
   default:
-    display_title: Isäntä
     display_options:
+      title: Loki
       fields:
         import_id:
           label: ID
-          separator: ', '
-        start:
-          separator: ', '
-        end:
-          separator: ', '
         uid:
-          separator: ', '
+          label: User
         sources_value:
           label: Lähteet
-          separator: ', '
       pager:
         options:
           expose:
             items_per_page_options_all_label: '- Kaikki -'
       exposed_form:
         options:
-          submit_button: Käytä
           reset_button_label: Palauta
-          exposed_sorts_label: Lajittele
-          sort_asc_label: Asc
-          sort_desc_label: Desc
   page_1:
     display_options:
       menu:
         title: Yleiskatsaus
+      tab_options:
+        title: Loki

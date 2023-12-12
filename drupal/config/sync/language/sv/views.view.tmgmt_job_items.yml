@@ -1,14 +1,9 @@
 display:
   default:
-    display_title: Huvud
     display_options:
       exposed_form:
         options:
-          submit_button: Applicera
           reset_button_label: Återställ
-          exposed_sorts_label: 'Sortera efter'
-          sort_asc_label: Stigande
-          sort_desc_label: Fallande
       pager:
         options:
           expose:
@@ -22,10 +17,6 @@ display:
           label: Typ
         progress:
           label: Framsteg
-        word_count:
-          separator: ', '
-        tags_count:
-          separator: ', '
         changed:
           label: Ändrad
         operations:
@@ -38,8 +29,5 @@ display:
           label: Etikett
         type:
           label: Typ
-        word_count:
-          separator: ', '
         changed:
           label: Ändrad
-          separator: ', '

@@ -1,28 +1,16 @@
 display:
   default:
-    display_title: Huvud
     display_options:
       exposed_form:
         options:
-          submit_button: Applicera
           reset_button_label: Återställ
-          exposed_sorts_label: 'Sortera efter'
-          sort_asc_label: Stigande
-          sort_desc_label: Fallande
       pager:
         options:
           expose:
             items_per_page_options_all_label: '- Alla -'
       fields:
-        sid:
-          separator: ', '
-        in_draft:
-          separator: ', '
         created:
           label: Skapad
-          separator: ', '
-        remote_addr:
-          separator: ', '
         view_webform_submission:
           label: Funktioner
   embed_administer:
@@ -30,22 +18,10 @@ display:
       fields:
         webform_submission_bulk_form:
           action_title: Åtgärd
-        sid:
-          separator: ', '
-        in_draft:
-          separator: ', '
-        sticky:
-          separator: ', '
-        locked:
-          separator: ', '
         created:
           label: Skapad
-          separator: ', '
         completed:
           label: Slutförd
-          separator: ', '
-        remote_addr:
-          separator: ', '
         operations:
           label: Funktioner
   embed_manage:
@@ -53,22 +29,10 @@ display:
       fields:
         webform_submission_bulk_form:
           action_title: Åtgärd
-        sid:
-          separator: ', '
-        in_draft:
-          separator: ', '
-        sticky:
-          separator: ', '
-        locked:
-          separator: ', '
         created:
           label: Skapad
-          separator: ', '
         completed:
           label: Slutförd
-          separator: ', '
-        remote_addr:
-          separator: ', '
         view_webform_submission:
           label: Funktioner
         edit_webform_submission:
@@ -76,21 +40,9 @@ display:
   embed_review:
     display_options:
       fields:
-        sid:
-          separator: ', '
-        in_draft:
-          separator: ', '
-        sticky:
-          separator: ', '
-        locked:
-          separator: ', '
         created:
           label: Skapad
-          separator: ', '
         completed:
           label: Slutförd
-          separator: ', '
-        remote_addr:
-          separator: ', '
         view_webform_submission:
           label: Funktioner
