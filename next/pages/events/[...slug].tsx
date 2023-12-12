@@ -56,10 +56,6 @@ export default function Event({
 
   const breadcrumbs = [
     {
-      title: t("homepage-link"),
-      url: "/",
-    },
-    {
       title: t("events-link"),
 
       url: "/events",
@@ -87,6 +83,7 @@ export default function Event({
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
+      <h2 className="sr-only">{`${event.title} - main description`}</h2>
       {event.field_content_elements?.map((element) => (
         <Paragraph key={element.id} paragraph={element} />
       ))}
@@ -108,12 +105,12 @@ export default function Event({
                 </div>
               ))}
               <HeadingParagraph>Venue</HeadingParagraph>
-              
+
               <p>{event.field_venue.field_venue_address}</p>
               <button onClick={toggleMap}>{showMap ? 'Hide map' : 'Show map'}</button>
               {showMap && <EventMapModal
-              lat={event.field_venue.field_venue_coordinates.lat}
-              lng={event.field_venue.field_venue_coordinates.lon}/>
+                lat={event.field_venue.field_venue_coordinates.lat}
+                lng={event.field_venue.field_venue_coordinates.lon} />
               }
             </>
           )}

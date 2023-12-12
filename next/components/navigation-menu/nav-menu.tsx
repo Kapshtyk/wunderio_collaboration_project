@@ -28,7 +28,7 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
   return (
     isClient &&
     <NavigationMenu>
-      <NavigationMenuList className="text-sm font-semibold text-steelgray">
+      <NavigationMenuList className="text-xl font-semibold text-steelgray">
         {menu.map((item) => (
           item.items ? (
             <NavigationMenuItem key={item.title}>
