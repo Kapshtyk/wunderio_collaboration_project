@@ -14,7 +14,7 @@ export default function NotFoundPage() {
   return (
     <>
       <Meta title={t("Page not found")} metatags={[]} />
-      <HeadingPage>{t("Page not found")}</HeadingPage>
+      <HeadingPage title={t("Page not found")} />
       <p className="mt-8 text-lg">
         {t("The page you are looking for does not exist.")}{" "}
         <Link href="/" className="hyperlink underline">

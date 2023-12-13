@@ -65,7 +65,7 @@ export function validateAndCleanupAboutUs(page: DrupalNode): AboutUs | null {
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError About us", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, page }, null, 2));
     return null;
   }

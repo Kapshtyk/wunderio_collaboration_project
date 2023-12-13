@@ -1,20 +1,14 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import {
-  DrupalNode,
-  DrupalTaxonomyTerm,
-  DrupalTranslatedPath,
-} from "next-drupal";
+import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Meta } from "@/components/meta";
+import Numbers from "@/components/numbers";
 import { Paragraph } from "@/components/paragraph";
 import { WorkArticleCard } from "@/components/workArticleCard";
 import { WorkWorkCard } from "@/components/workWorkCard";
-import {
-  createLanguageLinks,
-  LanguageLinks,
-} from "@/lib/contexts/language-links-context";
+import { createLanguageLinks } from "@/lib/contexts/language-links-context";
 import { drupal } from "@/lib/drupal/drupal-client";
 import {
   getNodePageJsonApiParams,
@@ -23,11 +17,13 @@ import {
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
+import {
+  Numbers as NumbersType,
+  validateAndCleanupNumbers,
+} from "@/lib/zod/numbers";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 
 import NotFoundPage from "../404";
-import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
-import Numbers from "@/components/numbers";
 
 interface WorkPageProps {
   currentWorkPage: PageType;
@@ -81,24 +77,37 @@ export default function WorkPage({
       </div>
 
       {currentWorkPage.title === "Luke.fi" ? (
-        <div >
-          <Numbers numbers={numbers.filter((lukeNumbers) => lukeNumbers.field_numbers_type.name === "Work-Luke-Numbers")} />
+        <div>
+          <Numbers
+            numbers={numbers.filter(
+              (lukeNumbers) =>
+                lukeNumbers.field_numbers_type.name === "Work-Luke-Numbers",
+            )}
+          />
         </div>
-
       ) : null}
 
       {currentWorkPage.title === "Ministry of Defence of Latvia" ? (
-        <div >
-          <Numbers numbers={numbers.filter((lukeNumbers) => lukeNumbers.field_numbers_type.name === "Work-MinistryOfDefenceLatvia-Numbers")} />
+        <div>
+          <Numbers
+            numbers={numbers.filter(
+              (lukeNumbers) =>
+                lukeNumbers.field_numbers_type.name ===
+                "Work-MinistryOfDefenceLatvia-Numbers",
+            )}
+          />
         </div>
-
       ) : null}
 
       {currentWorkPage.title === "Finavia" ? (
-        <div >
-          <Numbers numbers={numbers.filter((lukeNumbers) => lukeNumbers.field_numbers_type.name === "Work-Finavia-Numbers")} />
+        <div>
+          <Numbers
+            numbers={numbers.filter(
+              (lukeNumbers) =>
+                lukeNumbers.field_numbers_type.name === "Work-Finavia-Numbers",
+            )}
+          />
         </div>
-
       ) : null}
 
       {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
@@ -109,7 +118,7 @@ export default function WorkPage({
               .filter((workPages) => workPages.title !== currentWorkPage.title)
               .slice(0, 4)
               .map((workPage) => (
-                <WorkWorkCard workPage={workPage} />
+                <WorkWorkCard key={workPage.id} workPage={workPage} />
               ))}
           </div>
         </div>
@@ -131,7 +140,10 @@ export default function WorkPage({
               )
               .slice(0, 3)
               .map((workArticle) => (
-                <WorkArticleCard workArticle={workArticle} />
+                <WorkArticleCard
+                  key={workArticle.id}
+                  workArticle={workArticle}
+                />
               ))}
           </div>
         </div>
@@ -214,7 +226,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     "node--numbers",
     context,
     {
-      params: getNodePageJsonApiParams("node--numbers").getQueryObject()
+      params: getNodePageJsonApiParams("node--numbers").getQueryObject(),
     },
   );
 

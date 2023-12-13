@@ -3,10 +3,8 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
-import SubHeadingSectionComponent from "@/components/services-subHeading-section";
 import ServicesTypes from "@/components/services-types";
 import {
   createLanguageLinks,
@@ -65,7 +63,7 @@ export default function ServicesPages({
       </div>
       <div>
         {services.field_content_elements?.map((paragraph) => {
-          const { field_excerpt, ...props } = paragraph as HeadingSection;
+          const { field_excerpt: _, ...props } = paragraph as HeadingSection;
           return <Paragraph key={paragraph.id} paragraph={props} />;
         })}
       </div>

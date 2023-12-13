@@ -45,7 +45,7 @@ export function validateAndCleanupWork(work: DrupalNode): Work | null {
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Work", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, work }, null, 2));
     return null;
   }

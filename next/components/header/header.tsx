@@ -3,15 +3,15 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 
-import { MainMenu, MenuToggle } from "@/components/main-menu/main-menu";
+import { MainMenu } from "@/components/main-menu/main-menu";
 import { Menu } from "@/lib/zod/menu";
 import SearchIcon from "@/styles/icons/search.svg";
 import WunderIcon from "@/styles/icons/wunder.svg";
 
-import { LanguageSwitcher } from "./language-switcher";
-import { UserMenu } from "./user-menu";
-import { NavigationMenuDemo } from "../navigation-menu/nav-menu";
 import { DarkModeToggle } from "../dark-mode-toggle";
+import { NavigationMenuDemo } from "../navigation-menu/nav-menu";
+
+import { LanguageSwitcher } from "./language-switcher";
 
 interface HeaderProps {
   menu: Menu;
@@ -47,7 +47,7 @@ function HomeLink() {
   const { t } = useTranslation();
   return (
     <Link href="/" locale={locale} className="inline">
-      <WunderIcon className="w-32 text-primary-500" />
+      <WunderIcon className="w-32 text-main" />
       <span className="sr-only">{t("homepage-link")}</span>
     </Link>
   );

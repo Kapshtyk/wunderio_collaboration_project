@@ -3,22 +3,23 @@ import clsx from "clsx";
 import { cva } from "cva";
 
 export const buttonVariants = cva(
-  "flex rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
+  "flex gap-2 items-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
         primary: [
           "bg-primary-500 text-white",
-          "hover:bg-primary-600 hover:text-white",
-          "disabled:!border-primary-200 disabled:!text-white disabled:!bg-primary-200",
+          "hover:bg-primary-500/80 hover:text-white",
+          "disabled:!border-primary-500/20 disabled:!text-white/20 disabled:!bg-primary-500/20",
         ],
         secondary: [
-          "bg-foreground text-primary-500 border-primary-500 border",
+          "bg-background text-main border-main border",
           "hover:bg-primary-50 hover:text-primary-500 hover:border-primary-500",
           "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-foreground",
         ],
         tertiary: [
-          "bg-transparent text-primary-600",
+          "bg-transparent text-foreground",
+          "hover:hover:text-foreground/80",
           /* "hover:bg-primary-50 hover:text-primary-600 hover:border-transparent",
           "active:bg-primary-50 active:text-primary-600 active:border-transparent",
           "disabled:!border-transparent disabled:!text-primary-200", */
@@ -34,7 +35,7 @@ export const buttonVariants = cva(
     },
   },
 );
-<div className="h-14" />
+<div className="h-14" />;
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "tertiary";
@@ -49,7 +50,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     return (
-
       <button
         className={clsx(buttonVariants({ variant, size }), className)}
         ref={ref}

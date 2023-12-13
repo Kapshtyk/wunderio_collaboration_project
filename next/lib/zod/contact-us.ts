@@ -2,7 +2,7 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import { HeadingSectionSchema, FormattedTextSchema } from "@/lib/zod/paragraph";
+import { FormattedTextSchema, HeadingSectionSchema } from "@/lib/zod/paragraph";
 
 const ContactUsElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
@@ -56,7 +56,7 @@ export function validateAndCleanupContactUs(
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Contact us", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, contactUs }, null, 2));
     return null;
   }

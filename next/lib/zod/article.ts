@@ -41,7 +41,7 @@ export function validateAndCleanupArticle(article: DrupalNode): Article | null {
   try {
     return ArticleSchema.parse(article);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Article", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, article }, null, 2));
     return null;
   }

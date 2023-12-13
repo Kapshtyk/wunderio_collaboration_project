@@ -25,7 +25,7 @@ export default function DashboardPage({
   return (
     <>
       <Meta title={t("form-submission-details")} metatags={[]} />
-      <HeadingPage>{t("form-submission-details")}</HeadingPage>
+      <HeadingPage title={t("form-submission-details")} />
       <Link href="/dashboard" className="hyperlink mt-4 block">
         {t("back-to-dashboard")}
       </Link>

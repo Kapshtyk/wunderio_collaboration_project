@@ -1,32 +1,31 @@
-import { GoogleMap, MarkerF, useLoadScript } from '@react-google-maps/api';
-import { useEffect, useState } from 'react';
-import { env } from "@/env";
+import { useEffect, useState } from "react";
+import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 
-
+/* import { env } from "@/env";
+ */
 interface MapModalProps {
   lat: number;
   lng: number;
 }
 
 const EventMapModal: React.FC<MapModalProps> = ({ lat, lng }) => {
-  const [markers, setMarkers] = useState({lat:0,lng:0});
+  const [markers, setMarkers] = useState({ lat: 0, lng: 0 });
 
-  useEffect(()=> {
+  useEffect(() => {
     const newMarkers = {
-        lat: lat,
-        lng: lng
-    }
-    setMarkers(newMarkers)
-  },[lat,lng])
+      lat: lat,
+      lng: lng,
+    };
+    setMarkers(newMarkers);
+  }, [lat, lng]);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
+    googleMapsApiKey: "",
   });
 
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
-
 
   const getDirectionsUrl = (lat: number, lon: number) => {
     return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`;
@@ -34,11 +33,12 @@ const EventMapModal: React.FC<MapModalProps> = ({ lat, lng }) => {
 
   return (
     <>
-    <GoogleMap
-    center={{ lat: markers.lat, lng: markers.lng }} 
-      zoom={15} 
-      mapContainerStyle={{ height: '200px', width: '50%' }}>
-        <MarkerF position={{ lat:markers.lat, lng: markers.lng }}/>
+      <GoogleMap
+        center={{ lat: markers.lat, lng: markers.lng }}
+        zoom={15}
+        mapContainerStyle={{ height: "200px", width: "50%" }}
+      >
+        <MarkerF position={{ lat: markers.lat, lng: markers.lng }} />
       </GoogleMap>
 
       <p>
@@ -51,7 +51,7 @@ const EventMapModal: React.FC<MapModalProps> = ({ lat, lng }) => {
           How to Get There
         </a>
       </p>
-      </>
+    </>
   );
 };
 

@@ -19,6 +19,7 @@ const Matomo = ({ MATOMO_URL, MATOMO_CONTAINER }: MatomoProps) => {
 
   return (
     <Script
+      id="matomo"
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{
         __html: `

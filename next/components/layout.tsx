@@ -37,7 +37,7 @@ export function Layout({ menus, children }: LayoutProps) {
           {t("skip-to-main-content")}
         </SkipToContentLink>
         <Header menu={menus.main} />
-        <main className="grow bg-mischka" id="main-content">
+        <main className="grow" id="main-content">
           <div className="mx-auto max-w-6xl px-6">{children}</div>
         </main>
         <Footer menu={menus.footer} />

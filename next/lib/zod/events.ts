@@ -2,13 +2,13 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import { GeofieldSchema } from "./office-locations";
 import {
   FormattedTextSchema,
   HeadingSectionSchema,
   ImageSchema,
 } from "@/lib/zod/paragraph";
 
+import { GeofieldSchema } from "./office-locations";
 
 const EventsElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
@@ -20,14 +20,17 @@ export const VenueSchema = z.object({
   type: z.literal("node--venue"),
   id: z.string(),
   title: z.string(),
-  body: z.object({
-    value: z.string(),
-    format: z.string(),
-    processed: z.string(),
-  }).nullable().optional(),
+  body: z
+    .object({
+      value: z.string(),
+      format: z.string(),
+      processed: z.string(),
+    })
+    .nullable()
+    .optional(),
   field_venue_coordinates: GeofieldSchema,
-  field_venue_address: z.string()
-})
+  field_venue_address: z.string(),
+});
 
 export const ParticipantSchema = z.object({
   type: z.literal("node--people"),
@@ -53,23 +56,29 @@ export const EventsSchema = z.object({
   path: z.object({
     alias: z.string(),
   }),
-  body: z.object({
-    value: z.string(),
-    format: z.string(),
-    processed: z.string(),
-  }).nullable().optional(),
+  body: z
+    .object({
+      value: z.string(),
+      format: z.string(),
+      processed: z.string(),
+    })
+    .nullable()
+    .optional(),
   field_event_registration: z.object({
     id: z.string(),
-    resourceIdObjMeta: z.object({
-      drupal_internal__target_id: z.string(),
-    }).nullable().optional(),
+    resourceIdObjMeta: z
+      .object({
+        drupal_internal__target_id: z.string(),
+      })
+      .nullable()
+      .optional(),
   }),
   field_participant: z.array(ParticipantSchema).nullable(),
   field_venue: z.object({
     title: z.string(),
     field_venue_coordinates: GeofieldSchema,
-    field_venue_address: z.string()
-  })
+    field_venue_address: z.string(),
+  }),
 });
 
 export const SideEventSchema = z.object({
@@ -130,7 +139,7 @@ export function validateAndCleanupEvents(event: DrupalNode): Events | null {
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Events", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, event }, null, 2));
     return null;
   }
@@ -166,19 +175,17 @@ export function validateAndCleanupSideEvents(
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Side Events", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, sideEvent }, null, 2));
     return null;
   }
 }
 
-export function validateAndCleanupVenue(
-  venue: DrupalNode,
-): Venue | null {
+export function validateAndCleanupVenue(venue: DrupalNode): Venue | null {
   try {
     return VenueSchema.parse(venue);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Venue", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, venue }, null, 2));
     return null;
   }
