@@ -127,7 +127,7 @@ export function Webform({
       text={formMessageIfUnauthenticated}
       onlyForAuthenticated={onlyForAuthenticated}
     >
-      <section className="relative w-full grid grid-cols-2 min-h-[400px] my-4 overflow-hidden" aria-description={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}>
+      <section className="relative w-full grid grid-cols-2 min-h-[400px] overflow-hidden" aria-description={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}>
         <div className='bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>
         <div className="relative">
           {(formState.isSubmitSuccessful || isFormSubmitted && !onlyForAuthenticated) && (
@@ -184,6 +184,7 @@ export function Webform({
             </Button>
           </form>
         </div>
+
       </section>
     </AuthWrapper >
   );
