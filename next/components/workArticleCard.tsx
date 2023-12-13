@@ -12,8 +12,8 @@ export function WorkArticleCard({ workArticle }) {
       <Link href={workArticle.path.alias}>
         <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
           <Image
-            className="hover:saturate-150 w-full"
-            width={400}
+            className="hover:saturate-150 w-full h-full"
+            width={500}
             height={500}
             src={absoluteUrl(workArticle.field_image.uri.url)}
             alt={workArticle.field_image.resourceIdObjMeta.alt}

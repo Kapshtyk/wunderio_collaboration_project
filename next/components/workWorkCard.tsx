@@ -16,7 +16,7 @@ export function WorkWorkCard({ workPage }) {
           <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
             <Link href={workPage.path.alias}>
               <MediaImage
-                className="rounded-sm h-60 hover:saturate-150 w-full"
+                className="rounded-sm hover:saturate-150 w-full h-full"
                 media={paragraph.field_image}
               />
             </Link>
