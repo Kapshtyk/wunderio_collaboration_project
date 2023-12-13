@@ -1,26 +1,25 @@
-uuid: eee65c1d-e6da-4e4f-8c42-23d83272e081
+uuid: 6224542d-f89f-4b29-8d4e-4273e2696d55
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.contact_us.field_contact_us_form
-    - field.field.node.contact_us.field_content_elements
-    - node.type.contact_us
+    - field.field.node.testimonials.body
+    - field.field.node.testimonials.field_content_elements
+    - field.field.node.testimonials.field_person_category
+    - node.type.testimonials
   module:
     - entity_reference_revisions
+    - text
     - user
-    - webform
-id: node.contact_us.default
+id: node.testimonials.default
 targetEntityType: node
-bundle: contact_us
+bundle: testimonials
 mode: default
 content:
-  field_contact_us_form:
-    type: webform_entity_reference_entity_view
-    label: above
-    settings:
-      source_entity: true
-      lazy: false
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
     weight: 101
     region: content
@@ -32,6 +31,14 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_person_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
     region: content
   links:
     settings: {  }

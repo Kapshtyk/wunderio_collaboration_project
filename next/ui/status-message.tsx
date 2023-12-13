@@ -52,8 +52,8 @@ export const StatusMessage = React.forwardRef<
       ref={ref}
       {...props}
     >
-      <Icon className={clsx("absolute left-6 top-6 h-6 w-6", color)} />
-      <h3 className="mb-2 text-md font-bold">
+      <h3 className="mb-2 text-md font-bold relative inline-flex pl-6">
+        <Icon className={clsx("absolute left-0 top-0 bottom-0 h-6 w-6", color)} />
         {title ?? t(`statusmessage-${level}`)}
       </h3>
       {children}

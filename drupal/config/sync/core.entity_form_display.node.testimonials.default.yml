@@ -1,33 +1,36 @@
-uuid: 82d68f24-af40-4c93-a7fd-eb1fba810285
+uuid: fdf6c2db-1cf5-4987-8533-b6e8b9e4aae7
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.contact_us.field_contact_us_form
-    - field.field.node.contact_us.field_content_elements
-    - node.type.contact_us
+    - field.field.node.testimonials.body
+    - field.field.node.testimonials.field_content_elements
+    - field.field.node.testimonials.field_person_category
+    - node.type.testimonials
   module:
     - paragraphs
     - path
-    - webform
-id: node.contact_us.default
+    - text
+id: node.testimonials.default
 targetEntityType: node
-bundle: contact_us
+bundle: testimonials
 mode: default
 content:
+  body:
+    type: text_textarea_with_summary
+    weight: 121
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
   created:
     type: datetime_timestamp
     weight: 10
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_contact_us_form:
-    type: webform_entity_reference_select
-    weight: 121
-    region: content
-    settings:
-      default_data: true
-      webforms: {  }
     third_party_settings: {  }
   field_content_elements:
     type: paragraphs
@@ -47,6 +50,16 @@ content:
         add_above: '0'
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  field_person_category:
+    type: entity_reference_autocomplete
+    weight: 123
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   langcode:
     type: language_select
@@ -94,11 +107,6 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  translation:
-    weight: 10
-    region: content
-    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

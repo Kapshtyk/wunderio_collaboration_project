@@ -1,20 +1,19 @@
-uuid: 6bd27575-b048-4617-ab1c-aa2043ad127e
+uuid: 5ce2c847-aa89-4a5a-8b34-9c47d5266705
 langcode: en
 status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.careers.body
-    - field.field.node.careers.field_careers_newsletter
-    - field.field.node.careers.field_content_elements
-    - field.field.node.careers.field_testimonials
-    - node.type.careers
+    - field.field.node.testimonials.body
+    - field.field.node.testimonials.field_content_elements
+    - field.field.node.testimonials.field_person_category
+    - node.type.testimonials
   module:
     - text
     - user
-id: node.careers.teaser
+id: node.testimonials.teaser
 targetEntityType: node
-bundle: careers
+bundle: testimonials
 mode: teaser
 content:
   body:
@@ -31,7 +30,6 @@ content:
     weight: 100
     region: content
 hidden:
-  field_careers_newsletter: true
   field_content_elements: true
-  field_testimonials: true
+  field_person_category: true
   langcode: true
