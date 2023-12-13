@@ -3,6 +3,7 @@ import { DrupalTaxonomyTerm } from "next-drupal";
 
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services as ServicesType } from "@/lib/zod/services";
+import { HeadingParagraph } from "./heading--paragraph";
 
 interface SubHeadingSectionProps {
   subHeading: SubHeadingSection;
@@ -21,11 +22,14 @@ const SubHeadingSectionComponent = ({
     <>
       <div key={subHeading.id}>
         <div
-          className="flex h-[100px] bg-primary-400/40 justify-between"
+          className="h-72 w-[110vw] -translate-x-[25%] rounded-r-2xl bg-gradient-primary-600 bg-right bg-cover bg-no-repeat"
           id={subHeading.id}
         >
-          <h1>{subHeading.field_heading}</h1>
-          <span>{subHeading.field_excerpt}</span>
+          <div>
+            <HeadingParagraph>{subHeading.field_heading}</HeadingParagraph>
+            <p>{subHeading.field_excerpt}</p>
+          </div>
+          
         </div>
         {tags
           .filter((tag) => tag.name === subHeading.field_heading)

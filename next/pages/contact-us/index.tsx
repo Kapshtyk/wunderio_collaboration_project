@@ -56,16 +56,23 @@ export default function ContactUsPage({
       <div>
         <OfficeLocationsMap maps={maps}/>
       </div>
-      <div>
+      <div className="container">
+        <div className="flex gap-36">
         {maps.map((address) => (
-            <div>
+            <div className="w-60 bg-accent-peach-fuzz">
+            <h3>{address.title}</h3>
               {address.field_office_address.split(', ').map((word, index) => (
                 <p key={index}>{word}</p>
             ))}
-                <p><a href={`mailto:${address.field_office_email}`} className="hyperlink">{address.field_office_email}</a></p>
+            <div>
+            <a href={`mailto:${address.field_office_email}`} className="hyperlink">{address.field_office_email}</a>
+            </div>
+            
             </div>
         ))}
-      </div>
+        </div>
+
+      </div> 
     </>
   );
 }

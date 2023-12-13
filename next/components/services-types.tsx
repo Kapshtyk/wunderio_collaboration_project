@@ -16,12 +16,13 @@ const ServicesTypes = ({ servicesTypes, allServices }: ServicesTypesProps) => {
   ) as SubHeadingSection[];
   return (
     <>
-      <div className="grid gap-4">
+      <div className="flex">
         {subHeadingSections.map((subHeadingSection) => (
           <div key={subHeadingSection.id}>
             {
-              <div>
-                <p>{subHeadingSection.field_heading}</p>
+              <div className="col-12 col-md-6 col-lg-4">
+                <p className="underline underline--small text-secondary-900">
+                  {subHeadingSection.field_heading}</p>
                 <p>{subHeadingSection.field_excerpt}</p>
                 {servicesTypes
                   .filter(

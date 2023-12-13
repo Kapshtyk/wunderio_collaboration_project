@@ -23,6 +23,8 @@ import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services, validateAndCleanupServices } from "@/lib/zod/services";
 import { validateAndCleanupOfficeLocations } from "@/lib/zod/office-locations";
 import OfficeLocations from "@/components/office-map";
+import {ParagraphHeadingSection} from "@/components/paragraph--heading-section";
+import { ParagraphText } from "@/components/paragraph--text";
 
 interface ServicesProps extends LayoutProps {
   mainPage: Services;
@@ -58,23 +60,42 @@ export default function ServicesPage({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       <div className="grid gap-4">
-        {mainPage.field_content_elements?.map((paragraph) => (
-          <Paragraph key={paragraph.id} paragraph={paragraph} />
-        ))}
+        {mainPage.field_content_elements?.map((paragraph) =>  {
+          return(
+          <>
+           {paragraph.type === 'paragraph--heading_section' && 
+          <ParagraphHeadingSection key={paragraph.id} paragraph={paragraph} />
+          }
+          </>
+  
+        )})}
       </div>
       <div>
-        <p>Jump to:</p>
+      <ul className="flex gap-8">
+      <span>Jump to:</span>
         {subHeadings.map((sub) => (
-          <li>
+          <li key={sub.id}>
             <Link
               href={`#${sub.id}`}
               scroll={false}
               style={{ scrollMarginTop: "20px" }}
             >
-              {sub.field_heading}
+              <span className="text-primary-900 text-sm hover:underline">{sub.field_heading.toUpperCase()}</span>
             </Link>
           </li>
         ))}
+      </ul>
+      </div>
+      <div>
+        {mainPage.field_content_elements?.map((paragraph) =>  {
+          return(
+          <>
+           {paragraph.type === 'paragraph--formatted_text' && 
+          <ParagraphText key={paragraph.id} paragraph={paragraph} />
+          }
+          </>
+  
+        )})}
       </div>
       {subHeadings.map((subHeading) => (
         <SubHeadingSectionComponent
