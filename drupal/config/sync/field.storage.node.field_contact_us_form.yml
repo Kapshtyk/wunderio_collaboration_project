@@ -1,0 +1,20 @@
+uuid: 0b7cd416-37a1-45e2-b94a-4560925058ab
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - webform
+id: node.field_contact_us_form
+field_name: field_contact_us_form
+entity_type: node
+type: webform
+settings:
+  target_type: webform
+module: webform
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

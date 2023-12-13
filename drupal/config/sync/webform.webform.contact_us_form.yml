@@ -1,47 +1,52 @@
-uuid: 4006541b-161f-4b69-a411-03241c3c8f46
+uuid: df3e307a-71b0-41ab-b61e-8a4abb70ecb4
 langcode: en
-status: open
-dependencies:
-  enforced:
-    module:
-      - webform
+status: closed
+dependencies: {  }
 _core:
-  default_config_hash: _je-MWeeJB6gfm6iECiqjcyNetfMFbn-YIInYwZ1gIk
+  default_config_hash: uRLwN71qd0670d-JtU-pAHbXWBi7lG6dcb_XPLfcEh4
 weight: 0
 open: null
 close: null
-uid: null
-template: false
+uid: 1
+template: true
 archive: false
-id: contact
-title: Contact
-description: 'Basic email contact webform.'
-categories: {  }
-elements: |
-  name:
-    '#title': 'Your Name'
-    '#type': textfield
-    '#required': true
-    '#default_value': '[current-user:display-name]'
+id: contact_us_form
+title: 'Contact us form'
+description: ''
+categories:
+  - events
+elements: |-
   email:
-    '#title': 'Your Email'
     '#type': email
+    '#title': Email
     '#required': true
-    '#default_value': '[current-user:mail]'
-  subject:
-    '#title': Subject
+    '#unique': true
+    '#unique_entity': true
+    '#format_items': comma
+  name:
     '#type': textfield
+    '#title': Name
     '#required': true
-    '#test': 'Testing contact webform from [site:name]'
+    '#unique': true
+    '#format_items': comma
+  subject:
+    '#type': textfield
+    '#title': Subject
+    '#minlength': 3
+    '#maxlength': 30
+    '#required': true
+    '#format_items': comma
   message:
-    '#title': Message
     '#type': textarea
+    '#title': Message
+    '#minlength': 10
+    '#maxlength': 200
     '#required': true
-    '#test': 'Please ignore this email.'
+    '#format_items': comma
   actions:
     '#type': webform_actions
     '#title': 'Submit button(s)'
-    '#submit__label': 'Send message'
+    '#submit__label': Apply
 css: ''
 javascript: ''
 settings:
@@ -146,10 +151,10 @@ settings:
   draft_loaded_message: ''
   draft_pending_single_message: ''
   draft_pending_multiple_message: ''
-  confirmation_type: url_message
-  confirmation_url: '<front>'
+  confirmation_type: page
+  confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: 'Your message has been sent.'
+  confirmation_message: 'Thank you for applying.'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -226,51 +231,14 @@ access:
     users: {  }
     permissions: {  }
 handlers:
-  email_confirmation:
+  email_notification:
     id: email
-    handler_id: email_confirmation
-    label: 'Email confirmation'
+    handler_id: email_notification
+    label: 'Email Notification'
     notes: ''
     status: true
     conditions: {  }
     weight: 1
-    settings:
-      states:
-        - completed
-      to_mail: '[current-user:mail]'
-      to_options: {  }
-      bcc_mail: ''
-      bcc_options: {  }
-      cc_mail: ''
-      cc_options: {  }
-      from_mail: _default
-      from_options: {  }
-      from_name: _default
-      reply_to: ''
-      return_path: ''
-      sender_mail: ''
-      sender_name: ''
-      subject: '[webform_submission:values:subject:raw]'
-      body: '[webform_submission:values:message:value]'
-      excluded_elements: {  }
-      ignore_access: false
-      exclude_empty: true
-      exclude_empty_checkbox: false
-      exclude_attachments: false
-      html: true
-      attachments: false
-      twig: false
-      theme_name: ''
-      parameters: {  }
-      debug: false
-  email_notification:
-    id: email
-    handler_id: email_notification
-    label: 'Email notification'
-    notes: ''
-    status: true
-    conditions: {  }
-    weight: 2
     settings:
       states:
         - completed
@@ -282,13 +250,13 @@ handlers:
       cc_options: {  }
       from_mail: '[webform_submission:values:email:raw]'
       from_options: {  }
-      from_name: '[webform_submission:values:name:raw]'
+      from_name: '[webform_submission:values:first_name] [webform_submission:values:last_name]'
       reply_to: ''
       return_path: ''
       sender_mail: ''
       sender_name: ''
-      subject: '[webform_submission:values:subject:raw]'
-      body: '[webform_submission:values:message:value]'
+      subject: _default
+      body: _default
       excluded_elements: {  }
       ignore_access: false
       exclude_empty: true
