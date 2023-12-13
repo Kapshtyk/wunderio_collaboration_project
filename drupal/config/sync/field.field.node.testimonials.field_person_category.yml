@@ -1,0 +1,34 @@
+uuid: 5d277bd5-00e6-46e1-851b-afa14116aa9a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_person_category
+    - node.type.testimonials
+    - taxonomy.vocabulary.person_category
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.testimonials.field_person_category
+field_name: field_person_category
+entity_type: node
+bundle: testimonials
+label: 'Person category'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      person_category: person_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

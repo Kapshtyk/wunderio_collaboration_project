@@ -1,21 +1,19 @@
-uuid: d3270e5e-86f7-4cbe-af78-6d8be5b1b0c6
+uuid: fdf6c2db-1cf5-4987-8533-b6e8b9e4aae7
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.careers.body
-    - field.field.node.careers.field_careers_newsletter
-    - field.field.node.careers.field_content_elements
-    - field.field.node.careers.field_testimonials
-    - node.type.careers
+    - field.field.node.testimonials.body
+    - field.field.node.testimonials.field_content_elements
+    - field.field.node.testimonials.field_person_category
+    - node.type.testimonials
   module:
     - paragraphs
     - path
     - text
-    - webform
-id: node.careers.default
+id: node.testimonials.default
 targetEntityType: node
-bundle: careers
+bundle: testimonials
 mode: default
 content:
   body:
@@ -33,14 +31,6 @@ content:
     weight: 10
     region: content
     settings: {  }
-    third_party_settings: {  }
-  field_careers_newsletter:
-    type: webform_entity_reference_select
-    weight: 123
-    region: content
-    settings:
-      default_data: true
-      webforms: {  }
     third_party_settings: {  }
   field_content_elements:
     type: paragraphs
@@ -61,9 +51,9 @@ content:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
     third_party_settings: {  }
-  field_testimonials:
+  field_person_category:
     type: entity_reference_autocomplete
-    weight: 122
+    weight: 123
     region: content
     settings:
       match_operator: CONTAINS
@@ -117,11 +107,6 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-  translation:
-    weight: 10
-    region: content
-    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

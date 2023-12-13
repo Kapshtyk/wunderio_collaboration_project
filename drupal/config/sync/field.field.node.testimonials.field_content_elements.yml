@@ -1,21 +1,21 @@
-uuid: 30753807-667d-4250-ba4f-4ea254d0b71d
+uuid: 7c941349-41ed-4889-a410-242ea44eb907
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_content_elements
-    - node.type.careers
-    - paragraphs.paragraphs_type.heading_section
+    - node.type.testimonials
+    - paragraphs.paragraphs_type.image
   module:
     - entity_reference_revisions
     - tmgmt_content
 third_party_settings:
   tmgmt_content:
     excluded: false
-id: node.careers.field_content_elements
+id: node.testimonials.field_content_elements
 field_name: field_content_elements
 entity_type: node
-bundle: careers
+bundle: testimonials
 label: 'Content elements'
 description: ''
 required: true
@@ -26,7 +26,7 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      heading_section: heading_section
+      image: image
     negate: 0
     target_bundles_drag_drop:
       accordion:
@@ -46,13 +46,13 @@ settings:
         enabled: false
       heading_section:
         weight: 15
-        enabled: true
+        enabled: false
       hero:
         weight: -15
         enabled: false
       image:
         weight: -13
-        enabled: false
+        enabled: true
       labelled_image:
         weight: 26
         enabled: false

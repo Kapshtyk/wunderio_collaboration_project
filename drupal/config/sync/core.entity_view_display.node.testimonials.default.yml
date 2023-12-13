@@ -1,21 +1,19 @@
-uuid: 6e1b4f0c-3a0c-4479-9d86-7a63694d63eb
+uuid: 6224542d-f89f-4b29-8d4e-4273e2696d55
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.careers.body
-    - field.field.node.careers.field_careers_newsletter
-    - field.field.node.careers.field_content_elements
-    - field.field.node.careers.field_testimonials
-    - node.type.careers
+    - field.field.node.testimonials.body
+    - field.field.node.testimonials.field_content_elements
+    - field.field.node.testimonials.field_person_category
+    - node.type.testimonials
   module:
     - entity_reference_revisions
     - text
     - user
-    - webform
-id: node.careers.default
+id: node.testimonials.default
 targetEntityType: node
-bundle: careers
+bundle: testimonials
 mode: default
 content:
   body:
@@ -24,15 +22,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 101
-    region: content
-  field_careers_newsletter:
-    type: webform_entity_reference_entity_view
-    label: above
-    settings:
-      source_entity: true
-      lazy: false
-    third_party_settings: {  }
-    weight: 103
     region: content
   field_content_elements:
     type: entity_reference_revisions_entity_view
@@ -43,13 +32,13 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_testimonials:
+  field_person_category:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 102
+    weight: 103
     region: content
   links:
     settings: {  }

@@ -1,0 +1,8 @@
+uuid: a89a3b30-7098-47ac-9a1a-da65362d805e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Person category'
+vid: person_category
+description: ''
+weight: 0
