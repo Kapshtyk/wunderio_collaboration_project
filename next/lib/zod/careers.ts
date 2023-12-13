@@ -2,16 +2,11 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import {
-  FormattedTextSchema,
-  HeadingSectionSchema,
-  TestimonialsSchema,
-} from "@/lib/zod/paragraph";
+import { FormattedTextSchema, HeadingSectionSchema } from "@/lib/zod/paragraph";
+import { TestimonialsSchema } from "./testimonials";
 
 const CareersElementsSchema = z.discriminatedUnion("type", [
-  TestimonialsSchema,
   HeadingSectionSchema,
-  FormattedTextSchema,
 ]);
 
 export const CareersSchema = z.object({
@@ -19,7 +14,19 @@ export const CareersSchema = z.object({
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(CareersElementsSchema),
+  body: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+  field_testimonials: z.array(TestimonialsSchema),
   metatag: MetatagsSchema.optional(),
+  field_careers_newsletter: z.object({
+    id: z.string(),
+    resourceIdObjMeta: z.object({
+      drupal_internal__target_id: z.string(),
+    }),
+  }),
 });
 
 const BasicInfoSchema = z.object({

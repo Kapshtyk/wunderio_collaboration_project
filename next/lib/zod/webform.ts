@@ -2,6 +2,24 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 export const WebformFieldsSchema = z.object({
+  subject: z
+    .object({
+      "#type": z.literal("textfield"),
+      "#title": z.literal("Subject"),
+      "#required": z.boolean(),
+      "#min": z.number().optional(),
+      "#max": z.number().optional(),
+    })
+    .optional(),
+  message: z
+    .object({
+      "#type": z.literal("textarea"),
+      "#title": z.literal("Message"),
+      "#required": z.boolean(),
+      "#min": z.number().optional(),
+      "#max": z.number().optional(),
+    })
+    .optional(),
   first_name: z
     .object({
       "#type": z.literal("textfield"),

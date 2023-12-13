@@ -3,11 +3,13 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.contact_us.field_contact_us_form
     - field.field.node.contact_us.field_content_elements
     - node.type.contact_us
   module:
     - paragraphs
     - path
+    - webform
 id: node.contact_us.default
 targetEntityType: node
 bundle: contact_us
@@ -18,6 +20,14 @@ content:
     weight: 10
     region: content
     settings: {  }
+    third_party_settings: {  }
+  field_contact_us_form:
+    type: webform_entity_reference_select
+    weight: 121
+    region: content
+    settings:
+      default_data: true
+      webforms: {  }
     third_party_settings: {  }
   field_content_elements:
     type: paragraphs

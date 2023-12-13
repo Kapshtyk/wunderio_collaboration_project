@@ -9,7 +9,7 @@ uid: 1
 template: false
 archive: false
 id: careers_newsletter
-title: Careers-newsletter
+title: 'Careers newsletter'
 description: ''
 categories:
   - careers
@@ -25,7 +25,7 @@ elements: |-
     '#required': true
     '#format_items': comma
   email:
-    '#type': textfield
+    '#type': email
     '#title': Email
     '#input_mask': "'alias': 'email'"
     '#required': true

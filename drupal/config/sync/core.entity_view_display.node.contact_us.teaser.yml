@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.contact_us.field_contact_us_form
     - field.field.node.contact_us.field_content_elements
     - node.type.contact_us
   module:
@@ -19,5 +20,6 @@ content:
     weight: 100
     region: content
 hidden:
+  field_contact_us_form: true
   field_content_elements: true
   langcode: true
