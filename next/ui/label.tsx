@@ -4,13 +4,13 @@ import clsx from "clsx";
 import { cva, VariantProps } from "cva";
 
 const labelVariants = cva(
-  "mb-1 block text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+  "mb-1 block text-sm font-medium font-overpass peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
 );
 
 export const Label = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> &
-    VariantProps<typeof labelVariants>
+  VariantProps<typeof labelVariants>
 >(({ className, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}

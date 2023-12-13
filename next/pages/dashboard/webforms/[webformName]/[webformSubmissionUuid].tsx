@@ -39,7 +39,7 @@ export default function DashboardPage({
             <th className="px-3 py-4">{t("form-value")}</th>
           </tr>
         </thead>
-        <tbody className="bg-white text-sm text-steelgray">
+        <tbody className="bg-foreground text-sm text-steelgray">
           {submission.formData.map(([key, value]) => (
             <tr key={key} className="border border-graysuit">
               <td className="p-3">{key}</td>

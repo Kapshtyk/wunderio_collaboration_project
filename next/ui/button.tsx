@@ -3,21 +3,19 @@ import clsx from "clsx";
 import { cva } from "cva";
 
 export const buttonVariants = cva(
-  "flex justify-center items-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
+  "flex rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
   {
     variants: {
       variant: {
         primary: [
           "bg-primary-500 text-white",
-          /* "hover:bg-white hover:text-primary-600",
-          "active:bg-white active:text-primary-600",
-          "disabled:!border-primary-200 disabled:!text-white disabled:!bg-primary-200", */
+          "hover:bg-primary-600 hover:text-white",
+          "disabled:!border-primary-200 disabled:!text-white disabled:!bg-primary-200",
         ],
         secondary: [
-          "bg-white text-primary-500",
-          /*  "hover:bg-primary-600 hover:text-white",
-           "active:bg-primary-600 active:text-white",
-           "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-white", */
+          "bg-foreground text-primary-500 border-primary-500 border",
+          "hover:bg-primary-50 hover:text-primary-500 hover:border-primary-500",
+          "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-foreground",
         ],
         tertiary: [
           "bg-transparent text-primary-600",

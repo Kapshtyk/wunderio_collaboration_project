@@ -2,6 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import("tailwindcss").Config} */
 module.exports = {
+  darkMode: ["class"],
   content: ["./{components,lib,pages,stories,styles,ui}/**/*"],
   theme: {
     boxShadow: {
@@ -13,6 +14,9 @@ module.exports = {
       "2xl": "0px 24px 48px -12px rgba(17, 24, 39, 0.25);",
     },
     colors: {
+      main: "rgb(var(--main-color)) / <alpha-value>)",
+      background: "rgb(var(--background) / <alpha-value>)",
+      foreground: "rgb(var(--foreground) / <alpha-value>)",
       primary: {
         50: "rgb(var(--primary-50) / <alpha-value>)",
         100: "rgb(var(--primary-100) / <alpha-value>)",

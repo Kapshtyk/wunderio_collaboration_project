@@ -28,7 +28,7 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
   return (
     isClient &&
     <NavigationMenu>
-      <NavigationMenuList className="text-xl font-semibold text-steelgray">
+      <NavigationMenuList className="text-xl font-semibold text-textColor">
         {menu.map((item) => (
           item.items ? (
             <NavigationMenuItem key={item.title}>
@@ -37,16 +37,16 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
                   {item.title}
                 </Link>
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="bg-white/90 backdrop-blur-sm">
+              <NavigationMenuContent className="bg-background/90 backdrop-blur-sm rounded-md">
                 <ul className="grid w-[400px] gap-3 p-6 md:w-[500px] md:grid-cols-3 lg:w-[600px] text-start">
                   {item.items.map((item) => (
                     <li>
-                      <div key={item.id} className="text-sm p-2 font-medium font-inter leading-none mb-5">{item.title}</div>
+                      <div key={item.id} className="text-sm p-2 text-primary-500 font-medium font-inter mb-5">{item.title}</div>
                       <ul className="mt-2">
                         {item.items?.map((item, index) => (
                           index <= 2 && (
                             <ListItem key={item.id} href={item.url}>
-                              <p className="p-2 text-scapaflow font-regular font-inter">{item.title}</p>
+                              <p className="p-2 text-foreground font-regular font-inter">{item.title}</p>
                             </ListItem>
                           )
                         ))}
@@ -81,12 +81,12 @@ const ListItem = React.forwardRef<
         href={props.href ?? ""}
         ref={ref}
         className={clsx(
-          "block text-primary-500 select-none rounded-md py-2 no-underline outline-none transition-colors hover:bg-white hover:text-stone focus:bg-white focus:text-stone",
+          "block text-primary-500 select-none rounded-md py-2 no-underline outline-none transition-colors hover:bg-background focus:bg-background",
           className,
         )}
         {...props}
       >
-        <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+        <p className="line-clamp-2 text-sm text-primary-500 leading-snug">
           {children}
         </p>
       </Link>

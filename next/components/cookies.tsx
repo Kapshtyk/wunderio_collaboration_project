@@ -243,7 +243,7 @@ const Cookies = () => {
         id: cookieType,
         heading: (
           <>
-            <p>{t(`cookies-${cookieType.toLocaleLowerCase()}-title`)}</p>
+            <p className="text-foreground">{t(`cookies-${cookieType.toLocaleLowerCase()}-title`)}</p>
             {isClient && (
               <div
                 className="flex items-center gap-2 cursor-default"
@@ -251,8 +251,8 @@ const Cookies = () => {
               >
                 <p
                   className={`text-xs ${eval(`is${cookieType}CookiesAvailable`)
-                      ? "text-graysuit"
-                      : "text-topaz"
+                    ? "text-graysuit"
+                    : "text-topaz"
                     }`}
                 >
                   disabled
@@ -274,8 +274,8 @@ const Cookies = () => {
                 />
                 <p
                   className={`text-xs ${eval(`is${cookieType}CookiesAvailable`)
-                      ? "text-topaz"
-                      : "text-graysuit"
+                    ? "text-topaz"
+                    : "text-graysuit"
                     }`}
                 >
                   enabled
@@ -314,16 +314,16 @@ const Cookies = () => {
   }
 
   return (
-    <div className="fixed left-0 right-0 top-0 bottom-0 bg-white-30/90 backdrop-blur-sm z-40">
-      <div className="flex flex-col justify-between bg-white rounded-md shadow-md mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200">
+    <div className="fixed left-0 right-0 top-0 bottom-0 bg-background/90 backdrop-blur-sm z-40">
+      <div className="flex flex-col justify-between bg-background rounded-md shadow-md mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200">
         <nav className="flex justify-between items-center mb-6">
           {headings.map((heading) => {
             return (
               <div
                 key={heading}
-                className={`w-3/6 px-2 py-4 bg-mischka text-center border-b-2 ${currentMenu === heading.toLowerCase()
-                    ? "border-gray-900"
-                    : "border-mischka"
+                className={`w-3/6 px-2 py-4 text-center ${currentMenu === heading.toLowerCase()
+                  ? "text-primary-600"
+                  : ""
                   }`}
                 onClick={(e) => setCurrentMenu(heading.toLowerCase())}
               >

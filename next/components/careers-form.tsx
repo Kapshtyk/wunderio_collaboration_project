@@ -57,7 +57,7 @@ export function CareersForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit, onErrors)}
-      className="mx-auto mb-4 flex max-w-3xl flex-col gap-5 rounded border border-finnishwinter bg-white p-4 shadow-md transition-all hover:shadow-md"
+      className="mx-auto mb-4 flex max-w-3xl flex-col gap-5 rounded border border-finnishwinter bg-foreground p-4 shadow-md transition-all hover:shadow-md"
     >
       <h2 className="text-heading-sm font-bold md:text-heading-md">
         {/* TODO add translations */}

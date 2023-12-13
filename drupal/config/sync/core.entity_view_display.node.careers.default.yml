@@ -3,16 +3,37 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.careers.body
+    - field.field.node.careers.field_careers_newsletter
     - field.field.node.careers.field_content_elements
+    - field.field.node.careers.field_testimonials
     - node.type.careers
   module:
     - entity_reference_revisions
+    - text
     - user
+    - webform
 id: node.careers.default
 targetEntityType: node
 bundle: careers
 mode: default
 content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_careers_newsletter:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 103
+    region: content
   field_content_elements:
     type: entity_reference_revisions_entity_view
     label: above
@@ -21,6 +42,14 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_testimonials:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
     region: content
   links:
     settings: {  }

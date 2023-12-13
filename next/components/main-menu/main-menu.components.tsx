@@ -47,9 +47,9 @@ export const MenuRoot = forwardRef<
       {...props}
       className={clsx(
         "absolute inset-0 z-40 overflow-y-auto overflow-x-hidden border-finnishwinter lg:bottom-auto lg:min-h-[75vh]",
-        isOpen && "border-t bg-white lg:border",
+        isOpen && "border-t bg-foreground lg:border",
         isOpen &&
-          "after:absolute after:left-[calc(66.67%+1px)] after:h-full after:border-r",
+        "after:absolute after:left-[calc(66.67%+1px)] after:h-full after:border-r",
       )}
     />
   );
@@ -81,9 +81,9 @@ export function MenuList({ children, level }) {
   return (
     <NavigationMenu.List
       className={clsx(
-        "fixed inset-0 top-[72px] overflow-scroll border-b border-l border-r border-white bg-white lg:absolute lg:top-0 lg:w-[min(33.334vw,384px)] lg:overflow-visible",
+        "fixed inset-0 top-[72px] overflow-scroll border-b border-l border-r border-white bg-foreground lg:absolute lg:top-0 lg:w-[min(33.334vw,384px)] lg:overflow-visible",
         level === 0 &&
-          "z-10 h-full lg:left-0 lg:z-auto lg:border-primary-600 lg:bg-primary-600",
+        "z-10 h-full lg:left-0 lg:z-auto lg:border-primary-600 lg:bg-primary-600",
         level === 1 && "z-20 lg:left-[min(33.334vw,383px)] lg:z-auto",
         level === 2 && "z-30 lg:left-[min(33.334vw,383px)] lg:z-auto",
       )}
@@ -134,7 +134,7 @@ export function MenuItem({
   return (
     <NavigationMenu.Item
       className={clsx(
-        "flex items-stretch border-b border-finnishwinter bg-white font-bold tracking-widest text-primary-600 underline-offset-4 lg:border-b-0",
+        "flex items-stretch border-b border-finnishwinter bg-foreground font-bold tracking-widest text-primary-600 underline-offset-4 lg:border-b-0",
         isTopLevel && "lg:bg-primary-600 lg:text-mischka",
       )}
       value={value}
@@ -163,7 +163,7 @@ export function MenuLink({
       active={isActive}
       className={clsx(
         !isTitle &&
-          "aria-current:underline block h-full grow p-6 hover:underline data-[active]:underline",
+        "aria-current:underline block h-full grow p-6 hover:underline data-[active]:underline",
         isTopLevel && "lg:ring-white",
       )}
     >
@@ -186,7 +186,7 @@ export function MenuTrigger({
       className={clsx(
         "flex w-20 shrink-0 items-center justify-center ring-inset ring-primary-700 hover:ring-2 lg:border-none",
         isTopLevel
-          ? "lg:ring-white lg:aria-expanded:bg-white lg:aria-expanded:text-primary-600"
+          ? "lg:ring-white lg:aria-expanded:bg-foreground lg:aria-expanded:text-primary-600"
           : "lg:aria-expanded:bg-primary-600 lg:aria-expanded:text-white lg:aria-expanded:ring-primary-600",
       )}
       aria-label={`${t("show-submenu", { parent })}`}

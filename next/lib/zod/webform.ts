@@ -46,6 +46,24 @@ export const WebformFieldsSchema = z.object({
       "#required": z.boolean().optional(),
     })
     .optional(),
+  subject: z
+    .object({
+      "#type": z.literal("textfield"),
+      "#title": z.literal("Subject"),
+      "#required": z.boolean(),
+      "#min": z.number().optional(),
+      "#max": z.number().optional(),
+    })
+    .optional(),
+  message: z
+    .object({
+      "#type": z.literal("textarea"),
+      "#title": z.literal("Message"),
+      "#required": z.boolean(),
+      "#min": z.number().optional(),
+      "#max": z.number().optional(),
+    })
+    .optional(),
 });
 
 export const WebformSchema = z.object({

@@ -23,24 +23,33 @@ interface PageProps extends CommonPageProps {
   languageLinks?: LanguageLinks;
   session?: Session;
 }
+
+import { ThemeProvider } from "@/components/theme-provider"
+
 function App({ Component, pageProps }: AppProps<PageProps>) {
   const [queryClient] = useState(() => new QueryClient());
   const { menus, languageLinks, session, ...restPageProps } = pageProps;
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
-        <Fonts>
-          <LanguageLinksProvider languageLinks={languageLinks}>
-            <Layout menus={menus}>
-              <Matomo
-                MATOMO_URL={env.NEXT_PUBLIC_MATOMO_URL}
-                MATOMO_CONTAINER={env.NEXT_PUBLIC_MATOMO_CONTAINER_ID}
-              />
-              <Component {...restPageProps} />
-              <Cookies />
-            </Layout>
-          </LanguageLinksProvider>
-        </Fonts>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          disableTransitionOnChange
+        >
+          <Fonts>
+            <LanguageLinksProvider languageLinks={languageLinks}>
+              <Layout menus={menus}>
+                <Matomo
+                  MATOMO_URL={env.NEXT_PUBLIC_MATOMO_URL}
+                  MATOMO_CONTAINER={env.NEXT_PUBLIC_MATOMO_CONTAINER_ID}
+                />
+                <Component {...restPageProps} />
+                <Cookies />
+              </Layout>
+            </LanguageLinksProvider>
+          </Fonts>
+        </ThemeProvider>
       </QueryClientProvider>
     </SessionProvider>
   );

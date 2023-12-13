@@ -19,7 +19,7 @@ export function ArticleTeaser({ article }: ArticleTeaserProps) {
   return (
     <Link
       href={article.path.alias}
-      className="relative grid h-full rounded border border-finnishwinter bg-white p-4 transition-all hover:shadow-md"
+      className="relative grid h-full rounded border border-finnishwinter bg-foreground p-4 transition-all hover:shadow-md"
     >
       <h3 className="mb-2 line-clamp-2 text-heading-xs font-bold">
         {article.title}

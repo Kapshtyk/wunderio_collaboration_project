@@ -74,7 +74,7 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
           <Link
             key={openPosition.id}
             href={openPosition.path.alias}
-            className="relative grid h-full rounded border border-finnishwinter bg-white p-4 transition-all hover:shadow-md"
+            className="relative grid h-full rounded border border-finnishwinter bg-foreground p-4 transition-all hover:shadow-md"
           >
             <div className="p-4 w-52 h-52 rounded-md shadow-sm bg-primary-50">
               <h3>{openPosition.title}</h3>

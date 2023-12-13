@@ -9,7 +9,7 @@ import { HeadingParagraph } from "@/components/heading--paragraph";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
-import { Webform } from "@/components/webform";
+import { Webform } from "@/components/webworm/webform";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { drupal } from "@/lib/drupal/drupal-client";
@@ -122,13 +122,14 @@ export default function Event({
         formTitle={t("events-form-title", { event: event.title })}
         formMessageIfUnauthenticated={t("events-form-not-auth")}
       />
+
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
           sideEvents.map((sideEvent) => (
             <Link
               key={sideEvent.id}
               href={sideEvent.path.alias}
-              className="relative grid h-full rounded border border-finnishwinter bg-white p-4 transition-all hover:shadow-md"
+              className="relative grid h-full rounded border border-finnishwinter bg-foreground p-4 transition-all hover:shadow-md"
             >
               <div className="p-4 w-52 h-52 rounded-md shadow-sm bg-primary-50">
                 <h3>{sideEvent.title}</h3>
