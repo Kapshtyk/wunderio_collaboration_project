@@ -15,17 +15,20 @@ import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
 import OfficeLocationsMap from "../office-map";
 import { OfficeLocations } from "@/lib/zod/office-locations";
+import { Textarea } from "@/ui/textarea";
 
 
 type FieldInputs = {
   first_name?: string;
   last_name?: string;
   username?: string;
+  name?: string;
   email?: string;
   phone?: string;
   age?: number;
   message?: string;
   participant?: boolean;
+  subject?: string;
 };
 
 interface WebformProps {
@@ -132,14 +135,14 @@ export function Webform({
       text={formMessageIfUnauthenticated}
       onlyForAuthenticated={onlyForAuthenticated}
     >
-      <section className="relative w-full grid grid-cols-2 min-h-[400px] overflow-hidden" aria-description={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}>
+      <section className="relative bg-background w-full grid grid-cols-2 min-h-[400px] overflow-hidden" aria-description={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}>
         {variant === "default" && (<div className='bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>)}
         {variant === "contact" && (
           <OfficeLocationsMap maps={maps} />
         )}
         <div className="relative">
           {(formState.isSubmitSuccessful || isFormSubmitted && !onlyForAuthenticated) && (
-            <div className="absolute bg-white/60 right-0 top-0 w-full h-full backdrop-blur-sm">
+            <div className="absolute bg-foreground/60 right-0 top-0 w-full h-full backdrop-blur-sm">
               <div className="flex flex-col items-center justify-center h-full p-8">
                 <p className="text-heading-sm font-bold text-center my-2">{'Thank you for submitting the form.'}</p>
                 <Button variant="secondary" type="button" onClick={() => {
@@ -150,7 +153,7 @@ export function Webform({
             </div>
           )}
           {(isFormSubmitted && onlyForAuthenticated) && (
-            <div className="absolute bg-white/60 right-0 top-0 w-full h-full backdrop-blur-sm">
+            <div className="absolute bg-foreground/60 right-0 top-0 w-full h-full backdrop-blur-sm">
               <div className="flex flex-col items-center justify-center h-full p-8">
                 <p className="text-heading-sm font-bold text-center my-2">{'You have been already submitted this form.'}</p>
                 <Button variant="secondary" type="button" >Unregister?</Button>
@@ -159,7 +162,7 @@ export function Webform({
           )}
           <form
             onSubmit={handleSubmit(onSubmit, onErrors)}
-            className="mx-auto mb-4 flex max-w-md flex-col gap-5 bg-white p-4 font-inter items-start"
+            className="mx-auto mb-4 flex max-w-md flex-col gap-5 bg-background p-4 font-inter items-start"
           >
             <h2 className="text-heading-xs font-bold">
               {formTitle}
@@ -174,15 +177,26 @@ export function Webform({
                         .replace(" ", "")}`,
                     )}
                   </Label>
-                  <Input
-                    type={webform.field_webform_fields[key]["#type"]}
-                    id={webform.field_webform_fields[key]["#title"]}
-                    {...register(key as keyof FieldInputs, {
-                      required: webform.field_webform_fields[key]["#required"],
-                      min: webform.field_webform_fields[key]["#min"],
-                      max: webform.field_webform_fields[key]["#max"],
-                    })}
-                  />
+                  {webform.field_webform_fields[key]["#type"] === "textarea" ? (
+                    <Textarea
+                      id={webform.field_webform_fields[key]["#title"]}
+                      {...register(key as keyof FieldInputs, {
+                        required: webform.field_webform_fields[key]["#required"],
+                        min: webform.field_webform_fields[key]["#min"],
+                        max: webform.field_webform_fields[key]["#max"],
+                      })}
+                    />
+                  ) : (
+                    <Input
+                      type={webform.field_webform_fields[key]["#type"]}
+                      id={webform.field_webform_fields[key]["#title"]}
+                      {...register(key as keyof FieldInputs, {
+                        required: webform.field_webform_fields[key]["#required"],
+                        min: webform.field_webform_fields[key]["#min"],
+                        max: webform.field_webform_fields[key]["#max"],
+                      })}
+                    />
+                  )}
                   {formState.errors[key] && <p>{formState.errors[key].message}</p>}
                 </div>
               );

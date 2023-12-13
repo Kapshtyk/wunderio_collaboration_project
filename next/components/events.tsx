@@ -29,7 +29,7 @@ const Events = ({ events }: EventsProps) => {
               <RandomIcon />
             </div>
             {description && description.field_excerpt && (
-              <div className="opacity-0 bg-white/70 absolute top-0 left-0 p-4 flex hover:opacity-100 items-center w-full h-[305px] transition-all duration-200 ease-in-out backdrop-blur-sm">
+              <div className="opacity-0 bg-foreground/70 absolute top-0 left-0 p-4 flex hover:opacity-100 items-center w-full h-[305px] transition-all duration-200 ease-in-out backdrop-blur-sm">
                 <p className="text-sm font-regular">{description.field_excerpt}</p>
               </div>
             )}

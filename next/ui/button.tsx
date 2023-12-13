@@ -13,9 +13,9 @@ export const buttonVariants = cva(
           "disabled:!border-primary-200 disabled:!text-white disabled:!bg-primary-200",
         ],
         secondary: [
-          "bg-white text-primary-500 border-primary-500 border",
+          "bg-foreground text-primary-500 border-primary-500 border",
           "hover:bg-primary-50 hover:text-primary-500 hover:border-primary-500",
-          "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-white",
+          "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-foreground",
         ],
         tertiary: [
           "bg-transparent text-primary-600",
