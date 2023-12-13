@@ -3,21 +3,21 @@ import { DrupalJsonApiParams } from "drupal-jsonapi-params";
 import { env } from "@/env";
 
 export type ResourceType =
-  | 'node--frontpage'
-  | 'node--page'
-  | 'node--article'
-  | 'node--careers'
-  | 'node--open_positions'
-  | 'node--event'
-  | 'node--side_event'
-  | 'node--about_us'
-  | 'node--work_main_page'
-  | 'node--services_page'
-  | 'node--numbers'
-  | 'node--office_locations'
-  | 'node--contact_us'
-  | 'node--venue'
-  | 'node--legal_document';
+  | "node--frontpage"
+  | "node--page"
+  | "node--article"
+  | "node--careers"
+  | "node--open_positions"
+  | "node--event"
+  | "node--side_event"
+  | "node--about_us"
+  | "node--work_main_page"
+  | "node--services_page"
+  | "node--numbers"
+  | "node--office_locations"
+  | "node--contact_us"
+  | "node--venue"
+  | "node--legal_document";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -45,7 +45,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_content_elements.field_image.field_media_image",
       "field_event_registration",
       "field_participant",
-      "field_venue"
+      "field_venue",
     ]);
     /*  .addFields(resourceType, [
         "title",
@@ -60,9 +60,20 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
     apiParams
       .addInclude([
         "uid",
-        "field_content_elements.field_image.field_media_image",
+        "field_careers_newsletter",
+        "field_content_elements",
+        "field_testimonials.field_content_elements",
+        "field_testimonials, field_testimonials.field_content_elements.field_image.field_media_image",
       ])
-      .addFields(resourceType, ["title", "field_content_elements", "metatag"]);
+      .addFields(resourceType, [
+        "title",
+        "field_content_elements",
+        "field_careers_newsletter",
+        "field_testimonials",
+        "field_testimonials.field_content_elements",
+        "metatag",
+        "body",
+      ]);
   }
 
   if (resourceType === "node--open_positions") {
@@ -121,7 +132,12 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   // The article content type has an image field, and author information:
   if (resourceType === "node--article") {
-    apiParams.addInclude(["field_image", "uid", "field_tags", "uid.field_profile_picture"]);
+    apiParams.addInclude([
+      "field_image",
+      "uid",
+      "field_tags",
+      "uid.field_profile_picture",
+    ]);
     apiParams.addFields(resourceType, [
       "title",
       "body",
@@ -168,9 +184,8 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       ]);
   }
   if (resourceType === "node--numbers") {
-    apiParams.addInclude([
-      "field_numbers_type",
-    ])
+    apiParams
+      .addInclude(["field_numbers_type"])
       .addFields("node--numbers", [
         "uid",
         "title",
@@ -180,15 +195,12 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_text",
         "field_numbers_type",
         "path",
-      ])
+      ]);
   }
 
   if (resourceType === "node--office_locations") {
     apiParams
-      .addInclude([
-        "uuid",
-        "field_address_coordinates"
-      ])
+      .addInclude(["uuid", "field_address_coordinates"])
       .addFields("node--office_locations", [
         "title",
         "path",
@@ -198,43 +210,32 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_city",
         "field_country_name",
         "field_postal_code",
-        "field_street_address"
-      ])
+        "field_street_address",
+      ]);
   }
 
   if (resourceType === "node--contact_us") {
     apiParams
-      .addInclude([
-        "uid",
-        "field_content_elements",
-      ])
+      .addInclude(["uid", "field_content_elements"])
       .addFields("node--office_locations", [
         "title",
         "metatag",
         "field_content_elements",
-      ])
+      ]);
   }
   if (resourceType === "node--venue") {
     apiParams
-      .addInclude([
-        "uid",
-        "field_venue_coordinates",
-      ])
+      .addInclude(["uid", "field_venue_coordinates"])
       .addFields("node--office_locations", [
         "title",
         "metatag",
         "field_venue_coordinates",
-        "field_venue_address"
-      ])
+        "field_venue_address",
+      ]);
   }
   if (resourceType === "node--legal_document") {
-    apiParams
-      .addFields("node--legal_document", [
-        "title",
-        "body",
-        "metatag",
-      ])
+    apiParams.addFields("node--legal_document", ["title", "body", "metatag"]);
   }
 
-  return apiParams
+  return apiParams;
 }
