@@ -20,7 +20,7 @@ import { FormattedText } from "@/components/formatted-text";
 import Testimonials from "@/components/testimonials";
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { Webform as WebformType, validateAndCleanupWebform, validateAndCleanupWebformFields } from "@/lib/zod/webform";
-import { Webform } from "@/components/webform";
+import { Webform } from "@/components/webworm/webform";
 
 interface CareersPageProps extends LayoutProps {
   careers: Careers;

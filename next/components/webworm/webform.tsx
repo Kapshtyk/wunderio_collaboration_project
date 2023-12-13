@@ -8,14 +8,14 @@ import { useForm } from "react-hook-form";
 import { Webform } from "@/lib/zod/webform";
 import { validateAndCleanupWebformSubmissionList } from "@/lib/zod/webform-submission-list";
 
-import { AuthGate } from "./auth-gate";
+import { AuthGate } from "../auth-gate";
 
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
-import { StatusMessage } from "@/ui/status-message";
-import Image from "next/image";
-import { on } from "events";
+import OfficeLocationsMap from "../office-map";
+import { OfficeLocations } from "@/lib/zod/office-locations";
+
 
 type FieldInputs = {
   first_name?: string;
@@ -33,6 +33,8 @@ interface WebformProps {
   onlyForAuthenticated?: boolean;
   formTitle: string;
   formMessageIfUnauthenticated?: string;
+  variant?: "contact" | "default" | "events";
+  maps?: OfficeLocations[]
 }
 
 /**
@@ -42,6 +44,7 @@ interface WebformProps {
  * @param {Object} webform - The webform object.
  * @param {boolean} [onlyForAuthenticated=false] - Indicates if the form is only for authenticated users.
  * @param {string} [formTitle='events-form-title'] - The title of the form.
+ * @param #TODO
  * @returns {JSX.Element} The rendered web form component.
  */
 export function Webform({
@@ -49,6 +52,8 @@ export function Webform({
   onlyForAuthenticated = false,
   formTitle = "Form",
   formMessageIfUnauthenticated = "Sign in to submit the form",
+  variant = "default",
+  maps = []
 }: WebformProps) {
   const fieldInputs = Object.keys(webform.field_webform_fields).map(
     (key) => key,
@@ -128,7 +133,10 @@ export function Webform({
       onlyForAuthenticated={onlyForAuthenticated}
     >
       <section className="relative w-full grid grid-cols-2 min-h-[400px] overflow-hidden" aria-description={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}>
-        <div className='bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>
+        {variant === "default" && (<div className='bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>)}
+        {variant === "contact" && (
+          <OfficeLocationsMap maps={maps} />
+        )}
         <div className="relative">
           {(formState.isSubmitSuccessful || isFormSubmitted && !onlyForAuthenticated) && (
             <div className="absolute bg-white/60 right-0 top-0 w-full h-full backdrop-blur-sm">
@@ -184,7 +192,7 @@ export function Webform({
             </Button>
           </form>
         </div>
-
+        {variant === "events" && (<div className='bg-[url("/finavia-arrivals-1340x760.jpg")] bg-center bg-no-repeat bg-cover'></div>)}
       </section>
     </AuthWrapper >
   );
