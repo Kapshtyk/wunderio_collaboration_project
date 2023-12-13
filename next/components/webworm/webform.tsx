@@ -170,7 +170,7 @@ export function Webform({
             {fieldInputs.map((key) => {
               return (
                 <div key={key} className="w-full">
-                  <Label className="text-sm font-medium font-overpass text-scapaflow" htmlFor={webform.field_webform_fields[key]["#title"]}>
+                  <Label className="text-sm font-medium font-overpass text-foreground/50" htmlFor={webform.field_webform_fields[key]["#title"]}>
                     {t(
                       `form-label-${webform.field_webform_fields[key]["#title"]
                         .toLowerCase()

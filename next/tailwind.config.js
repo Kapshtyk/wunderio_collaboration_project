@@ -124,6 +124,15 @@ module.exports = {
         "gradient-primary-600":
           "linear-gradient(90deg, rgba(91, 55, 191, 0.9) 0%, rgba(91, 55, 191, 0.90) 100%), url('/a5b97f1ed23d0bc08a59a8be0e3a1290.jpeg')",
       },
+      keyframes: {
+        appear: {
+          "0%": { width: 0 },
+          "100%": { width: "100%" },
+        },
+      },
+      animation: {
+        underline: "appear 0.2s linear forwards",
+      },
     },
   },
   corePlugins: {

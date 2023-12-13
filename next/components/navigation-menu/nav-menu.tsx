@@ -58,8 +58,8 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
             </NavigationMenuItem>
           ) : (
             <NavigationMenuItem key={item.title}>
-              <Link href={item.url} >
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <Link className="relative" href={item.url} >
+                <NavigationMenuLink className={`${navigationMenuTriggerStyle()} hover:after:absolute hover:after:bottom-[-5px] hover:after:content=[''] hover:after:h-[2px] hover:after:bg-primary-400 hover:after:animate-underline`}>
                   {item.title}
                 </NavigationMenuLink>
               </Link>
@@ -76,12 +76,12 @@ const ListItem = React.forwardRef<
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
-    <li>
+    <li className="relative">
       <Link
         href={props.href ?? ""}
         ref={ref}
         className={clsx(
-          "block text-primary-500 select-none rounded-md py-2 no-underline outline-none transition-colors hover:bg-background focus:bg-background",
+          "block text-primary-500 select-none rounded-md py-2 no-underline outline-none transition-colors hover:after:absolute hover:after:bottom-[-1px] hover:after:content=[''] hover:after:h-[2px] hover:after:bg-primary-400 hover:after:animate-underline",
           className,
         )}
         {...props}

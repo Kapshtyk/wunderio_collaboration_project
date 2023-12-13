@@ -121,6 +121,7 @@ export default function Event({
         onlyForAuthenticated={true}
         formTitle={t("events-form-title", { event: event.title })}
         formMessageIfUnauthenticated={t("events-form-not-auth")}
+        variant="events"
       />
 
       <div className="flex gap-4 flex-wrap">

@@ -31,7 +31,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         {breadCrumbs.map((item, index) => (
           <li key={index} className="flex max-w-[300px] items-center truncate">
             {item.url ? (
-              <Link className="underline text-link" href={item.url}>
+              <Link className="text-link" href={item.url}>
                 {item.title}
               </Link>
             ) : (
