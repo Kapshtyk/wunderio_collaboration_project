@@ -50,17 +50,11 @@ export default function WorkPage({
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <div
-        className=" bg-primary-800 relative mb-6"
-        style={{ height: "350px" }}
-      >
-        <div className=" absolute inset-0 bg-cover bg-center bg-[url('/work-hero.jpg')] opacity-20"></div>
-        <div className="p-20 flex relative">
-          <div className="grid gap-4">
-            {mainPage.field_content_elements?.map((paragraph) => (
-              <Paragraph key={paragraph.id} paragraph={paragraph} />
-            ))}
-          </div>
+      <div>
+        <div className="grid gap-4">
+          {mainPage.field_content_elements?.map((paragraph) => (
+            <Paragraph key={paragraph.id} paragraph={paragraph} />
+          ))}
         </div>
       </div>
 
@@ -81,7 +75,7 @@ export default function WorkPage({
 
       <div>
         <h1 className="font-bold mb-4">MORE ABOUT OUR CLIENTS</h1>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="md:grid grid-cols-3 gap-3">
           {allArticles
             .filter((workArticles) =>
               workArticles.field_tags?.some(

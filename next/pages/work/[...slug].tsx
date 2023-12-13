@@ -103,11 +103,11 @@ export default function WorkPage({
 
       {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
         <div className="mt-20">
-          <h1 className="font-bold my-4">RELATED CONTENT</h1>
-          <div className="flex space-x-6">
+          <h1 className="font-bold mb-4">RELATED CONTENT</h1>
+          <div className="md:grid grid-cols-3 gap-3">
             {allWorkPages
               .filter((workPages) => workPages.title !== currentWorkPage.title)
-              .slice(0, 4)
+              .slice(0, 3)
               .map((workPage) => (
                 <WorkWorkCard workPage={workPage} />
               ))}
@@ -118,7 +118,7 @@ export default function WorkPage({
       {currentWorkPage.title === "Trimble" ? (
         <div className="mt-20">
           <h1 className="font-bold mb-4">RELATED CONTENT</h1>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="md:grid grid-cols-3 gap-3">
             {allArticles
               .filter((workArticles) =>
                 workArticles.field_tags.some(

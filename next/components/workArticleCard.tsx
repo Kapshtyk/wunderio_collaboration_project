@@ -7,12 +7,12 @@ export function WorkArticleCard({ workArticle }) {
   return (
     <div
       key={workArticle.id}
-      className="block max-w-[22rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+      className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-6"
     >
       <Link href={workArticle.path.alias}>
         <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
           <Image
-            className="hover:saturate-150"
+            className="hover:saturate-150 w-full"
             width={400}
             height={500}
             src={absoluteUrl(workArticle.field_image.uri.url)}

@@ -23,15 +23,15 @@ const Numbers = ({ numbers }: NumbersProps) => {
     }, [numbers]);
 
     return (
-        <div className="space-x-16 p-16 flex my-6 bg-finnishwinter justify-center">
+        <div className='flex flex-col items-center p-16  bg-finnishwinter my-12 lg:flex-row'>
             {numbers &&
                 numbers.map((number, index) => (
-                    <div key={number.id} className="flex flex-col">
+                    <div key={number.id} className='w-full m-4'>
                         <div>
-                            <h1 className="text-lg font-bold text-primary-600">{counters[index]}{" "}{number.field_suffix}</h1>
+                            <h1 className="text-heading-md font-bold text-primary-600">{counters[index]}{" "}{number.field_suffix}</h1>
                         </div>
                         <div>
-                            <h1 className="text-secondary-900 text-xs">{number.field_text.processed}</h1>
+                            <h1 className="text-secondary-900 text-md">{number.field_text.processed}</h1>
                         </div>
                     </div>
                 ))}
