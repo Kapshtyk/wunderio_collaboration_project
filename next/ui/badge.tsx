@@ -8,16 +8,16 @@ const badgeVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-primary-600 border-primary-600 hover:bg-white hover:text-primary-600 text-white",
+          "bg-primary-600 border-primary-600 hover:bg-foreground hover:text-primary-600 text-white",
         secondary:
-          "bg-secondary-700 border-secondary-700 hover:bg-white hover:text-secondary-700 text-white",
+          "bg-secondary-700 border-secondary-700 hover:bg-foreground hover:text-secondary-700 text-white",
         success:
-          "bg-success border-success hover:bg-white hover:text-success text-white",
+          "bg-success border-success hover:bg-foreground hover:text-success text-white",
         error:
-          "bg-error border-error hover:bg-white hover:text-error text-white",
+          "bg-error border-error hover:bg-foreground hover:text-error text-white",
         warning:
-          "bg-warning border-warning hover:bg-white hover:text-warning text-white",
-        info: "bg-info border-info hover:bg-white hover:text-info text-white",
+          "bg-warning border-warning hover:bg-foreground hover:text-warning text-white",
+        info: "bg-info border-info hover:bg-foreground hover:text-info text-white",
       },
       size: {
         sm: "px-1.5 py-0.5 text-sm",

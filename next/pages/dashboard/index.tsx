@@ -42,7 +42,7 @@ export default function DashboardPage({
             <th className="px-3 py-4">{t("more-details")}</th>
           </tr>
         </thead>
-        <tbody className="bg-white text-sm text-steelgray">
+        <tbody className="bg-foreground text-sm text-steelgray">
           {submissions.map((submission) => (
             <tr
               key={submission.uuid[0]["value"]}

@@ -40,7 +40,7 @@ const OfficeLocationsMap = ({ maps }: MapsProps) => {
       <GoogleMap
         center={markers.length > 0 ? markers[0].position : { lat: 0, lng: 0 }}
         zoom={5}
-        mapContainerStyle={{ height: '100%', width: '100%', backgroundColor: 'red' }}
+        mapContainerStyle={{ height: '100%', width: '100%' }}
       >
         {markers.map((marker, index) => (
           <MarkerF key={index} position={marker.position} title={marker.title} />

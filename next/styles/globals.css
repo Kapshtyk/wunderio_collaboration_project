@@ -32,7 +32,9 @@
 
     --tranquil: 247 255 255;
     --martinique: 47 41 66;
-    --primary: var(--primary-500);
+    --main-color: 101 60 197;
+    --background: 255 255 255;
+    --foreground: 34 31 45;
 
     --accent-hugs: 158 0 93;
     --accent-bittersweet: 255 112 96;
@@ -56,6 +58,12 @@
     --success: 0 127 108;
     --warning: 157 106 0;
     --info: 20 121 146;
+  }
+
+  .dark {
+    --background: 34 31 45;
+    --foreground: 255 255 255;
+    --primary-600:180 159 226;
   }
 }
 

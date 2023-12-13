@@ -28,6 +28,7 @@ export function Layout({ menus, children }: LayoutProps) {
     <>
       <div
         className={clsx(
+          "bg-background text-foreground",
           "flex min-h-screen flex-col",
           isPreviewVisible && "mt-10",
         )}

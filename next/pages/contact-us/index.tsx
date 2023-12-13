@@ -84,9 +84,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     )
   ).at(0);
 
-  console.log('contactUs:', contactUs);
-
-  const validatedResource = await validateAndCleanupContactUs(contactUs);
+  const validatedResource = validateAndCleanupContactUs(contactUs);
 
   const validatedWebform = validateAndCleanupWebform(contactUs.field_contact_us_form);
 
@@ -99,8 +97,11 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     .then((data) => data)
     .catch((error) => console.log(error));
 
+
   const validatedWebformFields =
     validateAndCleanupWebformFields(webformFields);
+
+  console.log("webformFields: ", validatedWebformFields)
 
   validatedWebform.field_webform_fields = validatedWebformFields;
 
