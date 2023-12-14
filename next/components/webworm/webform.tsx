@@ -5,27 +5,28 @@ import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 
+import { AuthGate } from "@/components/auth-gate";
+import OfficeLocationsMap from "@/components/office-map";
+import { OfficeLocations } from "@/lib/zod/office-locations";
 import { Webform } from "@/lib/zod/webform";
 import { validateAndCleanupWebformSubmissionList } from "@/lib/zod/webform-submission-list";
-
-import { AuthGate } from "../auth-gate";
 
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Label } from "@/ui/label";
-import OfficeLocationsMap from "../office-map";
-import { OfficeLocations } from "@/lib/zod/office-locations";
-
+import { Textarea } from "@/ui/textarea";
 
 type FieldInputs = {
   first_name?: string;
   last_name?: string;
   username?: string;
+  name?: string;
   email?: string;
   phone?: string;
   age?: number;
   message?: string;
   participant?: boolean;
+  subject?: string;
 };
 
 interface WebformProps {
@@ -34,7 +35,7 @@ interface WebformProps {
   formTitle: string;
   formMessageIfUnauthenticated?: string;
   variant?: "contact" | "default" | "events";
-  maps?: OfficeLocations[]
+  maps?: OfficeLocations[];
 }
 
 /**
@@ -53,14 +54,13 @@ export function Webform({
   formTitle = "Form",
   formMessageIfUnauthenticated = "Sign in to submit the form",
   variant = "default",
-  maps = []
+  maps = [],
 }: WebformProps) {
   const fieldInputs = Object.keys(webform.field_webform_fields).map(
     (key) => key,
   );
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [isSubmissionsFetched, setIsSubmissionsFetched] = useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
   const { t } = useTranslation();
@@ -68,39 +68,38 @@ export function Webform({
 
   useEffect(() => {
     if (onlyForAuthenticated == false) {
-      setIsSubmissionsFetched(true);
       setIsFormSubmitted(false);
     }
   }, [onlyForAuthenticated]);
 
   useEffect(() => {
+    const checkSubmissions = async () => {
+      const response = await fetch(`/api/webform_submissions`, {
+        method: "POST",
+        headers: {
+          "accept-language": router.locale,
+        },
+      }).then((response) => response.json());
+      const validated = validateAndCleanupWebformSubmissionList(response);
+      return validated;
+    };
     if (onlyForAuthenticated && session && session.accessToken) {
-      checkSubmissions().then((response) => {
-        if (response && response.length > 0) {
-          response.map((submission) => {
-            if (
-              submission.webform_id[0].target_id ===
-              webform.resourceIdObjMeta.drupal_internal__target_id
-            ) {
-              setIsFormSubmitted(true);
-            }
-          });
-        }
-      });
-      setIsSubmissionsFetched(true);
+      checkSubmissions()
+        .then((response) => {
+          if (response && response.length > 0) {
+            response.map((submission) => {
+              if (
+                submission.webform_id[0].target_id ===
+                webform.resourceIdObjMeta.drupal_internal__target_id
+              ) {
+                setIsFormSubmitted(true);
+              }
+            });
+          }
+        })
+        .catch((error) => console.log(error));
     }
-  }, [session]);
-
-  const checkSubmissions = async () => {
-    const response = await fetch(`/api/webform_submissions`, {
-      method: "POST",
-      headers: {
-        "accept-language": router.locale,
-      },
-    }).then((response) => response.json());
-    const validated = validateAndCleanupWebformSubmissionList(response);
-    return validated;
-  };
+  }, [session, onlyForAuthenticated, webform, router.locale]);
 
   const onSubmit = async (data: FieldInputs) => {
     const response = await fetch(`/api/webform`, {
@@ -126,64 +125,95 @@ export function Webform({
     return null;
   }
 
-
   return (
     <AuthWrapper
       text={formMessageIfUnauthenticated}
       onlyForAuthenticated={onlyForAuthenticated}
     >
-      <section className="relative w-full grid grid-cols-2 min-h-[400px] overflow-hidden" aria-description={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}>
-        {variant === "default" && (<div className='bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>)}
-        {variant === "contact" && (
-          <OfficeLocationsMap maps={maps} />
+      <section
+        className="relative bg-background w-full grid grid-cols-2 min-h-[400px] overflow-hidden"
+        aria-details={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}
+      >
+        {variant === "default" && (
+          <div className='bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>
         )}
+        {variant === "contact" && <OfficeLocationsMap maps={maps} />}
         <div className="relative">
-          {(formState.isSubmitSuccessful || isFormSubmitted && !onlyForAuthenticated) && (
+          {(formState.isSubmitSuccessful ||
+            (isFormSubmitted && !onlyForAuthenticated)) && (
             <div className="absolute bg-white/60 right-0 top-0 w-full h-full backdrop-blur-sm">
               <div className="flex flex-col items-center justify-center h-full p-8">
-                <p className="text-heading-sm font-bold text-center my-2">{'Thank you for submitting the form.'}</p>
-                <Button variant="secondary" type="button" onClick={() => {
-                  setIsFormSubmitted(false)
-                  reset()
-                }} >{t("form-send-another-message")}</Button>
+                <p className="text-heading-sm text-primary-600 font-bold text-center my-6">
+                  {"Thank you for submitting the form."}
+                </p>
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={() => {
+                    setIsFormSubmitted(false);
+                    reset();
+                  }}
+                >
+                  {t("form-send-another-message")}
+                </Button>
               </div>
             </div>
           )}
-          {(isFormSubmitted && onlyForAuthenticated) && (
-            <div className="absolute bg-white/60 right-0 top-0 w-full h-full backdrop-blur-sm">
+          {isFormSubmitted && onlyForAuthenticated && (
+            <div className="absolute bg-foreground/60 right-0 top-0 w-full h-full backdrop-blur-sm">
               <div className="flex flex-col items-center justify-center h-full p-8">
-                <p className="text-heading-sm font-bold text-center my-2">{'You have been already submitted this form.'}</p>
-                <Button variant="secondary" type="button" >Unregister?</Button>
+                <p className="text-heading-sm font-bold text-center my-6">
+                  {"You have been already submitted this form."}
+                </p>
+                <Button variant="primary" type="button">
+                  Unregister?
+                </Button>
               </div>
             </div>
           )}
           <form
             onSubmit={handleSubmit(onSubmit, onErrors)}
-            className="mx-auto mb-4 flex max-w-md flex-col gap-5 bg-white p-4 font-inter items-start"
+            className="mx-auto mb-4 flex max-w-md flex-col gap-5 bg-background p-4 font-inter items-start"
           >
-            <h2 className="text-heading-xs font-bold">
-              {formTitle}
-            </h2>
+            <h2 className="text-heading-xs font-bold">{formTitle}</h2>
             {fieldInputs.map((key) => {
               return (
                 <div key={key} className="w-full">
-                  <Label className="text-sm font-medium font-overpass text-scapaflow" htmlFor={webform.field_webform_fields[key]["#title"]}>
+                  <Label
+                    className="text-sm font-medium font-overpass text-foreground/50"
+                    htmlFor={webform.field_webform_fields[key]["#title"]}
+                  >
                     {t(
                       `form-label-${webform.field_webform_fields[key]["#title"]
                         .toLowerCase()
                         .replace(" ", "")}`,
                     )}
                   </Label>
-                  <Input
-                    type={webform.field_webform_fields[key]["#type"]}
-                    id={webform.field_webform_fields[key]["#title"]}
-                    {...register(key as keyof FieldInputs, {
-                      required: webform.field_webform_fields[key]["#required"],
-                      min: webform.field_webform_fields[key]["#min"],
-                      max: webform.field_webform_fields[key]["#max"],
-                    })}
-                  />
-                  {formState.errors[key] && <p>{formState.errors[key].message}</p>}
+                  {webform.field_webform_fields[key]["#type"] === "textarea" ? (
+                    <Textarea
+                      id={webform.field_webform_fields[key]["#title"]}
+                      {...register(key as keyof FieldInputs, {
+                        required:
+                          webform.field_webform_fields[key]["#required"],
+                        min: webform.field_webform_fields[key]["#min"],
+                        max: webform.field_webform_fields[key]["#max"],
+                      })}
+                    />
+                  ) : (
+                    <Input
+                      type={webform.field_webform_fields[key]["#type"]}
+                      id={webform.field_webform_fields[key]["#title"]}
+                      {...register(key as keyof FieldInputs, {
+                        required:
+                          webform.field_webform_fields[key]["#required"],
+                        min: webform.field_webform_fields[key]["#min"],
+                        max: webform.field_webform_fields[key]["#max"],
+                      })}
+                    />
+                  )}
+                  {formState.errors[key] && (
+                    <p>{formState.errors[key].message}</p>
+                  )}
                 </div>
               );
             })}
@@ -192,9 +222,11 @@ export function Webform({
             </Button>
           </form>
         </div>
-        {variant === "events" && (<div className='bg-[url("/finavia-arrivals-1340x760.jpg")] bg-center bg-no-repeat bg-cover'></div>)}
+        {variant === "events" && (
+          <div className='bg-[url("/finavia-arrivals-1340x760.jpg")] bg-center bg-no-repeat bg-cover'></div>
+        )}
       </section>
-    </AuthWrapper >
+    </AuthWrapper>
   );
 }
 

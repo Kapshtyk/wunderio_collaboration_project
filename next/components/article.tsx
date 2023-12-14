@@ -15,10 +15,10 @@ interface ArticleProps {
 export function Article({ article, ...props }: ArticleProps) {
   const { t } = useTranslation();
   const router = useRouter();
-  console.log('articlesmy', article)
+  console.log("articlesmy", article);
   return (
     <article {...props}>
-      <HeadingPage>{article.title}</HeadingPage>
+      <HeadingPage title={article.title} />
       {article.field_excerpt && (
         <div className="my-4 text-xl">{article.field_excerpt}</div>
       )}
@@ -27,7 +27,6 @@ export function Article({ article, ...props }: ArticleProps) {
           <span>
             {t("posted-by", { author: article.uid?.display_name })} -{" "}
           </span>
-
         )}
 
         {article.uid?.field_profile_picture?.uri && (
@@ -41,7 +40,8 @@ export function Article({ article, ...props }: ArticleProps) {
               alt={article.uid?.field_profile_picture.resourceIdObjMeta.alt}
             />
           </div>
-        )}{"-"}
+        )}
+        {"-"}
         <span>{formatDate(article.created, router.locale)}</span>
       </div>
       {article.field_image && (

@@ -10,7 +10,7 @@ export function ParagraphFileAttachments({
   paragraph: FileAttachments;
 }) {
   return (
-    <section className="relative h-full rounded border border-finnishwinter bg-white p-4 transition-all hover:shadow-md">
+    <section className="relative h-full rounded border border-finnishwinter bg-foreground p-4 transition-all hover:shadow-md">
       {paragraph.field_heading && (
         <HeadingParagraph>{paragraph.field_heading}</HeadingParagraph>
       )}

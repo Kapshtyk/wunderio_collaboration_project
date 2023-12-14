@@ -72,7 +72,7 @@ export function validateAndCleanupServices(
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Services", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, services }, null, 2));
     return null;
   }

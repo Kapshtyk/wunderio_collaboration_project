@@ -34,7 +34,7 @@ export default function AllArticlesPage({
     <>
       <Meta title={t("all-articles")} metatags={[]} />
       <div ref={focusRef} tabIndex={-1} />
-      <HeadingPage>{t("all-articles")}</HeadingPage>
+      <HeadingPage title={t("all-articles")} />
       <ul className="mt-4">
         {articleTeasers?.map((article) => (
           <li key={article.id}>

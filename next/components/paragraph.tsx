@@ -10,7 +10,6 @@ import { ParagraphText } from "@/components/paragraph--text";
 import { Paragraph } from "@/lib/zod/paragraph";
 
 import { ParagraphLabelledImage } from "./paragraph--labelled-image";
-import { ParagraphLinkService } from "./paragraph--link-service";
 import { ParagraphTestimonials } from "./paragraph--testimonials";
 // import { ParagraphServicesTaxonomy } from "./paragraph--services-taxonomy";
 

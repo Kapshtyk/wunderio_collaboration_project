@@ -30,7 +30,7 @@ export default function DashboardPage({
   return (
     <>
       <Meta title={t("user-dashboard")} metatags={[]} />
-      <HeadingPage>{t("user-dashboard")}</HeadingPage>
+      <HeadingPage title={t("user-dashboard")} />
       <p className="my-6 text-justify text-md/xl text-scapaflow sm:text-lg">
         {t("user-dashboard-intro-greeting", { username: data.user.name })}
       </p>
@@ -42,7 +42,7 @@ export default function DashboardPage({
             <th className="px-3 py-4">{t("more-details")}</th>
           </tr>
         </thead>
-        <tbody className="bg-white text-sm text-steelgray">
+        <tbody className="bg-foreground text-sm text-steelgray">
           {submissions.map((submission) => (
             <tr
               key={submission.uuid[0]["value"]}

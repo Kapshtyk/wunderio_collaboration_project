@@ -2,7 +2,8 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import { FormattedTextSchema, HeadingSectionSchema } from "@/lib/zod/paragraph";
+import { HeadingSectionSchema } from "@/lib/zod/paragraph";
+
 import { TestimonialsSchema } from "./testimonials";
 
 const CareersElementsSchema = z.discriminatedUnion("type", [
@@ -67,7 +68,7 @@ export function validateAndCleanupCareers(careers: DrupalNode): Careers | null {
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Careers", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, careers }, null, 2));
     return null;
   }
@@ -79,7 +80,7 @@ export function validateAndCleanupBasicInfo(
   try {
     return BasicInfoSchema.parse(basicInfo);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Basic Info", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, basicInfo }, null, 2));
     return null;
   }

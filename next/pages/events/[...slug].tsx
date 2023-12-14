@@ -2,8 +2,10 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Link from "next/link";
 import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
+import { useState } from "react";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import EventMapModal from "@/components/event-map-modal";
 import { FormattedText } from "@/components/formatted-text";
 import { HeadingParagraph } from "@/components/heading--paragraph";
 import { LayoutProps } from "@/components/layout";
@@ -33,8 +35,6 @@ import {
 } from "@/lib/zod/webform";
 
 import NotFoundPage from "../404";
-import EventMapModal from "@/components/event-map-modal";
-import { useState } from "react";
 
 interface EventProps extends LayoutProps {
   event: EventType | SideEventType;
@@ -50,6 +50,8 @@ export default function Event({
   sideEvents,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
+  const [showMap, setShowMap] = useState(false);
+
   if (!event) {
     return <NotFoundPage />;
   }
@@ -73,21 +75,24 @@ export default function Event({
     });
   }
 
-  const [showMap, setShowMap] = useState(false);
   const toggleMap = () => {
     setShowMap((prevShowMap) => !prevShowMap);
   };
+
   return (
     <>
       <Meta title={event.title} metatags={event.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <h2 className="sr-only">{`${event.title} - main description`}</h2>
+      <h2 className="sr-only">{`${event.title} - heading section`}</h2>
       {event.field_content_elements?.map((element) => (
         <Paragraph key={element.id} paragraph={element} />
       ))}
-      <FormattedText html={event.body.processed} />
+      <section className="pr-56">
+        <h2 className="sr-only">{`Main content of the ${event.title} event page`}</h2>
+        <FormattedText html={event.body.processed} />
+      </section>
       {
         <>
           {event.type === "node--event" && (
@@ -107,11 +112,15 @@ export default function Event({
               <HeadingParagraph>Venue</HeadingParagraph>
 
               <p>{event.field_venue.field_venue_address}</p>
-              <button onClick={toggleMap}>{showMap ? 'Hide map' : 'Show map'}</button>
-              {showMap && <EventMapModal
-                lat={event.field_venue.field_venue_coordinates.lat}
-                lng={event.field_venue.field_venue_coordinates.lon} />
-              }
+              <button onClick={toggleMap}>
+                {showMap ? "Hide map" : "Show map"}
+              </button>
+              {showMap && (
+                <EventMapModal
+                  lat={event.field_venue.field_venue_coordinates.lat}
+                  lng={event.field_venue.field_venue_coordinates.lon}
+                />
+              )}
             </>
           )}
         </>
@@ -121,6 +130,7 @@ export default function Event({
         onlyForAuthenticated={true}
         formTitle={t("events-form-title", { event: event.title })}
         formMessageIfUnauthenticated={t("events-form-not-auth")}
+        variant="events"
       />
 
       <div className="flex gap-4 flex-wrap">
@@ -129,7 +139,7 @@ export default function Event({
             <Link
               key={sideEvent.id}
               href={sideEvent.path.alias}
-              className="relative grid h-full rounded border border-finnishwinter bg-white p-4 transition-all hover:shadow-md"
+              className="relative grid h-full rounded border border-finnishwinter bg-foreground p-4 transition-all hover:shadow-md"
             >
               <div className="p-4 w-52 h-52 rounded-md shadow-sm bg-primary-50">
                 <h3>{sideEvent.title}</h3>

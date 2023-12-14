@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@hookform/error-message": "^2.0.1",
-    "@radix-ui/react-navigation-menu": "^1.1.4",
-    "lucide-react": "^0.294.0",
-    "nextjs-drupal-webform": "^1.1.1"
-  }
-}

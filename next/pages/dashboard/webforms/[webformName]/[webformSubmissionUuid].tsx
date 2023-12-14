@@ -25,7 +25,7 @@ export default function DashboardPage({
   return (
     <>
       <Meta title={t("form-submission-details")} metatags={[]} />
-      <HeadingPage>{t("form-submission-details")}</HeadingPage>
+      <HeadingPage title={t("form-submission-details")} />
       <Link href="/dashboard" className="hyperlink mt-4 block">
         {t("back-to-dashboard")}
       </Link>
@@ -39,7 +39,7 @@ export default function DashboardPage({
             <th className="px-3 py-4">{t("form-value")}</th>
           </tr>
         </thead>
-        <tbody className="bg-white text-sm text-steelgray">
+        <tbody className="bg-foreground text-sm text-steelgray">
           {submission.formData.map(([key, value]) => (
             <tr key={key} className="border border-graysuit">
               <td className="p-3">{key}</td>

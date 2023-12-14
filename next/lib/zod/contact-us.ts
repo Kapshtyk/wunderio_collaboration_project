@@ -67,7 +67,7 @@ export function validateAndCleanupContactUs(
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Contact us", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, contactUs }, null, 2));
     return null;
   }

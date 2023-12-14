@@ -1,28 +1,26 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Link from "next/link";
-import {
-  DrupalNode,
-  DrupalTaxonomyTerm,
-  DrupalTranslatedPath,
-} from "next-drupal";
+import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
+import OfficeLocationsMap from "@/components/office-map";
 import { Paragraph } from "@/components/paragraph";
-import { createLanguageLinks } from "@/lib/contexts/language-links-context";
+import { Webform } from "@/components/webworm/webform";
+import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { drupal } from "@/lib/drupal/drupal-client";
-import {
-  getNodePageJsonApiParams,
-} from "@/lib/drupal/get-node-page-json-api-params";
-import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { ContactUs, validateAndCleanupContactUs } from "@/lib/zod/contact-us";
-import { OfficeLocations, validateAndCleanupOfficeLocations } from "@/lib/zod/office-locations";
-import OfficeLocationsMap from "@/components/office-map";
-import { Webform } from "@/components/webworm/webform";
-import { Webform as WebformType, validateAndCleanupWebform, validateAndCleanupWebformFields } from "@/lib/zod/webform";
-import { absoluteUrl } from "@/lib/drupal/absolute-url";
+import {
+  OfficeLocations,
+  validateAndCleanupOfficeLocations,
+} from "@/lib/zod/office-locations";
+import {
+  validateAndCleanupWebform,
+  validateAndCleanupWebformFields,
+  Webform as WebformType,
+} from "@/lib/zod/webform";
 
 interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
@@ -31,7 +29,9 @@ interface ConatactUsProps extends LayoutProps {
 }
 
 export default function ContactUsPage({
-  contactUs, maps, webform
+  contactUs,
+  maps,
+  webform,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
@@ -40,7 +40,6 @@ export default function ContactUsPage({
       url: "/contact-us",
     },
   ];
-
 
   return (
     <>
@@ -59,7 +58,12 @@ export default function ContactUsPage({
       </div>
       <div>
         <OfficeLocationsMap maps={maps} />
-        <Webform formTitle={t('form-contact-title')} webform={webform} variant="contact" maps={maps} />
+        <Webform
+          formTitle={t("form-contact-title")}
+          webform={webform}
+          variant="contact"
+          maps={maps}
+        />
       </div>
       <div className="container">
         <div className="flex gap-36">
@@ -107,8 +111,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
       "node--contact_us",
       context,
       {
-        params: getNodePageJsonApiParams("node--contact_us")
-          .getQueryObject(),
+        params: getNodePageJsonApiParams("node--contact_us").getQueryObject(),
       },
     )
   ).at(0);
@@ -117,7 +120,9 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
 
   const validatedResource = await validateAndCleanupContactUs(contactUs);
 
-  const validatedWebform = validateAndCleanupWebform(contactUs.field_contact_us_form);
+  const validatedWebform = validateAndCleanupWebform(
+    contactUs.field_contact_us_form,
+  );
 
   const webformFields = await fetch(
     absoluteUrl(
@@ -128,8 +133,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     .then((data) => data)
     .catch((error) => console.log(error));
 
-  const validatedWebformFields =
-    validateAndCleanupWebformFields(webformFields);
+  const validatedWebformFields = validateAndCleanupWebformFields(webformFields);
 
   validatedWebform.field_webform_fields = validatedWebformFields;
 
@@ -143,7 +147,6 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
 
 
   // console.log('maps:',maps);
-
 
   //   const view = (
   //     await drupal.getView("office_address_marker--block_1",{
