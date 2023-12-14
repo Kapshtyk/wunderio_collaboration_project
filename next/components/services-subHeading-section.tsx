@@ -22,10 +22,10 @@ const SubHeadingSectionComponent = ({
     <>
       <div key={subHeading.id}>
         <div
-          className="h-72 w-[110vw] -translate-x-[25%] rounded-r-2xl bg-gradient-primary-600 bg-right bg-cover bg-no-repeat"
+          className="h-52 bg-gradient-primary-600 bg-right bg-cover bg-no-repeat rounded-full"
           id={subHeading.id}
         >
-          <div>
+          <div className="p-14 flex flex-col gap-6 z-40 text-white rounded-full">
             <HeadingParagraph>{subHeading.field_heading}</HeadingParagraph>
             <p>{subHeading.field_excerpt}</p>
           </div>

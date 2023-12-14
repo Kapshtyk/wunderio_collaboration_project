@@ -48,9 +48,14 @@ export default function ContactUsPage({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       <div className="grid gap-4">
-        {contactUs.field_content_elements?.map((paragraph) => (
-          <Paragraph key={paragraph.id} paragraph={paragraph} />
-        ))}
+        {contactUs.field_content_elements?.map((paragraph) => {
+            return(
+                <>
+                {paragraph.type === "paragraph--heading_section" && (
+                    <Paragraph key={paragraph.id} paragraph={paragraph} />
+                )}
+                </>
+        )})}
       </div>
       <div>
         <OfficeLocationsMap maps={maps} />
@@ -71,8 +76,25 @@ export default function ContactUsPage({
             </div>
         ))}
         </div>
-
+        {contactUs.field_contact_people && contactUs.field_contact_people.map((people) => (
+        <div key={people.id}>
+        <h1>{people.display_name}</h1>
+        </div>
+        ))}
       </div> 
+      <div>
+      {contactUs.field_content_elements?.map((paragraph) => {
+            return(
+                <>
+                <div className="flex gap-80">
+                {paragraph.type === "paragraph--formatted_text" && (
+                    <Paragraph key={paragraph.id} paragraph={paragraph} />
+                )}
+                </div>
+            
+                </>
+        )})}
+      </div>
     </>
   );
 }
@@ -91,7 +113,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     )
   ).at(0);
 
-  console.log('contactUs:', contactUs);
+//   console.log('contactUs:', contactUs);
 
   const validatedResource = await validateAndCleanupContactUs(contactUs);
 
@@ -111,14 +133,13 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
 
   validatedWebform.field_webform_fields = validatedWebformFields;
 
-  console.log(contactUs);
-
 
   const maps = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--office_locations", {
       params: getNodePageJsonApiParams('node--office_locations').getQueryObject()
     })
   )
+
 
 
   // console.log('maps:',maps);

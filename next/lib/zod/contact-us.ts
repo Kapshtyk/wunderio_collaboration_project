@@ -2,12 +2,22 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import { HeadingSectionSchema, FormattedTextSchema } from "@/lib/zod/paragraph";
+import { HeadingSectionSchema, FormattedTextSchema, ImageShape } from "@/lib/zod/paragraph";
 
 const ContactUsElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
   FormattedTextSchema,
 ]);
+
+export const ContactPersonSchema = z.object({
+    type: z.literal('user--user'),
+    id: z.string(),
+    display_name: z.string(),
+    resourceIdObjMeta: z.object({
+        drupal_internal__target_id: z.number(),
+        })
+
+  });
 
 export const ContactUsSchema = z.object({
   type: z.literal("node--contact_us"),
@@ -15,14 +25,15 @@ export const ContactUsSchema = z.object({
   title: z.string(),
   field_content_elements: z.array(ContactUsElementsSchema),
   field_contact_us_form: z.object({
-    id: z.string(),
-    resourceIdObjMeta: z
+      id: z.string(),
+      resourceIdObjMeta: z
       .object({
-        drupal_internal__target_id: z.string(),
-      })
-      .nullable()
-      .optional(),
-  }),
+          drupal_internal__target_id: z.string(),
+        })
+        .nullable()
+        .optional(),
+    }).nullable(),
+    field_contact_people: z.array(ContactPersonSchema),
   metatag: MetatagsSchema.optional(),
 });
 

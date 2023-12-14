@@ -25,7 +25,6 @@ import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 import { Divider } from "@/ui/divider";
 import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
 import { Button } from "@/ui/button";
-import ContactUs from "@/components/contact-us";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
@@ -41,7 +40,6 @@ export default function IndexPage({
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
-      <ContactUs />
 
     </ >
   );
