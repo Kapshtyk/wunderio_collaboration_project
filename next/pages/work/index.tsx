@@ -15,16 +15,20 @@ import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-vers
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
-import { HeadingSection } from "@/lib/zod/paragraph";
+import { HeadingSection, Testimonials as TestimonialsType } from "@/lib/zod/paragraph";
 import { validateAndCleanupWork, Work } from "@/lib/zod/work";
 import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
 import Numbers from "@/components/numbers";
+import { validateAndCleanupTestimonial } from "@/lib/zod/testimonials";
+import Testimonials from "@/components/testimonials";
+import { title } from "process";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
   allWorkPages: PageType[];
   allArticles: Article[];
   wunderNumbers: NumbersType[];
+  testimonials: TestimonialsType[];
 }
 
 export default function WorkPage({
@@ -32,6 +36,7 @@ export default function WorkPage({
   allWorkPages,
   allArticles,
   wunderNumbers,
+  testimonials,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
@@ -92,6 +97,9 @@ export default function WorkPage({
             ))}
         </div>
       </div>
+      <div>
+        <Testimonials testimonials={testimonials} />
+      </div>
     </>
   );
 }
@@ -146,6 +154,13 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
       params: getNodePageJsonApiParams("node--numbers").addFilter('field_numbers_type.name', 'Wunder in Numbers').getQueryObject()
     },
   );
+  const testimonials = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--testimonials",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--testimonials").addFilter('field_person_category.name', 'Client').getQueryObject()
+    },
+  );
 
   return {
     props: {
@@ -154,6 +169,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
       allWorkPages: pages.map((node) => validateAndCleanupPage(node)),
       allArticles: articles.map((node) => validateAndCleanupArticle(node)),
       wunderNumbers: numbers.map((node) => validateAndCleanupNumbers(node)),
+      testimonials: testimonials.map((node) => validateAndCleanupTestimonial(node)),
       languageLinks,
     },
   };
