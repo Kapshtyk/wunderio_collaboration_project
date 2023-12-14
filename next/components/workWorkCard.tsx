@@ -13,7 +13,10 @@ export function WorkWorkCard({ workPage }) {
       {workPage.field_content_elements
         .filter((element: Paragraph) => element.type === "paragraph--work_card")
         .map((paragraph: WorkCard) => (
-          <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
+          <div
+            key={paragraph.id}
+            className="relative overflow-hidden bg-cover bg-no-repeat h-64"
+          >
             <Link href={workPage.path.alias}>
               <MediaImage
                 className="rounded-sm hover:saturate-150 w-full h-full"

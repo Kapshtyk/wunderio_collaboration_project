@@ -40,7 +40,7 @@ export function validateAndCleanupOpenPositions(
   try {
     return OpenPositionsSchema.parse(openPositions);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Open Positions", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, openPositions }, null, 2));
     return null;
   }

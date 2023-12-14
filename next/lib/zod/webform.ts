@@ -78,7 +78,7 @@ export function validateAndCleanupWebform(form: DrupalNode): Webform | null {
   try {
     return WebformSchema.parse(form);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Webform", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, form }, null, 2));
     return null;
   }
@@ -90,7 +90,7 @@ export function validateAndCleanupWebformFields(
   try {
     return WebformFieldsSchema.parse(field);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Webform Fields", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, field }, null, 2));
     return null;
   }

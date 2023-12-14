@@ -33,11 +33,14 @@ export default function EventsPage({
 
   return (
     <>
-      <Meta title={"events"} />
+      <Meta title={t("events-main-title")} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <HeadingPage title={t("events-main-title")} description={t("events-main-description")} />
+      <HeadingPage
+        title={t("events-main-title")}
+        description={t("events-main-description")}
+      />
       <Events events={events} />
     </>
   );

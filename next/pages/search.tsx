@@ -53,7 +53,7 @@ export default function SearchPage() {
     <>
       <Meta title={t("search")} metatags={[]} />
 
-      <HeadingPage>{t("search")}</HeadingPage>
+      <HeadingPage title={t("search")} />
 
       <SearchProvider config={combinedConfig}>
         <WithSearch

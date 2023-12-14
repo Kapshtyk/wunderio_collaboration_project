@@ -30,7 +30,7 @@ export default function DashboardPage({
   return (
     <>
       <Meta title={t("user-dashboard")} metatags={[]} />
-      <HeadingPage>{t("user-dashboard")}</HeadingPage>
+      <HeadingPage title={t("user-dashboard")} />
       <p className="my-6 text-justify text-md/xl text-scapaflow sm:text-lg">
         {t("user-dashboard-intro-greeting", { username: data.user.name })}
       </p>

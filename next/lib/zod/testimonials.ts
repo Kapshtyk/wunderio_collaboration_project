@@ -2,6 +2,7 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
+
 import { ImageSchema } from "./paragraph";
 
 const TestimonialsElementsSchema = z.discriminatedUnion("type", [ImageSchema]);
@@ -28,7 +29,7 @@ export function validateAndCleanupTestimonial(
   try {
     return TestimonialsSchema.parse(testimonials);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Testimonial", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, testimonials }, null, 2));
     return null;
   }

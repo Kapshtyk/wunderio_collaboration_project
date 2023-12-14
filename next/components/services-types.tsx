@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { HeadingSection, SubHeadingSection } from "@/lib/zod/paragraph";
+import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services as ServicesType } from "@/lib/zod/services";
 
 interface ServicesTypesProps {

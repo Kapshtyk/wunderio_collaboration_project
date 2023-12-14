@@ -15,7 +15,7 @@ export function validateAndCleanupArticleTeaser(
   try {
     return ArticleTeaserSchema.parse(articleTeaser);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Article Teaser", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, articleTeaser }, null, 2));
     return null;
   }

@@ -3,9 +3,9 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 
 import AboutUs from "@/components/about_us";
 import { Article } from "@/components/article";
+import LegalDocument from "@/components/legal-document";
 import { Meta } from "@/components/meta";
 import { Page } from "@/components/page";
-import LegalDocument from "@/components/legal-document";
 import {
   createLanguageLinks,
   LanguageLinks,
@@ -26,11 +26,19 @@ import {
   Article as ArticleType,
   validateAndCleanupArticle,
 } from "@/lib/zod/article";
+import {
+  LegalDocument as LegalDocumentType,
+  validateAndCleanupLegalDocument,
+} from "@/lib/zod/legal-document";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
-import { LegalDocument as LegalDocumentType, validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
 
 // const RESOURCE_TYPES = ["node--article", "node--page"];
-const RESOURCE_TYPES = ["node--article", "node--page", "node--about_us", "node--legal_document"];
+const RESOURCE_TYPES = [
+  "node--article",
+  "node--page",
+  "node--about_us",
+  "node--legal_document",
+];
 
 export default function CustomPage({
   resource,
@@ -43,7 +51,9 @@ export default function CustomPage({
       {resource.type === "node--article" && <Article article={resource} />}
       {resource.type === "node--page" && <Page page={resource} />}
       {resource.type === "node--about_us" && <AboutUs about_us={resource} />}
-      {resource.type === "node--legal_document" && <LegalDocument legal_document={resource} />}
+      {resource.type === "node--legal_document" && (
+        <LegalDocument legal_document={resource} />
+      )}
     </>
   );
 }
@@ -94,7 +104,6 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
       },
     };
   }
-  const apiParams = getNodePageJsonApiParams(type).getQueryObject();
 
   const resource = await drupal.getResourceFromContext<DrupalNode>(
     path,
@@ -132,12 +141,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     type === "node--article"
       ? validateAndCleanupArticle(resource)
       : type === "node--page"
-      ? validateAndCleanupPage(resource)
-      : type === "node--about_us"
-      ? validateAndCleanupAboutUs(resource)
-      : type === "node--legal_document"
-      ? validateAndCleanupLegalDocument(resource)
-      : null;
+        ? validateAndCleanupPage(resource)
+        : type === "node--about_us"
+          ? validateAndCleanupAboutUs(resource)
+          : type === "node--legal_document"
+            ? validateAndCleanupLegalDocument(resource)
+            : null;
 
   return {
     props: {

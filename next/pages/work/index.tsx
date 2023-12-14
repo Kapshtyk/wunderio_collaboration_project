@@ -1,5 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
+import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -82,10 +82,11 @@ export default function WorkPage({
         <h1 className="font-bold mb-4">MORE ABOUT OUR CLIENTS</h1>
         <div className="md:grid grid-cols-3 gap-3">
           {allArticles
-            .filter((workArticles) =>
-              workArticles.field_tags?.some(
-                (field_tag) => field_tag?.name === "Client",
-              ),
+            .filter(
+              (workArticles) =>
+                workArticles.field_tags?.some(
+                  (field_tag) => field_tag?.name === "Client",
+                ),
             )
             .sort(
               (a, b) =>
@@ -151,9 +152,12 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     "node--numbers",
     context,
     {
-      params: getNodePageJsonApiParams("node--numbers").addFilter('field_numbers_type.name', 'Wunder in Numbers').getQueryObject()
+      params: getNodePageJsonApiParams("node--numbers")
+        .addFilter("field_numbers_type.name", "Wunder in Numbers")
+        .getQueryObject(),
     },
   );
+
   const testimonials = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--testimonials",
     context,

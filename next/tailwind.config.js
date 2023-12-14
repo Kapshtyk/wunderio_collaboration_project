@@ -14,7 +14,7 @@ module.exports = {
       "2xl": "0px 24px 48px -12px rgba(17, 24, 39, 0.25);",
     },
     colors: {
-      main: "rgb(var(--main-color)) / <alpha-value>)",
+      main: "rgb(var(--main-color) / <alpha-value>)",
       background: "rgb(var(--background) / <alpha-value>)",
       foreground: "rgb(var(--foreground) / <alpha-value>)",
       primary: {
@@ -123,6 +123,15 @@ module.exports = {
       backgroundImage: {
         "gradient-primary-600":
           "linear-gradient(90deg, rgba(91, 55, 191, 0.9) 0%, rgba(91, 55, 191, 0.90) 100%), url('/a5b97f1ed23d0bc08a59a8be0e3a1290.jpeg')",
+      },
+      keyframes: {
+        appear: {
+          "0%": { width: 0 },
+          "100%": { width: "100%" },
+        },
+      },
+      animation: {
+        underline: "appear 0.2s linear forwards",
       },
     },
   },

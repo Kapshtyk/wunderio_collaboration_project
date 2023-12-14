@@ -5,11 +5,7 @@ interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   breadcrumbs?: BreadcrumbsProps["items"];
 }
 
-export function PageHeader({
-  breadcrumbs,
-  children,
-  ...props
-}: PageHeaderProps) {
+export function PageHeader({ breadcrumbs, children }: PageHeaderProps) {
   return (
     <div className="container">
       {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}

@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
 
-
 const LegalDocumentSchema = z.object({
   type: z.literal("node--legal_document"),
   metatag: MetatagsSchema.optional(),
@@ -13,11 +12,13 @@ const LegalDocumentSchema = z.object({
   }),
 });
 
-export function validateAndCleanupLegalDocument(legal_document: DrupalNode): LegalDocument | null {
+export function validateAndCleanupLegalDocument(
+  legal_document: DrupalNode,
+): LegalDocument | null {
   try {
     return LegalDocumentSchema.parse(legal_document);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Legal Docs", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, legal_document }, null, 2));
     return null;
   }
