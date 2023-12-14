@@ -33,7 +33,7 @@
     --tranquil: 247 255 255;
     --martinique: 47 41 66;
     --main-color: 101 60 197;
-    --background: 255 255 255;
+    --background: 247 247 248;
     --foreground: 34 31 45;
 
     --accent-hugs: 158 0 93;
@@ -63,7 +63,7 @@
   .dark {
     --background: 34 31 45;
     --foreground: 255 255 255;
-    --primary-600:180 159 226;
+    --main-color: 149 119 215;
   }
 }
 

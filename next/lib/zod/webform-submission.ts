@@ -22,7 +22,7 @@ export function validateAndCleanupWebformSubmission(
       formData: Object.entries(webform_submission),
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Webform Submission", issues = [] } = error;
     console.log(JSON.stringify({ name, issues }, null, 2));
     return null;
   }

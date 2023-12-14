@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { DrupalTaxonomyTerm } from "next-drupal";
-import { useTranslation } from "react-i18next";
 
 import { Page as PageType } from "@/lib/zod/page";
 import { WorkCard } from "@/lib/zod/paragraph";

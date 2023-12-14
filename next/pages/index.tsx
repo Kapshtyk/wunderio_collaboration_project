@@ -1,19 +1,11 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
-import { useTranslation } from "next-i18next";
+import { DrupalNode } from "next-drupal";
 
-import { ArticleTeasers } from "@/components/article-teasers";
-import { ContactForm } from "@/components/contact-form";
-import { ContactList } from "@/components/contact-list";
+import HeroBanner from "@/components/hero-banner";
 import { LayoutProps } from "@/components/layout";
-import { LogoStrip } from "@/components/logo-strip";
 import { Meta } from "@/components/meta";
-import { Paragraph } from "@/components/paragraph";
 import { drupal } from "@/lib/drupal/drupal-client";
-import {
-  getNodePageJsonApiParams,
-  ResourceType,
-} from "@/lib/drupal/get-node-page-json-api-params";
+import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 import {
@@ -21,28 +13,22 @@ import {
   validateAndCleanupArticleTeaser,
 } from "@/lib/zod/article-teaser";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
-
-import { Divider } from "@/ui/divider";
 import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
-import { Button } from "@/ui/button";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
-  promotedArticleTeasers: ArticleTeaser[];
+  promotedArticleTeasers?: ArticleTeaser[];
 }
 
 export default function IndexPage({
   frontpage,
-  promotedArticleTeasers,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation();
-
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
-    </ >
+      <HeroBanner />
+    </>
   );
-
 }
 
 export const getStaticProps: GetStaticProps<IndexPageProps> = async (
@@ -81,14 +67,15 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       },
     )
   ).at(0);
-  console.log(aboutUs);
 
   const legalDocument = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
       "node--legal_document",
       context,
       {
-        params: getNodePageJsonApiParams("node--legal_document").getQueryObject(),
+        params: getNodePageJsonApiParams(
+          "node--legal_document",
+        ).getQueryObject(),
       },
     )
   ).at(0);
@@ -101,7 +88,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
         validateAndCleanupArticleTeaser(teaser),
       ),
       aboutUs: validateAndCleanupAboutUs(aboutUs),
-      legalDocument: validateAndCleanupLegalDocument(legalDocument)
+      legalDocument: validateAndCleanupLegalDocument(legalDocument),
     },
     revalidate: 60,
   };

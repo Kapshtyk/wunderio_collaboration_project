@@ -24,7 +24,7 @@ interface PageProps extends CommonPageProps {
   session?: Session;
 }
 
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 
 function App({ Component, pageProps }: AppProps<PageProps>) {
   const [queryClient] = useState(() => new QueryClient());

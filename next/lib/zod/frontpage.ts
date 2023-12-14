@@ -65,7 +65,7 @@ export function validateAndCleanupFrontpage(
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Frontpage", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, frontpage }, null, 2));
     return null;
   }

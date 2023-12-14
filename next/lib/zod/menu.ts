@@ -35,7 +35,7 @@ export function validateAndCleanupMenu(
   try {
     return MenuSchema.parse(menu);
   } catch (error) {
-    const { name = "ZodError", issues = [] } = error;
+    const { name = "ZodError Menu", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, menu }, null, 2));
     return null;
   }

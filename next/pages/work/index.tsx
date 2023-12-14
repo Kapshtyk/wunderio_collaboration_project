@@ -1,10 +1,11 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal";
+import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
 import { LogoStrip } from "@/components/logo-strip";
+import Numbers from "@/components/numbers";
 import { Paragraph } from "@/components/paragraph";
 import { WorkCards } from "@/components/work-cards";
 import { WorkArticleCard } from "@/components/workArticleCard";
@@ -14,11 +15,12 @@ import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-pa
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
+import {
+  Numbers as NumbersType,
+  validateAndCleanupNumbers,
+} from "@/lib/zod/numbers";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
-import { HeadingSection } from "@/lib/zod/paragraph";
 import { validateAndCleanupWork, Work } from "@/lib/zod/work";
-import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
-import Numbers from "@/components/numbers";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
@@ -83,10 +85,11 @@ export default function WorkPage({
         <h1 className="font-bold mb-4">MORE ABOUT OUR CLIENTS</h1>
         <div className="grid grid-cols-3 gap-3">
           {allArticles
-            .filter((workArticles) =>
-              workArticles.field_tags?.some(
-                (field_tag) => field_tag?.name === "Client",
-              ),
+            .filter(
+              (workArticles) =>
+                workArticles.field_tags?.some(
+                  (field_tag) => field_tag?.name === "Client",
+                ),
             )
             .sort(
               (a, b) =>
@@ -149,7 +152,9 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     "node--numbers",
     context,
     {
-      params: getNodePageJsonApiParams("node--numbers").addFilter('field_numbers_type.name', 'Wunder in Numbers').getQueryObject()
+      params: getNodePageJsonApiParams("node--numbers")
+        .addFilter("field_numbers_type.name", "Wunder in Numbers")
+        .getQueryObject(),
     },
   );
 
