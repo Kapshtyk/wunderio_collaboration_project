@@ -63,7 +63,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
                                             <Link href={workPage.path.alias}>
                                                 <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden pt-16" >
                                                     <MediaImage
-                                                        className="h-[430px] w-[220px] absolute z-10 top-[78px] hover:saturate-150"
+                                                        className="h-[460px] w-[220px] absolute z-10 top-[78px] hover:saturate-150"
                                                         media={paragraph.field_image}
                                                     />
                                                     <img

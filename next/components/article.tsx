@@ -22,27 +22,29 @@ export function Article({ article, ...props }: ArticleProps) {
       {article.field_excerpt && (
         <div className="my-4 text-xl">{article.field_excerpt}</div>
       )}
-      <div className="mb-4 text-scapaflow flex items-center">
-        {article.uid?.display_name && (
-          <span>
-            {t("posted-by", { author: article.uid?.display_name })} -{" "}
-          </span>
-        )}
+      <div className="mb-4 text-scapaflow flex items-center bg-primary-50 p-2 rounded-full w-6/12">
+
 
         {article.uid?.field_profile_picture?.uri && (
           <div>
             <Image
               src={absoluteUrl(article.uid?.field_profile_picture?.uri.url)}
-              width={60}
+              width={100}
               height={100}
               layout="fixed"
-              className="rounded-full"
+              className="rounded-full w-16 h-16 mr-3"
               alt={article.uid?.field_profile_picture.resourceIdObjMeta.alt}
             />
           </div>
         )}
-        {"-"}
-        <span>{formatDate(article.created, router.locale)}</span>
+        <div>
+          {article.uid?.display_name && (
+            <span>
+              {t("posted-by", { author: article.uid?.display_name })} -{" "}
+            </span>
+          )}
+          <span>{formatDate(article.created, router.locale)}</span>
+        </div>
       </div>
       {article.field_image && (
         <figure>
