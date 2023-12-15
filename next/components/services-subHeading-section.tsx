@@ -4,6 +4,8 @@ import { DrupalTaxonomyTerm } from "next-drupal";
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services as ServicesType } from "@/lib/zod/services";
 import { HeadingParagraph } from "./heading--paragraph";
+import { useRef } from "react";
+import { useIsVisible } from "@/lib/hooks/scroll-animation";
 
 interface SubHeadingSectionProps {
   subHeading: SubHeadingSection;
@@ -18,15 +20,22 @@ const SubHeadingSectionComponent = ({
 }: SubHeadingSectionProps) => {
   console.log("services:", services);
 
+  const ref = useRef<HTMLDivElement>(null);
+  const isVisible = useIsVisible(ref);
+
+
   return (
     <>
-      <div key={subHeading.id}>
+      <div key={subHeading.id} ref={ref} className={`fadeInOut ${isVisible ? 'opacity-100' : 'opacity-0'} 
+        }`}>
         <div
-          className="h-52 bg-gradient-primary-600 bg-right bg-cover bg-no-repeat rounded-full"
+          className="h-52 w-[75vw] bg-gradient-primary-600 bg-right bg-cover bg-no-repeat rounded-lg"
           id={subHeading.id}
         >
-          <div className="p-14 flex flex-col gap-6 z-40 text-white rounded-full">
-            <HeadingParagraph>{subHeading.field_heading}</HeadingParagraph>
+          <div className="p-14 flex flex-col gap-6 z-40 text-white">
+            <div>
+            <h2 className="text-white text-heading-lg font-semibold">{subHeading.field_heading}</h2>
+            </div>
             <p>{subHeading.field_excerpt}</p>
           </div>
           

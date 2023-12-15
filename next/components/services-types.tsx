@@ -9,8 +9,8 @@ interface ServicesTypesProps {
 }
 
 const ServicesTypes = ({ servicesTypes, allServices }: ServicesTypesProps) => {
-  console.log("all services:", allServices);
-  console.log("services:", servicesTypes);
+  // console.log("all services:", allServices);
+  // console.log("services:", servicesTypes);
   const subHeadingSections = allServices.field_content_elements.filter(
     (field) => field.type === "paragraph--sub_heading_section",
   ) as SubHeadingSection[];
