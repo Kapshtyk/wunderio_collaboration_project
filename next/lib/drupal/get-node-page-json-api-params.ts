@@ -216,14 +216,13 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   if (resourceType === "node--contact_us") {
     apiParams
-      .addInclude(["uid", "field_content_elements, field_contact_us_form", "field_contact_people", "field_contact_people.field_profile_picture"])
+      .addInclude(["uid", "field_content_elements, field_contact_us_form"])
       .addFields("node--contact_us", [
         "title",
         "metatag",
         "field_content_elements",
         "field_contact_us_form",
-        "field_contact_people",
-        "field_contact_people. field_profile_picture",
+        "field_contact_people"
       ]);
   }
   if (resourceType === "node--venue") {

@@ -80,11 +80,6 @@ export default function ContactUsPage({
             </div>
         ))}
         </div>
-        {contactUs.field_contact_people && contactUs.field_contact_people.map((people) => (
-        <div key={people.id}>
-        <h1>{people.display_name}</h1>
-        </div>
-        ))}
       </div> 
       <div>
       {contactUs.field_content_elements?.map((paragraph) => {

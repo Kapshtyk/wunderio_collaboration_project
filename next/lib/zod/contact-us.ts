@@ -9,16 +9,6 @@ const ContactUsElementsSchema = z.discriminatedUnion("type", [
   FormattedTextSchema,
 ]);
 
-export const ContactPersonSchema = z.object({
-    type: z.literal('user--user'),
-    id: z.string(),
-    display_name: z.string(),
-    resourceIdObjMeta: z.object({
-        drupal_internal__target_id: z.number(),
-        })
-
-  });
-
 export const ContactUsSchema = z.object({
   type: z.literal("node--contact_us"),
   id: z.string(),
@@ -33,7 +23,6 @@ export const ContactUsSchema = z.object({
         .nullable()
         .optional(),
     }).nullable(),
-    field_contact_people: z.array(ContactPersonSchema),
   metatag: MetatagsSchema.optional(),
 });
 
