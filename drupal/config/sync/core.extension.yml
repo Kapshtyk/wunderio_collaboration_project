@@ -77,6 +77,7 @@ module:
   system: 0
   taxonomy: 0
   team2_cascade_deletion: 0
+  team2_cookies_consent: 0
   text: 0
   tmgmt: 0
   tmgmt_content: 0

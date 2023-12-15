@@ -3,7 +3,7 @@ import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import Events from "@/components/events";
+import EventsArticles from "@/components/events-articles.tsx";
 import { HeadingPage } from "@/components/heading--page";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
@@ -12,18 +12,21 @@ import { drupal } from "@/lib/drupal/drupal-client";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import {
-  Events as EventsType,
   validateAndCleanupEvents,
 } from "@/lib/zod/events";
+import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
+import { EventsArticles as EventsArticlesType } from "@/lib/zod/events-articles";
+
 
 interface EventsPageProps extends LayoutProps {
-  events: EventsType[];
+  items: EventsArticlesType[]
 }
 
 export default function EventsPage({
-  events,
+  items,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
+
   const breadcrumbs = [
     {
       title: t("events-link"),
@@ -41,7 +44,7 @@ export default function EventsPage({
         title={t("events-main-title")}
         description={t("events-main-description")}
       />
-      <Events events={events} />
+      <EventsArticles items={items} />
     </>
   );
 }
@@ -57,11 +60,27 @@ export const getStaticProps: GetStaticProps<EventsPageProps> = async (
     },
   );
 
+  const validatedEvents = events.map((event) =>
+    validateAndCleanupEvents(event),
+  );
+
+  const articles = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--article", context, {
+    params: getNodePageJsonApiParams("node--article").getQueryObject(),
+  });
+
+  const validatedArticleTeasers = articles.map((teaser) =>
+    validateAndCleanupArticleTeaser(teaser),
+  );
+
+  const items = [...validatedEvents, ...validatedArticleTeasers];
+
   const languageLinks = createLanguageLinksForNextOnlyPage("/events", context);
   return {
     props: {
       ...(await getCommonPageProps(context)),
-      events: events.map((event) => validateAndCleanupEvents(event)),
+      items,
       languageLinks,
     },
     revalidate: 60,

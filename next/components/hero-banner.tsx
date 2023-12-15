@@ -19,7 +19,7 @@ const HeroBanner = () => {
           services are used in everyday life. We help our clients to improve
           their digital business, competitiveness and customer experience.
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-8">
           <Button>View Our Work</Button>
           <Button variant="tertiary">
             <span>Get to know us</span>
