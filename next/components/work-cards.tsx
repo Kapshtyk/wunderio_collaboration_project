@@ -18,15 +18,14 @@ export function WorkCards({ allWorkPages }) {
                 <div key={paragraph.id} className="p-2">
                   <Link href={workPage.path.alias}>
                     <MediaImage
-                      className="rounded-lg h-80 hover:saturate-150 w-full"
+                      className="rounded-lg h-72 hover:saturate-150 w-full"
                       media={paragraph.field_image}
                     />
-                    <h3 className="text-primary-600 py-3 text-lg font-bold hover:underline">
+                    <h1 className="text-primary-600 py-3 text-lg font-bold hover:underline">
                       {workPage.title}
-                    </h3>
+                    </h1>
                   </Link>
-                  <h1 className="text-md">{paragraph.field_excerpt}</h1>
-                  {/* <h1>{workPage.field_excerpt}</h1> */}
+                  <h1>{workPage.field_excerpt}</h1>
                 </div>
               ))}
         </div>

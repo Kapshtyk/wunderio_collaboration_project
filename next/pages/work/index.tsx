@@ -63,11 +63,11 @@ export default function WorkPage({
         </div>
       </div>
 
-      {
-        <div>
-          <WorkCards allWorkPages={allWorkPages} />
-        </div>
-      }
+
+      <div>
+        <WorkCards allWorkPages={allWorkPages} />
+      </div>
+
 
       <div className="my-20">
         <h1 className="font-bold">OUR CLIENTS</h1>
@@ -128,7 +128,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
 
   const languageLinks = createLanguageLinks(nodeTranslations);
 
-  const pages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+  const allWorkPages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--page",
     context,
     {
@@ -170,7 +170,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     props: {
       ...(await getCommonPageProps(context)),
       mainPage: validateAndCleanupWork(mainPage),
-      allWorkPages: pages.map((node) => validateAndCleanupPage(node)),
+      allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
       allArticles: articles.map((node) => validateAndCleanupArticle(node)),
       wunderNumbers: numbers.map((node) => validateAndCleanupNumbers(node)),
       testimonials: testimonials.map((node) => validateAndCleanupTestimonial(node)),

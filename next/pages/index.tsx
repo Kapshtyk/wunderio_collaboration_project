@@ -14,19 +14,26 @@ import {
 } from "@/lib/zod/article-teaser";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
+import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import { FrontPageWorkSection } from "@/components/frontPageWorkSection";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
   promotedArticleTeasers?: ArticleTeaser[];
+  allWorkPages: PageType[];
 }
 
 export default function IndexPage({
   frontpage,
+  allWorkPages,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
+      <div>
+        <FrontPageWorkSection allWorkPages={allWorkPages} />
+      </div>
     </>
   );
 }
@@ -80,6 +87,16 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     )
   ).at(0);
 
+  const allWorkPages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--page",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--page")
+        .addFilter("field_page_type.name", "Work")
+        .getQueryObject(),
+    },
+  );
+
   return {
     props: {
       ...(await getCommonPageProps(context)),
@@ -89,6 +106,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       ),
       aboutUs: validateAndCleanupAboutUs(aboutUs),
       legalDocument: validateAndCleanupLegalDocument(legalDocument),
+      allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
     },
     revalidate: 60,
   };
