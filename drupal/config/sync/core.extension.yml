@@ -7,6 +7,7 @@ module:
   block: 0
   breakpoint: 0
   ckeditor5: 0
+  ckeditor_div_manager: 0
   config: 0
   config_split: 0
   config_translation: 0
@@ -77,6 +78,7 @@ module:
   system: 0
   taxonomy: 0
   team2_cascade_deletion: 0
+  team2_cookies_consent: 0
   text: 0
   tmgmt: 0
   tmgmt_content: 0

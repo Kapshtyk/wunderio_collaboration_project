@@ -46,6 +46,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_event_registration",
       "field_participant",
       "field_venue",
+      "field_tags",
     ]);
     /*  .addFields(resourceType, [
         "title",

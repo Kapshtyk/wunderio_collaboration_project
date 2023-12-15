@@ -33,6 +33,7 @@
     --tranquil: 247 255 255;
     --martinique: 47 41 66;
     --main-color: 101 60 197;
+    --accent-color: 158 0 93;
     --background: 247 247 248;
     --foreground: 34 31 45;
 
@@ -64,6 +65,7 @@
     --background: 34 31 45;
     --foreground: 255 255 255;
     --main-color: 149 119 215;
+    --accent-color: 255 65 133;
   }
 }
 

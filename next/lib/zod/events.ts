@@ -6,6 +6,7 @@ import {
   FormattedTextSchema,
   HeadingSectionSchema,
   ImageSchema,
+  ImageShape,
 } from "@/lib/zod/paragraph";
 
 import { GeofieldSchema } from "./office-locations";
@@ -51,11 +52,22 @@ export const EventsSchema = z.object({
   type: z.literal("node--event"),
   id: z.string(),
   title: z.string(),
+  created: z.string(),
   field_content_elements: z.array(EventsElementsSchema),
   metatag: MetatagsSchema.optional(),
   path: z.object({
     alias: z.string(),
   }),
+  field_image: ImageShape.nullable(),
+  field_excerpt: z.string(),
+  field_tags: z
+    .array(
+      z.object({
+        name: z.string().nullable(),
+      }),
+    )
+    .nullable()
+    .optional(),
   body: z
     .object({
       value: z.string(),

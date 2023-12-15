@@ -6,6 +6,13 @@ export const buttonVariants = cva(
   "flex gap-2 items-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
   {
     variants: {
+      size: {
+        xs: "text-xs h-8 font-semibold py-2 px-3",
+        sm: "text-sm h-9 font-semibold py-2 px-3",
+        md: "text-sm h-10 font-semibold py-[10px] px-4",
+        lg: "text-md h-12 font-semibold py-3 px-5 gap-2",
+        xl: "text-md h-14 font-semibold py-4 px-6 gap-2",
+      },
       variant: {
         primary: [
           "bg-primary-500 text-white",
@@ -18,24 +25,13 @@ export const buttonVariants = cva(
           "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-foreground",
         ],
         tertiary: [
-          "bg-transparent text-foreground",
-          "hover:hover:text-foreground/80",
-          /* "hover:bg-primary-50 hover:text-primary-600 hover:border-transparent",
-          "active:bg-primary-50 active:text-primary-600 active:border-transparent",
-          "disabled:!border-transparent disabled:!text-primary-200", */
+          "bg-transparent text-main !px-0",
+          "hover:hover:text-main/80 !px-0",
         ],
-      },
-      size: {
-        xs: "text-xs h-8 font-semibold py-2 px-3",
-        sm: "text-sm h-9 font-semibold py-2 px-3",
-        md: "text-sm h-10 font-semibold py-[10px] px-4",
-        lg: "text-md h-12 font-semibold py-3 px-5 gap-2",
-        xl: "text-md h-14 font-semibold py-4 px-6 gap-2",
       },
     },
   },
 );
-<div className="h-14" />;
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "tertiary";
@@ -46,12 +42,12 @@ export interface ButtonProps
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { variant = "primary", size = "md", children, className, ...props },
+    { size = "md", variant = "primary", children, className, ...props },
     ref,
   ) => {
     return (
       <button
-        className={clsx(buttonVariants({ variant, size }), className)}
+        className={clsx(buttonVariants({ size, variant }), className)}
         ref={ref}
         {...props}
       >
