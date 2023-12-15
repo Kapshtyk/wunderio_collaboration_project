@@ -47,6 +47,15 @@ const options: HTMLReactParserOptions = {
         }
         break;
       }
+      case "div": {
+        const { class: className } = domNode.attribs;
+
+        return (
+          <div className="flex flex-row gap-8">
+            {domToReact(domNode.children, options)}
+          </div>
+        );
+      }
 
       case "strong": {
         return (

@@ -240,6 +240,7 @@ export type WorkCard = z.infer<typeof WorkCardSchema>;
 export type LinkService = z.infer<typeof LinkServiceSchema>;
 export type SubHeadingSection = z.infer<typeof SubHeadingSectionSchema>;
 export type LabelledImage = z.infer<typeof LabelledImageSchema>;
+export type ImageShape = z.infer<typeof ImageShape>;
 
 export type Paragraph =
   | FormattedText
@@ -256,4 +257,5 @@ export type Paragraph =
   | WorkCard
   | LinkService
   | SubHeadingSection
-  | LabelledImage;
+  | LabelledImage
+  | ImageShape;

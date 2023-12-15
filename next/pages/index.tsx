@@ -14,19 +14,24 @@ import {
 } from "@/lib/zod/article-teaser";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
+import NewsArticlesEvents from "@/components/news-articles-events";
+import { validateAndCleanupEvents } from "@/lib/zod/events";
+import { EventsArticles } from "@/lib/zod/events-articles";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
-  promotedArticleTeasers?: ArticleTeaser[];
+  items: EventsArticles[]
 }
 
 export default function IndexPage({
   frontpage,
+  items
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
+      <NewsArticlesEvents items={items} />
     </>
   );
 }
@@ -51,12 +56,29 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       "filter[status]": 1,
       "filter[langcode]": context.locale,
       "filter[promote]": 1,
-      "fields[node--article]": "title,path,field_image,uid,created",
-      include: "field_image,uid",
+      "fields[node--article]": "title,path,field_image,uid,created,field_excerpt,field_tags",
+      include: "field_image,uid,field_tags",
       sort: "-sticky,-created",
       "page[limit]": 3,
     },
   });
+
+  const validatedArticleTeasers = promotedArticleTeasers.map((teaser) =>
+    validateAndCleanupArticleTeaser(teaser),
+  );
+
+  const events = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--event", context, {
+    params: getNodePageJsonApiParams("node--event").addPageLimit(3).addSort('created', 'ASC').getQueryObject(),
+  });
+
+  const validatedEvents = events.map((event) =>
+    validateAndCleanupEvents(event),
+  );
+
+  const items = [...validatedArticleTeasers, ...validatedEvents]
+
 
   const aboutUs = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
@@ -84,9 +106,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     props: {
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
-      promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
-        validateAndCleanupArticleTeaser(teaser),
-      ),
+      items,
       aboutUs: validateAndCleanupAboutUs(aboutUs),
       legalDocument: validateAndCleanupLegalDocument(legalDocument),
     },

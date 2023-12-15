@@ -40,7 +40,7 @@ export function Layout({ menus, children }: LayoutProps) {
         <main className="grow" id="main-content">
           <div className="mx-auto max-w-6xl px-6">{children}</div>
         </main>
-        <Footer menu={menus.footer} />
+        {/*     <Footer menu={menus.footer} /> */}
       </div>
       <PreviewBanner isVisible={isPreviewVisible} />
     </>

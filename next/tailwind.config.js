@@ -14,6 +14,7 @@ module.exports = {
       "2xl": "0px 24px 48px -12px rgba(17, 24, 39, 0.25);",
     },
     colors: {
+      "accent-color": "rgb(var(--accent-color))",
       main: "rgb(var(--main-color) / <alpha-value>)",
       background: "rgb(var(--background) / <alpha-value>)",
       foreground: "rgb(var(--foreground) / <alpha-value>)",
