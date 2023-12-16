@@ -48,6 +48,7 @@ const Testimonials = ({
           </div>
           <div className="body-lg font-regular">
             <FormattedText
+              className="group/testimonials"
               html={testimonials[currentTestimonial].body.processed}
             />
           </div>

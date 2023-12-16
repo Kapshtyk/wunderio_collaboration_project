@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { cva } from "cva";
 
 export const buttonVariants = cva(
-  "flex gap-2 items-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
+  "flex gap-2 items-center align-center justify-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
   {
     variants: {
       size: {

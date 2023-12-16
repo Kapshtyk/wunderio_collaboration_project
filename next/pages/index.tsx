@@ -4,6 +4,7 @@ import { DrupalNode } from "next-drupal";
 import HeroBanner from "@/components/hero-banner";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
+import NewsArticlesEvents from "@/components/news-articles-events";
 import { drupal } from "@/lib/drupal/drupal-client";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
@@ -12,20 +13,19 @@ import {
   ArticleTeaser,
   validateAndCleanupArticleTeaser,
 } from "@/lib/zod/article-teaser";
-import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
-import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
-import NewsArticlesEvents from "@/components/news-articles-events";
 import { validateAndCleanupEvents } from "@/lib/zod/events";
 import { EventsArticles } from "@/lib/zod/events-articles";
+import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
+import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
 
 interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
-  items: EventsArticles[]
+  items: EventsArticles[];
 }
 
 export default function IndexPage({
   frontpage,
-  items
+  items,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
@@ -56,7 +56,8 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       "filter[status]": 1,
       "filter[langcode]": context.locale,
       "filter[promote]": 1,
-      "fields[node--article]": "title,path,field_image,uid,created,field_excerpt,field_tags",
+      "fields[node--article]":
+        "title,path,field_image,uid,created,field_excerpt,field_tags",
       include: "field_image,uid,field_tags",
       sort: "-sticky,-created",
       "page[limit]": 3,
@@ -67,18 +68,22 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     validateAndCleanupArticleTeaser(teaser),
   );
 
-  const events = await drupal.getResourceCollectionFromContext<
-    DrupalNode[]
-  >("node--event", context, {
-    params: getNodePageJsonApiParams("node--event").addPageLimit(3).addSort('created', 'ASC').getQueryObject(),
-  });
+  const events = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--event",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--event")
+        .addPageLimit(3)
+        .addSort("created", "ASC")
+        .getQueryObject(),
+    },
+  );
 
   const validatedEvents = events.map((event) =>
     validateAndCleanupEvents(event),
   );
 
-  const items = [...validatedArticleTeasers, ...validatedEvents]
-
+  const items = [...validatedArticleTeasers, ...validatedEvents];
 
   const aboutUs = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(

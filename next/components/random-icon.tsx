@@ -9,5 +9,5 @@ export const RandomIcon = () => {
     <div className="w-[101%]">
       {icons[Math.floor(Math.random() * icons.length)]}
     </div>
-  )
+  );
 };

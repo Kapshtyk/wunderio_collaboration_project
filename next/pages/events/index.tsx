@@ -3,7 +3,7 @@ import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
-import EventsArticles from "@/components/events-articles.tsx";
+import EventsArticles from "@/components/events-articles";
 import { HeadingPage } from "@/components/heading--page";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
@@ -11,15 +11,12 @@ import { createLanguageLinksForNextOnlyPage } from "@/lib/contexts/language-link
 import { drupal } from "@/lib/drupal/drupal-client";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
-import {
-  validateAndCleanupEvents,
-} from "@/lib/zod/events";
 import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
+import { validateAndCleanupEvents } from "@/lib/zod/events";
 import { EventsArticles as EventsArticlesType } from "@/lib/zod/events-articles";
 
-
 interface EventsPageProps extends LayoutProps {
-  items: EventsArticlesType[]
+  items: EventsArticlesType[];
 }
 
 export default function EventsPage({
@@ -64,11 +61,13 @@ export const getStaticProps: GetStaticProps<EventsPageProps> = async (
     validateAndCleanupEvents(event),
   );
 
-  const articles = await drupal.getResourceCollectionFromContext<
-    DrupalNode[]
-  >("node--article", context, {
-    params: getNodePageJsonApiParams("node--article").getQueryObject(),
-  });
+  const articles = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--article",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--article").getQueryObject(),
+    },
+  );
 
   const validatedArticleTeasers = articles.map((teaser) =>
     validateAndCleanupArticleTeaser(teaser),

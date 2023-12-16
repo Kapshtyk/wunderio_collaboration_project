@@ -57,7 +57,7 @@ export default function CareersPage({
           <Paragraph key={paragraph.id} paragraph={paragraph} />
         ))}
       </div>
-      <section className="pr-56">
+      <section className="">
         <h2 className="sr-only">Main content of the careers page</h2>
         <FormattedText html={careers.body.processed} />
       </section>
