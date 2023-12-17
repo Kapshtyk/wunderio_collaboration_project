@@ -74,17 +74,20 @@ export default function ServicesPages({
               <Paragraph key={paragraph.id} paragraph={props} />
             )}
             {paragraph.type === "paragraph--formatted_text" && (
-              <div>
-                <FormattedText className="flex" html={paragraph.field_formatted_text.processed}/>
-              </div>
+              <section className="w-full max-w-[1216px] max-md:max-w-full py-10">
+                <FormattedText html={paragraph.field_formatted_text.processed}/>  
+              </section>
             )}
             </>
           
           )       
         })}
       </div>
-     
-      <ServicesTypes servicesTypes={servicesTypes} allServices={allServices} />
+      <section className="w-full max-w-[1216px] max-md:max-w-full pt-10 pb-2.5">
+        <div className="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
+        <ServicesTypes servicesTypes={servicesTypes} allServices={allServices} />
+        </div>
+      </section>
     </>
   );
 }

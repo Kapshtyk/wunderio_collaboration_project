@@ -65,22 +65,6 @@ export default function ContactUsPage({
           maps={maps}
         />
       </div>
-      <div className="container">
-        <div className="flex gap-36">
-        {maps.map((address) => (
-            <div className="w-60 bg-accent-peach-fuzz">
-            <h3>{address.title}</h3>
-              {address.field_office_address.split(', ').map((word, index) => (
-                <p key={index}>{word}</p>
-            ))}
-            <div>
-            <a href={`mailto:${address.field_office_email}`} className="hyperlink">{address.field_office_email}</a>
-            </div>
-            
-            </div>
-        ))}
-        </div>
-      </div> 
       <div>
       {contactUs.field_content_elements?.map((paragraph) => {
             return(
@@ -94,6 +78,23 @@ export default function ContactUsPage({
                 </>
         )})}
       </div>
+      <section className="container">
+        <div className="flex gap-8">
+        <div className="flex">
+        {maps.map((address) => (
+            <div className="w-60 flex-col">
+            <h3 className="text-lg font-bold">{address.title}</h3>
+              {address.field_office_address.split(', ').map((word, index) => (
+                <p key={index}>{word}</p>
+            ))}
+            <span className="underline text-primary-500">
+            <a href={`mailto:${address.field_office_email}`} className="hyperlink">{address.field_office_email}</a>   
+            </span>
+            </div>
+        ))}
+        </div>
+        </div>
+      </section> 
     </>
   );
 }

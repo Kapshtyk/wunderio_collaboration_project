@@ -48,13 +48,29 @@ const options: HTMLReactParserOptions = {
         break;
       }
       case "div": {
-        const { class: className } = domNode.attribs;
-
-        return (
-          <div className="flex flex-row gap-8">
-            {domToReact(domNode.children, options)}
-          </div>
-        );
+        if(domNode.attribs.title === 'layout'){
+          return (
+            <div className="w-full flex max-md:flex-col max-md:items-stretch max-md:gap-0 group/layout">
+            <div className="grid grid-cols-2 gap-8">
+              {domToReact(domNode.children, options)}
+            </div>
+            </div>
+          );
+        }
+        else {
+          return (
+            <div className="flex flex-col items-start gap-6 flex-1">
+              {domToReact(domNode.children, options)}
+            </div>
+          )
+        }
+        // else if(domNode.attribs.title === 'head'){
+        //   return(
+        //     <div className="col-12 gap-36 px-6">
+        //       {domToReact(domNode.children, options)}
+        //     </div>
+        //   )
+        // }
       }
 
       case "strong": {
@@ -77,7 +93,7 @@ const options: HTMLReactParserOptions = {
 
       case "h2": {
         return (
-          <h2 className="text-heading-xl font-semibold">
+          <h2 className="text-heading-xl font-semibold text-primary-500 mb-6">
             {domToReact(domNode.children, options)}
           </h2>
         );
@@ -178,7 +194,7 @@ const options: HTMLReactParserOptions = {
 
       case "ul": {
         return (
-          <ul className="list-disc list-inside">
+          <ul className="list-disc list-inside pl-10">
             {domToReact(domNode.children, options)}
           </ul>
         );

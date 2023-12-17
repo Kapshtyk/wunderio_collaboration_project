@@ -16,13 +16,12 @@ const ServicesTypes = ({ servicesTypes, allServices }: ServicesTypesProps) => {
   ) as SubHeadingSection[];
   return (
     <>
-      <div className="flex">
+      <div className="flex gap-8">
         {subHeadingSections.map((subHeadingSection) => (
-          <div key={subHeadingSection.id}>
-            {
-              <div className="col-12 col-md-6 col-lg-4">
-                <p className="underline underline--small text-secondary-900">
-                  {subHeadingSection.field_heading}</p>
+          <div key={subHeadingSection.id} className="flex flex-col gap-2">
+                <p className="underline underline--small text-accent-hugs"> 
+                  {subHeadingSection.field_heading.toLocaleUpperCase()}
+                  </p>
                 <p>{subHeadingSection.field_excerpt}</p>
                 {servicesTypes
                   .filter(
@@ -41,8 +40,6 @@ const ServicesTypes = ({ servicesTypes, allServices }: ServicesTypesProps) => {
                     </div>
                   ))}
               </div>
-            }
-          </div>
         ))}
       </div>
     </>

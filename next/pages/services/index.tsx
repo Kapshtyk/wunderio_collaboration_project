@@ -90,7 +90,7 @@ export default function ServicesPage({
         ))}
       </div>
       </section>
-      <section className="flex h-[72] w-[75vw] gap-[32px] pt-[40px] pb-[10px]">
+      <section className="w-full grid grid-cols-1 gap-8">
         {mainPage.field_content_elements?.map((paragraph) =>  {
           return(
           <>
@@ -108,6 +108,7 @@ export default function ServicesPage({
   
         )})}
       </section>
+      <section>
       {subHeadings.map((subHeading) => (
         <SubHeadingSectionComponent
           key={subHeading.id}
@@ -116,6 +117,8 @@ export default function ServicesPage({
           services={services}
         />
       ))}
+      </section>
+
     </>
   );
 }
