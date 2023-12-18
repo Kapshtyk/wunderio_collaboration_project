@@ -18,7 +18,7 @@ export function WorkCards({ allWorkPages }) {
                 <div key={paragraph.id} className="p-2">
                   <Link href={workPage.path.alias}>
                     <MediaImage
-                      className="rounded-lg h-80 hover:saturate-150 w-full"
+                      className="rounded-lg h-96 hover:saturate-150 w-full"
                       media={paragraph.field_image}
                     />
                     <h1 className="text-primary-600 py-3 text-lg font-bold hover:underline">

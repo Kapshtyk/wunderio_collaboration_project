@@ -35,7 +35,7 @@ export default function IndexPage({
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
-      {/* <NewsArticlesEvents items={items} /> */}
+      <NewsArticlesEvents items={items} />
       <div>
         <FrontPageWorkSection allWorkPages={allWorkPages} />
       </div>
@@ -74,17 +74,17 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     validateAndCleanupArticleTeaser(teaser),
   );
 
-  // const events = await drupal.getResourceCollectionFromContext<
-  //   DrupalNode[]
-  // >("node--event", context, {
-  //   params: getNodePageJsonApiParams("node--event").addPageLimit(3).addSort('created', 'ASC').getQueryObject(),
-  // });
+  const events = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--event", context, {
+    params: getNodePageJsonApiParams("node--event").addPageLimit(3).addSort('created', 'ASC').getQueryObject(),
+  });
 
-  // const validatedEvents = events.map((event) =>
-  //   validateAndCleanupEvents(event),
-  // );
+  const validatedEvents = events.map((event) =>
+    validateAndCleanupEvents(event),
+  );
 
-  // const items = [...validatedArticleTeasers, ...validatedEvents]
+  const items = [...validatedArticleTeasers, ...validatedEvents]
 
 
   const aboutUs = (
@@ -123,7 +123,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     props: {
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
-      //items,
+      items,
       aboutUs: validateAndCleanupAboutUs(aboutUs),
       legalDocument: validateAndCleanupLegalDocument(legalDocument),
       allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
