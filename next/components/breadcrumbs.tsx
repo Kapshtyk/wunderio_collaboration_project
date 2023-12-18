@@ -26,7 +26,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <nav>
       <ul
-        className="hidden 2sm:flex py-4"
+        className="hidden 2sm:flex pt-4"
         aria-label="breadcrumbs"
         role="navigation"
       >

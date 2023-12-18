@@ -242,7 +242,7 @@ const Cookies = () => {
         id: cookieType,
         heading: (
           <>
-            <p className="text-foreground">
+            <p className="text-foreground !mb-0">
               {t(`cookies-${cookieType.toLocaleLowerCase()}-title`)}
             </p>
             {isClient && (
@@ -251,7 +251,7 @@ const Cookies = () => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <p
-                  className={`text-xs ${
+                  className={`text-xs !mb-0 ${
                     eval(`is${cookieType}CookiesAvailable`)
                       ? "text-graysuit"
                       : "text-topaz"
@@ -275,7 +275,7 @@ const Cookies = () => {
                   aria-details={`${cookieType} cookies consent switch`}
                 />
                 <p
-                  className={`text-xs ${
+                  className={`text-xs !mb-0 ${
                     eval(`is${cookieType}CookiesAvailable`)
                       ? "text-topaz"
                       : "text-graysuit"
@@ -289,9 +289,7 @@ const Cookies = () => {
         ),
         content: (
           <>
-            <p className="text-sm">
-              {t(`cookies-${cookieType.toLocaleLowerCase()}-description`)}
-            </p>
+            <p>{t(`cookies-${cookieType.toLocaleLowerCase()}-description`)}</p>
             {getCookiesTable(cookieType)}
           </>
         ),
@@ -318,20 +316,22 @@ const Cookies = () => {
 
   return (
     <div className="fixed left-0 right-0 top-0 bottom-0 bg-background/90 backdrop-blur-sm z-40">
-      <div className="flex flex-col justify-between bg-background rounded-md shadow-md border border-foreground/15 mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200">
-        <nav className="flex justify-between items-center mb-6">
+      <div className="flex flex-col justify-between bg-background border-foreground/30 borderrounded-md shadow-md mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200">
+        <nav className="flex justify-between items-center">
           {headings.map((heading) => {
             return (
               <div
                 key={heading}
-                className={`w-3/6 px-2 py-4 text-center ${
-                  currentMenu === heading.toLowerCase()
-                    ? "text-primary-600"
-                    : ""
-                }`}
+                className="w-3/6 px-2 py-4 text-center"
                 onClick={() => setCurrentMenu(heading.toLowerCase())}
               >
-                <span>{t(`cookies-${heading.toLowerCase()}-tab`)}</span>
+                <span
+                  className={`${
+                    currentMenu === heading.toLowerCase() ? "text-main" : ""
+                  }`}
+                >
+                  {t(`cookies-${heading.toLowerCase()}-tab`)}
+                </span>
               </div>
             );
           })}
@@ -341,7 +341,7 @@ const Cookies = () => {
             currentMenu === "consent" ? "block" : "hidden"
           }`}
         >
-          <h2 className="text-lg font-regular mb-2">{t("cookies-title")}</h2>
+          <h2 className="text-lg mb-2">{t("cookies-title")}</h2>
           <p>{t("cookies-message")}</p>
         </div>
         <div
@@ -351,7 +351,7 @@ const Cookies = () => {
         >
           <Accordion items={getAccordionItems()} />
         </div>
-        <div className="text-xs flex gap-1 sm:gap-4">
+        <div className="text-xs flex md:flex-row flex-col gap-2 sm:gap-4 w-full items-start ">
           {mainButtons()}
           {preferencesButtons()}
         </div>
