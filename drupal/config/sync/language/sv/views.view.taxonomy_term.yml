@@ -1,3 +1,4 @@
+label: Taxonomiterm
 display:
   default:
     display_title: Förvald
@@ -8,6 +9,8 @@ display:
             items_per_page_options_all_label: '- Alla -'
       exposed_form:
         options:
+          submit_button: Applicera
           reset_button_label: Återställ
-  feed_1:
-    display_title: Innehållsflöde
+          exposed_sorts_label: 'Sortera efter'
+          sort_asc_label: Stigande
+          sort_desc_label: Fallande

@@ -1,0 +1,56 @@
+uuid: 880dda76-649d-4ec1-b9e1-62937ab86c4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact_people.field_contact_number
+    - field.field.paragraph.contact_people.field_email_address
+    - field.field.paragraph.contact_people.field_full
+    - field.field.paragraph.contact_people.field_image
+    - field.field.paragraph.contact_people.field_label
+    - paragraphs.paragraphs_type.contact_people
+id: paragraph.contact_people.default
+targetEntityType: paragraph
+bundle: contact_people
+mode: default
+content:
+  field_contact_number:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_email_address:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_full:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_label:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

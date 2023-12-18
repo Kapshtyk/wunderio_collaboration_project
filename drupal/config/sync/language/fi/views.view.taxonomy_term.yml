@@ -1,3 +1,4 @@
+label: Luokittelutermi
 display:
   default:
     display_title: Oletus
@@ -8,6 +9,8 @@ display:
             items_per_page_options_all_label: '- Kaikki -'
       exposed_form:
         options:
+          submit_button: Käytä
           reset_button_label: Palauta
-  feed_1:
-    display_title: Syöte
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc

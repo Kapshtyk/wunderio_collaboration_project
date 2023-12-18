@@ -1,22 +1,21 @@
-uuid: 6942d196-8558-460d-b64e-e159e0625538
+uuid: 12c378eb-aef7-4396-81eb-67da7871785f
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_content_elements
-    - node.type.contact_us
-    - paragraphs.paragraphs_type.formatted_text
-    - paragraphs.paragraphs_type.heading_section
+    - node.type.contact_persons
+    - paragraphs.paragraphs_type.contact_people
   module:
     - entity_reference_revisions
     - tmgmt_content
 third_party_settings:
   tmgmt_content:
     excluded: false
-id: node.contact_us.field_content_elements
+id: node.contact_persons.field_content_elements
 field_name: field_content_elements
 entity_type: node
-bundle: contact_us
+bundle: contact_persons
 label: 'Content elements'
 description: ''
 required: true
@@ -27,8 +26,7 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      formatted_text: formatted_text
-      heading_section: heading_section
+      contact_people: contact_people
     negate: 0
     target_bundles_drag_drop:
       accordion:
@@ -38,20 +36,20 @@ settings:
         weight: -12
         enabled: false
       contact_people:
-        weight: 19
-        enabled: false
+        weight: 21
+        enabled: true
       event_participants:
-        weight: 20
+        weight: 22
         enabled: false
       file_attachments:
         weight: 10
         enabled: false
       formatted_text:
         weight: -14
-        enabled: true
+        enabled: false
       heading_section:
         weight: 15
-        enabled: true
+        enabled: false
       hero:
         weight: -15
         enabled: false
@@ -59,7 +57,7 @@ settings:
         weight: -13
         enabled: false
       labelled_image:
-        weight: 26
+        weight: 28
         enabled: false
       links:
         weight: -11
@@ -68,13 +66,13 @@ settings:
         weight: 9
         enabled: false
       photos:
-        weight: 29
+        weight: 31
         enabled: false
       services_taxonomy:
-        weight: 30
+        weight: 32
         enabled: false
       sub_heading_section:
-        weight: 31
+        weight: 33
         enabled: false
       testimonials:
         weight: 12
@@ -83,6 +81,6 @@ settings:
         weight: -9
         enabled: false
       work_card:
-        weight: 34
+        weight: 36
         enabled: false
 field_type: entity_reference_revisions
