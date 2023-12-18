@@ -7,13 +7,17 @@ dependencies:
     - node.type.numbers
   module:
     - text
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
 id: node.numbers.field_text
 field_name: field_text
 entity_type: node
 bundle: numbers
 label: Text
 description: ''
-required: false
+required: true
 translatable: true
 default_value: {  }
 default_value_callback: ''

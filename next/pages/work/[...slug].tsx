@@ -59,6 +59,15 @@ export default function WorkPage({
     "Luke.fi",
     "Fortum",
     "HUS - Helsinki University Hospital",
+    "Wunder loves Turku - the benefits of a long-term partnership",
+    "Ministry of Defence of Latvia",
+    "Finavia",
+    "University Of Turku",
+    "Ruutu.fi",
+    "Service Advisor Applications",
+
+
+
   ].filter(Boolean);
   //
   return currentWorkPage &&
@@ -109,14 +118,24 @@ export default function WorkPage({
           />
         </div>
       ) : null}
+      {currentWorkPage.title === "HUS - Helsinki University Hospital" ? (
+        <div>
+          <Numbers
+            numbers={numbers.filter(
+              (lukeNumbers) =>
+                lukeNumbers.field_numbers_type.name === "Work-HUS-Numbers",
+            )}
+          />
+        </div>
+      ) : null}
 
       {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
         <div className="mt-20">
-          <h1 className="font-bold my-4">RELATED CONTENT</h1>
-          <div className="flex space-x-6">
+          <h1 className="font-bold mb-4">RELATED CONTENT</h1>
+          <div className="md:grid grid-cols-3 gap-3">
             {allWorkPages
               .filter((workPages) => workPages.title !== currentWorkPage.title)
-              .slice(0, 4)
+              .slice(0, 3)
               .map((workPage) => (
                 <WorkWorkCard key={workPage.id} workPage={workPage} />
               ))}
@@ -124,14 +143,39 @@ export default function WorkPage({
         </div>
       ) : null}
 
-      {currentWorkPage.title === "Trimble" ? (
+      {currentWorkPage.title === "Trimble" || currentWorkPage.title === "Central Statistical Bureau of Latvia" ? (
         <div className="mt-20">
           <h1 className="font-bold mb-4">RELATED CONTENT</h1>
-          <div className="grid grid-cols-3 gap-3">
+          <div className="md:grid grid-cols-3 gap-3">
             {allArticles
               .filter((workArticles) =>
                 workArticles.field_tags.some(
                   (field_tag) => field_tag?.name === "Drupal",
+                ),
+              )
+              .sort(
+                (a, b) =>
+                  new Date(b.created).getTime() - new Date(a.created).getTime(),
+              )
+              .slice(0, 3)
+              .map((workArticle) => (
+                <WorkArticleCard
+                  key={workArticle.id}
+                  workArticle={workArticle}
+                />
+              ))}
+          </div>
+        </div>
+      ) : null}
+
+      {currentWorkPage.title === "Traficom.fi" || currentWorkPage.title === "Nelonen Media Partnership" ? (
+        <div className="mt-20">
+          <h1 className="font-bold mb-4">RELATED CONTENT</h1>
+          <div className="md:grid grid-cols-3 gap-3">
+            {allArticles
+              .filter((workArticles) =>
+                workArticles.field_tags.some(
+                  (field_tag) => field_tag?.name === "Next.js",
                 ),
               )
               .sort(

@@ -5,7 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.numbers.body
+    - field.field.node.numbers.field_num
     - field.field.node.numbers.field_number
+    - field.field.node.numbers.field_numbers_type
+    - field.field.node.numbers.field_suffix
     - field.field.node.numbers.field_text
     - node.type.numbers
   module:

@@ -16,7 +16,7 @@ export function MediaImage({
   fill,
   ...props
 }: MediaImageProps) {
-  const image = media.type === "media--image" ? media.field_media_image : media;
+  const image = media?.type === "media--image" ? media.field_media_image : media;
 
   if (!image) {
     return null;
