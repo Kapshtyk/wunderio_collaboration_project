@@ -113,8 +113,6 @@ services:
         PHP_IDE_CONFIG: serverName=appserver
         # PHPUnit settings. @see: .lando/phpunit.sh
         MINK_DRIVER_ARGS_WEBDRIVER: '["chrome", {"browserName":"chrome","chromeOptions":{"args":["--disable-gpu","--headless"]}}, "http://chrome:9515"]'
-        # Google Map API
-        NEXT_PUBLIC_GOOGLE_MAPS_KEY: AIzaSyDFHz-zBARgR11y63cmaFJ3lTFUfcEaKSA
 
   # This service handles the frontend part of the application
   node:
@@ -144,6 +142,8 @@ services:
         # Environment variables for next_auth:
         NEXTAUTH_SECRET: nextauth_secret_not_secure_used_only_locally
         NEXTAUTH_URL: https://frontend.lndo.site
+        # Google Map API
+        NEXT_PUBLIC_GOOGLE_MAPS_KEY: AIzaSyDFHz-zBARgR11y63cmaFJ3lTFUfcEaKSA
     build:
       - "cd next && npm install"
     scanner: false
