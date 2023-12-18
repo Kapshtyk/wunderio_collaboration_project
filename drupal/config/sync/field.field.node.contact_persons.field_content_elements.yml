@@ -1,0 +1,86 @@
+uuid: 12c378eb-aef7-4396-81eb-67da7871785f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_content_elements
+    - node.type.contact_persons
+    - paragraphs.paragraphs_type.contact_people
+  module:
+    - entity_reference_revisions
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.contact_persons.field_content_elements
+field_name: field_content_elements
+entity_type: node
+bundle: contact_persons
+label: 'Content elements'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      contact_people: contact_people
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: -10
+        enabled: false
+      accordion_item:
+        weight: -12
+        enabled: false
+      contact_people:
+        weight: 21
+        enabled: true
+      event_participants:
+        weight: 22
+        enabled: false
+      file_attachments:
+        weight: 10
+        enabled: false
+      formatted_text:
+        weight: -14
+        enabled: false
+      heading_section:
+        weight: 15
+        enabled: false
+      hero:
+        weight: -15
+        enabled: false
+      image:
+        weight: -13
+        enabled: false
+      labelled_image:
+        weight: 28
+        enabled: false
+      links:
+        weight: -11
+        enabled: false
+      listing_articles:
+        weight: 9
+        enabled: false
+      photos:
+        weight: 31
+        enabled: false
+      services_taxonomy:
+        weight: 32
+        enabled: false
+      sub_heading_section:
+        weight: 33
+        enabled: false
+      testimonials:
+        weight: 12
+        enabled: false
+      video:
+        weight: -9
+        enabled: false
+      work_card:
+        weight: 36
+        enabled: false
+field_type: entity_reference_revisions

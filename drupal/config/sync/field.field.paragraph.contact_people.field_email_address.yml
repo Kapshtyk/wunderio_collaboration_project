@@ -1,0 +1,24 @@
+uuid: 083743f3-a941-4c09-9483-d8173a9e5c04
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_email_address
+    - paragraphs.paragraphs_type.contact_people
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: paragraph.contact_people.field_email_address
+field_name: field_email_address
+entity_type: paragraph
+bundle: contact_people
+label: 'Email address'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

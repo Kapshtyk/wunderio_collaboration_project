@@ -21,7 +21,7 @@ export const env = isStorybook
       NEXT_PUBLIC_FRONTEND_URL: zod.string().url(),
       NEXT_PUBLIC_MATOMO_URL: zod.string(),
       NEXT_PUBLIC_MATOMO_CONTAINER_ID: zod.string(),
-      // NEXT_PUBLIC_GOOGLE_MAPS_KEY: zod.string()
+      NEXT_PUBLIC_GOOGLE_MAPS_KEY: zod.string().optional(),
     },
     runtimeEnv: {
       /* eslint-disable n/no-process-env */
@@ -35,7 +35,7 @@ export const env = isStorybook
       NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
       NEXT_PUBLIC_MATOMO_URL: "frontendlndosite.matomo.cloud",
       NEXT_PUBLIC_MATOMO_CONTAINER_ID: "YijLmEPP",
-      // NEXT_PUBLIC_GOOGLE_MAPS_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
+      NEXT_PUBLIC_GOOGLE_MAPS_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
       /* eslint-enable n/no-process-env */
     },
   });

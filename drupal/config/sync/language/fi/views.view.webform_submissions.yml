@@ -1,16 +1,28 @@
 display:
   default:
+    display_title: Isäntä
     display_options:
       exposed_form:
         options:
+          submit_button: Käytä
           reset_button_label: Palauta
+          exposed_sorts_label: Lajittele
+          sort_asc_label: Asc
+          sort_desc_label: Desc
       pager:
         options:
           expose:
             items_per_page_options_all_label: '- Kaikki -'
       fields:
+        sid:
+          separator: ', '
+        in_draft:
+          separator: ', '
         created:
           label: Luotu
+          separator: ', '
+        remote_addr:
+          separator: ', '
         view_webform_submission:
           label: Toimenpiteet
   embed_administer:
@@ -18,10 +30,22 @@ display:
       fields:
         webform_submission_bulk_form:
           action_title: Toiminto
+        sid:
+          separator: ', '
+        in_draft:
+          separator: ', '
+        sticky:
+          separator: ', '
+        locked:
+          separator: ', '
         created:
           label: Luotu
+          separator: ', '
         completed:
           label: Valmis
+          separator: ', '
+        remote_addr:
+          separator: ', '
         operations:
           label: Toimenpiteet
   embed_manage:
@@ -29,10 +53,22 @@ display:
       fields:
         webform_submission_bulk_form:
           action_title: Toiminto
+        sid:
+          separator: ', '
+        in_draft:
+          separator: ', '
+        sticky:
+          separator: ', '
+        locked:
+          separator: ', '
         created:
           label: Luotu
+          separator: ', '
         completed:
           label: Valmis
+          separator: ', '
+        remote_addr:
+          separator: ', '
         view_webform_submission:
           label: Toimenpiteet
         edit_webform_submission:
@@ -40,9 +76,21 @@ display:
   embed_review:
     display_options:
       fields:
+        sid:
+          separator: ', '
+        in_draft:
+          separator: ', '
+        sticky:
+          separator: ', '
+        locked:
+          separator: ', '
         created:
           label: Luotu
+          separator: ', '
         completed:
           label: Valmis
+          separator: ', '
+        remote_addr:
+          separator: ', '
         view_webform_submission:
           label: Toimenpiteet

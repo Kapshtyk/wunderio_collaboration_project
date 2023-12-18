@@ -1,0 +1,16 @@
+uuid: 10828729-d4c1-45a4-beb0-e80a91fa287d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.contact_persons
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: node.contact_persons
+target_entity_type_id: node
+target_bundle: contact_persons
+default_langcode: site_default
+language_alterable: true

@@ -37,6 +37,9 @@ settings:
       accordion_item:
         weight: -12
         enabled: false
+      contact_people:
+        weight: 19
+        enabled: false
       event_participants:
         weight: 20
         enabled: false

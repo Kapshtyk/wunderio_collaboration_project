@@ -21,17 +21,22 @@ import {
   validateAndCleanupWebformFields,
   Webform as WebformType,
 } from "@/lib/zod/webform";
+import { ContactPerson, validateAndCleanupContactPerson } from "@/lib/zod/contact-person";
+import ContactPeople from "@/components/contact-person";
+import { FormattedText } from "@/components/formatted-text";
 
 interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
   maps: OfficeLocations[];
   webform: WebformType;
+  contactPerson: ContactPerson;
 }
 
 export default function ContactUsPage({
   contactUs,
   maps,
   webform,
+  contactPerson
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
@@ -47,9 +52,14 @@ export default function ContactUsPage({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       <div className="grid gap-4">
-        {contactUs.field_content_elements?.map((paragraph) => (
-          <Paragraph key={paragraph.id} paragraph={paragraph} />
-        ))}
+        {contactUs.field_content_elements?.map((paragraph) => {
+            return(
+                <>
+                {paragraph.type === "paragraph--heading_section" && (
+                    <Paragraph key={paragraph.id} paragraph={paragraph} />
+                )}
+                </>
+        )})}
       </div>
       <div>
         <OfficeLocationsMap maps={maps} />
@@ -61,22 +71,44 @@ export default function ContactUsPage({
         />
       </div>
       <div>
-        {maps.map((address) => (
-          <div key={address.id}>
-            {address.field_office_address.split(", ").map((word, index) => (
-              <p key={index}>{word}</p>
-            ))}
-            <p>
-              <a
-                href={`mailto:${address.field_office_email}`}
-                className="hyperlink"
-              >
-                {address.field_office_email}
-              </a>
-            </p>
-          </div>
-        ))}
+      {contactUs.field_content_elements?.map((paragraph) => {
+            return(
+                <>
+                <div className="justify-center items-center flex flex-col py-10 max-md:px-5">
+                {paragraph.type === "paragraph--formatted_text" && (
+                    <div className="flex w-full max-w-[1216px] justify-between gap-5 items-start max-md:max-w-full max-md:flex-wrap">
+                        <FormattedText key={paragraph.id} html={paragraph.field_formatted_text.processed} />
+                    </div>
+                    
+                )}
+                </div>
+                </>
+        )})}
       </div>
+      <section className="items-center flex-col justify-center py-11 max-md:px-5">
+        <div className="flex flex-col w-full max-w-[1216px] items-stretch mb-8 max-md:max-w-full">
+        <div className="justify-center max-md:max-w-full max-md:pr-5">
+        <div className="gap-5 flex max-md:flex max-md:items-stretch max-md:gap-0">
+        {maps.map((address) => (
+            <div className="flex flex-col items-stretch w-[36%] max-md:w-full max-md:ml-0">
+            <div className="items-stretch flex grow flex-col max-md:mt-10">
+            <h3 className="text-lg font-bold">{address.title}</h3>
+              {address.field_office_address.split(', ').map((word, index) => (
+                <p key={index}>{word}</p>
+            ))}
+            <span className="underline text-primary-500">
+            <a href={`mailto:${address.field_office_email}`} className="hyperlink">{address.field_office_email}</a>   
+            </span>
+            </div>
+            </div>
+        ))}
+        </div>
+        </div>
+        </div>
+      </section>
+      <section>
+        <ContactPeople contactPerson={contactPerson}/>
+     </section> 
     </>
   );
 }
@@ -94,7 +126,9 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     )
   ).at(0);
 
-  const validatedResource = validateAndCleanupContactUs(contactUs);
+//   console.log('contactUs:', contactUs);
+
+  const validatedResource = await validateAndCleanupContactUs(contactUs);
 
   const validatedWebform = validateAndCleanupWebform(
     contactUs.field_contact_us_form,
@@ -113,34 +147,22 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
 
   validatedWebform.field_webform_fields = validatedWebformFields;
 
-  const maps = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--office_locations",
-    {
-      params: getNodePageJsonApiParams(
-        "node--office_locations",
-      ).getQueryObject(),
-    },
-  );
 
-  // console.log('maps:',maps);
+  const maps = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--office_locations", {
+      params: getNodePageJsonApiParams('node--office_locations').getQueryObject()
+    })
+  )
 
-  //   const view = (
-  //     await drupal.getView("office_address_marker--block_1",{
-  //       params:{
-  //         fields:{
-  //           "node--office_locations": "title,field_office_address,field_address"
-  //         }
-  //       }
-  //     })
-  //   )
+  const contactPerson = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--contact_persons", {
+        params: getNodePageJsonApiParams('node--contact_persons').getQueryObject()
+      })
+  ).at(0)
 
-  // console.log("view:", view);
+  console.log("contact", contactPerson);
+  
 
-  //   const nodeTranslations = await getNodeTranslatedVersions(
-  //     contactPage,
-  //     context,
-  //     drupal,
-  //   );
 
   //   const languageLinks = createLanguageLinks(nodeTranslations);
 
@@ -149,8 +171,8 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
       ...(await getCommonPageProps(context)),
       contactUs: validatedResource,
       webform: validatedWebform,
-      // view,
       maps: maps.map((node) => validateAndCleanupOfficeLocations(node)),
+      contactPerson: validateAndCleanupContactPerson(contactPerson)
       //   languageLinks,
     },
   };

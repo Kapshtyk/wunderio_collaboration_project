@@ -11,6 +11,8 @@ import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
+import { Services, validateAndCleanupServices } from "@/lib/zod/services";
+import ServicesFrontPage from "@/components/services-types-frontpage";
 import NewsArticlesEvents from "@/components/news-articles-events";
 import { validateAndCleanupEvents } from "@/lib/zod/events";
 import { EventsArticles } from "@/lib/zod/events-articles";
@@ -21,18 +23,23 @@ interface IndexPageProps extends LayoutProps {
   frontpage: Frontpage | null;
   items: EventsArticles[]
   allWorkPages: PageType[];
+  allServices: Services;
+  servicesTypes: Services[];
 }
 
 export default function IndexPage({
   frontpage,
   items,
+  allServices,
+  servicesTypes,
   allWorkPages,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
-      {/* <NewsArticlesEvents items={items} /> */}
+      <ServicesFrontPage allServices={allServices} servicesTypes={servicesTypes} />
+      {/* {/* <NewsArticlesEvents items={items} /> */} */}
       <div>
         <FrontPageWorkSection allWorkPages={allWorkPages} />
       </div>
@@ -111,6 +118,24 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     )
   ).at(0);
 
+  const allServices = (
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--services_page",
+      context,
+      {
+        params: getNodePageJsonApiParams("node--services_page")
+          .addFilter("title", "Services")
+          .getQueryObject(),
+      },
+    )
+  ).at(0);
+
+  const servicesTypes = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--services_page", context, {
+    params: getNodePageJsonApiParams("node--services_page").getQueryObject(),
+  });
+
   const allWorkPages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--page",
     context,
@@ -128,6 +153,10 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       //items,
       aboutUs: validateAndCleanupAboutUs(aboutUs),
       legalDocument: validateAndCleanupLegalDocument(legalDocument),
+      allServices: validateAndCleanupServices(allServices),
+      servicesTypes: servicesTypes
+        .filter((node) => node.title !== "Services")
+        .map((node) => validateAndCleanupServices(node)),
       allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
     },
     revalidate: 60,

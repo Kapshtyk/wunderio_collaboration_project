@@ -24,15 +24,36 @@ const OfficeLocationsMap = ({ maps }: MapsProps) => {
     setMarkers(newMarkers);
   }, [maps]);
 
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "",
-  });
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: "AIzaSyDFHz-zBARgR11y63cmaFJ3lTFUfcEaKSA" as string
+      });
+    
+      if (!isLoaded) {
+        return <p>Loading...</p>;
+      }
 
-  if (!isLoaded) {
-    return <p>Loading...</p>;
-  }
+      const mapOptions = {
+        styles: [
+          {
+            featureType: 'water',
+            elementType: 'geometry',
+            stylers: [{ color: '#B49FE2' }], 
+          },
+          {
+            featureType: 'administrative',
+            elementType: 'labels.text.fill',
+            stylers: [{ color: '#9E005D' }], 
+          },
+          {
+            featureType: 'landscape',
+            elementType: 'geometry',
+            stylers: [{ color: '#F7F7F8' }], 
+          },
+        ],
+      };
 
-  console.log("maps", maps);
+  console.log('maps', maps);
+
 
   return (
     <div className="">
@@ -40,7 +61,8 @@ const OfficeLocationsMap = ({ maps }: MapsProps) => {
       <GoogleMap
         center={markers.length > 0 ? markers[0].position : { lat: 0, lng: 0 }}
         zoom={5}
-        mapContainerStyle={{ height: "100%", width: "100%" }}
+        mapContainerStyle={{ height: '100%', width: '100%', backgroundColor: 'red' }}
+          options={mapOptions}
       >
         {markers.map((marker, index) => (
           <MarkerF

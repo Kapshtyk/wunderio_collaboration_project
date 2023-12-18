@@ -9,19 +9,19 @@ interface ServicesTypesProps {
 }
 
 const ServicesTypes = ({ servicesTypes, allServices }: ServicesTypesProps) => {
-  console.log("all services:", allServices);
-  console.log("services:", servicesTypes);
+  // console.log("all services:", allServices);
+  // console.log("services:", servicesTypes);
   const subHeadingSections = allServices.field_content_elements.filter(
     (field) => field.type === "paragraph--sub_heading_section",
   ) as SubHeadingSection[];
   return (
     <>
-      <div className="grid gap-4">
+      <div className="flex gap-8">
         {subHeadingSections.map((subHeadingSection) => (
-          <div key={subHeadingSection.id}>
-            {
-              <div>
-                <p>{subHeadingSection.field_heading}</p>
+          <div key={subHeadingSection.id} className="flex flex-col gap-2">
+                <p className="underline underline--small text-accent-hugs"> 
+                  {subHeadingSection.field_heading.toLocaleUpperCase()}
+                  </p>
                 <p>{subHeadingSection.field_excerpt}</p>
                 {servicesTypes
                   .filter(
@@ -40,8 +40,6 @@ const ServicesTypes = ({ servicesTypes, allServices }: ServicesTypesProps) => {
                     </div>
                   ))}
               </div>
-            }
-          </div>
         ))}
       </div>
     </>
