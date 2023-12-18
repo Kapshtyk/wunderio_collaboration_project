@@ -17,7 +17,7 @@ interface NavigationMenuProps {
   menu: Menu;
 }
 
-export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
+export function NavigationMenuDesktop({ menu }: NavigationMenuProps) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
 
   return (
     isClient && (
-      <NavigationMenu>
+      <NavigationMenu className="hidden desktopMenu:flex">
         <NavigationMenuList>
           {menu.map((item) =>
             item.items ? (
@@ -37,23 +37,26 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
                   </Link>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="bg-background/90 backdrop-blur-sm rounded-md">
-                  <ul className="grid w-[400px] gap-3 p-6 md:w-[500px] md:grid-cols-3 lg:w-[600px] text-start">
+                  <ul className="grid w-[400px] gap-3 p-6 md:w-[600px] md:grid-cols-3 lg:w-[800px] text-start">
                     {item.items.map((item) => (
-                      <li key={item.id}>
-                        <div
+                      <li
+                        className="border-r-[0.5px] last-of-type:border-r-0 pr-2"
+                        key={item.id}
+                      >
+                        <span
                           key={item.id}
-                          className="text-md p-2 text-main font-medium font-inter mb-5"
+                          className="text-main !text-md font-inter mb-5 "
                         >
                           {item.title}
-                        </div>
+                        </span>
                         <ul className="mt-2">
                           {item.items?.map(
                             (item, index) =>
                               index <= 2 && (
                                 <ListItem key={item.id} href={item.url}>
-                                  <p className="p-2 text-foreground font-regular font-inter">
+                                  <span className="font-inter !text-md">
                                     {item.title}
-                                  </p>
+                                  </span>
                                 </ListItem>
                               ),
                           )}
@@ -67,7 +70,7 @@ export function NavigationMenuDemo({ menu }: NavigationMenuProps) {
               <NavigationMenuItem className="relative" key={item.title}>
                 <Link
                   href={item.url}
-                  className={`text-md font-medium p-8 hover:after:absolute hover:after:bottom-[-5px] hover:after:scale-x-90 hover:after:content=[''] hover:after:h-[2px] hover:after:left-0 hover:after:bg-main hover:after:animate-underline`}
+                  className={`text-md font-medium px-4 hover:after:absolute hover:after:bottom-[-5px] hover:after:scale-x-90 hover:after:content=[''] hover:after:h-[2px] hover:after:left-0 hover:after:bg-main hover:after:animate-underline`}
                 >
                   {item.title}
                 </Link>
@@ -95,9 +98,7 @@ const ListItem = React.forwardRef<
         )}
         {...props}
       >
-        <p className="line-clamp-2 text-sm text-main leading-snug">
-          {children}
-        </p>
+        <span className="line-clamp-2 text-main">{children}</span>
       </Link>
     </li>
   );

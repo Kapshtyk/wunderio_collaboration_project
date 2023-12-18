@@ -85,3 +85,33 @@
     clip-path: circle();
   }
 }
+
+@layer base {
+  h2 {
+    @apply text-heading-md md:text-heading-lg lg:text-heading-xl font-semibold text-main mb-4 mt-2;
+  }
+
+  h3 {
+    @apply text-heading-sm md:text-heading-md lg:text-heading-lg font-semibold text-main mb-3 mt-1;
+  }
+
+  h4, h5, h6 {
+    @apply text-heading-xs md:text-heading-sm lg:text-heading-md font-semibold text-main mb-2;
+  }
+
+  p {
+    @apply text-md md:text-lg lg:text-xl text-foreground mb-2 md:mb-4 lg:mb-6;
+  }
+
+  span {
+    @apply text-md md:text-lg lg:text-xl text-foreground;
+  }
+
+  nav>div>ul>li {
+    @apply mb-0;
+  }
+  
+  li>a>p>p {
+    @apply mb-0 ;
+  }
+}

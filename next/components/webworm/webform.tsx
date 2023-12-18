@@ -131,11 +131,11 @@ export function Webform({
       onlyForAuthenticated={onlyForAuthenticated}
     >
       <section
-        className="relative bg-background w-full grid grid-cols-2 min-h-[400px] overflow-hidden"
+        className="relative bg-background w-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 min-h-[400px] overflow-hidden"
         aria-details={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}
       >
         {variant === "default" && (
-          <div className='bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>
+          <div className='hidden md:block bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>
         )}
         {variant === "contact" && <OfficeLocationsMap maps={maps} />}
         <div className="relative">
@@ -173,12 +173,12 @@ export function Webform({
           )}
           <form
             onSubmit={handleSubmit(onSubmit, onErrors)}
-            className="mx-auto mb-4 flex max-w-md flex-col gap-5 bg-background p-4 font-inter items-start"
+            className="md:mx-auto mb-4 flex md:max-w-md flex-col gap-5 bg-background md:p-4 font-inter items-start"
           >
-            <h2 className="text-heading-xs font-bold">{formTitle}</h2>
+            <h3>{formTitle}</h3>
             {fieldInputs.map((key) => {
               return (
-                <div key={key} className="w-full">
+                <div key={key} className="w-full max-w-md">
                   <Label
                     className="text-sm font-medium font-overpass text-foreground/50"
                     htmlFor={webform.field_webform_fields[key]["#title"]}
@@ -223,7 +223,7 @@ export function Webform({
           </form>
         </div>
         {variant === "events" && (
-          <div className='bg-[url("/finavia-arrivals-1340x760.jpg")] bg-center bg-no-repeat bg-cover'></div>
+          <div className='hidden md:block bg-[url("/finavia-arrivals-1340x760.jpg")] bg-center bg-no-repeat bg-cover'></div>
         )}
       </section>
     </AuthWrapper>

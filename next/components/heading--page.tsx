@@ -9,10 +9,11 @@ export function HeadingPage({
 }) {
   return (
     <>
-      <div className="h-72 w-[110vw] -translate-x-[25%] rounded-r-2xl bg-gradient-primary-600 bg-right bg-cover bg-no-repeat"></div>
-      <div className="relative -mt-72 h-72 w-[75vw] mb-4 pt-14 flex flex-col gap-6 z-40 text-white">
-        <HeadingParagraph>{title}</HeadingParagraph>
-        <p className="text-xl font-regular">{description}</p>
+      <div className="bg-gradient-primary-600 py-4 2sm:py-6 md:py-8 lg:py-10 xl:py-12 min-h-[280px] w-[110vw] -translate-x-[25%] rounded-r-2xl  flex flex-col align-middle justify-center">
+        <div className="w-[70vw] ml-[25%]">
+          <HeadingParagraph className="text-white">{title}</HeadingParagraph>
+          <p className="text-white">{description}</p>
+        </div>
       </div>
     </>
   );

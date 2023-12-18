@@ -101,7 +101,7 @@ export function MenuListTitle({
   children: ReactNode;
 }) {
   return (
-    <h2 className="border-b border-finnishwinter p-6 pt-0 text-heading-xs font-bold text-steelgray hover:underline lg:hidden">
+    <h2>
       <MenuLink href={href} isTitle={true}>
         {children}
       </MenuLink>

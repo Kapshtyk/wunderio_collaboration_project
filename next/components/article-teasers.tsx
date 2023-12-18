@@ -17,9 +17,7 @@ export function ArticleTeasers({ articles, heading }: LatestArticlesProps) {
   const { t } = useTranslation();
   return (
     <>
-      <h2 className="text-heading-sm font-bold md:text-heading-md">
-        {heading}
-      </h2>
+      <h2>{heading}</h2>
       <ul className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
         {articles?.map((article) => (
           <li key={article.id}>

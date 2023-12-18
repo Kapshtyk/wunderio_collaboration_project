@@ -113,6 +113,10 @@ module.exports = {
       xl: "1.75",
     },
     extend: {
+      screens: {
+        "2sm": "570px",
+        desktopMenu: "940px",
+      },
       borderRadius: {
         ...defaultTheme.borderRadius,
         DEFAULT: "3px",
@@ -142,7 +146,7 @@ module.exports = {
     },
   },
   corePlugins: {
-    aspectRatio: false,
+    aspectRatio: true,
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),
