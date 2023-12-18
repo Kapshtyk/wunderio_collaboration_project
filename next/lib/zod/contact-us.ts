@@ -30,7 +30,7 @@ export function validateAndCleanupContactUs(
   contactUs: DrupalNode,
 ): ContactUs | null {
   try {
-    const topLevelServicesData = ContactUsSchema.omit({
+    const topLevelContactUsData = ContactUsSchema.omit({
       field_content_elements: true,
     }).parse(contactUs);
 
@@ -43,7 +43,7 @@ export function validateAndCleanupContactUs(
             return result.data;
           case false:
             console.log(
-              `Error validating services paragraph ${paragraph.type}: `,
+              `Error validating contact us paragraph ${paragraph.type}: `,
               JSON.stringify(result.error, null, 2),
             );
             return null;
@@ -52,7 +52,7 @@ export function validateAndCleanupContactUs(
       .filter(Boolean);
 
     return {
-      ...topLevelServicesData,
+      ...topLevelContactUsData,
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {

@@ -24,12 +24,13 @@ import {
 import { ContactPerson, validateAndCleanupContactPerson } from "@/lib/zod/contact-person";
 import ContactPeople from "@/components/contact-person";
 import { FormattedText } from "@/components/formatted-text";
+import { HeadingParagraph } from "@/components/heading--paragraph";
 
 interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
   maps: OfficeLocations[];
   webform: WebformType;
-  contactPerson: ContactPerson;
+  contactPerson: ContactPerson [];
 }
 
 export default function ContactUsPage({
@@ -107,7 +108,8 @@ export default function ContactUsPage({
         </div>
       </section>
       <section>
-        <ContactPeople contactPerson={contactPerson}/>
+        {/* <ContactPeople contactPerson={contactPerson}/> */}
+        {/* <FormattedText html={contactPerson.body.processed}/> */}
      </section> 
     </>
   );
@@ -158,7 +160,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>("node--contact_persons", {
         params: getNodePageJsonApiParams('node--contact_persons').getQueryObject()
       })
-  ).at(0)
+  )
 
   console.log("contact", contactPerson);
   
@@ -172,7 +174,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
       contactUs: validatedResource,
       webform: validatedWebform,
       maps: maps.map((node) => validateAndCleanupOfficeLocations(node)),
-      contactPerson: validateAndCleanupContactPerson(contactPerson)
+      contactPerson: contactPerson.map((node)=> validateAndCleanupContactPerson(node))
       //   languageLinks,
     },
   };
