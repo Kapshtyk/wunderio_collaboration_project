@@ -2,8 +2,8 @@ import { useTranslation } from "next-i18next";
 import React from "react";
 import clsx from "clsx";
 
-import { Footer } from "@/components/footer/footer";
-import { Header } from "@/components/header/header";
+/* import { Footer } from "@/components/footer/footer";
+ */ import { Header } from "@/components/header/header";
 import {
   PreviewBanner,
   useIsPreviewBannerVisible,
@@ -38,7 +38,9 @@ export function Layout({ menus, children }: LayoutProps) {
         </SkipToContentLink>
         <Header menu={menus.main} />
         <main className="grow" id="main-content">
-          <div className="mx-auto max-w-6xl px-6">{children}</div>
+          <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
+            {children}
+          </div>
         </main>
         {/*     <Footer menu={menus.footer} /> */}
       </div>
