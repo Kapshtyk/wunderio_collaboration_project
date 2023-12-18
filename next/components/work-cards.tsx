@@ -8,7 +8,7 @@ import { MediaImage } from "./media--image";
 export function WorkCards({ allWorkPages }) {
   //console.log("allPages", allWorkPages);
   return (
-    <div className="w-full md:grid grid-cols-2 gap-6 lg:grid-cols-3">
+    <div className="w-full md:grid grid-cols-2 gap-4 lg:grid-cols-3">
       {allWorkPages.map((workPage: PageType) => (
         <div key={workPage.id}>
           {workPage.field_content_elements &&
@@ -18,7 +18,7 @@ export function WorkCards({ allWorkPages }) {
                 <div key={paragraph.id} className="p-2">
                   <Link href={workPage.path.alias}>
                     <MediaImage
-                      className="rounded-lg h-96 hover:saturate-150 w-full"
+                      className="rounded-lg h-[500px] hover:saturate-150 w-[auto]"
                       media={paragraph.field_image}
                     />
                     <h1 className="text-primary-600 py-3 text-lg font-bold hover:underline">

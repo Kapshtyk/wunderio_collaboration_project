@@ -28,7 +28,6 @@ interface WorkPageProps extends LayoutProps {
   allWorkPages: PageType[];
   allArticles: Article[];
   wunderNumbers: NumbersType[];
-  testimonials: TestimonialsType[];
 }
 
 export default function WorkPage({
@@ -36,7 +35,6 @@ export default function WorkPage({
   allWorkPages,
   allArticles,
   wunderNumbers,
-  testimonials,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
@@ -98,9 +96,6 @@ export default function WorkPage({
             ))}
         </div>
       </div>
-      <div>
-        <Testimonials testimonials={testimonials} />
-      </div>
     </>
   );
 }
@@ -158,14 +153,6 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     },
   );
 
-  const testimonials = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--testimonials",
-    context,
-    {
-      params: getNodePageJsonApiParams("node--testimonials").addFilter('field_person_category.name', 'Client').getQueryObject()
-    },
-  );
-
   return {
     props: {
       ...(await getCommonPageProps(context)),
@@ -173,7 +160,6 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
       allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
       allArticles: articles.map((node) => validateAndCleanupArticle(node)),
       wunderNumbers: numbers.map((node) => validateAndCleanupNumbers(node)),
-      testimonials: testimonials.map((node) => validateAndCleanupTestimonial(node)),
       languageLinks,
     },
   };

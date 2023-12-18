@@ -4,14 +4,11 @@ import { DrupalNode } from "next-drupal";
 import HeroBanner from "@/components/hero-banner";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
-import NewsArticlesEvents from "@/components/news-articles-events";
 import { drupal } from "@/lib/drupal/drupal-client";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
 import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
-import { validateAndCleanupEvents } from "@/lib/zod/events";
-import { EventsArticles } from "@/lib/zod/events-articles";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
 import { validateAndCleanupLegalDocument } from "@/lib/zod/legal-document";
 import NewsArticlesEvents from "@/components/news-articles-events";
@@ -35,7 +32,7 @@ export default function IndexPage({
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
-      <NewsArticlesEvents items={items} />
+      {/* <NewsArticlesEvents items={items} /> */}
       <div>
         <FrontPageWorkSection allWorkPages={allWorkPages} />
       </div>
@@ -75,22 +72,22 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     validateAndCleanupArticleTeaser(teaser),
   );
 
-  const events = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--event",
-    context,
-    {
-      params: getNodePageJsonApiParams("node--event")
-        .addPageLimit(3)
-        .addSort("created", "ASC")
-        .getQueryObject(),
-    },
-  );
+  // const events = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+  //   "node--event",
+  //   context,
+  //   {
+  //     params: getNodePageJsonApiParams("node--event")
+  //       .addPageLimit(3)
+  //       .addSort("created", "ASC")
+  //       .getQueryObject(),
+  //   },
+  // );
 
-  const validatedEvents = events.map((event) =>
-    validateAndCleanupEvents(event),
-  );
+  // const validatedEvents = events.map((event) =>
+  //   validateAndCleanupEvents(event),
+  // );
 
-  const items = [...validatedArticleTeasers, ...validatedEvents];
+  // const items = [...validatedArticleTeasers, ...validatedEvents];
 
   const aboutUs = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
@@ -128,7 +125,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     props: {
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
-      items,
+      //items,
       aboutUs: validateAndCleanupAboutUs(aboutUs),
       legalDocument: validateAndCleanupLegalDocument(legalDocument),
       allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
