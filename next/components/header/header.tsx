@@ -1,26 +1,21 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
 
-import { MainMenu } from "@/components/main-menu/main-menu";
 import { Menu } from "@/lib/zod/menu";
 import SearchIcon from "@/styles/icons/search.svg";
 import WunderIcon from "@/styles/icons/wunder.svg";
-import Hamburger from "@/styles/icons/menu.svg";
 
+import MobMenu from "../navigation-menu/mob-menu";
 import { NavigationMenuDesktop } from "../navigation-menu/nav-menu";
 
 import SecondaryMenu from "./secondary-menu";
-import MobMenu from "../navigation-menu/mob-menu";
 
 interface HeaderProps {
   menu: Menu;
 }
 
 export function Header({ menu }: HeaderProps) {
-  const [isMainMenuOpen, setIsMainMenuOpen] = useState(false);
-
   return (
     <header className="z-50 flex-shrink-0 border-b bg-background border-foreground/15 md:sticky md:top-0">
       <div className="mx-auto relative flex px-6 sm:px-28 h-20 flex-row items-center justify-between">
@@ -31,11 +26,6 @@ export function Header({ menu }: HeaderProps) {
           <SecondaryMenu />
         </div>
       </div>
-      {/*  <MainMenu
-        menu={menu}
-        isOpen={isMainMenuOpen}
-        setIsOpen={setIsMainMenuOpen}
-      /> */}
     </header>
   );
 }
@@ -51,7 +41,7 @@ function HomeLink() {
   );
 }
 
-function SearchLink() {
+export function SearchLink() {
   const { locale } = useRouter();
   const { t } = useTranslation();
   return (

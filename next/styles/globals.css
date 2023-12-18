@@ -99,7 +99,7 @@
     @apply text-heading-xs md:text-heading-sm lg:text-heading-md font-semibold text-main mb-2;
   }
 
-  p {
+  p, li {
     @apply text-md md:text-lg lg:text-xl text-foreground mb-2 md:mb-4 lg:mb-6;
   }
 

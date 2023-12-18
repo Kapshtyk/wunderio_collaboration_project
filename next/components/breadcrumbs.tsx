@@ -26,12 +26,12 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <nav>
       <ul
-        className="hidden 2sm:flex py-4"
+        className="hidden 2sm:flex pt-4"
         aria-label="breadcrumbs"
         role="navigation"
       >
         {breadCrumbs.map((item, index) => (
-          <li key={index} className="flex items-center truncate">
+          <li key={index} className="flex items-center truncate !lmb-0">
             {item.url ? (
               <Link className="text-main" href={item.url}>
                 {item.title}
