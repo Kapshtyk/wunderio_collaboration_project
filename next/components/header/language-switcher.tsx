@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
@@ -10,14 +9,16 @@ import { RadioGroup, RadioGroupItem } from "@/ui/radio";
 
 export function LanguageSwitcher() {
   const languageLinks = useLanguageLinks();
-  const { push, locale, locales } = useRouter();
+  const { push, locale } = useRouter();
   const { t } = useTranslation();
   const [curvalue, setcurValue] = useState(locale);
   const { path } = languageLinks[curvalue];
 
   useEffect(() => {
-    push(path, undefined, { locale: curvalue });
-  }, [curvalue]);
+    push(path, undefined, { locale: curvalue })
+      .then(() => window.scrollTo(0, 0))
+      .catch(console.error);
+  }, [curvalue, path, push]);
 
   return (
     <div>

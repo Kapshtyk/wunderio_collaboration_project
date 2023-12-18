@@ -1,14 +1,10 @@
+label: Innehållsflöden
 display:
   default:
-    display_title: Huvud
     display_options:
       exposed_form:
         options:
-          submit_button: Applicera
           reset_button_label: Återställ
-          exposed_sorts_label: 'Sortera efter'
-          sort_asc_label: Stigande
-          sort_desc_label: Fallande
       pager:
         options:
           expose:
@@ -16,17 +12,12 @@ display:
       fields:
         title:
           label: Titel
-          separator: ', '
         type:
           label: Typ
-          separator: ', '
         name:
           label: Författare
-          separator: ', '
         changed:
-          separator: ', '
-        imported:
-          separator: ', '
+          label: Uppdaterad
         operations:
           label: Funktioner
       filters:
@@ -36,3 +27,8 @@ display:
         type:
           expose:
             label: Typ
+      title: Innehållsflöden
+  page_1:
+    display_options:
+      menu:
+        title: Innehållsflöden
