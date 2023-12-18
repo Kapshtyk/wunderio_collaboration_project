@@ -65,9 +65,7 @@ export function ContactForm() {
       onSubmit={handleSubmit(onSubmit, onErrors)}
       className="mx-auto mb-4 flex max-w-3xl flex-col gap-5 rounded border border-finnishwinter bg-foreground p-4 shadow-md transition-all hover:shadow-md"
     >
-      <h2 className="text-heading-sm font-bold md:text-heading-md">
-        {t("form-title")}
-      </h2>
+      <h2>{t("form-title")}</h2>
       <AuthGate text={t("login-to-fill-form")}>
         <>
           <p>{t("form-description")}</p>

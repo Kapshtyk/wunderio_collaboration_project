@@ -52,7 +52,7 @@ export const StatusMessage = React.forwardRef<
       ref={ref}
       {...props}
     >
-      <h3 className="mb-2 text-md font-bold relative inline-flex pl-6">
+      <h3 className="mb-2 relative inline-flex pl-6">
         <Icon
           className={clsx("absolute left-0 top-0 bottom-0 h-6 w-6", color)}
         />

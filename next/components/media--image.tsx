@@ -1,11 +1,11 @@
 import NextImage, { ImageProps } from "next/image";
+import clsx from "clsx";
 
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { Image, ImageShape } from "@/lib/zod/paragraph";
-import clsx from "clsx";
 
 interface MediaImageProps extends Partial<ImageProps> {
-  media: Image["field_image"] | ImageShape
+  media: Image["field_image"] | ImageShape;
 }
 
 export function MediaImage({
@@ -29,11 +29,14 @@ export function MediaImage({
         alt={image.resourceIdObjMeta.alt || "Image"}
         title={image.resourceIdObjMeta.title}
         fill
-        sizes='100%'
-        className={clsx("h-auto max-w-full object-center object-cover", className)}
+        sizes="100%"
+        className={clsx(
+          "h-auto max-w-full object-center object-cover",
+          className,
+        )}
         {...props}
       />
-    )
+    );
   } else {
     return (
       <NextImage
@@ -45,6 +48,6 @@ export function MediaImage({
         className={clsx("h-auto max-w-full object-cover", className)}
         {...props}
       />
-    )
+    );
   }
 }

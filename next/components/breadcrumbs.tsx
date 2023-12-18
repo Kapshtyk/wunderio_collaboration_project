@@ -24,12 +24,16 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
   const breadCrumbs = [...defaultBreadcrumbs, ...items];
 
   return (
-    <nav className="py-4 text-sm font-medium text-main">
-      <ul className="flex" aria-label="breadcrumbs" role="navigation">
+    <nav>
+      <ul
+        className="hidden 2sm:flex py-4"
+        aria-label="breadcrumbs"
+        role="navigation"
+      >
         {breadCrumbs.map((item, index) => (
-          <li key={index} className="flex max-w-[300px] items-center truncate">
+          <li key={index} className="flex items-center truncate">
             {item.url ? (
-              <Link className="text-link" href={item.url}>
+              <Link className="text-main" href={item.url}>
                 {item.title}
               </Link>
             ) : (
@@ -37,11 +41,11 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
             )}
             {index !== breadCrumbs.length - 1 && (
               <svg
-                className="mx-2"
+                className="mx-2 text-main"
                 width="15"
                 height="15"
                 viewBox="0 0 15 15"
-                fill="none"
+                fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path

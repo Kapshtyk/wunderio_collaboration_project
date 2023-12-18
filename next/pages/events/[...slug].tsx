@@ -86,10 +86,12 @@ export default function Event({
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
       <h2 className="sr-only">{`${event.title} - heading section`}</h2>
-      {event.field_content_elements?.map((element) => (
-        <Paragraph key={element.id} paragraph={element} />
-      ))}
-      <section className="pr-56">
+      <div className="grid">
+        {event.field_content_elements?.map((element) => (
+          <Paragraph key={element.id} paragraph={element} />
+        ))}
+      </div>
+      <section className="mt-2 2sm:mt-4 md:mt-6 lg:mt-8 xl:mt-12">
         <h2 className="sr-only">{`Main content of the ${event.title} event page`}</h2>
         <FormattedText html={event.body.processed} />
       </section>
@@ -100,7 +102,7 @@ export default function Event({
               <HeadingParagraph>Participants</HeadingParagraph>
               {event.field_participant.map((participant) => (
                 <div className="mb-4" key={participant.id}>
-                  <h2 className="font-regular text-2xl">{participant.title}</h2>
+                  <h2>{participant.title}</h2>
                   <div
                     className="mt-6 font-serif text-xl leading-loose prose"
                     dangerouslySetInnerHTML={{

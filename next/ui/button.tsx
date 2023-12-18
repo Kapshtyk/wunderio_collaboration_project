@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { cva } from "cva";
 
 export const buttonVariants = cva(
-  "flex gap-2 items-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
+  "flex gap-2 items-center align-center justify-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
   {
     variants: {
       size: {
@@ -25,7 +25,7 @@ export const buttonVariants = cva(
           "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-foreground",
         ],
         tertiary: [
-          "bg-transparent text-main !px-0",
+          "bg-transparent !text-main !px-0 !justify-start",
           "hover:hover:text-main/80 !px-0",
         ],
       },

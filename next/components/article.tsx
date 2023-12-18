@@ -8,6 +8,8 @@ import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { formatDate } from "@/lib/utils";
 import { Article } from "@/lib/zod/article";
 
+import { Breadcrumbs } from "./breadcrumbs";
+
 interface ArticleProps {
   article: Article;
 }
@@ -16,8 +18,24 @@ export function Article({ article, ...props }: ArticleProps) {
   const { t } = useTranslation();
   const router = useRouter();
   console.log("articlesmy", article);
+
+  const breadcrumbs = [
+    {
+      //TODO: fix link and style ALL ARTICLES page
+      title: t("articles-link"),
+      url: "/all-articles",
+    },
+    {
+      title: article.title,
+      url: article.path.alias,
+    },
+  ];
+
   return (
     <article {...props}>
+      <div className="container">
+        {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
+      </div>
       <HeadingPage title={article.title} />
       {article.field_excerpt && (
         <div className="my-4 text-xl">{article.field_excerpt}</div>
