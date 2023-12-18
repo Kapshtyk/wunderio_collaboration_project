@@ -2,64 +2,63 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
-import clsx from "clsx";
 
 import { useLanguageLinks } from "@/lib/contexts/language-links-context";
-import { useOnClickOutside } from "@/lib/hooks/use-on-click-outside";
-import LanguageIcon from "@/styles/icons/language.svg";
+
+import { Label } from "@/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/ui/radio";
 
 export function LanguageSwitcher() {
   const languageLinks = useLanguageLinks();
-  const { locale, locales } = useRouter();
-
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen((o) => !o);
-  const close = () => setIsOpen(false);
-
-  // Close on locale change
-  useEffect(close, [locale]);
-
-  // Close on click outside
-  const ref = useOnClickOutside<HTMLDivElement>(close);
+  const { push, locale, locales } = useRouter();
   const { t } = useTranslation();
+  const [curvalue, setcurValue] = useState(locale);
+  const { path } = languageLinks[curvalue];
+
+  useEffect(() => {
+    push(path, undefined, { locale: curvalue });
+  }, [curvalue]);
 
   return (
-    <div ref={ref}>
+    <div>
       <span className="sr-only">{t("language-switcher")}</span>
-      <button
-        type="button"
-        className="hover:underline"
-        onClick={toggle}
-        aria-expanded={isOpen}
+      <RadioGroup
+        className="grid-cols-3 items-center align-middle"
+        defaultValue={curvalue}
+        onValueChange={setcurValue}
       >
-        <span className="sr-only sm:not-sr-only sm:mr-2 sm:inline">
-          {languageLinks[locale].name}
-        </span>
-        <LanguageIcon className="inline-block h-6 w-6" aria-hidden="true" />
-      </button>
-      <ul
-        className={clsx(
-          "absolute z-50 mt-1 w-fit border border-finnishwinter bg-mischka",
-          !isOpen && "hidden",
-        )}
-      >
-        {locales
-          .filter((l) => l !== locale)
-          .map((l) => {
-            const { name, path } = languageLinks[l];
-            return (
-              <li key={l}>
-                <Link
-                  className="block p-2 hover:bg-primary-50"
-                  locale={l}
-                  href={path}
-                >
-                  {name}
-                </Link>
-              </li>
-            );
-          })}
-      </ul>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="en" id="en" />
+          <Label className="!mb-0 text-sm font-reqular" htmlFor="en">
+            English
+          </Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="fi" id="fi" />
+          <Label className="!mb-0 text-sm font-reqular" htmlFor="fi">
+            Finnish
+          </Label>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="sv" id="sv" />
+          <Label className="!mb-0 text-sm font-reqular" htmlFor="sv">
+            Swedish
+          </Label>
+        </div>
+      </RadioGroup>
     </div>
   );
+}
+
+{
+  /* <li key={l}>
+<Link
+  className="block p-2 hover:bg-primary-50"
+  locale={l}
+  href={path}
+>
+  {name}
+</Link>
+</li> */
 }

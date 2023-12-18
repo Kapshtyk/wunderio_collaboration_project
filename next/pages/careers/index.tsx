@@ -52,12 +52,12 @@ export default function CareersPage({
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <div className="grid gap-4">
+      <div className="grid">
         {careers.field_content_elements?.map((paragraph) => (
           <Paragraph key={paragraph.id} paragraph={paragraph} />
         ))}
       </div>
-      <section className="">
+      <section className="mt-2 2sm:mt-4 md:mt-6 lg:mt-8 xl:mt-12">
         <h2 className="sr-only">Main content of the careers page</h2>
         <FormattedText html={careers.body.processed} />
       </section>

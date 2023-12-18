@@ -25,7 +25,7 @@ export const buttonVariants = cva(
           "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-foreground",
         ],
         tertiary: [
-          "bg-transparent text-main !px-0",
+          "bg-transparent !text-main !px-0 !justify-start",
           "hover:hover:text-main/80 !px-0",
         ],
       },

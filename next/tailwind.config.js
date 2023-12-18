@@ -113,6 +113,10 @@ module.exports = {
       xl: "1.75",
     },
     extend: {
+      screens: {
+        "2sm": "570px",
+        desktopMenu: "940px",
+      },
       borderRadius: {
         ...defaultTheme.borderRadius,
         DEFAULT: "3px",
@@ -129,15 +133,25 @@ module.exports = {
         appear: {
           "0%": { width: 0 },
           "100%": { width: "100%" },
+          "slide-in-from-bottom": {
+            "0%": { transform: "translateY(100%)" },
+            "100%": { transform: "translateY(0)" },
+          },
+          "slide-out-to-bottom": {
+            "0%": { transform: "translateY(0)" },
+            "100%": { transform: "translateY(100%)" },
+          },
         },
       },
       animation: {
         underline: "appear 0.2s linear forwards",
+        "slide-in-from-bottom": "slide-in-from-bottom 0.2s ease-out forwards",
+        "slide-out-to-bottom": "slide-out-to-bottom 0.2s ease-out forwards",
       },
     },
   },
   corePlugins: {
-    aspectRatio: false,
+    aspectRatio: true,
   },
   plugins: [
     require("@tailwindcss/aspect-ratio"),

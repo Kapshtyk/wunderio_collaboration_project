@@ -42,7 +42,7 @@ const options: HTMLReactParserOptions = {
               width={numberWidth}
               height={numberHeight}
               alt={alt}
-              className="max-w-full object-cover"
+              className="max-w-full object-cover 2sm:pr-20 md:pr-32 lg:pr-44 xl:pr-56 mb-4 lg:group-first/layout:pr-0"
             />
           );
         }
@@ -51,7 +51,7 @@ const options: HTMLReactParserOptions = {
       case "div": {
         if (domNode.attribs.title === "layout") {
           return (
-            <div className=" w-full grid grid-cols-2 gap-8 group/layout">
+            <div className=" w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-8 group/layout">
               {domToReact(domNode.children, options)}
             </div>
           );
@@ -78,43 +78,23 @@ const options: HTMLReactParserOptions = {
       }
 
       case "h2": {
-        return (
-          <h2 className="text-heading-xl text-main font-semibold">
-            {domToReact(domNode.children, options)}
-          </h2>
-        );
+        return <h2>{domToReact(domNode.children, options)}</h2>;
       }
 
       case "h3": {
-        return (
-          <h3 className="text-xl font-bold text-main mb-4">
-            {domToReact(domNode.children, options)}
-          </h3>
-        );
+        return <h3>{domToReact(domNode.children, options)}</h3>;
       }
 
       case "h4": {
-        return (
-          <h4 className="text-lg font-bold text-main mb-4">
-            {domToReact(domNode.children, options)}
-          </h4>
-        );
+        return <h4>{domToReact(domNode.children, options)}</h4>;
       }
 
       case "h5": {
-        return (
-          <h5 className="text-base font-bold text-main mb-4">
-            {domToReact(domNode.children, options)}
-          </h5>
-        );
+        return <h5>{domToReact(domNode.children, options)}</h5>;
       }
 
       case "h6": {
-        return (
-          <h6 className="text-sm font-bold text-main mb-4">
-            {domToReact(domNode.children, options)}
-          </h6>
-        );
+        return <h6>{domToReact(domNode.children, options)}</h6>;
       }
 
       case "a": {
@@ -143,7 +123,7 @@ const options: HTMLReactParserOptions = {
 
       case "p": {
         return (
-          <p className="mb-4 text-xl font-regular pr-56 group-first/layout:pr-0 group-first/testimonials:pr-0 ">
+          <p className="2sm:pr-20 md:pr-32 lg:pr-44 xl:pr-56 lg:group-first/layout:pr-0 group-first/testimonials:pr-0">
             {domToReact(domNode.children, options)}
           </p>
         );
@@ -167,7 +147,7 @@ const options: HTMLReactParserOptions = {
 
       case "ul": {
         return (
-          <ul className="marker:text-main list-disc pl-4 space-y-4">
+          <ul className="marker:text-main list-disc pl-4 space-y-2 md:space-y-4 lg:space-y-6">
             {domToReact(domNode.children, options)}
           </ul>
         );
@@ -175,7 +155,7 @@ const options: HTMLReactParserOptions = {
 
       case "li": {
         return (
-          <li className="group-first:text-lg text-xl">
+          <li className="2sm:pr-20 md:pr-32 lg:pr-44 xl:pr-56 lg:group-first/layout:pr-0">
             {domToReact(domNode.children, options)}
           </li>
         );

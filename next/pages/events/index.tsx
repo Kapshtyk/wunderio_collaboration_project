@@ -41,7 +41,9 @@ export default function EventsPage({
         title={t("events-main-title")}
         description={t("events-main-description")}
       />
-      <EventsArticles items={items} />
+      <section className="mt-2 2sm:mt-4 md:mt-6 lg:mt-8 xl:mt-12">
+        <EventsArticles items={items} />
+      </section>
     </>
   );
 }

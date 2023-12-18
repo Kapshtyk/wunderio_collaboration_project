@@ -9,10 +9,7 @@ import { drupal } from "@/lib/drupal/drupal-client";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
-import {
-  ArticleTeaser,
-  validateAndCleanupArticleTeaser,
-} from "@/lib/zod/article-teaser";
+import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
 import { validateAndCleanupEvents } from "@/lib/zod/events";
 import { EventsArticles } from "@/lib/zod/events-articles";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";

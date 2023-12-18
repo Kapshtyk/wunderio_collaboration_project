@@ -14,11 +14,7 @@ interface AccordionProps {
 export function Accordion({ heading, description, items }: AccordionProps) {
   return (
     <div className="relative h-full  bg-background transition-all">
-      {heading && (
-        <h2 className="mb-4 text-heading-sm font-bold md:text-heading-md">
-          {heading}
-        </h2>
-      )}
+      {heading && <h2>{heading}</h2>}
       {description && <p className="mb-4 text-sm">{description}</p>}
       <AccordionUI.Root type="single" collapsible className="grid gap-4">
         {items?.map((item) => (
