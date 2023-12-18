@@ -5,7 +5,6 @@ import { useTranslation } from "next-i18next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
 import { LogoStrip } from "@/components/logo-strip";
-import Numbers from "@/components/numbers";
 import { Paragraph } from "@/components/paragraph";
 import { WorkCards } from "@/components/work-cards";
 import { WorkArticleCard } from "@/components/workArticleCard";
@@ -15,12 +14,14 @@ import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-pa
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
-import {
-  Numbers as NumbersType,
-  validateAndCleanupNumbers,
-} from "@/lib/zod/numbers";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import { HeadingSection, Testimonials as TestimonialsType } from "@/lib/zod/paragraph";
 import { validateAndCleanupWork, Work } from "@/lib/zod/work";
+import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
+import Numbers from "@/components/numbers";
+import { validateAndCleanupTestimonial } from "@/lib/zod/testimonials";
+import Testimonials from "@/components/testimonials";
+import { title } from "process";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
@@ -52,25 +53,19 @@ export default function WorkPage({
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <div
-        className=" bg-primary-800 relative mb-6"
-        style={{ height: "350px" }}
-      >
-        <div className=" absolute inset-0 bg-cover bg-center bg-[url('/work-hero.jpg')] opacity-20"></div>
-        <div className="p-20 flex relative">
-          <div className="grid gap-4">
-            {mainPage.field_content_elements?.map((paragraph) => (
-              <Paragraph key={paragraph.id} paragraph={paragraph} />
-            ))}
-          </div>
+      <div>
+        <div className="grid gap-4">
+          {mainPage.field_content_elements?.map((paragraph) => (
+            <Paragraph key={paragraph.id} paragraph={paragraph} />
+          ))}
         </div>
       </div>
 
-      {
-        <div>
-          <WorkCards allWorkPages={allWorkPages} />
-        </div>
-      }
+
+      <div>
+        <WorkCards allWorkPages={allWorkPages} />
+      </div>
+
 
       <div className="my-20">
         <h1 className="font-bold">OUR CLIENTS</h1>
@@ -83,7 +78,7 @@ export default function WorkPage({
 
       <div>
         <h1 className="font-bold mb-4">MORE ABOUT OUR CLIENTS</h1>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="md:grid grid-cols-3 gap-3">
           {allArticles
             .filter(
               (workArticles) =>
@@ -128,7 +123,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
 
   const languageLinks = createLanguageLinks(nodeTranslations);
 
-  const pages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+  const allWorkPages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--page",
     context,
     {
@@ -162,7 +157,7 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
     props: {
       ...(await getCommonPageProps(context)),
       mainPage: validateAndCleanupWork(mainPage),
-      allWorkPages: pages.map((node) => validateAndCleanupPage(node)),
+      allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
       allArticles: articles.map((node) => validateAndCleanupArticle(node)),
       wunderNumbers: numbers.map((node) => validateAndCleanupNumbers(node)),
       languageLinks,

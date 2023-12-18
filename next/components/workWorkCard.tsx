@@ -8,7 +8,7 @@ export function WorkWorkCard({ workPage }) {
   return (
     <div
       key={workPage.id}
-      className="block max-w-[16rem] rounded-lg bg-foreground shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+      className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-6"
     >
       {workPage.field_content_elements
         .filter((element: Paragraph) => element.type === "paragraph--work_card")
@@ -19,7 +19,7 @@ export function WorkWorkCard({ workPage }) {
           >
             <Link href={workPage.path.alias}>
               <MediaImage
-                className="rounded-sm h-60 hover:saturate-150"
+                className="rounded-sm hover:saturate-150 w-full h-full"
                 media={paragraph.field_image}
               />
             </Link>
