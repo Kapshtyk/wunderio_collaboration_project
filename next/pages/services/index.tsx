@@ -29,7 +29,6 @@ interface ServicesProps extends LayoutProps {
   mainPage: Services;
   services: Services[];
   tags: DrupalTaxonomyTerm[];
-  // view: DrupalView;
 }
 
 export default function ServicesPage({
@@ -159,23 +158,10 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
     )
   ).at(0);
 
-  // console.log('maps:',maps);
 
   const tags = await drupal.getResourceCollectionFromContext<
     DrupalTaxonomyTerm[]
   >("taxonomy_term--advisory", context, {});
-
-  //   const view = (
-  //     await drupal.getView("office_address_marker--block_1",{
-  //       params:{
-  //         fields:{
-  //           "node--office_locations": "title,field_office_address,field_address"
-  //         }
-  //       }
-  //     })
-  //   )
-
-  // console.log("view:", view);
 
   const nodeTranslations = await getNodeTranslatedVersions(
     mainPage,
@@ -193,7 +179,6 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
         .filter((node) => node.title !== "Services")
         .map((node) => validateAndCleanupServices(node)),
       tags,
-      // view,
       maps: validateAndCleanupOfficeLocations(maps),
       languageLinks,
     },

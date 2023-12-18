@@ -17,7 +17,8 @@ export type ResourceType =
   | "node--office_locations"
   | "node--contact_us"
   | "node--venue"
-  | "node--legal_document";
+  | "node--legal_document"
+  | "node--contact_persons";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -238,6 +239,16 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
   }
   if (resourceType === "node--legal_document") {
     apiParams.addFields("node--legal_document", ["title", "body", "metatag"]);
+  }
+
+  if (resourceType === "node--contact_persons") {
+    apiParams
+      .addInclude(["uid", "field_content_elements", "field_content_elements.field_image.field_media_image"])
+      .addFields("node--contact_persons", [
+        "title",
+        "metatag",
+        "field_content_elements"    
+      ]);
   }
 
   return apiParams;
