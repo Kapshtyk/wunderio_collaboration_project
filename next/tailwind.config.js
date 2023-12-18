@@ -133,20 +133,15 @@ module.exports = {
         appear: {
           "0%": { width: 0 },
           "100%": { width: "100%" },
-          "slide-in-from-bottom": {
-            "0%": { transform: "translateY(100%)" },
-            "100%": { transform: "translateY(0)" },
-          },
-          "slide-out-to-bottom": {
-            "0%": { transform: "translateY(0)" },
-            "100%": { transform: "translateY(100%)" },
-          },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
       },
       animation: {
         underline: "appear 0.2s linear forwards",
-        "slide-in-from-bottom": "slide-in-from-bottom 0.2s ease-out forwards",
-        "slide-out-to-bottom": "slide-out-to-bottom 0.2s ease-out forwards",
+        fadeIn: 'fadeIn 0.5s ease-in-out',
       },
     },
   },
