@@ -38,8 +38,8 @@ export default function IndexPage({
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
-      <ServicesFrontPage allServices={allServices} servicesTypes={servicesTypes} />
-      {/* {/* <NewsArticlesEvents items={items} /> */} */}
+      {/* <ServicesFrontPage allServices={allServices} servicesTypes={servicesTypes} /> */}
+      {/* {/* <NewsArticlesEvents items={items} /> */}
       <div>
         <FrontPageWorkSection allWorkPages={allWorkPages} />
       </div>
@@ -75,9 +75,9 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     },
   });
 
-  const validatedArticleTeasers = promotedArticleTeasers.map((teaser) =>
-    validateAndCleanupArticleTeaser(teaser),
-  );
+  // const validatedArticleTeasers = promotedArticleTeasers.map((teaser) =>
+  //   validateAndCleanupArticleTeaser(teaser),
+  // );
 
   // const events = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
   //   "node--event",
@@ -96,45 +96,45 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
 
   // const items = [...validatedArticleTeasers, ...validatedEvents];
 
-  const aboutUs = (
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--about_us",
-      context,
-      {
-        params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
-      },
-    )
-  ).at(0);
+  // const aboutUs = (
+  //   await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+  //     "node--about_us",
+  //     context,
+  //     {
+  //       params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
+  //     },
+  //   )
+  // ).at(0);
 
-  const legalDocument = (
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--legal_document",
-      context,
-      {
-        params: getNodePageJsonApiParams(
-          "node--legal_document",
-        ).getQueryObject(),
-      },
-    )
-  ).at(0);
+  // const legalDocument = (
+  //   await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+  //     "node--legal_document",
+  //     context,
+  //     {
+  //       params: getNodePageJsonApiParams(
+  //         "node--legal_document",
+  //       ).getQueryObject(),
+  //     },
+  //   )
+  // ).at(0);
 
-  const allServices = (
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--services_page",
-      context,
-      {
-        params: getNodePageJsonApiParams("node--services_page")
-          .addFilter("title", "Services")
-          .getQueryObject(),
-      },
-    )
-  ).at(0);
+  // const allServices = (
+  //   await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+  //     "node--services_page",
+  //     context,
+  //     {
+  //       params: getNodePageJsonApiParams("node--services_page")
+  //         .addFilter("title", "Services")
+  //         .getQueryObject(),
+  //     },
+  //   )
+  // ).at(0);
 
-  const servicesTypes = await drupal.getResourceCollectionFromContext<
-    DrupalNode[]
-  >("node--services_page", context, {
-    params: getNodePageJsonApiParams("node--services_page").getQueryObject(),
-  });
+  // const servicesTypes = await drupal.getResourceCollectionFromContext<
+  //   DrupalNode[]
+  // >("node--services_page", context, {
+  //   params: getNodePageJsonApiParams("node--services_page").getQueryObject(),
+  // });
 
   const allWorkPages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--page",
@@ -151,12 +151,12 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
       //items,
-      aboutUs: validateAndCleanupAboutUs(aboutUs),
-      legalDocument: validateAndCleanupLegalDocument(legalDocument),
-      allServices: validateAndCleanupServices(allServices),
-      servicesTypes: servicesTypes
-        .filter((node) => node.title !== "Services")
-        .map((node) => validateAndCleanupServices(node)),
+      // aboutUs: validateAndCleanupAboutUs(aboutUs),
+      //legalDocument: validateAndCleanupLegalDocument(legalDocument),
+      //allServices: validateAndCleanupServices(allServices),
+      // servicesTypes: servicesTypes
+      //   .filter((node) => node.title !== "Services")
+      //   .map((node) => validateAndCleanupServices(node)),
       allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
     },
     revalidate: 60,
