@@ -1,0 +1,6 @@
+id,isNecessaryCookiesAvailable,isFunctionalCookiesAvailable,isAnalyticsCookiesAvailable,isPerformanceCookiesAvailable,isAdvertisingCookiesAvailable,consentDate,expirationDate
+1,1,0,1,0,0,"2023-12-08 08:05:28","2024-06-08 08:05:28"
+2,1,1,1,1,1,"2023-12-08 08:06:39","2024-06-08 08:06:39"
+3,1,1,1,1,1,"2023-12-08 08:06:55","2024-06-08 08:06:55"
+4,1,1,1,1,1,"2023-12-08 08:06:57","2024-06-08 08:06:57"
+5,1,1,1,1,1,"2023-12-08 08:07:42","2024-06-08 08:07:42"
