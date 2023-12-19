@@ -109,7 +109,6 @@ export default function ContactUsPage({
       </section>
       <section>
         {/* <ContactPeople contactPerson={contactPerson}/> */}
-        {/* <FormattedText html={contactPerson.body.processed}/> */}
      </section> 
     </>
   );

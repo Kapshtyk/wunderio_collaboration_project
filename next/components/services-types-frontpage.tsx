@@ -32,9 +32,9 @@ const ServicesFrontPage = ({ servicesTypes, allServices }: ServicesTypesProps) =
                     <DesignDataIcon className="h-10 w-10"/>}
                 {subHeadingSection.field_heading === "Delivering Digital" &&
                     <DeliveringDigitalIcon className="h-10 w-10"/>}
-                <p className="text-accent-hugs uppercase"> 
+                <span className="text-accent-hugs uppercase"> 
                   {subHeadingSection.field_heading}
-                </p>
+                </span>
             </div>
             <div className="bg-steelgray shrink-0 h-px mt-6" />
                 <p className="mt-6 mb-6">{subHeadingSection.field_excerpt}</p>
