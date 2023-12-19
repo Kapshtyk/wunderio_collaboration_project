@@ -28,6 +28,7 @@ import {
   Webform as WebformType,
 } from "@/lib/zod/webform";
 import { HeadingParagraph } from "@/components/heading--paragraph";
+import { Meta } from "@/components/meta";
 
 interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
@@ -52,6 +53,7 @@ export default function ContactUsPage({
 
   return (
     <>
+    <Meta title={contactUs.title} metatags={contactUs.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
@@ -126,7 +128,7 @@ export default function ContactUsPage({
         </div>
       </section>
       <section>
-        {/* <ContactPeople contactPerson={contactPerson}/> */}
+        <ContactPeople contactPerson={contactPerson}/>
      </section> 
     </>
   );

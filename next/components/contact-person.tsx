@@ -1,20 +1,15 @@
-import Image from "next/image";
-
-import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { ContactPerson } from "@/lib/zod/contact-person";
-import Image from "next/image";
-import { FormattedText } from "./formatted-text";
-import { HeadingParagraph } from "./heading--paragraph";
-import { Media } from "./media";
 
 interface ContactPeopleProps{
     contactPerson: ContactPerson []
   }
 const ContactPeople = ({ contactPerson }: ContactPeopleProps) => {
+    console.log("contact", contactPerson);
+    
 
   return (
     <>
-        <div className="">
+        <div>
             {contactPerson.map((contact)=> {
                 return(
                     <>

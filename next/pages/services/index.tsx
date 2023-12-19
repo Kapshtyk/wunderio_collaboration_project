@@ -24,6 +24,7 @@ import { validateAndCleanupOfficeLocations } from "@/lib/zod/office-locations";
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services, validateAndCleanupServices } from "@/lib/zod/services";
 import ArrowDownIcon from "@/styles/icons/arrow-down.svg";
+import { Meta } from "@/components/meta";
 
 /* import IndexPage from ".."; */
 
@@ -56,6 +57,7 @@ export default function ServicesPage({
 
   return (
     <>
+    <Meta title={mainPage.title} metatags={mainPage.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
