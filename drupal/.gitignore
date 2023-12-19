@@ -32,6 +32,7 @@
 # Ignore local configuration
 /web/sites/*/settings.local.php
 
+
 # Ignore testing directories.
 /web/sites/simpletest
 /web/tmp
