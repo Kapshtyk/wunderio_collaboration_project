@@ -32,7 +32,7 @@ interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
   maps: OfficeLocations[];
   webform: WebformType;
-  contactPerson: ContactPerson;
+  contactPerson: ContactPerson[];
 }
 
 export default function ContactUsPage({
@@ -174,18 +174,13 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     },
   );
 
-  const contactPerson = (
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--contact_persons",
-      {
-        params: getNodePageJsonApiParams(
-          "node--contact_persons",
-        ).getQueryObject(),
-      },
-    )
-  ).at(0);
+  const contactPerson = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--contact_persons", {
+    params: getNodePageJsonApiParams("node--contact_persons").getQueryObject(),
+  });
 
-  console.log("contact", contactPerson);
+  /* console.log("contact", contactPerson); */
 
   //   const languageLinks = createLanguageLinks(nodeTranslations);
 
@@ -195,7 +190,9 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
       contactUs: validatedResource,
       webform: validatedWebform,
       maps: maps.map((node) => validateAndCleanupOfficeLocations(node)),
-      contactPerson: validateAndCleanupContactPerson(contactPerson),
+      contactPerson: contactPerson.map((node) =>
+        validateAndCleanupContactPerson(node),
+      ),
       //   languageLinks,
     },
   };

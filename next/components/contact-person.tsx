@@ -1,33 +1,16 @@
-import Image from "next/image";
-
-import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { ContactPerson } from "@/lib/zod/contact-person";
 
 interface ContactPeopleProps {
-  contactPerson: ContactPerson;
+  contactPerson: ContactPerson[];
 }
 const ContactPeople = ({ contactPerson }: ContactPeopleProps) => {
-  /* const image = contactPerson.field_content_elements.map((image) =>
-    console.log("image", image),
-  ); */
-
   return (
     <>
-      <div className="">
-        {contactPerson.field_content_elements.map((content) => {
+      <div>
+        {contactPerson.map((contact) => {
           return (
             <>
-              <Image
-                src={absoluteUrl(content.field_image.field_media_image.uri.url)}
-                width={768}
-                height={480}
-                style={{ width: 768, height: 480 }}
-                alt={
-                  content.field_image.field_media_image.resourceIdObjMeta.alt
-                }
-                className="object-cover"
-                priority
-              />
+              <p>{contact.field_contact_phone}</p>
             </>
           );
         })}

@@ -52,8 +52,6 @@ const OfficeLocationsMap = ({ maps }: MapsProps) => {
     ],
   };
 
-  console.log("maps", maps);
-
   return (
     <div className="">
       <h2>Our Offices</h2>

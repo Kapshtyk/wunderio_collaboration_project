@@ -41,7 +41,7 @@ export function Article({ article, ...props }: ArticleProps) {
         <div className="my-4 text-xl">{article.field_excerpt}</div>
       )}
       <div className="mb-4 text-scapaflow flex items-center bg-primary-50 p-2 rounded-full w-6/12">
-        {/* {article.uid?.field_profile_picture?.uri && (
+        {article.uid?.field_profile_picture?.uri && (
           <div>
             <Image
               src={absoluteUrl(article.uid?.field_profile_picture?.uri.url)}
@@ -52,7 +52,7 @@ export function Article({ article, ...props }: ArticleProps) {
               alt={article.uid?.field_profile_picture.resourceIdObjMeta.alt}
             />
           </div>
-        )} */}
+        )}
         <div>
           {article.uid?.display_name && (
             <span>

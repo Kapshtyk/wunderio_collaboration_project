@@ -15,6 +15,7 @@ export function WorkArticleCard({ workArticle }) {
             className="hover:saturate-150 w-full h-full"
             width={500}
             height={500}
+            sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
             src={absoluteUrl(workArticle.field_image.uri.url)}
             alt={workArticle.field_image.resourceIdObjMeta.alt}
           />
