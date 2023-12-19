@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       "filter[promote]": 1,
       "fields[node--article]":
         "title,path,field_image,uid,created,field_excerpt,field_tags",
-      include: "field_image,uid,field_tags",
+      include: "field_image,uid,uid.field_profile_picture,field_tags",
       sort: "-sticky,-created",
       "page[limit]": 3,
     },
