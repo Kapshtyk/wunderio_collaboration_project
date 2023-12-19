@@ -1,0 +1,24 @@
+uuid: 31a6481a-a4d4-410d-a778-ff1c19fcf640
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_excerpt
+    - node.type.contact_persons
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.contact_persons.field_excerpt
+field_name: field_excerpt
+entity_type: node
+bundle: contact_persons
+label: Excerpt
+description: 'Add an excerpt for this piece of content. It will also be used for search results and HTML meta tags.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

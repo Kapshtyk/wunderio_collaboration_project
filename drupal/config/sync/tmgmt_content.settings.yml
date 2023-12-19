@@ -5,4 +5,5 @@ embedded_fields:
     field_basic_info: true
     field_participant: true
     field_service_types: true
+    field_testimonials: true
 default_moderation_states: {  }

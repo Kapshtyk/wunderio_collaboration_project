@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 name: 'Services Types'
 vid: advisory
-description: ''
+description: 'List of services types'
 weight: 0
