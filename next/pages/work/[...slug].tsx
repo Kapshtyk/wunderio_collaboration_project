@@ -61,9 +61,6 @@ export default function WorkPage({
     "University Of Turku",
     "Ruutu.fi",
     "Service Advisor Applications",
-
-
-
   ].filter(Boolean);
   //
   return currentWorkPage &&
@@ -139,7 +136,8 @@ export default function WorkPage({
         </div>
       ) : null}
 
-      {currentWorkPage.title === "Trimble" || currentWorkPage.title === "Central Statistical Bureau of Latvia" ? (
+      {currentWorkPage.title === "Trimble" ||
+      currentWorkPage.title === "Central Statistical Bureau of Latvia" ? (
         <div className="mt-20">
           <h1 className="font-bold mb-4">RELATED CONTENT</h1>
           <div className="md:grid grid-cols-3 gap-3">
@@ -164,7 +162,8 @@ export default function WorkPage({
         </div>
       ) : null}
 
-      {currentWorkPage.title === "Traficom.fi" || currentWorkPage.title === "Nelonen Media Partnership" ? (
+      {currentWorkPage.title === "Traficom.fi" ||
+      currentWorkPage.title === "Nelonen Media Partnership" ? (
         <div className="mt-20">
           <h1 className="font-bold mb-4">RELATED CONTENT</h1>
           <div className="md:grid grid-cols-3 gap-3">

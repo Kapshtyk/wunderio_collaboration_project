@@ -19,27 +19,24 @@ const ServicesTypes = ({ servicesTypes, allServices }: ServicesTypesProps) => {
       <div className="flex gap-8">
         {subHeadingSections.map((subHeadingSection) => (
           <div key={subHeadingSection.id} className="flex flex-col gap-2">
-                <p className="underline underline--small text-accent-hugs"> 
-                  {subHeadingSection.field_heading.toLocaleUpperCase()}
-                  </p>
-                <p>{subHeadingSection.field_excerpt}</p>
-                {servicesTypes
-                  .filter(
-                    (field) =>
-                      field.field_service_types?.name ===
-                      subHeadingSection.field_heading,
-                  )
-                  .map((service) => (
-                    <div key={service.id}>
-                      <Link
-                        href={service.path.alias}
-                        className="text-primary-600"
-                      >
-                        {service.title}
-                      </Link>
-                    </div>
-                  ))}
-              </div>
+            <p className="underline underline--small text-accent-hugs">
+              {subHeadingSection.field_heading.toLocaleUpperCase()}
+            </p>
+            <p>{subHeadingSection.field_excerpt}</p>
+            {servicesTypes
+              .filter(
+                (field) =>
+                  field.field_service_types?.name ===
+                  subHeadingSection.field_heading,
+              )
+              .map((service) => (
+                <div key={service.id}>
+                  <Link href={service.path.alias} className="text-primary-600">
+                    {service.title}
+                  </Link>
+                </div>
+              ))}
+          </div>
         ))}
       </div>
     </>

@@ -135,13 +135,13 @@ module.exports = {
           "100%": { width: "100%" },
         },
         fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
       animation: {
         underline: "appear 0.2s linear forwards",
-        fadeIn: 'fadeIn 0.5s ease-in-out',
+        fadeIn: "fadeIn 0.5s ease-in-out",
       },
     },
   },
@@ -151,5 +151,6 @@ module.exports = {
   plugins: [
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/typography"),
+    require("@tailwindcss/container-queries"),
   ],
 };
