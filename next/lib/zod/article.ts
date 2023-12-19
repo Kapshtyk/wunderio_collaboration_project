@@ -12,7 +12,7 @@ export const ArticleBaseSchema = z.object({
   uid: z.object({
     id: z.string(),
     display_name: z.string(),
-    /* field_profile_picture: ImageShape.nullable().optional(), */
+    field_profile_picture: ImageShape.nullable().optional(),
   }),
   title: z.string(),
   field_image: ImageShape.nullable(),

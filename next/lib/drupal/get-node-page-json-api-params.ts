@@ -174,6 +174,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_connect_services",
         "field_content_elements",
         "field_content_elements.field_image.field_media_image",
+        "field_content_elements.field_video",
         "field_service_types",
       ])
       .addFields("node--services_page", [
@@ -242,6 +243,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   if (resourceType === "node--contact_persons") {
     apiParams
+      .addInclude(["uid", "field_image"])
       .addInclude(["uid", "field_image"])
       .addFields("node--contact_persons", [
         "title",

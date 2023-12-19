@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Page as PageType } from "@/lib/zod/page";
@@ -28,13 +29,20 @@ export function FrontPageWorkSection({ allWorkPages }) {
                             className=" h-[300px] w-[240px] md:w-[420px] hover:saturate-150 md:m-auto absolute md:right-[50px] top-[10px]"
                             media={paragraph.field_image}
                           />
-                          <img
+                          <Image
+                            className="z-20 relative object-contain"
+                            src={"/macbook_pro.png"}
+                            fill={true}
+                            sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
+                            alt="iPhone photo frame"
+                          ></Image>
+                          {/* <img
                             className="z-10 relative"
                             src={"/macbook_pro.png"}
                             width={600}
                             height={450}
                             alt="macbookpro photo frame"
-                          />
+                          /> */}
                         </div>
                       </Link>
                     </div>
@@ -66,18 +74,25 @@ export function FrontPageWorkSection({ allWorkPages }) {
                       className="bg-primary-50 rounded-lg"
                     >
                       <Link href={workPage.path.alias}>
-                        <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden pt-16">
+                        <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden">
                           <MediaImage
-                            className="h-[500px] w-[220px] absolute z-10 top-[78px] hover:saturate-150"
+                            className="h-[380px] w-[220px] absolute z-10 top-[75px] hover:saturate-150"
                             media={paragraph.field_image}
                           />
-                          <img
+                          <Image
+                            className="z-20 relative pt-16 object-contain"
+                            src={"/iPhone_X.png"}
+                            fill={true}
+                            sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
+                            alt="iPhone photo frame"
+                          ></Image>
+                          {/*   <img
                             className="z-20 relative"
                             src={"/iPhone_X.png"}
                             width={250}
                             height={500}
                             alt="iPhone photo frame"
-                          ></img>
+                          ></img> */}
                         </div>
                       </Link>
                     </div>
