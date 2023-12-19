@@ -1,0 +1,20 @@
+uuid: 260003be-9d75-46cc-8b2f-37833575b0e7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.testimonials
+  module:
+    - metatag
+id: node.testimonials.metatag
+field_name: metatag
+entity_type: node
+bundle: testimonials
+label: 'Metatags (Hidden field for JSON support)'
+description: 'The computed meta tags for the entity.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag_computed

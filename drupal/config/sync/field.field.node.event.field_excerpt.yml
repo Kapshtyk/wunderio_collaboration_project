@@ -17,7 +17,7 @@ bundle: event
 label: Excerpt
 description: 'Add an excerpt for this piece of content. It will also be used for search results and HTML meta tags.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
