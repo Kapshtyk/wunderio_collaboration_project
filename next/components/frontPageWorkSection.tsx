@@ -6,7 +6,6 @@ import { MediaImage } from "./media--image";
 export function FrontPageWorkSection({ allWorkPages }) {
     return (
         <div >
-            {/* First Row */}
             <h1 className="text-heading-md font-bold text-main mb-4">Our Work</h1>
             <div className="mb-12">
                 {allWorkPages.slice(0, 1).map((workPage: PageType) => (
@@ -18,7 +17,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
                                     .map((paragraph: WorkCard) => (
                                         <div key={paragraph.id}>
                                             <Link href={workPage.path.alias}>
-                                                <div className="relative w-[300px] md:w-[520px] md:h-[300px] flex justify-center overflow-hidden">
+                                                <div className="relative w-[300px] md:w-[520px] md:h-[300px] flex justify-center overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">
 
                                                     <MediaImage
                                                         className=" h-[300px] w-[240px] md:w-[420px] hover:saturate-150 md:m-auto absolute md:right-[50px] top-[10px]"
@@ -61,9 +60,9 @@ export function FrontPageWorkSection({ allWorkPages }) {
                                     .map((paragraph: WorkCard) => (
                                         <div key={paragraph.id} className="bg-primary-50 rounded-lg">
                                             <Link href={workPage.path.alias}>
-                                                <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden pt-16" >
+                                                <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden pt-16 transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn" >
                                                     <MediaImage
-                                                        className="h-[500px] w-[220px] absolute z-10 top-[78px] hover:saturate-150"
+                                                        className="h-[515px] w-[220px] absolute z-10 top-[78px] hover:saturate-150"
                                                         media={paragraph.field_image}
                                                     />
                                                     <img
@@ -73,8 +72,6 @@ export function FrontPageWorkSection({ allWorkPages }) {
                                                         height={500}
                                                         alt="iPhone photo frame"
                                                     ></img>
-
-
                                                 </div>
                                             </Link>
 

@@ -15,12 +15,14 @@ export function WorkCards({ allWorkPages }) {
             workPage.field_content_elements
               .filter((element) => element.type === "paragraph--work_card")
               .map((paragraph: WorkCard) => (
-                <div key={paragraph.id} className="p-2">
+                <div key={paragraph.id} className="p-2 ">
                   <Link href={workPage.path.alias}>
-                    <MediaImage
-                      className="rounded-lg h-[500px] hover:saturate-150 w-[auto]"
-                      media={paragraph.field_image}
-                    />
+                    <div className="transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">
+                      <MediaImage
+                        className="rounded-lg h-[380px] hover:saturate-150 w-[auto]"
+                        media={paragraph.field_image}
+                      />
+                    </div>
                     <h1 className="text-primary-600 py-3 text-lg font-bold hover:underline">
                       {workPage.title}
                     </h1>
