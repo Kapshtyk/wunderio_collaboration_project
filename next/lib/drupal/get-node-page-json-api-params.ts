@@ -196,7 +196,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_suffix",
         "field_text",
         "field_numbers_type",
-      ])
+      ]);
   }
 
   if (resourceType === "node--office_locations") {
@@ -223,7 +223,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "metatag",
         "field_content_elements",
         "field_contact_us_form",
-        "field_contact_people"
+        "field_contact_people",
       ]);
   }
   if (resourceType === "node--venue") {
@@ -242,11 +242,15 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   if (resourceType === "node--contact_persons") {
     apiParams
-      .addInclude(["uid", "field_content_elements", "field_content_elements.field_image.field_media_image"])
+      .addInclude([
+        "uid",
+        "field_content_elements",
+        "field_content_elements.field_image.field_media_image",
+      ])
       .addFields("node--contact_persons", [
         "title",
         "metatag",
-        "field_content_elements"    
+        "field_content_elements",
       ]);
   }
 

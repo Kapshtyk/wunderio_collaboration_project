@@ -91,6 +91,8 @@ export const getStaticProps: GetStaticProps<CareersPageProps> = async (
     )
   ).at(0);
 
+  console.log("careers", careers);
+
   const validatedResource = validateAndCleanupCareers(careers);
 
   const nodeTranslations = await getNodeTranslatedVersions(

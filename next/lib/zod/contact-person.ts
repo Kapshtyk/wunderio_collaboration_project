@@ -4,8 +4,8 @@ import { z } from "zod";
 import { MetatagsSchema } from "@/lib/zod/metatag";
 import { ContactPeopleSchema } from "@/lib/zod/paragraph";
 
-const ContactPersonElementsSchema= z.discriminatedUnion("type", [
-ContactPeopleSchema
+const ContactPersonElementsSchema = z.discriminatedUnion("type", [
+  ContactPeopleSchema,
 ]);
 
 export const ContactPersonSchema = z.object({
