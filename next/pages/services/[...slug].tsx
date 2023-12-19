@@ -3,8 +3,12 @@ import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { FormattedText } from "@/components/formatted-text";
+/* import { HeadingParagraph } from "@/components/heading--paragraph"; */
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
+/* import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
+import { ParagraphText } from "@/components/paragraph--text"; */
 import ServicesTypes from "@/components/services-types";
 import {
   createLanguageLinks,
@@ -20,15 +24,11 @@ import {
   CommonPageProps,
   getCommonPageProps,
 } from "@/lib/get-common-page-props";
-import {HeadingSection } from "@/lib/zod/paragraph";
+import { HeadingSection } from "@/lib/zod/paragraph";
 import {
   Services as ServicesType,
   validateAndCleanupServices,
 } from "@/lib/zod/services";
-import { ParagraphText } from "@/components/paragraph--text";
-import { FormattedText } from "@/components/formatted-text";
-import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
-import { HeadingParagraph } from "@/components/heading--paragraph";
 
 interface ServicesProps extends CommonPageProps {
   services: ServicesType;
@@ -68,24 +68,28 @@ export default function ServicesPages({
       <div>
         {services.field_content_elements?.map((paragraph) => {
           const { field_excerpt: _, ...props } = paragraph as HeadingSection;
-          return(
+          return (
             <>
-            {paragraph.type === "paragraph--heading_section" && (
-              <Paragraph key={paragraph.id} paragraph={props} />
-            )}
-            {paragraph.type === "paragraph--formatted_text" && (
-              <section className="w-full max-w-[1216px] max-md:max-w-full py-10">
-                <FormattedText html={paragraph.field_formatted_text.processed}/>  
-              </section>
-            )}
+              {paragraph.type === "paragraph--heading_section" && (
+                <Paragraph key={paragraph.id} paragraph={props} />
+              )}
+              {paragraph.type === "paragraph--formatted_text" && (
+                <section className="w-full max-w-[1216px] max-md:max-w-full py-10">
+                  <FormattedText
+                    html={paragraph.field_formatted_text.processed}
+                  />
+                </section>
+              )}
             </>
-          
-          )       
+          );
         })}
       </div>
       <section className="w-full max-w-[1216px] max-md:max-w-full pt-10 pb-2.5">
         <div className="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
-        <ServicesTypes servicesTypes={servicesTypes} allServices={allServices} />
+          <ServicesTypes
+            servicesTypes={servicesTypes}
+            allServices={allServices}
+          />
         </div>
       </section>
     </>

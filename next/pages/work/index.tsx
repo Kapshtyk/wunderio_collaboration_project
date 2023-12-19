@@ -5,8 +5,10 @@ import { useTranslation } from "next-i18next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
 import { LogoStrip } from "@/components/logo-strip";
+import Numbers from "@/components/numbers";
 import { Paragraph } from "@/components/paragraph";
-import { WorkCards } from "@/components/work-cards";
+/* import Testimonials from "@/components/testimonials";
+ */ import { WorkCards } from "@/components/work-cards";
 import { WorkArticleCard } from "@/components/workArticleCard";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
 import { drupal } from "@/lib/drupal/drupal-client";
@@ -14,14 +16,17 @@ import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-pa
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
+import {
+  Numbers as NumbersType,
+  validateAndCleanupNumbers,
+} from "@/lib/zod/numbers";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
-import { HeadingSection, Testimonials as TestimonialsType } from "@/lib/zod/paragraph";
+/* import {
+  HeadingSection,
+  Testimonials as TestimonialsType,
+} from "@/lib/zod/paragraph";
+import { validateAndCleanupTestimonial } from "@/lib/zod/testimonials"; */
 import { validateAndCleanupWork, Work } from "@/lib/zod/work";
-import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
-import Numbers from "@/components/numbers";
-import { validateAndCleanupTestimonial } from "@/lib/zod/testimonials";
-import Testimonials from "@/components/testimonials";
-import { title } from "process";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
@@ -61,11 +66,9 @@ export default function WorkPage({
         </div>
       </div>
 
-
       <div>
         <WorkCards allWorkPages={allWorkPages} />
       </div>
-
 
       <div className="my-20">
         <h1 className="font-bold">OUR CLIENTS</h1>
@@ -123,15 +126,13 @@ export const getStaticProps: GetStaticProps<WorkPageProps> = async (
 
   const languageLinks = createLanguageLinks(nodeTranslations);
 
-  const allWorkPages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--page",
-    context,
-    {
-      params: getNodePageJsonApiParams("node--page")
-        .addFilter("field_page_type.name", "Work")
-        .getQueryObject(),
-    },
-  );
+  const allWorkPages = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--page", context, {
+    params: getNodePageJsonApiParams("node--page")
+      .addFilter("field_page_type.name", "Work")
+      .getQueryObject(),
+  });
 
   // console.log("pages: ", pages);
 

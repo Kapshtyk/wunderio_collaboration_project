@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { ContactPerson } from "@/lib/zod/contact-person";
 import Image from "next/image";
@@ -23,7 +25,6 @@ const ContactPeople = ({ contactPerson }: ContactPeopleProps) => {
       
       </div>
     </>
-
   );
 };
 

@@ -2,16 +2,19 @@ import Link from "next/link";
 
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services as ServicesType } from "@/lib/zod/services";
-import AdvisoryIcon from '@/styles/icons/advisory.svg';
-import DesignDataIcon from '@/styles/icons/design-data.svg';
-import DeliveringDigitalIcon from '@/styles/icons/delivering-digital.svg';
+import AdvisoryIcon from "@/styles/icons/advisory.svg";
+import DeliveringDigitalIcon from "@/styles/icons/delivering-digital.svg";
+import DesignDataIcon from "@/styles/icons/design-data.svg";
 
 interface ServicesTypesProps {
   servicesTypes: ServicesType[];
   allServices: ServicesType;
 }
 
-const ServicesFrontPage = ({ servicesTypes, allServices }: ServicesTypesProps) => {
+const ServicesFrontPage = ({
+  servicesTypes,
+  allServices,
+}: ServicesTypesProps) => {
   const subHeadingSections = allServices.field_content_elements.filter(
     (field) => field.type === "paragraph--sub_heading_section",
   ) as SubHeadingSection[];
@@ -19,8 +22,10 @@ const ServicesFrontPage = ({ servicesTypes, allServices }: ServicesTypesProps) =
     <>
       <section className="items-center bg-primary-50 flex flex-col justify-center px-16 py-12 max-md:px-5">
         <div className="flex w-full max-w-[1216px] flex-col items-stretch my-8 max-md:max-w-full">
-            <h2 className="text-primary-700 text-center text-heading-lg font-semibold leading-[60px] tracking-tighter whitespace-nowrap max-md:max-w-full max-md:text-4xl max-md:leading-[56px]">This is What we do</h2>
-            <div className="mt-16 max-md:max-w-full max-md:mt-10">
+          <h2 className="text-primary-700 text-center text-heading-lg font-semibold leading-[60px] tracking-tighter whitespace-nowrap max-md:max-w-full max-md:text-4xl max-md:leading-[56px]">
+            This is What we do
+          </h2>
+          <div className="mt-16 max-md:max-w-full max-md:mt-10">
             <div className="gap-5 flex max-md:flex-col max-md:items-stretch max-md:gap-0">
         {subHeadingSections.map((subHeadingSection) => (
           <div key={subHeadingSection.id} className="flex flex-col items-stretch w-[33%] max-md:w-full max-md:ml-0 transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">

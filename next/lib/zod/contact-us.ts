@@ -2,7 +2,11 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import { HeadingSectionSchema, FormattedTextSchema, ImageShape } from "@/lib/zod/paragraph";
+import {
+  FormattedTextSchema,
+  HeadingSectionSchema,
+  /* ImageShape, */
+} from "@/lib/zod/paragraph";
 
 const ContactUsElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,
@@ -14,15 +18,17 @@ export const ContactUsSchema = z.object({
   id: z.string(),
   title: z.string(),
   field_content_elements: z.array(ContactUsElementsSchema),
-  field_contact_us_form: z.object({
+  field_contact_us_form: z
+    .object({
       id: z.string(),
       resourceIdObjMeta: z
-      .object({
+        .object({
           drupal_internal__target_id: z.string(),
         })
         .nullable()
         .optional(),
-    }).nullable(),
+    })
+    .nullable(),
   metatag: MetatagsSchema.optional(),
 });
 

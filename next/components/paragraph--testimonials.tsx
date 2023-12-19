@@ -24,8 +24,11 @@ export function ParagraphTestimonials({
     <div className="border-l-8 border-primary-600 w-full p-10 my-16">
       <FormattedText html={paragraph.field_testimonial_text.processed} />
       <div className="flex gap-4 items-center h-full w-full">
-
-        <Media className="h-[60px] w-[62px] rounded-full" media={paragraph.field_image} priority={true} />
+        <Media
+          /* className="h-[60px] w-[62px] rounded-full" */
+          media={paragraph.field_image}
+          priority={true}
+        />
         <span className="text-sm text-secondary-900 items-center w-full">
           {paragraph.field_testimonial_person.processed}
         </span>
