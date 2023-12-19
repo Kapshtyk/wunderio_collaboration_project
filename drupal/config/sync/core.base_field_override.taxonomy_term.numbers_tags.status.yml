@@ -1,0 +1,22 @@
+uuid: 53dc14aa-be09-4cb1-90c3-75f562837c63
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.numbers_tags
+id: taxonomy_term.numbers_tags.status
+field_name: status
+entity_type: taxonomy_term
+bundle: numbers_tags
+label: Published
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
