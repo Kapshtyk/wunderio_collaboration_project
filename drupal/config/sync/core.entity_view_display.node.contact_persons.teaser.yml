@@ -5,9 +5,15 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.contact_persons.body
-    - field.field.node.contact_persons.field_content_elements
+    - field.field.node.contact_persons.field_contact_email
+    - field.field.node.contact_persons.field_contact_phone
+    - field.field.node.contact_persons.field_excerpt
+    - field.field.node.contact_persons.field_full_name
+    - field.field.node.contact_persons.field_image
+    - image.style.medium
     - node.type.contact_persons
   module:
+    - image
     - text
     - user
 id: node.contact_persons.teaser
@@ -23,11 +29,25 @@ content:
     third_party_settings: {  }
     weight: 101
     region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: medium
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: -1
+    region: content
   links:
     settings: {  }
     third_party_settings: {  }
     weight: 100
     region: content
 hidden:
-  field_content_elements: true
+  field_contact_email: true
+  field_contact_phone: true
+  field_excerpt: true
+  field_full_name: true
   langcode: true

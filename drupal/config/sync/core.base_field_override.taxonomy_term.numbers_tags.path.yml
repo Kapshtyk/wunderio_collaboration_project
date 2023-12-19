@@ -1,0 +1,20 @@
+uuid: b7012c0f-ff1d-46d0-ae7f-cc8edc51b6eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.numbers_tags
+  module:
+    - path
+id: taxonomy_term.numbers_tags.path
+field_name: path
+entity_type: taxonomy_term
+bundle: numbers_tags
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

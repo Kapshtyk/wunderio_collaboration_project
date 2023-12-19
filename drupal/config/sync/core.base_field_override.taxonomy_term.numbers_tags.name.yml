@@ -1,0 +1,18 @@
+uuid: 9b8294f9-411e-49bb-981f-81fef16dc893
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.numbers_tags
+id: taxonomy_term.numbers_tags.name
+field_name: name
+entity_type: taxonomy_term
+bundle: numbers_tags
+label: Name
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

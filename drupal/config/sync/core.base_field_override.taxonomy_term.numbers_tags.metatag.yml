@@ -1,0 +1,20 @@
+uuid: 4dafac13-1696-48d9-bb22-c278c05f98b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.numbers_tags
+  module:
+    - metatag
+id: taxonomy_term.numbers_tags.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: numbers_tags
+label: 'Metatags (Hidden field for JSON support)'
+description: 'The computed meta tags for the entity.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag_computed

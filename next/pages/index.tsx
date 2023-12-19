@@ -10,8 +10,8 @@ import ServicesFrontPage from "@/components/services-types-frontpage";
 import { drupal } from "@/lib/drupal/drupal-client";
 import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
-import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
-import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
+/* import { validateAndCleanupAboutUs } from "@/lib/zod/about-us";
+ */ import { validateAndCleanupArticleTeaser } from "@/lib/zod/article-teaser";
 import { validateAndCleanupEvents } from "@/lib/zod/events";
 import { EventsArticles } from "@/lib/zod/events-articles";
 import { Frontpage, validateAndCleanupFrontpage } from "@/lib/zod/frontpage";
@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       "filter[promote]": 1,
       "fields[node--article]":
         "title,path,field_image,uid,created,field_excerpt,field_tags",
-      include: "field_image,uid,field_tags",
+      include: "field_image,uid,uid.field_profile_picture,field_tags",
       sort: "-sticky,-created",
       "page[limit]": 3,
     },
@@ -99,7 +99,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
 
   const items = [...validatedArticleTeasers, ...validatedEvents];
 
-  const aboutUs = (
+  /* const aboutUs = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
       "node--about_us",
       context,
@@ -107,7 +107,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
         params: getNodePageJsonApiParams("node--about_us").getQueryObject(),
       },
     )
-  ).at(0);
+  ).at(0); */
 
   const legalDocument = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
@@ -152,8 +152,8 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
       ...(await getCommonPageProps(context)),
       frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
       items,
-      aboutUs: validateAndCleanupAboutUs(aboutUs),
-      legalDocument: validateAndCleanupLegalDocument(legalDocument),
+      /*       aboutUs: validateAndCleanupAboutUs(aboutUs),
+       */ legalDocument: validateAndCleanupLegalDocument(legalDocument),
       allServices: validateAndCleanupServices(allServices),
       servicesTypes: servicesTypes
         .filter((node) => node.title !== "Services")
