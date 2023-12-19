@@ -19,7 +19,7 @@ export function WorkCards({ allWorkPages }) {
                   <Link href={workPage.path.alias}>
                     <div className="transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">
                       <MediaImage
-                        className="rounded-lg h-[380px] hover:saturate-150 w-[auto]"
+                        className="rounded-lg h-[480px] hover:saturate-150 w-[auto]"
                         media={paragraph.field_image}
                       />
                     </div>

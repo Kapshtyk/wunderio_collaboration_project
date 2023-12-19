@@ -22,6 +22,7 @@ import Numbers from "@/components/numbers";
 import { validateAndCleanupTestimonial } from "@/lib/zod/testimonials";
 import Testimonials from "@/components/testimonials";
 import { title } from "process";
+import { Meta } from "@/components/meta";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
@@ -39,10 +40,6 @@ export default function WorkPage({
   const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t("homepage-link"),
-      url: "/",
-    },
-    {
       title: t("work-link"),
       url: "/work",
     },
@@ -50,6 +47,7 @@ export default function WorkPage({
 
   return (
     <>
+      <Meta title={mainPage.title} metatags={mainPage.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>

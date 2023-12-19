@@ -41,10 +41,6 @@ export default function WorkPage({
   const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t("homepage-link"),
-      url: "/",
-    },
-    {
       title: t("work-link"),
       url: "/work",
     },
