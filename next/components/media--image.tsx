@@ -30,7 +30,7 @@ export function MediaImage({
         alt={image.resourceIdObjMeta.alt || "Image"}
         title={image.resourceIdObjMeta.title}
         fill
-        sizes="100%"
+        sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
         className={clsx(
           "h-auto max-w-full object-center object-cover",
           className,
@@ -46,6 +46,7 @@ export function MediaImage({
         title={image.resourceIdObjMeta.title}
         width={width || image.resourceIdObjMeta.width}
         height={height || image.resourceIdObjMeta.height}
+        sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
         className={clsx("h-auto max-w-full object-cover", className)}
         {...props}
       />

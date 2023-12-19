@@ -146,7 +146,6 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
       },
     )
   ).at(0);
-  console.log("mainpage", mainPage);
 
   const pages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     "node--services_page",

@@ -8,6 +8,7 @@ import {
   LabelledImageSchema,
   SubHeadingSectionSchema,
   TestimonialsSchema,
+  VideoSchema,
 } from "@/lib/zod/paragraph";
 
 const ServicesElementsSchema = z.discriminatedUnion("type", [
@@ -16,6 +17,7 @@ const ServicesElementsSchema = z.discriminatedUnion("type", [
   TestimonialsSchema,
   SubHeadingSectionSchema,
   LabelledImageSchema,
+  VideoSchema,
 ]);
 
 export const ServicesSchema = z.object({
