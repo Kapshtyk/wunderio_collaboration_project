@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Paragraph, WorkCard } from "@/lib/zod/paragraph";
 
 import { MediaImage } from "./media--image";
+import { useTranslation } from "react-i18next";
 
 export function WorkWorkCard({ workPage }) {
+  const { t } = useTranslation();
   return (
     <div
       key={workPage.id}
@@ -28,8 +30,8 @@ export function WorkWorkCard({ workPage }) {
 
       <div className="px-6 py-4">
         <Link href="/work">
-          <span className="text-accent-hugs text-md hover:underline uppercase">
-            {workPage.field_page_type.name}
+          <span className="uppercase text-accent-hugs text-md hover:underline">
+            {/* {workPage.field_page_type.name} */} {t("related-content-work")}
           </span>
         </Link>
       </div>

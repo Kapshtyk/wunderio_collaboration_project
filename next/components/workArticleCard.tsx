@@ -28,7 +28,7 @@ export function WorkArticleCard({ workArticle }) {
         <Link href="/all-articles">
           {" "}
           <span className="uppercase text-accent-hugs text-md hover:underline">
-            {t(workArticle.type.split("--")[1])}
+            {/* {t(workArticle.type.split("--")[1])} */} {t("related-content-article")}
           </span>{" "}
         </Link>
       </div>
