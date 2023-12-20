@@ -19,7 +19,7 @@ export function AuthGate({ children, text }: AuthGateProps) {
   }
 
   return (
-    <section className="bg-main max-w-lg p-4 rounded-md mt-2">
+    <section className="bg-primary-500 max-w-lg p-4 rounded-md mt-2">
       <h2 className="text-white text-heading-xs md:text-heading-sm">
         {t("you-are-not-logged-in")}
       </h2>

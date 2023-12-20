@@ -29,7 +29,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
         {breadCrumbs.map((item, index) => (
           <li
             key={index}
-            className="flex items-center truncate !mb-0 last:after:border-r-0 after:content=['']  after:border-r-2 after:border-main after:h-4  after:ml-3 after:mr-3 after:-skew-x-12"
+            className="flex items-center truncate !mb-0 last:after:border-r-0 after:content=['']  after:border-r-2 after:border-main after:h-4  after:ml-3 after:mr-3 after:-skew-x-12 transition duration-300 ease-in-out transform hover:scale-105"
           >
             {item.url ? (
               <Link

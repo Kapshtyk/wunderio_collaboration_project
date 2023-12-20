@@ -8,7 +8,7 @@ export function WorkWorkCard({ workPage }) {
   return (
     <div
       key={workPage.id}
-      className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-6"
+      className="block w-full rounded-lg bg-background shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-6"
     >
       {workPage.field_content_elements
         .filter((element: Paragraph) => element.type === "paragraph--work_card")
@@ -27,7 +27,7 @@ export function WorkWorkCard({ workPage }) {
         ))}
 
       <div className="p-6">
-        <p className="text-base text-sm text-secondary-900">
+        <p className="text-base text-sm text-foreground">
           <Link href="/work">
             <span className="hover:underline">
               {workPage.field_page_type.name.toUpperCase()}
@@ -38,7 +38,7 @@ export function WorkWorkCard({ workPage }) {
 
       <Link href={workPage.path.alias}>
         <div className="p-6">
-          <h1 className="text-primary-600 font-bold hover:underline">
+          <h1 className="text-main font-bold hover:underline">
             {workPage.title}
           </h1>
         </div>

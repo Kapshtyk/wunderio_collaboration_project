@@ -52,7 +52,7 @@ export default function ServicesPage({
 
   return (
     <>
-    <Meta title={mainPage.title} metatags={mainPage.metatag} />
+      <Meta title={mainPage.title} metatags={mainPage.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
@@ -71,21 +71,21 @@ export default function ServicesPage({
         })}
       </div>
       <section className="mt-10 mb-10 flex flex-col items-center sm:flex-row">
-      <p>{t("jump-to")}:</p>
-         <ul className="flex flex-wrap gap-2">
-         {subHeadings.map((sub) => (
-         <li key={sub.id} className="p-2">
-         <Link
-          href={`#${sub.id}`}
-          scroll={false}
-          style={{ scrollMarginTop: "20px" }}
-          className="text-primary-700 text-sm hover:underline flex items-center transition duration-300 ease-in-out transform hover:scale-105"
-          >
-          <ArrowDownIcon className="h-5 w-5 mr-2" />
-          <span className="text-primary-700">{sub.field_heading}</span>
-         </Link>
-         </li>
-        ))}
+        <p>{t("jump-to")}:</p>
+        <ul className="flex flex-wrap gap-2">
+          {subHeadings.map((sub) => (
+            <li key={sub.id} className="p-2">
+              <Link
+                href={`#${sub.id}`}
+                scroll={false}
+                style={{ scrollMarginTop: "20px" }}
+                className="text-main text-sm hover:underline flex items-center transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                <ArrowDownIcon className="h-5 w-5 mr-2" />
+                <span className="text-main">{sub.field_heading}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </section>
       <section className="w-full grid grid-cols-1 gap-8">
