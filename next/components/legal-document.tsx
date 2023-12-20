@@ -1,8 +1,8 @@
 import { LegalDocument } from "@/lib/zod/legal-document";
 
 import { FormattedText } from "./formatted-text";
-import { Meta } from "./meta";
 import { HeadingPage } from "./heading--page";
+import { Meta } from "./meta";
 
 interface LegalDocumentProps {
   legal_document: LegalDocument;

@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { DrupalTaxonomyTerm } from "next-drupal";
+import { useRef } from "react";
 
+import useScrollReveal from "@/lib/hooks/scroll-animation";
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services as ServicesType } from "@/lib/zod/services";
 
 import { HeadingPage } from "./heading--page";
-import { useRef } from "react";
-import useScrollReveal from "@/lib/hooks/scroll-animation";
 
 interface SubHeadingSectionProps {
   subHeading: SubHeadingSection;
@@ -19,16 +19,17 @@ const SubHeadingSectionComponent = ({
   tags,
   services,
 }: SubHeadingSectionProps) => {
-
   const revealRef = useRef<HTMLDivElement>(null);
   useScrollReveal(revealRef);
 
   return (
     <>
-      <div
-        key={subHeading.id}
-      >
-        <section id={subHeading.id} ref={revealRef} className="transition-opacity duration-800 ease-in-out">
+      <div key={subHeading.id}>
+        <section
+          id={subHeading.id}
+          ref={revealRef}
+          className="transition-opacity duration-800 ease-in-out"
+        >
           <HeadingPage
             title={subHeading.field_heading}
             description={subHeading.field_excerpt}
@@ -72,9 +73,7 @@ const SubHeadingSectionComponent = ({
                           "field_excerpt" in item
                         ) {
                           if (item.type === "paragraph--heading_section") {
-                            return (
-                              <p key={item.id}>{item.field_excerpt}</p>
-                            );
+                            return <p key={item.id}>{item.field_excerpt}</p>;
                           }
                         }
                         return null;
@@ -84,7 +83,6 @@ const SubHeadingSectionComponent = ({
               </div>
             ))}
         </section>
-
       </div>
     </>
   );

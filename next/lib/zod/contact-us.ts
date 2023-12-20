@@ -2,10 +2,7 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import {
-  FormattedTextSchema,
-  HeadingSectionSchema,
-} from "@/lib/zod/paragraph";
+import { FormattedTextSchema, HeadingSectionSchema } from "@/lib/zod/paragraph";
 
 const ContactUsElementsSchema = z.discriminatedUnion("type", [
   HeadingSectionSchema,

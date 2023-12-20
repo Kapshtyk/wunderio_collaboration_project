@@ -1,15 +1,19 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { DrupalNode, DrupalTranslatedPath } from "next-drupal";
 import { useTranslation } from "next-i18next";
+import { useRef } from "react";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { FormattedText } from "@/components/formatted-text";
 /* import { HeadingParagraph } from "@/components/heading--paragraph"; */
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
+import { ParagraphLabelledImage } from "@/components/paragraph--labelled-image";
+import { ParagraphVideo } from "@/components/paragraph--video";
 /* import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
 import { ParagraphText } from "@/components/paragraph--text"; */
 import ServicesTypes from "@/components/services-types";
+import { WorkWorkCard } from "@/components/workWorkCard";
 import {
   createLanguageLinks,
   LanguageLinks,
@@ -24,18 +28,14 @@ import {
   CommonPageProps,
   getCommonPageProps,
 } from "@/lib/get-common-page-props";
+import useScrollReveal from "@/lib/hooks/scroll-animation";
+import { shuffleArray } from "@/lib/utils";
+import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { HeadingSection } from "@/lib/zod/paragraph";
 import {
   Services as ServicesType,
   validateAndCleanupServices,
 } from "@/lib/zod/services";
-import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
-import { WorkWorkCard } from "@/components/workWorkCard";
-import { shuffleArray } from "@/lib/utils";
-import { ParagraphLabelledImage } from "@/components/paragraph--labelled-image";
-import { ParagraphVideo } from "@/components/paragraph--video";
-import { useRef} from "react";
-import useScrollReveal from "@/lib/hooks/scroll-animation";
 
 interface ServicesProps extends CommonPageProps {
   services: ServicesType;
@@ -49,7 +49,7 @@ export default function ServicesPages({
   services,
   allServices,
   servicesTypes,
-  allWorkPages
+  allWorkPages,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
 
@@ -88,30 +88,33 @@ export default function ServicesPages({
                   />
                 </section>
               )}
-                {paragraph.type === "paragraph--labelled_image" && (
-                  <ParagraphLabelledImage key={paragraph.id} paragraph={paragraph}/>
-                )}
-                {paragraph.type === "paragraph--video" && (
-                  <ParagraphVideo key={paragraph.id} paragraph={paragraph}/>
-                )}
+              {paragraph.type === "paragraph--labelled_image" && (
+                <ParagraphLabelledImage
+                  key={paragraph.id}
+                  paragraph={paragraph}
+                />
+              )}
+              {paragraph.type === "paragraph--video" && (
+                <ParagraphVideo key={paragraph.id} paragraph={paragraph} />
+              )}
             </>
           );
         })}
       </div>
-          <ServicesTypes
-            servicesTypes={servicesTypes}
-            allServices={allServices}
-          />
+      <ServicesTypes servicesTypes={servicesTypes} allServices={allServices} />
       <div className="mt-20">
-          <h1 className="font-bold mb-4 uppercase">{t("related-content")}</h1>
-          <div ref={revealRef} className="md:grid grid-cols-3 gap-3 transition-opacity duration-800 ease-in-out">
-            {shuffleArray(allWorkPages)
-              .slice(0, 3)
-              .map((workPage) => (
-                <WorkWorkCard key={workPage.id} workPage={workPage} />
-              ))}
-          </div>
+        <h1 className="font-bold mb-4 uppercase">{t("related-content")}</h1>
+        <div
+          ref={revealRef}
+          className="md:grid grid-cols-3 gap-3 transition-opacity duration-800 ease-in-out"
+        >
+          {shuffleArray(allWorkPages)
+            .slice(0, 3)
+            .map((workPage) => (
+              <WorkWorkCard key={workPage.id} workPage={workPage} />
+            ))}
         </div>
+      </div>
     </>
   );
 }

@@ -1,10 +1,11 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
-import Link from "next/link";
-import Walk from "@/styles/icons/walk.svg"
-import Bicycle from "@/styles/icons/bicycle.svg"
-import Bus from "@/styles/icons/bus.svg"
-import Car from "@/styles/icons/car.svg"
+
+import Bicycle from "@/styles/icons/bicycle.svg";
+import Bus from "@/styles/icons/bus.svg";
+import Car from "@/styles/icons/car.svg";
+import Walk from "@/styles/icons/walk.svg";
 
 /* import { env } from "@/env";
  */
@@ -79,7 +80,7 @@ const EventMapModal: React.FC<MapModalProps> = ({ lat, lng }) => {
         >
           <Car className="inline-block text-main w-6 h-6 m-2" />
         </Link>
-      </div >
+      </div>
     </>
   );
 };

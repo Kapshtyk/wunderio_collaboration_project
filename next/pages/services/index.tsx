@@ -10,6 +10,7 @@ import { FormattedText } from "@/components/formatted-text";
 /* import { HeadingPage } from "@/components/heading--page"; */
 import { HeadingParagraph } from "@/components/heading--paragraph";
 import { LayoutProps } from "@/components/layout";
+import { Meta } from "@/components/meta";
 /* import OfficeLocations from "@/components/office-map";
 import { Paragraph } from "@/components/paragraph"; */
 import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
@@ -24,8 +25,6 @@ import { validateAndCleanupOfficeLocations } from "@/lib/zod/office-locations";
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services, validateAndCleanupServices } from "@/lib/zod/services";
 import ArrowDownIcon from "@/styles/icons/arrow-down.svg";
-import { Meta } from "@/components/meta";
-
 
 interface ServicesProps extends LayoutProps {
   mainPage: Services;
