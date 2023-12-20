@@ -55,7 +55,7 @@ export default function ServicesPages({
 
   const breadcrumbs = [
     {
-      title: t("Services"),
+      title: t("services"),
       url: "/services",
     },
     {

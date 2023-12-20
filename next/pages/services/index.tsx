@@ -41,7 +41,7 @@ export default function ServicesPage({
   const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t("Services"),
+      title: t("services"),
       url: "/services",
     },
   ];

@@ -28,12 +28,16 @@ import {
   Webform as WebformType,
 } from "@/lib/zod/webform";
 import { Meta } from "@/components/meta";
+import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+import { LanguageLinks, createLanguageLinks } from "@/lib/contexts/language-links-context";
 
 interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
   maps: OfficeLocations[];
   webform: WebformType;
   contactPerson: ContactPerson [];
+  languageLinks: LanguageLinks;
+  
 }
 
 export default function ContactUsPage({
@@ -45,7 +49,7 @@ export default function ContactUsPage({
   const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t("Contact Us"),
+      title: t("contact-us"),
       url: "/contact-us",
     },
   ];
@@ -185,7 +189,13 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
 
     const validatedContactPerson = contactPerson.map((node) => validateAndCleanupContactPerson(node));
 
-  //   const languageLinks = createLanguageLinks(nodeTranslations);
+    const nodeTranslations = await getNodeTranslatedVersions(
+        contactUs,
+        context,
+        drupal,
+      );
+
+    const languageLinks = createLanguageLinks(nodeTranslations);
 
   return {
     props: {
@@ -193,8 +203,8 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
       contactUs: validatedResource,
       webform: validatedWebform,
       maps: maps.map((node) => validateAndCleanupOfficeLocations(node)),
-      contactPerson: validatedContactPerson
-      //   languageLinks,
+      contactPerson: validatedContactPerson,
+      languageLinks,
     },
   };
 };
