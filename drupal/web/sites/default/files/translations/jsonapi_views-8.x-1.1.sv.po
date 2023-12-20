@@ -1,0 +1,20 @@
+# Swedish translation of JSON:API Views (8.x-1.1)
+# Copyright (c) 2023 by the Swedish translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: JSON:API Views (8.x-1.1)\n"
+"POT-Creation-Date: 2023-07-17 02:03+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Swedish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "Yes"
+msgstr "Ja"
+msgid "No"
+msgstr "Nej"
+msgid "JSON:API"
+msgstr "JSON:API"

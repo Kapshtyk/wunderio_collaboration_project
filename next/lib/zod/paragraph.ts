@@ -224,22 +224,6 @@ export const LabelledImageSchema = z.object({
     .optional(),
   field_label: z.string(),
 });
-export const ContactPeopleSchema = z.object({
-  type: z.literal("paragraph--contact_people"),
-  id: z.string(),
-  field_image: z
-    .object({
-      type: z.literal("media--image"),
-      id: z.string(),
-      field_media_image: ImageShape.nullable(),
-    })
-    .nullable()
-    .optional(),
-  field_full: z.string(),
-  field_label: z.string(),
-  field_contact_number: z.string(),
-  field_email_address: z.string(),
-});
 
 export type FormattedText = z.infer<typeof FormattedTextSchema>;
 export type Image = z.infer<typeof ImageSchema>;
@@ -257,7 +241,6 @@ export type LinkService = z.infer<typeof LinkServiceSchema>;
 export type SubHeadingSection = z.infer<typeof SubHeadingSectionSchema>;
 export type LabelledImage = z.infer<typeof LabelledImageSchema>;
 export type ImageShape = z.infer<typeof ImageShape>;
-export type ContactPeople = z.infer<typeof ContactPeopleSchema>;
 
 export type Paragraph =
   | FormattedText
@@ -276,4 +259,4 @@ export type Paragraph =
   | SubHeadingSection
   | LabelledImage
   | ImageShape
-  | ContactPeople;
+
