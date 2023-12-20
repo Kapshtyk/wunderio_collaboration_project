@@ -9,7 +9,7 @@ export function WorkArticleCard({ workArticle }) {
   return (
     <div
       key={workArticle.id}
-      className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-12"
+      className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-4"
     >
       <Link href={workArticle.path.alias}>
         <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
