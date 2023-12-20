@@ -26,7 +26,7 @@ export function WorkCards({ allWorkPages }) {
                       {workPage.title}
                     </h1>
                   </Link>
-                  <p>{workPage.field_excerpt}</p>
+                  <p className="text-lg">{workPage.field_excerpt}</p>
                 </div>
               ))}
         </div>
