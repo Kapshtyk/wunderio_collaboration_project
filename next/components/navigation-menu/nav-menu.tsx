@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 
@@ -19,6 +20,17 @@ interface NavigationMenuProps {
 
 export function NavigationMenuDesktop({ menu }: NavigationMenuProps) {
   const [isClient, setIsClient] = useState(false);
+  const { status } = useSession();
+  const [menuItems, setMenuItems] = useState<Menu>([]);
+
+  useEffect(() => {
+    if (status === "loading") return;
+    if (status === "authenticated") {
+      setMenuItems(menu.filter((item) => item.url !== "/auth/login"));
+    } else {
+      setMenuItems(menu);
+    }
+  }, [status, menu]);
 
   useEffect(() => {
     setIsClient(true);
@@ -28,7 +40,7 @@ export function NavigationMenuDesktop({ menu }: NavigationMenuProps) {
     isClient && (
       <NavigationMenu className="hidden desktopMenu:flex">
         <NavigationMenuList>
-          {menu.map((item) =>
+          {menuItems.map((item) =>
             item.items ? (
               <NavigationMenuItem key={item.title}>
                 <NavigationMenuTrigger className={navigationMenuTriggerStyle()}>

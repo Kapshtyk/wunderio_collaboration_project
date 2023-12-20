@@ -20,7 +20,7 @@ import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { Services, validateAndCleanupServices } from "@/lib/zod/services";
 
 interface IndexPageProps extends LayoutProps {
-  frontpage: Frontpage | null;
+  /* frontpage: Frontpage | null; */
   items: EventsArticles[];
   allWorkPages: PageType[];
   allServices: Services;
@@ -28,7 +28,7 @@ interface IndexPageProps extends LayoutProps {
 }
 
 export default function IndexPage({
-  frontpage,
+  /* frontpage, */
   items,
   allServices,
   servicesTypes,
@@ -36,7 +36,7 @@ export default function IndexPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
+      {/*  <Meta title={frontpage?.title} metatags={frontpage?.metatag} /> */}
       <HeroBanner />
       <NewsArticlesEvents items={items} />
       <ServicesFrontPage
@@ -53,7 +53,7 @@ export default function IndexPage({
 export const getStaticProps: GetStaticProps<IndexPageProps> = async (
   context,
 ) => {
-  const frontpage = (
+  /* const frontpage = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
       "node--frontpage",
       context,
@@ -61,7 +61,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
         params: getNodePageJsonApiParams("node--frontpage").getQueryObject(),
       },
     )
-  ).at(0);
+  ).at(0); */
 
   const promotedArticleTeasers = await drupal.getResourceCollectionFromContext<
     DrupalNode[]
@@ -150,7 +150,7 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
   return {
     props: {
       ...(await getCommonPageProps(context)),
-      frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null,
+      /* frontpage: frontpage ? validateAndCleanupFrontpage(frontpage) : null, */
       items,
       /*       aboutUs: validateAndCleanupAboutUs(aboutUs),
        */ legalDocument: validateAndCleanupLegalDocument(legalDocument),

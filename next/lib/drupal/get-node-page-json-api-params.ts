@@ -46,6 +46,7 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
       "field_content_elements.field_image.field_media_image",
       "field_event_registration",
       "field_participant",
+      "field_participant.field_personal_data.field_profile_picture",
       "field_venue",
       "field_tags",
     ]);

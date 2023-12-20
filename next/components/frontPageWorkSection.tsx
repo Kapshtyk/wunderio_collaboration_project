@@ -51,7 +51,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
 
             <div>
               <Link href={workPage.path.alias}>
-                <h1 className="text-primary-600 py-3 text-lg font-bold hover:underline">
+                <h1 className="text-main py-3 text-lg font-bold hover:underline">
                   {workPage.title}
                 </h1>
               </Link>
@@ -100,7 +100,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
             </div>
             <div>
               <Link href={workPage.path.alias}>
-                <h1 className="text-primary-600 py-3 text-lg font-bold hover:underline">
+                <h1 className="text-main py-3 text-lg font-bold hover:underline">
                   {workPage.title}
                 </h1>
               </Link>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 import { formatDate } from "@/lib/utils";
@@ -27,27 +28,28 @@ const NewsArticlesEvents = ({ items }: NewsArticlesEventsProps) => {
     return 0;
   });
   const router = useRouter();
+  const { t } = useTranslation();
   return (
-    <div className="h-auto md:pt-20 flex xl:pt-[96px] xl:flex-row flex-col gap-8">
+    <section className="h-auto section-margin flex xl:flex-row flex-col gap-8">
       <div className="relative w-full flex flex-col items-start xl:max-w-[380px]">
         {items.length > 1 && (
           <Watermark className="w-0 h-0 md:w-[188px] md:h-[116px] xl:w-[305px] xl:h-[185px] absolute text-main/20 md:right-0 xl:bottom-0 xl:-left-8" />
         )}
         <h3 className="text-heading-md text-main md:max-w-lg">
-          News, articles & events
+          {t("news-articles-events-title")}
         </h3>
-        <p className="md:max-w-lg">
-          The newest and most exciting things happing in our company right now
-        </p>
+        <p className="md:max-w-lg">{t("news-articles-events-description")}</p>
         <div className="flex flex-col pt-4">
           <Button variant="tertiary">
-            All news
+            {t("all-news-button")}
             <Arrow className="w-4 h-4 -rotate-90" />
           </Button>
-          <Button onClick={() => router.push("/events")} variant="tertiary">
-            All articles & events
-            <Arrow className="w-4 h-4 -rotate-90" />
-          </Button>
+          <Link href="/events">
+            <Button onClick={() => router.push("/events")} variant="tertiary">
+              {t("all-articles-events-button")}
+              <Arrow className="w-4 h-4 -rotate-90" />
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="w-full h-full">
@@ -92,7 +94,7 @@ const NewsArticlesEvents = ({ items }: NewsArticlesEventsProps) => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

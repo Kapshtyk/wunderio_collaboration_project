@@ -4,6 +4,7 @@ import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { FormattedText } from "@/components/formatted-text";
+import { HeadingPage } from "@/components/heading--page";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 import { createLanguageLinks } from "@/lib/contexts/language-links-context";
@@ -44,9 +45,11 @@ export default function OpenPosition({
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <h1 className="text-2xl text-bold">{openPosition.title}</h1>
-      <FormattedText html={openPosition.body.processed} />
-      <FormattedText html={basicInformation.body.processed} />
+      <HeadingPage title={openPosition.title} />
+      <section className="section-margin">
+        <FormattedText html={openPosition.body.processed} />
+        <FormattedText html={basicInformation.body.processed} />
+      </section>
     </>
   );
 }

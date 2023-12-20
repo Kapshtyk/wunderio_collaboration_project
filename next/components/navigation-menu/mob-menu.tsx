@@ -24,7 +24,11 @@ const MobMenu = ({ menu }: NavigationMenuProps) => {
   const [open, setOpen] = React.useState(false);
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger>
+      <SheetTrigger
+        aria-label="Open mobile menu"
+        aria-expanded="false"
+        aria-haspopup="dialog"
+      >
         <Hamburger className="desktopMenu:hidden text-main w-6 h-6" />
       </SheetTrigger>
       <SheetContent side="bottom">

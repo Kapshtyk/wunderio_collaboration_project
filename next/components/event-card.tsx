@@ -19,9 +19,13 @@ const EventCard = ({ item, className }: EventCardProps) => {
   return (
     <article className={clsx("@container", className)}>
       <div className="grid @lg:grid-cols-2 @lg:gap-8 gap-4 items-center">
-        <div className="relative rounded-xl overflow-hidden">
+        <div className="relative rounded-xl aspect-w-1 aspect-h-1 overflow-hidden">
           {item.field_image ? (
-            <MediaImage className="rounded-xl" media={item.field_image} />
+            <MediaImage
+              className="rounded-xl"
+              fill={true}
+              media={item.field_image}
+            />
           ) : (
             <RandomIcon />
           )}

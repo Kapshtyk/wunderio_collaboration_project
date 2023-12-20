@@ -102,6 +102,10 @@ export function Webform({
   }, [session, onlyForAuthenticated, webform, router.locale]);
 
   const onSubmit = async (data: FieldInputs) => {
+    if (onlyForAuthenticated && isFormSubmitted) {
+      return;
+    }
+    alert("response");
     const response = await fetch(`/api/webform`, {
       method: "POST",
       body: JSON.stringify({
@@ -116,6 +120,8 @@ export function Webform({
 
     if (!response.ok) {
       alert("Error!");
+    } else {
+      setIsFormSubmitted(true);
     }
   };
 
@@ -131,9 +137,15 @@ export function Webform({
       onlyForAuthenticated={onlyForAuthenticated}
     >
       <section
-        className="relative bg-background w-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 min-h-[400px] overflow-hidden"
-        aria-details={`Form ${webform.resourceIdObjMeta.drupal_internal__target_id}`}
+        className="relative bg-background w-full grid grid-rows-1 md:grid-rows-1 md:grid-cols-2 min-h-[400px] overflow-hidden"
+        aria-describedby="form-description"
       >
+        <h2
+          id="form-description"
+          className="sr-only"
+        >{`Form ${webform.resourceIdObjMeta.drupal_internal__target_id
+          .split("_")
+          .join(" ")}`}</h2>
         {variant === "default" && (
           <div className='hidden md:block bg-[url("/731a8bd43838e3dd428b38ad8bdce08a.jpeg")] bg-center bg-no-repeat bg-cover'></div>
         )}
@@ -144,7 +156,7 @@ export function Webform({
             <div className="absolute bg-white/60 right-0 top-0 w-full h-full backdrop-blur-sm">
               <div className="flex flex-col items-center justify-center h-full p-8">
                 <p className="text-heading-sm text-primary-600 font-bold text-center my-6">
-                  {"Thank you for submitting the form."}
+                  {t("thank-you-message")}
                 </p>
                 <Button
                   variant="primary"
@@ -160,13 +172,13 @@ export function Webform({
             </div>
           )}
           {isFormSubmitted && onlyForAuthenticated && (
-            <div className="absolute bg-foreground/60 right-0 top-0 w-full h-full backdrop-blur-sm">
+            <div className="absolute bg-white/60 right-0 top-0 w-full h-full backdrop-blur-sm">
               <div className="flex flex-col items-center justify-center h-full p-8">
-                <p className="text-heading-sm font-bold text-center my-6">
-                  {"You have been already submitted this form."}
+                <p className="text-heading-sm text-primary-600 font-bold text-center my-6">
+                  {t("already-submitted-message")}
                 </p>
                 <Button variant="primary" type="button">
-                  Unregister?
+                  {t("cancel-registration")}
                 </Button>
               </div>
             </div>
@@ -180,7 +192,7 @@ export function Webform({
               return (
                 <div key={key} className="w-full max-w-md">
                   <Label
-                    className="text-sm font-medium font-overpass text-foreground/50"
+                    className="text-sm font-medium font-overpass text-foreground/80"
                     htmlFor={webform.field_webform_fields[key]["#title"]}
                   >
                     {t(

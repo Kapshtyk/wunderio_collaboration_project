@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import EventMapModal from "@/components/event-map-modal";
+import EventParticipantCard from "@/components/event-participant-card";
 import { FormattedText } from "@/components/formatted-text";
 import { HeadingParagraph } from "@/components/heading--paragraph";
 import { LayoutProps } from "@/components/layout";
@@ -91,7 +92,7 @@ export default function Event({
           <Paragraph key={element.id} paragraph={element} />
         ))}
       </div>
-      <section className="mt-2 2sm:mt-4 md:mt-6 lg:mt-8 xl:mt-12">
+      <section className="section-margin">
         <h2 className="sr-only">{`Main content of the ${event.title} event page`}</h2>
         <FormattedText html={event.body.processed} />
       </section>
@@ -99,19 +100,14 @@ export default function Event({
         <>
           {event.type === "node--event" && (
             <>
-              <HeadingParagraph>Participants</HeadingParagraph>
+              <HeadingParagraph>{t("participants")}</HeadingParagraph>
               {event.field_participant.map((participant) => (
-                <div className="mb-4" key={participant.id}>
-                  <h2>{participant.title}</h2>
-                  <div
-                    className="mt-6 font-serif text-xl leading-loose prose"
-                    dangerouslySetInnerHTML={{
-                      __html: participant.body.processed,
-                    }}
-                  ></div>
-                </div>
+                <EventParticipantCard
+                  key={participant.id}
+                  participant={participant}
+                />
               ))}
-              <HeadingParagraph>Venue</HeadingParagraph>
+              <HeadingParagraph>{t("venue")}</HeadingParagraph>
 
               <p>{event.field_venue.field_venue_address}</p>
               <button onClick={toggleMap}>
