@@ -2,7 +2,7 @@ import { DrupalNode } from "next-drupal";
 import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
-import { ImageShape } from "./paragraph";
+import { ImageShape } from "@/lib/zod/paragraph";
 
 export const ContactPersonSchema = z.object({
   type: z.literal("node--contact_persons"),
@@ -10,12 +10,12 @@ export const ContactPersonSchema = z.object({
   title: z.string(),
   body: z.object({
     processed: z.string(),
-  }).nullable(),
-  field_image: ImageShape.nullable(),
-  field_full_name: z.string(),
-  field_excerpt: z.string(),
-  field_contact_email: z.string(),
-  field_contact_phone: z.string(),
+  }).nullable().optional(),
+  field_image: ImageShape.nullable().optional(),
+  field_full_name: z.string().nullable().optional(),
+  field_excerpt: z.string().nullable().optional(),
+  field_contact_email: z.string().nullable().optional(),
+  field_contact_phone: z.string().nullable().optional(),
   metatag: MetatagsSchema.optional(),
 });
 

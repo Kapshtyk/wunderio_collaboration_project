@@ -54,7 +54,6 @@ const OfficeLocationsMap = ({ maps }: MapsProps) => {
 
   return (
     <div className="">
-      <h2>Our Offices</h2>
       <GoogleMap
         center={markers.length > 0 ? markers[0].position : { lat: 0, lng: 0 }}
         zoom={5}

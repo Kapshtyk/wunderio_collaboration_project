@@ -29,11 +29,15 @@ import {
   Services as ServicesType,
   validateAndCleanupServices,
 } from "@/lib/zod/services";
+import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import { WorkWorkCard } from "@/components/workWorkCard";
+import { shuffleArray } from "@/lib/utils";
 
 interface ServicesProps extends CommonPageProps {
   services: ServicesType;
   allServices: ServicesType;
   servicesTypes: ServicesType[];
+  allWorkPages: PageType[];
   languageLinks: LanguageLinks;
 }
 
@@ -41,16 +45,13 @@ export default function ServicesPages({
   services,
   allServices,
   servicesTypes,
+  allWorkPages
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
 
   const breadcrumbs = [
     {
-      title: t("home"),
-      url: "/",
-    },
-    {
-      title: t("services"),
+      title: t("Services"),
       url: "/services",
     },
     {
@@ -84,14 +85,20 @@ export default function ServicesPages({
           );
         })}
       </div>
-      <section className="w-full max-w-[1216px] max-md:max-w-full pt-10 pb-2.5">
-        <div className="flex max-md:flex-col max-md:items-stretch max-md:gap-0">
           <ServicesTypes
             servicesTypes={servicesTypes}
             allServices={allServices}
           />
+      <div className="mt-20">
+          <h1 className="font-bold mb-4 uppercase">{t("Related Content")}</h1>
+          <div className="md:grid grid-cols-3 gap-3">
+            {shuffleArray(allWorkPages)
+              .slice(0, 3)
+              .map((workPage) => (
+                <WorkWorkCard key={workPage.id} workPage={workPage} />
+              ))}
+          </div>
         </div>
-      </section>
     </>
   );
 }
@@ -141,6 +148,16 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
     params: getNodePageJsonApiParams("node--services_page").getQueryObject(),
   });
 
+  const pages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--page",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--page")
+        .addFilter("field_page_type.name", "Work")
+        .getQueryObject(),
+    },
+  );
+
   const type = path.jsonapi.resourceName as ResourceType;
 
   const apiParams = getNodePageJsonApiParams(type).getQueryObject();
@@ -179,6 +196,7 @@ export const getStaticProps: GetStaticProps<ServicesProps> = async (
       servicesTypes: servicesTypes
         .filter((node) => node.title !== "Services")
         .map((node) => validateAndCleanupServices(node)),
+      allWorkPages: pages.map((node) => validateAndCleanupPage(node)),
       languageLinks,
     },
     revalidate: 60,

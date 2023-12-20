@@ -27,12 +27,13 @@ import {
   validateAndCleanupWebformFields,
   Webform as WebformType,
 } from "@/lib/zod/webform";
+import { Meta } from "@/components/meta";
 
 interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
   maps: OfficeLocations[];
   webform: WebformType;
-  contactPerson: ContactPerson[];
+  contactPerson: ContactPerson [];
 }
 
 export default function ContactUsPage({
@@ -51,6 +52,7 @@ export default function ContactUsPage({
 
   return (
     <>
+    <Meta title={contactUs.title} metatags={contactUs.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
@@ -65,15 +67,49 @@ export default function ContactUsPage({
           );
         })}
       </div>
-      <div>
-        <OfficeLocationsMap maps={maps} />
+      <div className="py-16 max-md:px-5">
+        <OfficeLocationsMap maps={maps}/>
         <Webform
-          formTitle={t("form-contact-title")}
+          formTitle={t("Contact Us")}
           webform={webform}
           variant="contact"
           maps={maps}
         />
       </div>
+      <section className="items-center flex-col justify-center py-11 max-md:px-5 text-center">
+      <h2>{t("Our Offices")}</h2>
+      <div className="flex flex-col w-full max-w-[1216px] items-stretch mb-8 max-md:max-w-full">
+        <div className="justify-center max-md:max-w-full max-md:pr-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {maps.map((address) => (
+              <div
+                key={address.id}
+                className="bg-white p-6 rounded-md hover:shadow-md"
+              >
+                <div className="text-center">
+                  <h3 className="text-lg font-bold mb-2">{address.title}</h3>
+                  {address.field_office_address
+                    .split(", ")
+                    .map((word, index) => (
+                      <p key={index} className="mb-0">{word}</p>
+                    ))}
+                  <span className="underline text-primary-500">
+                    <a
+                      href={`mailto:${address.field_office_email}`}
+                    >
+                      {address.field_office_email}
+                    </a>
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+      <section>
+        <ContactPeople contactPerson={contactPerson} />
+      </section>
       <div>
         {contactUs.field_content_elements?.map((paragraph) => {
           return (
@@ -93,40 +129,6 @@ export default function ContactUsPage({
           );
         })}
       </div>
-      <section className="items-center flex-col justify-center py-11 max-md:px-5">
-        <div className="flex flex-col w-full max-w-[1216px] items-stretch mb-8 max-md:max-w-full">
-          <div className="justify-center max-md:max-w-full max-md:pr-5">
-            <div className="gap-5 flex max-md:flex max-md:items-stretch max-md:gap-0">
-              {maps.map((address) => (
-                <div
-                  key={address.id}
-                  className="flex flex-col items-stretch w-[36%] max-md:w-full max-md:ml-0"
-                >
-                  <div className="items-stretch flex grow flex-col max-md:mt-10">
-                    <h3 className="text-lg font-bold">{address.title}</h3>
-                    {address.field_office_address
-                      .split(", ")
-                      .map((word, index) => (
-                        <p key={index}>{word}</p>
-                      ))}
-                    <span className="underline text-primary-500">
-                      <a
-                        href={`mailto:${address.field_office_email}`}
-                        className="hyperlink"
-                      >
-                        {address.field_office_email}
-                      </a>
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      <section>
-        <ContactPeople contactPerson={contactPerson} />
-      </section>
     </>
   );
 }
@@ -144,7 +146,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     )
   ).at(0);
 
-  //   console.log('contactUs:', contactUs);
+    // console.log('contactUs:', contactUs);
 
   const validatedResource = validateAndCleanupContactUs(contactUs);
 
@@ -174,13 +176,18 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     },
   );
 
-  const contactPerson = await drupal.getResourceCollectionFromContext<
-    DrupalNode[]
-  >("node--contact_persons", {
-    params: getNodePageJsonApiParams("node--contact_persons").getQueryObject(),
-  });
+  const contactPerson = 
+    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+      "node--contact_persons",
+      context,
+      {
+        params: getNodePageJsonApiParams("node--contact_persons").getQueryObject(),
+      },
+    )
 
-  /* console.log("contact", contactPerson); */
+    const validatedContactPerson = contactPerson.map((node) => validateAndCleanupContactPerson(node));
+
+  console.log("contact", contactPerson);
 
   //   const languageLinks = createLanguageLinks(nodeTranslations);
 
@@ -190,9 +197,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
       contactUs: validatedResource,
       webform: validatedWebform,
       maps: maps.map((node) => validateAndCleanupOfficeLocations(node)),
-      contactPerson: contactPerson.map((node) =>
-        validateAndCleanupContactPerson(node),
-      ),
+      contactPerson: validatedContactPerson
       //   languageLinks,
     },
   };

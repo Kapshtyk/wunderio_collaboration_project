@@ -26,7 +26,6 @@ import { Services, validateAndCleanupServices } from "@/lib/zod/services";
 import ArrowDownIcon from "@/styles/icons/arrow-down.svg";
 import { Meta } from "@/components/meta";
 
-/* import IndexPage from ".."; */
 
 interface ServicesProps extends LayoutProps {
   mainPage: Services;
@@ -41,10 +40,6 @@ export default function ServicesPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
   const breadcrumbs = [
-    {
-      title: t("Home"),
-      url: "/",
-    },
     {
       title: t("Services"),
       url: "/services",
@@ -75,27 +70,23 @@ export default function ServicesPage({
           );
         })}
       </div>
-      <section className="mt-10 mb-10">
-        <div className="flex items-center gap-4">
-          <span>Jump to:</span>
-          {subHeadings.map((sub) => (
-            <>
-              <ul key={sub.id} className="p-2">
-                <li>
-                  <Link
-                    href={`#${sub.id}`}
-                    scroll={false}
-                    style={{ scrollMarginTop: "20px" }}
-                    className="text-primary-900 text-sm hover:underline flex items-center"
-                  >
-                    <ArrowDownIcon className="h-[14px] mr-2" />
-                    {sub.field_heading.toUpperCase()}
-                  </Link>
-                </li>
-              </ul>
-            </>
-          ))}
-        </div>
+      <section className="mt-10 mb-10 flex flex-col items-center sm:flex-row">
+      <p>{t("Jump to:")}</p>
+         <ul className="flex flex-wrap gap-2">
+         {subHeadings.map((sub) => (
+         <li key={sub.id} className="p-2">
+         <Link
+          href={`#${sub.id}`}
+          scroll={false}
+          style={{ scrollMarginTop: "20px" }}
+          className="text-primary-700 text-sm hover:underline flex items-center transition duration-300 ease-in-out transform hover:scale-105"
+          >
+          <ArrowDownIcon className="h-5 w-5 mr-2" />
+          <span className="text-primary-700">{sub.field_heading}</span>
+         </Link>
+         </li>
+        ))}
+        </ul>
       </section>
       <section className="w-full grid grid-cols-1 gap-8">
         {mainPage.field_content_elements?.map((paragraph) => {
@@ -103,11 +94,6 @@ export default function ServicesPage({
             <>
               {paragraph.type === "paragraph--formatted_text" && (
                 <div className="flex gap-14 ">
-                  <div className="text-primary-700 w-[700px] h-[60px]">
-                    <HeadingParagraph>
-                      {paragraph.field_heading}
-                    </HeadingParagraph>
-                  </div>
                   <div>
                     <FormattedText
                       key={paragraph.id}

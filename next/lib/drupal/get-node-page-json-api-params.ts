@@ -243,16 +243,16 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   if (resourceType === "node--contact_persons") {
     apiParams
-      .addInclude(["uid", "field_image"])
-      .addInclude(["uid", "field_image"])
+      .addInclude(["field_image"])
       .addFields("node--contact_persons", [
+        "uid",
         "title",
         "metatag",
         "field_image",
         "field_full_name",
         "field_excerpt",
         "field_contact_email",
-        "field_contact_phone",  
+        "field_contact_phone",
       ]);
   }
 
