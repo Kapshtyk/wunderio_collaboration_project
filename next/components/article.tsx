@@ -40,30 +40,56 @@ export function Article({ article, ...props }: ArticleProps) {
       {article.field_excerpt && (
         <div className="my-4 text-xl">{article.field_excerpt}</div>
       )}
-      <div className="mb-4 bg-primary-50 p-2 md:w-6/12 py-4 rounded-full">
+      {/* <div className="mb-4 bg-primary-50 p-2 md:w-3/12 py-4 rounded-lg">
         <div className="flex items-center ">
 
           <div className="w-[350px] m-auto">
             {article.uid?.display_name && (
-              <span className="text-accent-hugs">
+              <span className="text-accent-hugs text-md">
                 {t("posted-by", { author: article.uid?.display_name })} -{" "}
               </span>
             )}
-            <span className="text-accent-hugs">{formatDate(article.created, router.locale)}</span>
+            <span className="text-accent-hugs text-md">{formatDate(article.created, router.locale)}</span>
           </div>
         </div>
         {article.uid?.field_profile_picture?.uri && (
-          <div className="w-[100px] m-auto my-2">
+          <div className="w-12 h-12 m-auto my-2">
             <Image
               src={absoluteUrl(article.uid?.field_profile_picture?.uri.url)}
               width={100}
               height={100}
-              layout="fixed"
-              className="rounded-full w-20 h-20 mr-3"
+              className="rounded-full object-cover h-full w-full mr-3"
               alt={article.uid?.field_profile_picture.resourceIdObjMeta.alt}
             />
           </div>
         )}
+      </div> */}
+      <div className="flex items-center justify-center bg-primary-50 p-2 rounded-md shadow-md mb-4">
+        {article.uid?.field_profile_picture?.uri && (
+          <div className="w-12 h-12">
+            <Image
+              src={absoluteUrl(article.uid?.field_profile_picture?.uri.url)}
+              width={100}
+              height={100}
+              alt="Author Image"
+              className="w-full h-full rounded-full object-cover"
+            />
+          </div>
+        )}
+
+        <div className="flex-grow ml-4 h-6">
+          {article.uid?.display_name && (
+            <p className="text-lg font-semibold text-accent-hugs">
+              {t("posted-by", { author: article.uid?.display_name })}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <p className="text-accent-hugs text-sm h-0">
+            {formatDate(article.created, router.locale)}
+          </p>
+        </div>
       </div>
 
       {article.field_image && (
