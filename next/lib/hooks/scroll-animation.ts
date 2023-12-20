@@ -1,18 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect} from 'react';
 
-export function useIsVisible(ref) {
-  const [isIntersecting, setIntersecting] = useState(false);
-
+const useScrollReveal = (ref: React.MutableRefObject<HTMLElement | null>) => {
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIntersecting(entry.isIntersecting);
-    });
+    const handleScroll = () => {
+      if (ref.current) {
+        const revealPosition = ref.current.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
 
-    observer.observe(ref.current);
+        if (revealPosition < windowHeight) {
+          ref.current.classList.add('animate-fadeIn');
+        } else {
+          ref.current.classList.remove('animate-fadeIn');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
     return () => {
-      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [ref]);
+};
 
-  return isIntersecting;
-}
+export default useScrollReveal;

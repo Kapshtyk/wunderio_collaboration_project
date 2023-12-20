@@ -243,8 +243,9 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
 
   if (resourceType === "node--contact_persons") {
     apiParams
-      .addInclude(["uid", "field_image"])
+      .addInclude(["field_image"])
       .addFields("node--contact_persons", [
+        "uid",
         "title",
         "metatag",
         "field_image",
