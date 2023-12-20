@@ -304,8 +304,11 @@ const Cookies = () => {
           variant="tertiary"
           size="sm"
           onClick={() => setIsConsentDateAvailable(false)}
+          aria-label="Open cookie settings"
+          tabIndex={0}
         >
           <CookiesIcon
+            aria-hidden="true"
             aria-details="cookies settings page"
             className="h-8 w-8 opacity-50"
           />
@@ -315,8 +318,11 @@ const Cookies = () => {
   }
 
   return (
-    <div className="fixed left-0 right-0 top-0 bottom-0 bg-background/90 backdrop-blur-sm z-40">
-      <div className="flex flex-col justify-between bg-background border-foreground/30 borderrounded-md shadow-md mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200">
+    <div
+      onClick={() => setIsConsentDateAvailable(true)}
+      className="fixed left-0 right-0 top-0 bottom-0 bg-background/90 backdrop-blur-sm z-40"
+    >
+      <div className="flex flex-col justify-between bg-background border-foreground/30 border rounded-md shadow-md mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200">
         <nav className="flex justify-between items-center">
           {headings.map((heading) => {
             return (

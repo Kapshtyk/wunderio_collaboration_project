@@ -5,7 +5,7 @@ import { Services as ServicesType } from "@/lib/zod/services";
 import AdvisoryIcon from "@/styles/icons/advisory.svg";
 import DeliveringDigitalIcon from "@/styles/icons/delivering-digital.svg";
 import DesignDataIcon from "@/styles/icons/design-data.svg";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 interface ServicesTypesProps {
   servicesTypes: ServicesType[];
@@ -22,7 +22,7 @@ const ServicesFrontPage = ({
   ) as SubHeadingSection[];
   return (
     <>
-      <section className="items-center bg-primary-50 flex flex-col justify-center px-16 py-12 max-md:px-5">
+      <section className="items-center section-magrin flex flex-col justify-center px-16 py-12 max-md:px-5">
         <div className="flex w-full max-w-[1216px] flex-col items-stretch my-8 max-md:max-w-full">
           <h2 className="text-center">
             {t("this-is-what-we-do")}

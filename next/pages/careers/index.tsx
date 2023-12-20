@@ -57,10 +57,13 @@ export default function CareersPage({
           <Paragraph key={paragraph.id} paragraph={paragraph} />
         ))}
       </div>
-      <section className="mt-2 2sm:mt-4 md:mt-6 lg:mt-8 xl:mt-12">
+      <section className="section-margin">
         <h2 className="sr-only">Main content of the careers page</h2>
         <FormattedText html={careers.body.processed} />
       </section>
+      {webform && (
+        <Webform formTitle={t("form-careers-title")} webform={webform} />
+      )}
       {careers.field_testimonials?.length ? (
         <Testimonials
           testimonials={careers.field_testimonials}
@@ -70,9 +73,6 @@ export default function CareersPage({
           }
         />
       ) : null}
-      {webform && (
-        <Webform formTitle={t("form-careers-title")} webform={webform} />
-      )}
       <OpenPositions openPositions={openPositions} />
     </>
   );

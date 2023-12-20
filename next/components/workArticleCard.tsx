@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export function WorkArticleCard({ workArticle }) {
   const { t } = useTranslation()

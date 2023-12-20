@@ -53,6 +53,9 @@ export default function WorkPage({
           ))}
         </div>
       </div>
+      <div>
+        <Numbers numbers={wunderNumbers} />
+      </div>
 
       <div>
         <WorkCards allWorkPages={allWorkPages} />
@@ -63,9 +66,6 @@ export default function WorkPage({
         <LogoStrip />
       </div> */}
 
-      <div>
-        <Numbers numbers={wunderNumbers} />
-      </div>
 
       <div>
         <h1 className="uppercase text-main font-bold text-lg mb-4">{t("more-about-our-clients")}</h1>

@@ -24,7 +24,7 @@ const Numbers = ({ numbers }: NumbersProps) => {
   }, [numbers]);
 
   return (
-    <div className="flex flex-col p-16 bg-finnishwinter my-12 lg:flex-row">
+    <div className="flex flex-col p-16 my-12 lg:flex-row">
       {numbers &&
         numbers.map((number, index) => (
           <div

@@ -45,6 +45,7 @@ export const ParticipantSchema = z.object({
   field_personal_data: z.object({
     id: z.string(),
     display_name: z.string(),
+    field_profile_picture: ImageShape.nullable().optional(),
   }),
 });
 

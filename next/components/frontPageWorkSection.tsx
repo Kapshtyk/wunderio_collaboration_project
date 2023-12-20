@@ -5,7 +5,7 @@ import { Page as PageType } from "@/lib/zod/page";
 import { WorkCard } from "@/lib/zod/paragraph";
 
 import { MediaImage } from "./media--image";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export function FrontPageWorkSection({ allWorkPages }) {
   const { t } = useTranslation();

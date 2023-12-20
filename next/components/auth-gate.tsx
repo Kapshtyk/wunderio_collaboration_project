@@ -19,13 +19,17 @@ export function AuthGate({ children, text }: AuthGateProps) {
   }
 
   return (
-    <section className="bg-accent-peach-fuzz/50 w-1/2 p-4 h-36 rounded-md">
-      <h2>{t("you-are-not-logged-in")}</h2>
-      <p className="text-md font-regular underline text-primary-500">
-        <Link href={`/auth/login?callbackUrl=${encodeURI(router.asPath)}`}>
-          {text}
-        </Link>
-      </p>
+    <section className="bg-primary-500 max-w-lg p-4 rounded-md mt-2">
+      <h2 className="text-white text-heading-xs md:text-heading-sm">
+        {t("you-are-not-logged-in")}
+      </h2>
+
+      <Link
+        className="underline text-white"
+        href={`/auth/login?callbackUrl=${encodeURI(router.asPath)}`}
+      >
+        {text}
+      </Link>
     </section>
   );
 }

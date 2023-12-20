@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 import Icon from "@/styles/icons/arrow-down.svg";
@@ -8,25 +10,26 @@ import User2 from "@/styles/icons/user_2.svg";
 import { Button } from "@/ui/button";
 
 const HeroBanner = () => {
+  const { t } = useTranslation();
   return (
-    <div className="h-auto xl:h-[640px] py-12 md:py-[96px] lg:py-[120px] flex flex-col lg:flex-row gap-4 lg:gap-8">
+    <section className="h-auto items-center py-12 md:py-[96px] lg:py-[120px] flex flex-col lg:flex-row gap-4 lg:gap-8">
       <div className="w-full lg:w-1/2 h-full lg:py-8 flex flex-col lg:gap-4">
-        <h2>Shaping the Digital Experience</h2>
-        <p>
-          Our mission is to bring people together and shape the way digital
-          services are used in everyday life. We help our clients to improve
-          their digital business, competitiveness and customer experience.
-        </p>
+        <h2>{t("hero-logo")}</h2>
+        <p>{t("hero-slogan")}</p>
         <div className="flex gap-8 mt-2 md:mt-0">
-          <Button>View Our Work</Button>
-          <Button variant="tertiary">
-            Get to know us
-            <Icon className="w-4 h-4 -rotate-90" />
-          </Button>
+          <Link href="/work">
+            <Button>{t("hero-work-button")}</Button>
+          </Link>
+          <Link href="/contact">
+            <Button variant="tertiary">
+              {t("hero-get-to-know-button")}
+              <Icon className="w-4 h-4 -rotate-90" />
+            </Button>
+          </Link>
         </div>
       </div>
       <div
-        aria-details="collage of the images within the hero banner"
+        aria-label="collage of the images within the hero banner"
         className="relative w-full lg:w-1/2 h-full flex justify-center"
       >
         <div className="absolute w-[226px] h-[226px] 2sm:w-[400px] 2sm:h-[400px]">
@@ -62,7 +65,7 @@ const HeroBanner = () => {
           ></Image>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

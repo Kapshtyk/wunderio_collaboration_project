@@ -123,7 +123,7 @@ const options: HTMLReactParserOptions = {
 
       case "p": {
         return (
-          <p className="2sm:pr-20 md:pr-32 lg:pr-44 xl:pr-56 lg:group-first/layout:pr-0 group-first/testimonials:pr-0">
+          <p className="2sm:pr-20 md:pr-32 lg:pr-44 xl:pr-56 lg:group-first/layout:pr-0 group-first/testimonials:pr-0 group-first/participants:pr-0">
             {domToReact(domNode.children, options)}
           </p>
         );

@@ -15,9 +15,14 @@ export function LanguageSwitcher() {
   const { path } = languageLinks[curvalue];
 
   useEffect(() => {
-    push(path, undefined, { locale: curvalue })
-      .then(() => window.scrollTo(0, 0))
-      .catch(console.error);
+    const changeLocale = async () => {
+      await push(path, undefined, { locale: curvalue });
+    };
+    changeLocale()
+      .then()
+      .catch((e) => {
+        console.error(e);
+      });
   }, [curvalue, path, push]);
 
   return (
@@ -50,16 +55,4 @@ export function LanguageSwitcher() {
       </RadioGroup>
     </div>
   );
-}
-
-{
-  /* <li key={l}>
-<Link
-  className="block p-2 hover:bg-primary-50"
-  locale={l}
-  href={path}
->
-  {name}
-</Link>
-</li> */
 }

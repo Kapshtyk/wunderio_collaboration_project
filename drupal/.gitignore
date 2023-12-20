@@ -36,3 +36,4 @@
 # Ignore testing directories.
 /web/sites/simpletest
 /web/tmp
+/web/sites/default/files/php/twig/*

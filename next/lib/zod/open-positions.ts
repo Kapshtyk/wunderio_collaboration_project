@@ -3,6 +3,8 @@ import { z } from "zod";
 
 import { MetatagsSchema } from "@/lib/zod/metatag";
 
+import { ImageShape } from "./paragraph";
+
 export const OpenPositionsSchema = z.object({
   type: z.literal("node--open_positions"),
   id: z.string(),
@@ -32,6 +34,7 @@ export const OpenPositionsSchema = z.object({
   path: z.object({
     alias: z.string(),
   }),
+  field_position_image: ImageShape.nullable(),
 });
 
 export function validateAndCleanupOpenPositions(

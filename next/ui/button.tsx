@@ -22,11 +22,12 @@ export const buttonVariants = cva(
         secondary: [
           "bg-background text-main border-main border",
           "hover:bg-primary-50 hover:text-primary-500 hover:border-primary-500",
-          "disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-foreground",
+          "disabled:!border-primary-200 disabled:!text-main disabled:!bg-finnishwinter/90",
         ],
         tertiary: [
           "bg-transparent !text-main !px-0 !justify-start",
           "hover:hover:text-main/80 !px-0",
+          "focus:ring-0 focus:ring-offset-0 focus:ring-transparent focus:ring-offset-transparent",
         ],
       },
     },

@@ -24,41 +24,29 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
   const breadCrumbs = [...defaultBreadcrumbs, ...items];
 
   return (
-    <nav>
-      <ul
-        className="hidden 2sm:flex pt-4"
-        aria-label="breadcrumbs"
-        role="navigation"
-      >
+    <nav aria-label="Breadcrumb">
+      <ol className="hidden 2sm:flex pt-4">
         {breadCrumbs.map((item, index) => (
-          <li key={index} className="flex items-center truncate !mb-0">
+          <li
+            key={index}
+            className="flex items-center truncate !mb-0 last:after:border-r-0 after:content=['']  after:border-r-2 after:border-main after:h-4  after:ml-3 after:mr-3 after:-skew-x-12 transition duration-300 ease-in-out transform hover:scale-105"
+          >
             {item.url ? (
-              <Link className="text-main" href={item.url}>
+              <Link
+                className="text-main flex items-center"
+                href={item.url}
+                aria-current={
+                  index === breadCrumbs.length - 1 ? "page" : undefined
+                }
+              >
                 {item.title}
               </Link>
             ) : (
               item.title
             )}
-            {index !== breadCrumbs.length - 1 && (
-              <svg
-                className="mx-2 text-main"
-                width="15"
-                height="15"
-                viewBox="0 0 15 15"
-                fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4.10876 14L9.46582 1H10.8178L5.46074 14H4.10876Z"
-                  fill="currentColor"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            )}
           </li>
         ))}
-      </ul>
+      </ol>
     </nav>
   );
 }
