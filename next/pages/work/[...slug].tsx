@@ -124,7 +124,7 @@ export default function WorkPage({
 
       {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
         <div className="mt-20">
-          <h1 className="text-main font-bold text-lg mb-4">RELATED CONTENT</h1>
+          <h1 className="uppercase text-main font-bold text-lg mb-4">{t("related-content")}</h1>
           <div className="md:grid grid-cols-3 gap-3">
             {allWorkPages
               .filter((workPages) => workPages.title !== currentWorkPage.title)
@@ -139,7 +139,7 @@ export default function WorkPage({
       {currentWorkPage.title === "Trimble" ||
         currentWorkPage.title === "Central Statistical Bureau of Latvia" ? (
         <div className="mt-20">
-          <h1 className="text-main font-bold text-lg mb-4">RELATED CONTENT</h1>
+          <h1 className="uppercase text-main font-bold text-lg mb-4">{t("related-content")}</h1>
           <div className="md:grid grid-cols-3 gap-3">
             {allArticles
               .filter((workArticles) =>
@@ -165,7 +165,7 @@ export default function WorkPage({
       {currentWorkPage.title === "Traficom.fi" ||
         currentWorkPage.title === "Nelonen Media Partnership" ? (
         <div className="mt-20">
-          <h1 className="text-main font-bold text-lg mb-4">RELATED CONTENT</h1>
+          <h1 className="uppercase text-main font-bold text-lg mb-4">{t("related-content")}</h1>
           <div className="md:grid grid-cols-3 gap-3">
             {allArticles
               .filter((workArticles) =>

@@ -58,17 +58,17 @@ export default function WorkPage({
         <WorkCards allWorkPages={allWorkPages} />
       </div>
 
-      <div className="my-20">
+      {/* <div className="my-20">
         <h1 className="font-bold">OUR CLIENTS</h1>
         <LogoStrip />
-      </div>
+      </div> */}
 
       <div>
         <Numbers numbers={wunderNumbers} />
       </div>
 
       <div>
-        <h1 className="text-main font-bold text-lg mb-4">MORE ABOUT OUR CLIENTS</h1>
+        <h1 className="uppercase text-main font-bold text-lg mb-4">{t("more-about-our-clients")}</h1>
         <div className="md:grid grid-cols-3 gap-3">
           {allArticles
             .filter(

@@ -11,7 +11,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
   const { t } = useTranslation();
   return (
     <div >
-      <h1 className="text-heading-md font-bold text-main my-4">{t("Our Work")}</h1>
+      <h1 className="text-heading-md font-bold text-main my-4">{t("frontPage-workTitle")}</h1>
       <div className="mb-12">
         {allWorkPages.slice(0, 1).map((workPage: PageType) => (
           <div key={workPage.id}>
@@ -22,7 +22,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
                   .map((paragraph: WorkCard) => (
                     <div key={paragraph.id}>
                       <Link href={workPage.path.alias}>
-                        <div className="relative w-[300px] md:w-[520px] md:h-[300px] flex justify-center overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">
+                        <div className="relative w-[300px] h-[190px] md:w-[520px] md:h-[300px] flex justify-center overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">
 
                           <MediaImage
                             className=" h-[300px] w-[240px] md:w-[420px] hover:saturate-150 md:m-auto absolute md:right-[50px] top-[10px]"
@@ -34,6 +34,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
                             fill={true}
                             sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
                             alt="macbook pro photo frame"
+                            priority
                           ></Image>
                         </div>
                       </Link>
@@ -65,7 +66,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
                       <Link href={workPage.path.alias}>
                         <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">
                           <MediaImage
-                            className="h-[330px] w-[220px] absolute z-10 top-[75px] hover:saturate-150"
+                            className="h-[335px] w-[220px] absolute z-10 top-[75px] hover:saturate-150"
                             media={paragraph.field_image}
                           />
                           <Image
