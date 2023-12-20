@@ -4,7 +4,7 @@ import { useTranslation } from "next-i18next";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
-import { LogoStrip } from "@/components/logo-strip";
+// import { LogoStrip } from "@/components/logo-strip";
 import { Meta } from "@/components/meta";
 import Numbers from "@/components/numbers";
 import { Paragraph } from "@/components/paragraph";
