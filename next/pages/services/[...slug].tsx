@@ -32,6 +32,10 @@ import {
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { WorkWorkCard } from "@/components/workWorkCard";
 import { shuffleArray } from "@/lib/utils";
+import { ParagraphLabelledImage } from "@/components/paragraph--labelled-image";
+import { ParagraphVideo } from "@/components/paragraph--video";
+import { useRef} from "react";
+import useScrollReveal from "@/lib/hooks/scroll-animation";
 
 interface ServicesProps extends CommonPageProps {
   services: ServicesType;
@@ -60,6 +64,9 @@ export default function ServicesPages({
     },
   ];
 
+  const revealRef = useRef<HTMLDivElement>(null);
+  useScrollReveal(revealRef);
+
   return (
     <>
       <Meta title={services.title} metatags={services.metatag} />
@@ -81,6 +88,12 @@ export default function ServicesPages({
                   />
                 </section>
               )}
+                {paragraph.type === "paragraph--labelled_image" && (
+                  <ParagraphLabelledImage key={paragraph.id} paragraph={paragraph}/>
+                )}
+                {paragraph.type === "paragraph--video" && (
+                  <ParagraphVideo key={paragraph.id} paragraph={paragraph}/>
+                )}
             </>
           );
         })}
@@ -90,8 +103,8 @@ export default function ServicesPages({
             allServices={allServices}
           />
       <div className="mt-20">
-          <h1 className="font-bold mb-4 uppercase">{t("Related Content")}</h1>
-          <div className="md:grid grid-cols-3 gap-3">
+          <h1 className="font-bold mb-4 uppercase">{t("related-content")}</h1>
+          <div ref={revealRef} className="md:grid grid-cols-3 gap-3 transition-opacity duration-800 ease-in-out">
             {shuffleArray(allWorkPages)
               .slice(0, 3)
               .map((workPage) => (

@@ -71,7 +71,7 @@ export default function ServicesPage({
         })}
       </div>
       <section className="mt-10 mb-10 flex flex-col items-center sm:flex-row">
-      <p>{t("Jump to:")}</p>
+      <p>{t("jump-to")}:</p>
          <ul className="flex flex-wrap gap-2">
          {subHeadings.map((sub) => (
          <li key={sub.id} className="p-2">

@@ -70,28 +70,28 @@ export default function ContactUsPage({
       <div className="py-16 max-md:px-5">
         <OfficeLocationsMap maps={maps}/>
         <Webform
-          formTitle={t("Contact Us")}
+          formTitle={t("form-contact-title")}
           webform={webform}
           variant="contact"
           maps={maps}
         />
       </div>
       <section className="items-center flex-col justify-center py-11 max-md:px-5 text-center">
-      <h2>{t("Our Offices")}</h2>
+      <h2>{t("our-offices")}</h2>
       <div className="flex flex-col w-full max-w-[1216px] items-stretch mb-8 max-md:max-w-full">
         <div className="justify-center max-md:max-w-full max-md:pr-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {maps.map((address) => (
               <div
                 key={address.id}
-                className="bg-white p-6 rounded-md hover:shadow-md"
+                className="bg-white p-6 rounded-md hover:shadow-md text-center"
               >
-                <div className="text-center">
+                <div>
                   <h3 className="text-lg font-bold mb-2">{address.title}</h3>
                   {address.field_office_address
                     .split(", ")
                     .map((word, index) => (
-                      <p key={index} className="mb-0">{word}</p>
+                      <p key={index} className="mb-0 text-steelgray">{word}</p>
                     ))}
                   <span className="underline text-primary-500">
                     <a
@@ -146,8 +146,6 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     )
   ).at(0);
 
-    // console.log('contactUs:', contactUs);
-
   const validatedResource = validateAndCleanupContactUs(contactUs);
 
   const validatedWebform = validateAndCleanupWebform(
@@ -186,8 +184,6 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     )
 
     const validatedContactPerson = contactPerson.map((node) => validateAndCleanupContactPerson(node));
-
-  console.log("contact", contactPerson);
 
   //   const languageLinks = createLanguageLinks(nodeTranslations);
 

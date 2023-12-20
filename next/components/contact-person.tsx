@@ -15,7 +15,7 @@ const ContactPeople = ({ contactPerson }: ContactPeopleProps) => {
     return (
       <>
         <div className="text-center text-5xl font-bold leading-[60px] tracking-tighter max-md:max-w-full max-md:text-4xl">
-         <h2>{t("Meet our team")}</h2> 
+         <h2>{t("meet-our-team")}</h2> 
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1216px] mx-auto mt-16">
           {contactPerson.map((contact) => (

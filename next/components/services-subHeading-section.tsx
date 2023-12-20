@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { DrupalTaxonomyTerm } from "next-drupal";
-import { useRef } from "react";
 
-import { useIsVisible } from "@/lib/hooks/scroll-animation";
 import { SubHeadingSection } from "@/lib/zod/paragraph";
 import { Services as ServicesType } from "@/lib/zod/services";
 
 import { HeadingPage } from "./heading--page";
-import { HeadingParagraph } from "./heading--paragraph";
-/* import { HeadingParagraph } from "./heading--paragraph";
- */
+import { useRef } from "react";
+import useScrollReveal from "@/lib/hooks/scroll-animation";
+
 interface SubHeadingSectionProps {
   subHeading: SubHeadingSection;
   tags: DrupalTaxonomyTerm[];
@@ -21,39 +19,21 @@ const SubHeadingSectionComponent = ({
   tags,
   services,
 }: SubHeadingSectionProps) => {
-  console.log("services:", services);
 
-  const ref = useRef<HTMLDivElement>(null);
-  const isVisible = useIsVisible(ref);
+  const revealRef = useRef<HTMLDivElement>(null);
+  useScrollReveal(revealRef);
 
   return (
     <>
       <div
         key={subHeading.id}
-        ref={ref}
-        className={`fadeInOut ${isVisible ? "opacity-100" : "opacity-0"}`}
       >
-        <section id={subHeading.id}>
+        <section id={subHeading.id} ref={revealRef} className="transition-opacity duration-800 ease-in-out">
         <HeadingPage
           title={subHeading.field_heading}
           description={subHeading.field_excerpt}
         />
         </section>
-        {/* <section
-          className="flex flex-col w-[1440px] items-start gap-[10px] px-0 py-[47px] relative"
-          id={subHeading.id}
-        >
-          <div className="inline-flex flex-col items-start gap-[10px] relative flex-[0_0_auto]">
-            <div className="relative w-[1328px] h-[279px] bg-gradient-primary-600 bg-right bg-cover bg-no-repeat rounded-lg">
-            <div className="flex flex-col w-[1007px] items-start gap-[20px] absolute top-[58px] left-[199px] text-white">
-            <div className="inline-flex flex-col items-start gap-[24px] relative flex-[0_0_auto]">
-            <h2 className="text-white">{subHeading.field_heading}</h2>
-            <p className="text-white">{subHeading.field_excerpt}</p>
-            </div>
-          </div>
-          </div>
-          </div>
-        </section> */}
   <section className="w-full flex flex-col">
   {tags
     .filter((tag) => tag.name === subHeading.field_heading)
