@@ -12,7 +12,7 @@ import { Button } from "@/ui/button";
 const HeroBanner = () => {
   const { t } = useTranslation();
   return (
-    <section className="h-auto xl:h-[640px] py-12 md:py-[96px] lg:py-[120px] flex flex-col lg:flex-row gap-4 lg:gap-8">
+    <section className="h-auto items-center py-12 md:py-[96px] lg:py-[120px] flex flex-col lg:flex-row gap-4 lg:gap-8">
       <div className="w-full lg:w-1/2 h-full lg:py-8 flex flex-col lg:gap-4">
         <h2>{t("hero-logo")}</h2>
         <p>{t("hero-slogan")}</p>

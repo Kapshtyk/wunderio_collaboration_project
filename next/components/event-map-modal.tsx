@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+import Link from "next/link";
+import Walk from "@/styles/icons/walk.svg"
+import Bicycle from "@/styles/icons/bicycle.svg"
+import Bus from "@/styles/icons/bus.svg"
+import Car from "@/styles/icons/car.svg"
 
 /* import { env } from "@/env";
  */
@@ -20,7 +25,7 @@ const EventMapModal: React.FC<MapModalProps> = ({ lat, lng }) => {
   }, [lat, lng]);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyAvUNynHkOr1Ubrd2WcR0hspWU372MVXCs",
   });
 
   if (!isLoaded) {
@@ -36,21 +41,45 @@ const EventMapModal: React.FC<MapModalProps> = ({ lat, lng }) => {
       <GoogleMap
         center={{ lat: markers.lat, lng: markers.lng }}
         zoom={15}
-        mapContainerStyle={{ height: "200px", width: "50%" }}
+        mapContainerStyle={{ height: "100%", width: "100%" }}
       >
         <MarkerF position={{ lat: markers.lat, lng: markers.lng }} />
       </GoogleMap>
 
-      <p>
-        <a
-          href={getDirectionsUrl(lat, lng)}
+      <div className="mx-auto flex justify-evenly max-w-2xl pt-4">
+        <Link
+          href={getDirectionsUrl(lat, lng) + "&travelmode=walking"}
           target="_blank"
           rel="noopener noreferrer"
           className="text-warning hover:underline"
         >
-          How to Get There
-        </a>
-      </p>
+          <Walk className="inline-block text-main w-6 h-6 m-2" />
+        </Link>
+        <Link
+          href={getDirectionsUrl(lat, lng) + "&travelmode=bicycling"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-warning hover:underline"
+        >
+          <Bicycle className="inline-block text-main w-6 h-6 m-2" />
+        </Link>
+        <Link
+          href={getDirectionsUrl(lat, lng) + "&travelmode=transit"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-warning hover:underline"
+        >
+          <Bus className="inline-block text-main w-6 h-6 m-2" />
+        </Link>
+        <Link
+          href={getDirectionsUrl(lat, lng) + "&travelmode=driving"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-warning hover:underline"
+        >
+          <Car className="inline-block text-main w-6 h-6 m-2" />
+        </Link>
+      </div >
     </>
   );
 };

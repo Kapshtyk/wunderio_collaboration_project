@@ -114,10 +114,12 @@ export default function Event({
                 {showMap ? "Hide map" : "Show map"}
               </button>
               {showMap && (
-                <EventMapModal
-                  lat={event.field_venue.field_venue_coordinates.lat}
-                  lng={event.field_venue.field_venue_coordinates.lon}
-                />
+                <div className="w-full h-[400px] mb-20">
+                  <EventMapModal
+                    lat={event.field_venue.field_venue_coordinates.lat}
+                    lng={event.field_venue.field_venue_coordinates.lon}
+                  />
+                </div>
               )}
             </>
           )}
@@ -130,7 +132,6 @@ export default function Event({
         formMessageIfUnauthenticated={t("events-form-not-auth")}
         variant="events"
       />
-
       <div className="flex gap-4 flex-wrap">
         {sideEvents.length > 0 &&
           sideEvents.map((sideEvent) => (
