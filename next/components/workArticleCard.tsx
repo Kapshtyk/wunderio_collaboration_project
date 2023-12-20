@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { absoluteUrl } from "@/lib/drupal/absolute-url";
+import { useTranslation } from "react-i18next";
 
 export function WorkArticleCard({ workArticle }) {
+  const { t } = useTranslation()
   return (
     <div
       key={workArticle.id}
-      className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-6"
+      className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-12"
     >
       <Link href={workArticle.path.alias}>
         <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
@@ -22,20 +24,18 @@ export function WorkArticleCard({ workArticle }) {
         </div>
       </Link>
 
-      <div className="p-6">
-        <p className="text-base text-sm text-secondary-900">
-          <Link href="/all-articles">
-            {" "}
-            <span className="hover:underline">
-              {workArticle.type.split("--")[1].toUpperCase()}
-            </span>{" "}
-          </Link>
-        </p>
+      <div className="px-6 py-4">
+        <Link href="/all-articles">
+          {" "}
+          <span className="uppercase text-accent-hugs text-md hover:underline">
+            {/* {t(workArticle.type.split("--")[1])} */} {t("related-content-article")}
+          </span>{" "}
+        </Link>
       </div>
 
       <Link href={workArticle.path.alias}>
-        <div className="p-6">
-          <h1 className="text-primary-600 font-bold hover:underline">
+        <div className="px-6 py-4">
+          <h1 className="text-main font-bold hover:underline">
             {workArticle.title}
           </h1>
         </div>
