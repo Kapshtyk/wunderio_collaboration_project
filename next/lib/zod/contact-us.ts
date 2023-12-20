@@ -5,7 +5,6 @@ import { MetatagsSchema } from "@/lib/zod/metatag";
 import {
   FormattedTextSchema,
   HeadingSectionSchema,
-  /* ImageShape, */
 } from "@/lib/zod/paragraph";
 
 const ContactUsElementsSchema = z.discriminatedUnion("type", [

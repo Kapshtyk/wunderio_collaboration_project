@@ -16,9 +16,6 @@ export const OfficeLocationsSchema = z.object({
   field_office_address: z.string(),
   field_office_email: z.string(),
   metatag: MetatagsSchema.optional(),
-  path: z.object({
-    alias: z.string().nullable(),
-  }),
 });
 
 export function validateAndCleanupOfficeLocations(
