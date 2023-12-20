@@ -22,7 +22,7 @@ export function Article({ article, ...props }: ArticleProps) {
   const breadcrumbs = [
     {
       //TODO: fix link and style ALL ARTICLES page
-      title: t("articles-link"),
+      title: t("all-articles-link"),
       url: "/all-articles",
     },
     {
@@ -40,28 +40,32 @@ export function Article({ article, ...props }: ArticleProps) {
       {article.field_excerpt && (
         <div className="my-4 text-xl">{article.field_excerpt}</div>
       )}
-      <div className="mb-4 flex items-center bg-primary-50 p-2 rounded-full w-6/12">
+      <div className="mb-4 bg-primary-50 p-2 md:w-6/12 py-4 rounded-full">
+        <div className="flex items-center ">
+
+          <div className="w-[350px] m-auto">
+            {article.uid?.display_name && (
+              <span className="text-accent-hugs">
+                {t("posted-by", { author: article.uid?.display_name })} -{" "}
+              </span>
+            )}
+            <span className="text-accent-hugs">{formatDate(article.created, router.locale)}</span>
+          </div>
+        </div>
         {article.uid?.field_profile_picture?.uri && (
-          <div>
+          <div className="w-[100px] m-auto my-2">
             <Image
               src={absoluteUrl(article.uid?.field_profile_picture?.uri.url)}
               width={100}
               height={100}
               layout="fixed"
-              className="rounded-full w-16 h-16 mr-3"
+              className="rounded-full w-20 h-20 mr-3"
               alt={article.uid?.field_profile_picture.resourceIdObjMeta.alt}
             />
           </div>
         )}
-        <div>
-          {article.uid?.display_name && (
-            <span className="text-accent-hugs">
-              {t("posted-by", { author: article.uid?.display_name })} -{" "}
-            </span>
-          )}
-          <span className="text-accent-hugs">{formatDate(article.created, router.locale)}</span>
-        </div>
       </div>
+
       {article.field_image && (
         <figure>
           <Image

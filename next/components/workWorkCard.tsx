@@ -17,7 +17,7 @@ export function WorkWorkCard({ workPage }) {
         .map((paragraph: WorkCard) => (
           <div
             key={paragraph.id}
-            className="relative overflow-hidden bg-cover bg-no-repeat h-64"
+            className="relative overflow-hidden object-cover bg-no-repeat h-64 p-2"
           >
             <Link href={workPage.path.alias}>
               <MediaImage

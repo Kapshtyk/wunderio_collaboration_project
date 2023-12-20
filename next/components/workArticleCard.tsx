@@ -12,9 +12,9 @@ export function WorkArticleCard({ workArticle }) {
       className="block w-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 mb-4"
     >
       <Link href={workArticle.path.alias}>
-        <div className="relative overflow-hidden bg-cover bg-no-repeat h-64">
+        <div className="relative overflow-hidden bg-cover bg-no-repeat h-[300px] p-2">
           <Image
-            className="hover:saturate-150 w-full h-full"
+            className="hover:saturate-150 w-full object-cover h-full"
             width={500}
             height={500}
             sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
