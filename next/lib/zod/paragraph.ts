@@ -222,7 +222,7 @@ export const LabelledImageSchema = z.object({
     })
     .nullable()
     .optional(),
-  field_label: z.string(),
+  field_label: z.string().nullable().optional(),
 });
 
 export type FormattedText = z.infer<typeof FormattedTextSchema>;
