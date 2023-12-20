@@ -38,11 +38,9 @@ export default function IndexPage({
     <>
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
+      <FrontPageWorkSection allWorkPages={allWorkPages} />
       <ServicesFrontPage allServices={allServices} servicesTypes={servicesTypes} />
       <NewsArticlesEvents items={items} />
-      <div>
-        <FrontPageWorkSection allWorkPages={allWorkPages} />
-      </div>
     </>
   );
 }

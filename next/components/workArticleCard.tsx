@@ -23,10 +23,10 @@ export function WorkArticleCard({ workArticle }) {
       </Link>
 
       <div className="p-6">
-        <p className="text-base text-sm text-secondary-900">
+        <p>
           <Link href="/all-articles">
             {" "}
-            <span className="hover:underline">
+            <span className="text-accent-hugs text-md hover:underline">
               {workArticle.type.split("--")[1].toUpperCase()}
             </span>{" "}
           </Link>
@@ -35,7 +35,7 @@ export function WorkArticleCard({ workArticle }) {
 
       <Link href={workArticle.path.alias}>
         <div className="p-6">
-          <h1 className="text-primary-600 font-bold hover:underline">
+          <h1 className="text-main font-bold hover:underline">
             {workArticle.title}
           </h1>
         </div>

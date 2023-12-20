@@ -27,9 +27,9 @@ export function WorkWorkCard({ workPage }) {
         ))}
 
       <div className="p-6">
-        <p className="text-base text-sm text-secondary-900">
+        <p>
           <Link href="/work">
-            <span className="hover:underline">
+            <span className="text-accent-hugs text-md hover:underline">
               {workPage.field_page_type.name.toUpperCase()}
             </span>
           </Link>
@@ -38,7 +38,7 @@ export function WorkWorkCard({ workPage }) {
 
       <Link href={workPage.path.alias}>
         <div className="p-6">
-          <h1 className="text-primary-600 font-bold hover:underline">
+          <h1 className="text-main font-bold hover:underline">
             {workPage.title}
           </h1>
         </div>
