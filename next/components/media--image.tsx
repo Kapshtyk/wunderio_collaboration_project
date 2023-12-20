@@ -30,7 +30,7 @@ export function MediaImage({
         alt={image.resourceIdObjMeta.alt || "Image"}
         title={image.resourceIdObjMeta.title}
         fill
-        sizes="(max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
+        sizes="(max-width: 400px) 20vw, (max-width: 570px) 50vw, (max-width: 1200px) 100vw, 30vw"
         className={clsx(
           "h-auto max-w-full object-center object-cover",
           className,

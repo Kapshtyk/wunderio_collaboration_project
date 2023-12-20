@@ -10,6 +10,8 @@ import {
 } from "@/components/preview-banner";
 import { Menu } from "@/lib/zod/menu";
 
+import { Footer } from "./footer/footer";
+
 import { SkipToContentLink } from "@/ui/skip-to-content-link";
 
 export interface LayoutProps {
@@ -42,7 +44,7 @@ export function Layout({ menus, children }: LayoutProps) {
             {children}
           </div>
         </main>
-        {/*     <Footer menu={menus.footer} /> */}
+        <Footer menus={menus} />
       </div>
       <PreviewBanner isVisible={isPreviewVisible} />
     </>

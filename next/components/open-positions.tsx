@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 import React, { useMemo, useState } from "react";
 
 import { OpenPositions } from "@/lib/zod/open-positions";
+
+import { MediaImage } from "./media--image";
+import { RandomIcon } from "./random-icon";
 
 interface OpenPositionsProps {
   openPositions: OpenPositions[];
@@ -11,6 +15,7 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
   const [countries, setCountries] = useState<string[]>([]);
   const [choosenOffice, setChoosenOffice] = useState<string>("all");
   const [choosenCountry, setChoosenCountry] = useState<string>("all");
+  const { t } = useTranslation();
 
   useMemo(() => {
     const offices = openPositions.map(
@@ -42,7 +47,8 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
   });
 
   return (
-    <>
+    <section className="section-margin">
+      <h2>{t("open-positions")}</h2>
       <div className="flex gap-4 mb-4">
         <select
           onChange={(e) => {
@@ -69,24 +75,50 @@ const OpenPositions = ({ openPositions }: OpenPositionsProps) => {
           ))}
         </select>
       </div>
-      <div className="flex gap-4 flex-wrap">
+      <div className="grid grid-cols-1 sm:grid-cols-2 ">
         {filteredPositions.map((openPosition) => (
-          <Link
-            key={openPosition.id}
-            href={openPosition.path.alias}
-            className="relative grid h-full rounded border border-finnishwinter bg-foreground p-4 transition-all hover:shadow-md"
-          >
-            <div className="p-4 w-52 h-52 rounded-md shadow-sm bg-primary-50">
-              <h3>{openPosition.title}</h3>
-              <span>
-                {openPosition.field_country.name},{" "}
-                {openPosition.field_office.name}
-              </span>
+          <article key={openPosition.id} className="@container">
+            <div className="grid @md:grid-cols-2 gap-4 items-center">
+              <div className="relative rounded-xl overflow-hidden">
+                {openPosition.field_position_image ? (
+                  <MediaImage
+                    className="rounded-xl"
+                    media={openPosition.field_position_image}
+                  />
+                ) : (
+                  <RandomIcon />
+                )}
+              </div>
+              <div className="flex flex-col py-2">
+                <Link href={openPosition.path.alias}>
+                  <div>
+                    {openPosition.field_country && (
+                      <span
+                        key={openPosition.field_country.name}
+                        className="text-xs @sm:text-sm @lg:text-md font-bold text-accent-color mt-1 pr-1 inline-block uppercase"
+                      >
+                        {openPosition.field_country.name}
+                      </span>
+                    )}
+                    {openPosition.field_office && (
+                      <span
+                        key={openPosition.field_office.name}
+                        className="text-xs @sm:text-sm @lg:text-md font-bold text-accent-color mt-1 pr-1 inline-block uppercase"
+                      >
+                        {openPosition.field_office.name}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-heading-xs sm:text-heading-sm">
+                    {openPosition.title}
+                  </h3>
+                </Link>
+              </div>
             </div>
-          </Link>
+          </article>
         ))}
       </div>
-    </>
+    </section>
   );
 };
 

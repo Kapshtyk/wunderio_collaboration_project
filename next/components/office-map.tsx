@@ -25,7 +25,7 @@ const OfficeLocationsMap = ({ maps }: MapsProps) => {
   }, [maps]);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDFHz-zBARgR11y63cmaFJ3lTFUfcEaKSA" as string,
+    googleMapsApiKey: "AIzaSyAvUNynHkOr1Ubrd2WcR0hspWU372MVXCs" as string,
   });
 
   if (!isLoaded) {
