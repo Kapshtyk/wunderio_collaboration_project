@@ -41,10 +41,6 @@ export default function WorkPage({
   const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: t("homepage-link"),
-      url: "/",
-    },
-    {
       title: t("work-link"),
       url: "/work",
     },
@@ -66,7 +62,7 @@ export default function WorkPage({
     "Ruutu.fi",
     "Service Advisor Applications",
   ].filter(Boolean);
-  //
+
   return currentWorkPage &&
     currentWorkPage.field_page_type &&
     currentWorkPage.field_page_type.name === "Work" ? (
@@ -128,7 +124,7 @@ export default function WorkPage({
 
       {allowedWorkPageTitles.includes(currentWorkPage.title) ? (
         <div className="mt-20">
-          <h1 className="font-bold mb-4">RELATED CONTENT</h1>
+          <h1 className="uppercase text-main font-bold text-lg mb-4">{t("related-content")}</h1>
           <div className="md:grid grid-cols-3 gap-3">
             {allWorkPages
               .filter((workPages) => workPages.title !== currentWorkPage.title)
@@ -141,9 +137,9 @@ export default function WorkPage({
       ) : null}
 
       {currentWorkPage.title === "Trimble" ||
-      currentWorkPage.title === "Central Statistical Bureau of Latvia" ? (
+        currentWorkPage.title === "Central Statistical Bureau of Latvia" ? (
         <div className="mt-20">
-          <h1 className="font-bold mb-4">RELATED CONTENT</h1>
+          <h1 className="uppercase text-main font-bold text-lg mb-4">{t("related-content")}</h1>
           <div className="md:grid grid-cols-3 gap-3">
             {allArticles
               .filter((workArticles) =>
@@ -167,9 +163,9 @@ export default function WorkPage({
       ) : null}
 
       {currentWorkPage.title === "Traficom.fi" ||
-      currentWorkPage.title === "Nelonen Media Partnership" ? (
+        currentWorkPage.title === "Nelonen Media Partnership" ? (
         <div className="mt-20">
-          <h1 className="font-bold mb-4">RELATED CONTENT</h1>
+          <h1 className="uppercase text-main font-bold text-lg mb-4">{t("related-content")}</h1>
           <div className="md:grid grid-cols-3 gap-3">
             {allArticles
               .filter((workArticles) =>

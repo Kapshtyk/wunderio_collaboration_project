@@ -5,7 +5,7 @@ import { Services as ServicesType } from "@/lib/zod/services";
 import AdvisoryIcon from "@/styles/icons/advisory.svg";
 import DeliveringDigitalIcon from "@/styles/icons/delivering-digital.svg";
 import DesignDataIcon from "@/styles/icons/design-data.svg";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 interface ServicesTypesProps {
   servicesTypes: ServicesType[];

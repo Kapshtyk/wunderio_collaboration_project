@@ -40,7 +40,7 @@ export function Article({ article, ...props }: ArticleProps) {
       {article.field_excerpt && (
         <div className="my-4 text-xl">{article.field_excerpt}</div>
       )}
-      <div className="mb-4 text-scapaflow flex items-center bg-primary-50 p-2 rounded-full w-6/12">
+      <div className="mb-4 flex items-center bg-primary-50 p-2 rounded-full w-6/12">
         {article.uid?.field_profile_picture?.uri && (
           <div>
             <Image
@@ -55,11 +55,11 @@ export function Article({ article, ...props }: ArticleProps) {
         )}
         <div>
           {article.uid?.display_name && (
-            <span>
+            <span className="text-accent-hugs">
               {t("posted-by", { author: article.uid?.display_name })} -{" "}
             </span>
           )}
-          <span>{formatDate(article.created, router.locale)}</span>
+          <span className="text-accent-hugs">{formatDate(article.created, router.locale)}</span>
         </div>
       </div>
       {article.field_image && (
