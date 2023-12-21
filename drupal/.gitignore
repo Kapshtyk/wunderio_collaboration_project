@@ -37,3 +37,6 @@
 /web/sites/simpletest
 /web/tmp
 /web/sites/default/files/php/twig/*
+
+/web/sites/*/files/
+

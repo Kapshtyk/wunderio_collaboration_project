@@ -1,1 +1,0 @@
-window.drupalTranslations = {"strings":{"":{"Edit":"Muokkaa","Save":"Tallenna","Changed":"Muuttunut","Cancel":"Peruuta"}},"pluralFormula":{"1":0,"default":1}};
