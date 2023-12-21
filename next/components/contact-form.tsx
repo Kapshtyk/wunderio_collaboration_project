@@ -16,7 +16,7 @@ type FieldInputs = {
 export function ContactForm() {
   const router = useRouter();
   const { t } = useTranslation();
-  const { register, handleSubmit, formState } = useForm<FieldInputs>();
+  const { register, handleSubmit, formState, reset } = useForm<FieldInputs>();
 
   const onSubmit = async (data: FieldInputs) => {
     const response = await fetch(`/api/webform`, {
@@ -32,6 +32,8 @@ export function ContactForm() {
 
     if (!response.ok) {
       alert("Error!");
+    } else {
+      reset();
     }
   };
 

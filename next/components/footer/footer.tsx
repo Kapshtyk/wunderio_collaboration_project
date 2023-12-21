@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 
 import { ContactForm } from "@/components/contact-form";
@@ -18,11 +17,6 @@ interface FooterProps {
 export function Footer({ menus }: FooterProps) {
   // Only show the menu items that match the current locale:
   const { t } = useTranslation();
-  const { locale } = useRouter();
-  const filteredFooterMenuItems = menus.footer.filter(
-    (link) => link.langcode == locale,
-  );
-
   return (
     <footer className="bg-primary-500 py-24 section-margin relative">
       <Watermark className="z-20 absolute text-primary-300/50 top-0 -right-4 w-60 h-32" />
@@ -51,7 +45,7 @@ export function Footer({ menus }: FooterProps) {
           <div className="flex flex-col mr-4 md:mr-6 lg:mr-10">
             <h2 className="text-heading-xs text-white mt-0">{t("support")}</h2>
             <ul className="flex flex-col gap-3">
-              {filteredFooterMenuItems.map((link) => (
+              {menus.footer.map((link) => (
                 <li className="mb-0" key={link.id}>
                   <FooterLink href={link.url}>{link.title}</FooterLink>
                 </li>

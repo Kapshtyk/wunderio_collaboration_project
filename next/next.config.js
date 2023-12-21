@@ -47,6 +47,22 @@ const nextConfig = {
           source: "/contact-us",
           destination: "/contact-us",
         },
+        {
+          source: "/tyo",
+          destination: "/work",
+        },
+        {
+          source: "/arbete",
+          destination: "/work",
+        },
+        {
+          source: "/tietoa-meista",
+          destination: "/about",
+        },
+        {
+          source: "/om-oss",
+          destination: "/about",
+        },
       ],
     };
   },

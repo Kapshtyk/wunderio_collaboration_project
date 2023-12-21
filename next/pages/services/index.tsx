@@ -8,7 +8,6 @@ import { useTranslation } from "next-i18next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { FormattedText } from "@/components/formatted-text";
 /* import { HeadingPage } from "@/components/heading--page"; */
-// import { HeadingParagraph } from "@/components/heading--paragraph";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
 /* import OfficeLocations from "@/components/office-map";

@@ -257,7 +257,7 @@ const Cookies = () => {
                       : "text-topaz"
                   }`}
                 >
-                  disabled
+                  {t("disabled")}
                 </p>
                 <Switch
                   disabled={cookieType === "Necessary"}
@@ -281,7 +281,7 @@ const Cookies = () => {
                       : "text-graysuit"
                   }`}
                 >
-                  enabled
+                  {t("enabled")}
                 </p>
               </div>
             )}
@@ -299,7 +299,7 @@ const Cookies = () => {
 
   if (isConsentDateAvailable) {
     return (
-      <div className="fixed left-0 bottom-0 rounded-full overflow-hidden">
+      <div className="fixed left-1 bottom-1 rounded-full overflow-hidden z-50">
         <Button
           variant="tertiary"
           size="sm"
@@ -322,7 +322,10 @@ const Cookies = () => {
       onClick={() => setIsConsentDateAvailable(true)}
       className="fixed left-0 right-0 top-0 bottom-0 bg-background/90 backdrop-blur-sm z-40"
     >
-      <div className="flex flex-col justify-between bg-background border-foreground/30 border rounded-md shadow-md mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="flex flex-col justify-between bg-background border-foreground/30 border rounded-md shadow-md mx-4 sm:mx-auto sm:max-w-5xl max-h-[600px] my-10 fixed bottom-0 left-0 right-0 z-40 p-2 sm:p-4 transition-transform duration-200"
+      >
         <nav className="flex justify-between items-center">
           {headings.map((heading) => {
             return (

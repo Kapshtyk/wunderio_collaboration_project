@@ -14,6 +14,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
       <h1 className="text-heading-md font-bold text-main my-4">
         {t("frontPage-workTitle")}
       </h1>
+
       <div className="mb-12">
         {allWorkPages.slice(0, 1).map((workPage: PageType) => (
           <div key={workPage.id}>
@@ -55,7 +56,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
         ))}
       </div>
 
-      <div className=" w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mb-12 gap-6">
+      {/* <div className=" w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  mb-12 gap-6">
         {allWorkPages.slice(1, 4).map((workPage: PageType) => (
           <div key={workPage.id}>
             <div>
@@ -68,9 +69,9 @@ export function FrontPageWorkSection({ allWorkPages }) {
                       className="bg-primary-50 rounded-lg"
                     >
                       <Link href={workPage.path.alias}>
-                        <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 animate-fadeIn">
+                        <div className="relative w-[auto] h-[400px]  flex justify-center overflow-hidden">
                           <MediaImage
-                            className="h-[330px] w-[220px] absolute z-10 top-[75px] hover:saturate-150"
+                            className={`h-[33px] w-[220px] absolute z-10 top-[75px] hover:saturate-150`}
                             media={paragraph.field_image}
                           />
                           <Image
@@ -95,7 +96,7 @@ export function FrontPageWorkSection({ allWorkPages }) {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

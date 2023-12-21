@@ -3,6 +3,7 @@ import { useTranslation } from "next-i18next";
 import { useRef } from "react";
 
 import { ArticleListItem } from "@/components/article-list-item";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { HeadingPage } from "@/components/heading--page";
 import { LayoutProps } from "@/components/layout";
 import { Meta } from "@/components/meta";
@@ -17,7 +18,6 @@ import {
   ArticleTeaser as ArticleTeaserType,
   validateAndCleanupArticleTeaser,
 } from "@/lib/zod/article-teaser";
-import { Breadcrumbs } from "@/components/breadcrumbs";
 
 interface AllArticlesPageProps extends LayoutProps {
   articleTeasers: ArticleTeaserType[];

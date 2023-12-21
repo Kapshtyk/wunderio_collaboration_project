@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useLanguageLinks } from "@/lib/contexts/language-links-context";
 
@@ -11,19 +11,19 @@ export function LanguageSwitcher() {
   const languageLinks = useLanguageLinks();
   const { push, locale } = useRouter();
   const { t } = useTranslation();
-  const [curvalue, setcurValue] = useState(locale);
-  const { path } = languageLinks[curvalue];
+  const curvalue = useState(locale)[0];
 
-  useEffect(() => {
-    const changeLocale = async () => {
-      await push(path, undefined, { locale: curvalue });
-    };
-    changeLocale()
-      .then()
-      .catch((e) => {
-        console.error(e);
+  const changeLocale = (locale) => {
+    const { path } = languageLinks[locale];
+    const scroll = window.scrollY;
+    push(path, undefined, { locale })
+      .then(() => {
+        window.scrollTo(0, scroll);
+      })
+      .catch((err) => {
+        console.error(err);
       });
-  }, [curvalue, path, push]);
+  };
 
   return (
     <div>
@@ -31,25 +31,25 @@ export function LanguageSwitcher() {
       <RadioGroup
         className="grid-cols-3 items-center align-middle"
         defaultValue={curvalue}
-        onValueChange={setcurValue}
+        onValueChange={changeLocale}
       >
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="en" id="en" />
           <Label className="!mb-0 text-sm font-reqular" htmlFor="en">
-            English
+            {t("english")}
           </Label>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="fi" id="fi" />
           <Label className="!mb-0 text-sm font-reqular" htmlFor="fi">
-            Finnish
+            {t("finnish")}
           </Label>
         </div>
 
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="sv" id="sv" />
           <Label className="!mb-0 text-sm font-reqular" htmlFor="sv">
-            Swedish
+            {t("swedish")}
           </Label>
         </div>
       </RadioGroup>
