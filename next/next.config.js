@@ -35,6 +35,14 @@ const nextConfig = {
           source: "/tjänster",
           destination: "/services",
         },
+        {
+          source: "/tyo",
+          destination: "/work",
+        },
+        {
+          source: "/arbete",
+          destination: "/work",
+        },
       ],
     };
   },

@@ -69,5 +69,4 @@ export function shuffleArray(array) {
     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
   return newArray;
-};
-
+}

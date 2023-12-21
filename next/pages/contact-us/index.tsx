@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import ContactPeople from "@/components/contact-person";
 import { FormattedText } from "@/components/formatted-text";
 import { LayoutProps } from "@/components/layout";
+import { Meta } from "@/components/meta";
 import OfficeLocationsMap from "@/components/office-map";
 import { Paragraph } from "@/components/paragraph";
 import { Webform } from "@/components/webworm/webform";
@@ -27,13 +28,12 @@ import {
   validateAndCleanupWebformFields,
   Webform as WebformType,
 } from "@/lib/zod/webform";
-import { Meta } from "@/components/meta";
 
 interface ConatactUsProps extends LayoutProps {
   contactUs: ContactUs;
   maps: OfficeLocations[];
   webform: WebformType;
-  contactPerson: ContactPerson [];
+  contactPerson: ContactPerson[];
 }
 
 export default function ContactUsPage({
@@ -52,7 +52,7 @@ export default function ContactUsPage({
 
   return (
     <>
-    <Meta title={contactUs.title} metatags={contactUs.metatag} />
+      <Meta title={contactUs.title} metatags={contactUs.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
@@ -68,7 +68,7 @@ export default function ContactUsPage({
         })}
       </div>
       <div className="py-16 max-md:px-5">
-        <OfficeLocationsMap maps={maps}/>
+        <OfficeLocationsMap maps={maps} />
         <Webform
           formTitle={t("form-contact-title")}
           webform={webform}
@@ -77,36 +77,36 @@ export default function ContactUsPage({
         />
       </div>
       <section className="items-center flex-col justify-center py-11 max-md:px-5 text-center">
-      <h2>{t("our-offices")}</h2>
-      <div className="flex flex-col w-full max-w-[1216px] items-stretch mb-8 max-md:max-w-full">
-        <div className="justify-center max-md:max-w-full max-md:pr-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {maps.map((address) => (
-              <div
-                key={address.id}
-                className="bg-white p-6 rounded-md hover:shadow-md text-center"
-              >
-                <div>
-                  <h3 className="text-lg font-bold mb-2">{address.title}</h3>
-                  {address.field_office_address
-                    .split(", ")
-                    .map((word, index) => (
-                      <p key={index} className="mb-0 text-steelgray">{word}</p>
-                    ))}
-                  <span className="underline text-primary-500">
-                    <a
-                      href={`mailto:${address.field_office_email}`}
-                    >
-                      {address.field_office_email}
-                    </a>
-                  </span>
+        <h2>{t("our-offices")}</h2>
+        <div className="flex flex-col w-full max-w-[1216px] items-stretch mb-8 max-md:max-w-full">
+          <div className="justify-center max-md:max-w-full max-md:pr-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+              {maps.map((address) => (
+                <div
+                  key={address.id}
+                  className="bg-white p-6 rounded-md hover:shadow-md text-center"
+                >
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">{address.title}</h3>
+                    {address.field_office_address
+                      .split(", ")
+                      .map((word, index) => (
+                        <p key={index} className="mb-0 text-steelgray">
+                          {word}
+                        </p>
+                      ))}
+                    <span className="underline text-primary-500">
+                      <a href={`mailto:${address.field_office_email}`}>
+                        {address.field_office_email}
+                      </a>
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
       <section>
         <ContactPeople contactPerson={contactPerson} />
       </section>
@@ -174,16 +174,15 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
     },
   );
 
-  const contactPerson = 
-    await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      "node--contact_persons",
-      context,
-      {
-        params: getNodePageJsonApiParams("node--contact_persons").getQueryObject(),
-      },
-    )
+  const contactPerson = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--contact_persons", context, {
+    params: getNodePageJsonApiParams("node--contact_persons").getQueryObject(),
+  });
 
-    const validatedContactPerson = contactPerson.map((node) => validateAndCleanupContactPerson(node));
+  const validatedContactPerson = contactPerson.map((node) =>
+    validateAndCleanupContactPerson(node),
+  );
 
   //   const languageLinks = createLanguageLinks(nodeTranslations);
 
@@ -193,7 +192,7 @@ export const getStaticProps: GetStaticProps<ConatactUsProps> = async (
       contactUs: validatedResource,
       webform: validatedWebform,
       maps: maps.map((node) => validateAndCleanupOfficeLocations(node)),
-      contactPerson: validatedContactPerson
+      contactPerson: validatedContactPerson,
       //   languageLinks,
     },
   };

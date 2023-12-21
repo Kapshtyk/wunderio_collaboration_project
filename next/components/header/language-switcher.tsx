@@ -12,18 +12,16 @@ export function LanguageSwitcher() {
   const { push, locale } = useRouter();
   const { t } = useTranslation();
   const [curvalue, setcurValue] = useState(locale);
-  const { path } = languageLinks[curvalue];
 
-  useEffect(() => {
-    const changeLocale = async () => {
-      await push(path, undefined, { locale: curvalue });
-    };
-    changeLocale()
-      .then()
-      .catch((e) => {
-        console.error(e);
-      });
-  }, [curvalue, path, push]);
+
+  const changeLocale = (locale) => {
+    const { path } = languageLinks[locale];
+    const scroll = window.scrollY;
+    push(path, undefined, { locale }).then(() => {
+      window.scrollTo(0, scroll);
+    })
+  };
+
 
   return (
     <div>
@@ -31,25 +29,25 @@ export function LanguageSwitcher() {
       <RadioGroup
         className="grid-cols-3 items-center align-middle"
         defaultValue={curvalue}
-        onValueChange={setcurValue}
+        onValueChange={changeLocale}
       >
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="en" id="en" />
           <Label className="!mb-0 text-sm font-reqular" htmlFor="en">
-            English
+            {t("english")}
           </Label>
         </div>
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="fi" id="fi" />
           <Label className="!mb-0 text-sm font-reqular" htmlFor="fi">
-            Finnish
+            {t("finnish")}
           </Label>
         </div>
 
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="sv" id="sv" />
           <Label className="!mb-0 text-sm font-reqular" htmlFor="sv">
-            Swedish
+            {t("swedish")}
           </Label>
         </div>
       </RadioGroup>

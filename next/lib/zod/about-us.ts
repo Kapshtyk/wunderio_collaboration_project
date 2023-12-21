@@ -11,10 +11,12 @@ import {
   ImageSchema,
   LinksSchema,
   ListingArticlesSchema,
+  TestimonialsSchema,
   VideoSchema,
+  WorkCardSchema,
 } from "@/lib/zod/paragraph";
 
-const AboutUsElementsSchema = z.discriminatedUnion("type", [
+const AboutElementsSchema = z.discriminatedUnion("type", [
   FormattedTextSchema,
   ImageSchema,
   VideoSchema,
@@ -24,28 +26,38 @@ const AboutUsElementsSchema = z.discriminatedUnion("type", [
   ListingArticlesSchema,
   FileAttachmentsSchema,
   HeadingSectionSchema,
+  TestimonialsSchema,
+  WorkCardSchema,
 ]);
 
-export const AboutUsSchema = z.object({
+export const AboutSchema = z.object({
   type: z.literal("node--about_us"),
   id: z.string(),
   title: z.string(),
-  field_content_elements: z.array(AboutUsElementsSchema),
+  field_content_elements: z.array(AboutElementsSchema),
+  path: z.object({
+    alias: z.string(),
+  }),
+  body: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
   metatag: MetatagsSchema.optional(),
 });
 
-export function validateAndCleanupAboutUs(page: DrupalNode): AboutUs | null {
+export function validateAndCleanupAbout(about: DrupalNode): About | null {
   try {
     // Validate the top level fields first.
-    const topLevelAboutUsData = AboutUsSchema.omit({
+    const topLevelAboutData = AboutSchema.omit({
       field_content_elements: true,
-    }).parse(page);
+    }).parse(about);
 
     // Validate the field_content_elements separately, one by one.
     // This way, if one of them is invalid, we can still return the rest of the page contents.
-    const validatedParagraphs = page.field_content_elements
+    const validatedParagraphs = about.field_content_elements
       .map((paragraph: any) => {
-        const result = AboutUsElementsSchema.safeParse(paragraph);
+        const result = AboutElementsSchema.safeParse(paragraph);
 
         switch (result.success) {
           case true:
@@ -61,14 +73,14 @@ export function validateAndCleanupAboutUs(page: DrupalNode): AboutUs | null {
       .filter(Boolean);
 
     return {
-      ...topLevelAboutUsData,
+      ...topLevelAboutData,
       field_content_elements: validatedParagraphs,
     };
   } catch (error) {
     const { name = "ZodError About us", issues = [] } = error;
-    console.log(JSON.stringify({ name, issues, page }, null, 2));
+    console.log(JSON.stringify({ name, issues, about }, null, 2));
     return null;
   }
 }
 
-export type AboutUs = z.infer<typeof AboutUsSchema>;
+export type About = z.infer<typeof AboutSchema>;

@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 import { Paragraph, WorkCard } from "@/lib/zod/paragraph";
 
 import { MediaImage } from "./media--image";
-import { useTranslation } from "next-i18next";
 
 export function WorkWorkCard({ workPage }) {
   const { t } = useTranslation();

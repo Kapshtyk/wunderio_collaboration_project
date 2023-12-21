@@ -87,7 +87,7 @@
   "field-is-required": "{{field}} är obligatoriskt.",
   "events-main-title": "Artiklar och händelser",
   "events-main-description": "Vi hjälper till att definiera ditt företags digitala vision och ambitioner, vägleder dig på vägen mot digital framgång.",
-  "events-link": "Evenemang",
+  "events-link": "Evenemang och artiklar",
   "work-link": "Arbete",
   "frontPage-workTitle": "Vårt Arbete",
   "more-about-our-clients": "Mer Om Våra Kunder",
@@ -140,5 +140,16 @@
   "jump-to": "Hoppa till",
   "this-is-what-we-do": "Det här är vad vi gör",
   "our-offices": "våra kontor",
-  "meet-our-team": "Träffa vårt team"
+  "meet-our-team": "Träffa vårt team",
+  "preferences": "Inställningar",
+  "preferences_description": "Här kan du ändra dina inställningar relaterade till språk och tema",
+  "theme_switcher": "Teman växlare",
+  "language_switcher": "Språk växlare",
+  "english": "Engelska",
+  "swedish": "Svenska",
+  "finnish": "Finska",
+  "light_mode": "Ljust läge",
+  "dark_mode": "Mörkt läge",
+  "disabled": "avstängd",
+  "enabled": "aktiverad"
 }

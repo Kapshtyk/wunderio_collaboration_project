@@ -117,4 +117,8 @@
   li>a>p>p {
     @apply mb-0 ;
   }
+
+  li>a>p {
+    @apply transition duration-300 ease-in-out transform hover:scale-105;
+  }
 }

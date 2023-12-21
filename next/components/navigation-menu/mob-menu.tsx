@@ -4,7 +4,7 @@ import React from "react";
 import { Menu } from "@/lib/zod/menu";
 import Hamburger from "@/styles/icons/menu.svg";
 
-import { DarkModeToggle } from "../dark-mode-toggle";
+import { DarkModeToggle } from "../header/dark-mode-toggle";
 import { LanguageSwitcher } from "../header/language-switcher";
 
 import {

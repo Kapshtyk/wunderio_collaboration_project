@@ -258,5 +258,4 @@ export type Paragraph =
   | LinkService
   | SubHeadingSection
   | LabelledImage
-  | ImageShape
-
+  | ImageShape;

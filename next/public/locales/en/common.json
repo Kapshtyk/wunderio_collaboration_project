@@ -87,7 +87,7 @@
   "field-is-required": "The {{field}} field is required.",
   "events-main-title": "Articles & Events",
   "events-main-description": "We help to define your company’s digital vision and aspirations, guiding you on your way to digital success.",
-  "events-link": "Events",
+  "events-link": "Events & Articles",
   "events-form-title": "Registration for the {{event}}",
   "events-form-not-auth": "Please log in to register for an event.",
   "events-participants": "Participants",
@@ -140,5 +140,16 @@
   "jump-to": "Jump to",
   "this-is-what-we-do": "This is what we do",
   "our-offices": "Our offices",
-  "meet-our-team": "Meet our team"
+  "meet-our-team": "Meet our team",
+  "preferences": "Preferences",
+  "preferences_description": "Here you can change your preferences related to the language and theme",
+  "theme_switcher": "Theme switcher",
+  "language_switcher": "Language switcher",
+  "english": "English",
+  "swedish": "Swedish",
+  "finnish": "Finnish",
+  "light_mode": "Light mode",
+  "dark_mode": "Dark mode",
+  "disabled": "disabled",
+  "enabled": "enabled"
 }

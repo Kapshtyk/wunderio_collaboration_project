@@ -18,7 +18,8 @@ export type ResourceType =
   | "node--contact_us"
   | "node--venue"
   | "node--legal_document"
-  | "node--contact_persons";
+  | "node--contact_persons"
+  | "node--logowall";
 
 export function getNodePageJsonApiParams(resourceType: ResourceType) {
   const apiParams = new DrupalJsonApiParams().addFilter(
@@ -254,6 +255,33 @@ export function getNodePageJsonApiParams(resourceType: ResourceType) {
         "field_excerpt",
         "field_contact_email",
         "field_contact_phone",
+      ]);
+  }
+
+  if (resourceType === "node--logowall") {
+    apiParams
+      .addFields("node--logowall", [
+        "title",
+        "field_image",
+        "field_field_link_client_site",
+        "metatag",
+      ])
+      .addInclude(["field_image"]);
+  }
+
+  if (resourceType === "node--about_us") {
+    apiParams
+      .addInclude([
+        "field_content_elements",
+        "field_content_elements.field_image.field_media_image",
+      ])
+      .addFields("node--about_us", [
+        "title",
+        "field_content_elements",
+        "path",
+        "body",
+        "status",
+        "metatag",
       ]);
   }
 
