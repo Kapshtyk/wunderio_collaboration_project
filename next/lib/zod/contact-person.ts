@@ -8,9 +8,12 @@ export const ContactPersonSchema = z.object({
   type: z.literal("node--contact_persons"),
   id: z.string(),
   title: z.string(),
-  body: z.object({
-    processed: z.string(),
-  }).nullable().optional(),
+  body: z
+    .object({
+      processed: z.string(),
+    })
+    .nullable()
+    .optional(),
   field_image: ImageShape.nullable().optional(),
   field_full_name: z.string().nullable().optional(),
   field_excerpt: z.string().nullable().optional(),
@@ -22,9 +25,8 @@ export const ContactPersonSchema = z.object({
 export function validateAndCleanupContactPerson(
   contactPerson: DrupalNode,
 ): ContactPerson | null {
-  try { 
-    return ContactPersonSchema.parse(contactPerson)
-
+  try {
+    return ContactPersonSchema.parse(contactPerson);
   } catch (error) {
     const { name = "ZodError Contact Person", issues = [] } = error;
     console.log(JSON.stringify({ name, issues, contactPerson }, null, 2));

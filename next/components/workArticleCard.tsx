@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-
-import { absoluteUrl } from "@/lib/drupal/absolute-url";
 import { useTranslation } from "next-i18next";
 
+import { absoluteUrl } from "@/lib/drupal/absolute-url";
+
 export function WorkArticleCard({ workArticle }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <div
       key={workArticle.id}
@@ -28,7 +28,8 @@ export function WorkArticleCard({ workArticle }) {
         <Link href="/all-articles">
           {" "}
           <span className="uppercase text-accent-hugs text-md hover:underline">
-            {/* {t(workArticle.type.split("--")[1])} */} {t("related-content-article")}
+            {/* {t(workArticle.type.split("--")[1])} */}{" "}
+            {t("related-content-article")}
           </span>{" "}
         </Link>
       </div>

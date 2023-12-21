@@ -39,7 +39,10 @@ export default function IndexPage({
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
       <FrontPageWorkSection allWorkPages={allWorkPages} />
-      <ServicesFrontPage allServices={allServices} servicesTypes={servicesTypes} />
+      <ServicesFrontPage
+        allServices={allServices}
+        servicesTypes={servicesTypes}
+      />
       <NewsArticlesEvents items={items} />
     </>
   );
@@ -134,15 +137,13 @@ export const getStaticProps: GetStaticProps<IndexPageProps> = async (
     params: getNodePageJsonApiParams("node--services_page").getQueryObject(),
   });
 
-  const allWorkPages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    "node--page",
-    context,
-    {
-      params: getNodePageJsonApiParams("node--page")
-        .addFilter("field_page_type.name", "Work")
-        .getQueryObject(),
-    },
-  );
+  const allWorkPages = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--page", context, {
+    params: getNodePageJsonApiParams("node--page")
+      .addFilter("field_page_type.name", "Work")
+      .getQueryObject(),
+  });
 
   return {
     props: {

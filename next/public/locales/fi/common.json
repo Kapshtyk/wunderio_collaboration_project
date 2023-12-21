@@ -138,9 +138,12 @@
   "already-submitted-message": "Olet jo lähettänyt tämän lomakkeen.",
   "sign-in-message": "Kirjaudu sisään lähettääksesi lomakkeen.",
   "cancel-registration": "Poistaa rekisteröinti?",
-  "jump-to": "siirry",
+  "jump-to": "Siirry",
   "this-is-what-we-do": "Tätä me teemme",
   "our-offices": "Toimistomme",
   "meet-our-team": "Tapaa tiimimme",
-  "wunder-in-numbers": "Wunder Numeroina"
+  "wunder-in-numbers": "Wunder Numeroina",
+  "services": "Palvelut",
+  "form-contact-title": "Lähetä viesti",
+  "contact-us": "Ota yhteytta"
 }

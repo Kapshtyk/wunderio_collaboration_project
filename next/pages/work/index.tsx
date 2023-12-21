@@ -1,9 +1,11 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { DrupalNode } from "next-drupal";
 import { useTranslation } from "next-i18next";
+
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { LayoutProps } from "@/components/layout";
-import { LogoStrip } from "@/components/logo-strip";
+// import { LogoStrip } from "@/components/logo-strip";
+import { Meta } from "@/components/meta";
 import Numbers from "@/components/numbers";
 import { Paragraph } from "@/components/paragraph";
 import { WorkCards } from "@/components/work-cards";
@@ -14,10 +16,12 @@ import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-pa
 import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
 import { getCommonPageProps } from "@/lib/get-common-page-props";
 import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
+import {
+  Numbers as NumbersType,
+  validateAndCleanupNumbers,
+} from "@/lib/zod/numbers";
 import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
 import { validateAndCleanupWork, Work } from "@/lib/zod/work";
-import { Numbers as NumbersType, validateAndCleanupNumbers } from "@/lib/zod/numbers";
-import { Meta } from "@/components/meta";
 
 interface WorkPageProps extends LayoutProps {
   mainPage: Work;
@@ -66,7 +70,6 @@ export default function WorkPage({
         <h1 className="font-bold">OUR CLIENTS</h1>
         <LogoStrip />
       </div> */}
-
 
       <div className="my-12">
         <h1 className="uppercase text-main font-bold text-lg mb-4">{t("more-about-our-clients")}</h1>
