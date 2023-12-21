@@ -1,9 +1,9 @@
+import { useTranslation } from "next-i18next";
 import React from "react";
 
 import Cog from "@/styles/icons/cog.svg";
 
-import { DarkModeToggle } from "../dark-mode-toggle";
-
+import { DarkModeToggle } from "./dark-mode-toggle";
 import { LanguageSwitcher } from "./language-switcher";
 
 import {
@@ -16,6 +16,7 @@ import {
 } from "@/ui/sheet";
 
 const SecondaryMenu = () => {
+  const { t } = useTranslation();
   return (
     <Sheet>
       <SheetTrigger>
@@ -23,15 +24,12 @@ const SecondaryMenu = () => {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Preferences</SheetTitle>
-          <SheetDescription>
-            Here you can change your preferences related to the language and
-            theme
-          </SheetDescription>
+          <SheetTitle>{t("preferences")}</SheetTitle>
+          <SheetDescription>{t("preferences_description")}</SheetDescription>
         </SheetHeader>
-        <SheetTitle>Theme switcher</SheetTitle>
+        <SheetTitle>{t("theme_switcher")}</SheetTitle>
         <DarkModeToggle />
-        <SheetTitle>Language switcher</SheetTitle>
+        <SheetTitle>{t("language_switcher")}</SheetTitle>
         <LanguageSwitcher />
       </SheetContent>
     </Sheet>

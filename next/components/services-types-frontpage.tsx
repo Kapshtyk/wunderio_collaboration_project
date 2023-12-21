@@ -35,19 +35,23 @@ const ServicesFrontPage = ({
                   <div className="items-stretch self-stretch bg-white flex w-full grow flex-col mx-auto pt-6 pb-12 px-6 rounded-lg max-md:mt-8 max-md:px-5">
                     <div className="flex items-center self-stretch gap-4">
                       {subHeadingSection.field_heading === "Advisory" ||
-                    subHeadingSection.field_heading === "Neuvonta" || 
-                    subHeadingSection.field_heading === "Rådgivande" ? (
-                      <AdvisoryIcon className="h-10 w-10 motion-safe:animate-spin" />
-                    ) : subHeadingSection.field_heading === "Design & Data" || 
-                    subHeadingSection.field_heading === "Suunnittelu ja tiedot" ||
-                    subHeadingSection.field_heading === "Design och data"
-                     ? (
-                      <DesignDataIcon className="h-10 w-10 motion-safe:animate-spin" />
-                    ) : subHeadingSection.field_heading === "Delivering Digital" ||
-                    subHeadingSection.field_heading === "Digitaalinen toimitus" || 
-                    subHeadingSection.field_heading === "Att leverera digitalt" ? (
-                      <DeliveringDigitalIcon className="h-10 w-10 motion-safe:animate-spin" />
-                    ) : null}
+                      subHeadingSection.field_heading === "Neuvonta" ||
+                      subHeadingSection.field_heading === "Rådgivande" ? (
+                        <AdvisoryIcon className="h-10 w-10 motion-safe:animate-spin" />
+                      ) : subHeadingSection.field_heading === "Design & Data" ||
+                        subHeadingSection.field_heading ===
+                          "Suunnittelu ja tiedot" ||
+                        subHeadingSection.field_heading ===
+                          "Design och data" ? (
+                        <DesignDataIcon className="h-10 w-10 motion-safe:animate-spin" />
+                      ) : subHeadingSection.field_heading ===
+                          "Delivering Digital" ||
+                        subHeadingSection.field_heading ===
+                          "Digitaalinen toimitus" ||
+                        subHeadingSection.field_heading ===
+                          "Att leverera digitalt" ? (
+                        <DeliveringDigitalIcon className="h-10 w-10 motion-safe:animate-spin" />
+                      ) : null}
                       <span className="text-accent-hugs uppercase">
                         {subHeadingSection.field_heading}
                       </span>

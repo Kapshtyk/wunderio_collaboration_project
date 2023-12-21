@@ -39,11 +39,11 @@ export default function IndexPage({
       <Meta title={frontpage?.title} metatags={frontpage?.metatag} />
       <HeroBanner />
       <FrontPageWorkSection allWorkPages={allWorkPages} />
+      <NewsArticlesEvents items={items} />
       <ServicesFrontPage
         allServices={allServices}
         servicesTypes={servicesTypes}
       />
-      <NewsArticlesEvents items={items} />
     </>
   );
 }

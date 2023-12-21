@@ -1,11 +1,11 @@
 import Link from "next/link";
+import { useTranslation } from "next-i18next";
 import React from "react";
 
+import { DarkModeToggle } from "@/components/header/dark-mode-toggle";
+import { LanguageSwitcher } from "@/components/header/language-switcher";
 import { Menu } from "@/lib/zod/menu";
 import Hamburger from "@/styles/icons/menu.svg";
-
-import { DarkModeToggle } from "../dark-mode-toggle";
-import { LanguageSwitcher } from "../header/language-switcher";
 
 import {
   Sheet,
@@ -22,6 +22,7 @@ interface NavigationMenuProps {
 
 const MobMenu = ({ menu }: NavigationMenuProps) => {
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
@@ -33,13 +34,13 @@ const MobMenu = ({ menu }: NavigationMenuProps) => {
       </SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle>Menu</SheetTitle>
+          <SheetTitle>{t("menu")}</SheetTitle>
           <SheetDescription>
-            <ul className="flex w-full flex-col items-center">
+            <ul className="flex w-full flex-col pl-4 items-start">
               {menu.map((item) => (
                 <Link
                   key={item.id}
-                  className="block text-main select-none rounded-md py-2 no-underline outline-none transition-colors hover:after:absolute hover:after:bottom-[-1px] hover:after:content=[''] hover:after:h-[2px] hover:after:bg-main hover:after:animate-underline"
+                  className="block text-main select-none rounded-md pb-1 no-underline outline-none transition-colors hover:after:absolute hover:after:bottom-[-1px] hover:after:content=[''] hover:after:h-[2px] hover:after:bg-main hover:after:animate-underline"
                   href={item.url}
                 >
                   <li onClick={() => setOpen(false)}>{item.title}</li>
@@ -48,13 +49,11 @@ const MobMenu = ({ menu }: NavigationMenuProps) => {
             </ul>
           </SheetDescription>
         </SheetHeader>
-        <SheetTitle>Preferences</SheetTitle>
-        <SheetDescription>
-          Here you can change your preferences related to the language and theme
-        </SheetDescription>
-        <SheetTitle>Theme switcher</SheetTitle>
+        <SheetTitle>{t("preferences")}</SheetTitle>
+        <SheetDescription>{t("preferences_description")} </SheetDescription>
+        <SheetTitle>{t("theme_switcher")}</SheetTitle>
         <DarkModeToggle />
-        <SheetTitle>Language switcher</SheetTitle>
+        <SheetTitle>{t("language_switcher")}</SheetTitle>
         <LanguageSwitcher />
       </SheetContent>
     </Sheet>

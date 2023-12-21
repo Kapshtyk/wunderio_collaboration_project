@@ -394,30 +394,6 @@
   <priority>0.5</priority>
  </url>
  <url>
-  <loc>https://frontend.lndo.site/en/about-us</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/about-us"/>
-  <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/tietoa-meista"/>
-  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/om-oss"/>
-  <lastmod>2023-10-31T12:47:16+00:00</lastmod>
-  <priority>0.5</priority>
- </url>
- <url>
-  <loc>https://frontend.lndo.site/fi/tietoa-meista</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/about-us"/>
-  <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/tietoa-meista"/>
-  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/om-oss"/>
-  <lastmod>2023-10-31T12:47:16+00:00</lastmod>
-  <priority>0.5</priority>
- </url>
- <url>
-  <loc>https://frontend.lndo.site/sv/om-oss</loc>
-  <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/about-us"/>
-  <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/tietoa-meista"/>
-  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/om-oss"/>
-  <lastmod>2023-10-31T12:47:16+00:00</lastmod>
-  <priority>0.5</priority>
- </url>
- <url>
   <loc>https://frontend.lndo.site/en/media-and-publishing</loc>
   <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/media-and-publishing"/>
   <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/media-ja-julkaisut"/>
@@ -900,7 +876,25 @@
  <url>
   <loc>https://frontend.lndo.site/en/work/wunder-loves-turku-benefits-long-term-partnership</loc>
   <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/work/wunder-loves-turku-benefits-long-term-partnership"/>
-  <lastmod>2023-12-17T16:29:59+00:00</lastmod>
+  <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/work/wunder-loves-turku-pitkaaikaisen-kumppanuuden-edut"/>
+  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/work/wunder-loves-turku-fordelarna-med-ett-langsiktigt-partnerskap"/>
+  <lastmod>2023-12-21T08:43:21+00:00</lastmod>
+  <priority>0.5</priority>
+ </url>
+ <url>
+  <loc>https://frontend.lndo.site/fi/work/wunder-loves-turku-pitkaaikaisen-kumppanuuden-edut</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/work/wunder-loves-turku-benefits-long-term-partnership"/>
+  <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/work/wunder-loves-turku-pitkaaikaisen-kumppanuuden-edut"/>
+  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/work/wunder-loves-turku-fordelarna-med-ett-langsiktigt-partnerskap"/>
+  <lastmod>2023-12-21T08:43:21+00:00</lastmod>
+  <priority>0.5</priority>
+ </url>
+ <url>
+  <loc>https://frontend.lndo.site/sv/work/wunder-loves-turku-fordelarna-med-ett-langsiktigt-partnerskap</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/work/wunder-loves-turku-benefits-long-term-partnership"/>
+  <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/work/wunder-loves-turku-pitkaaikaisen-kumppanuuden-edut"/>
+  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/work/wunder-loves-turku-fordelarna-med-ett-langsiktigt-partnerskap"/>
+  <lastmod>2023-12-21T08:43:21+00:00</lastmod>
   <priority>0.5</priority>
  </url>
  <url>
@@ -1027,6 +1021,7 @@
   <loc>https://frontend.lndo.site/en/work/service-advisor-applications</loc>
   <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/work/service-advisor-applications"/>
   <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/work/palveluneuvojan-sovellukset"/>
+  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/work/applikationer-serviceradgivare"/>
   <lastmod>2023-12-17T16:55:04+00:00</lastmod>
   <priority>0.5</priority>
  </url>
@@ -1034,6 +1029,15 @@
   <loc>https://frontend.lndo.site/fi/work/palveluneuvojan-sovellukset</loc>
   <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/work/service-advisor-applications"/>
   <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/work/palveluneuvojan-sovellukset"/>
+  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/work/applikationer-serviceradgivare"/>
+  <lastmod>2023-12-17T16:55:04+00:00</lastmod>
+  <priority>0.5</priority>
+ </url>
+ <url>
+  <loc>https://frontend.lndo.site/sv/work/applikationer-serviceradgivare</loc>
+  <xhtml:link rel="alternate" hreflang="en" href="https://frontend.lndo.site/en/work/service-advisor-applications"/>
+  <xhtml:link rel="alternate" hreflang="fi" href="https://frontend.lndo.site/fi/work/palveluneuvojan-sovellukset"/>
+  <xhtml:link rel="alternate" hreflang="sv" href="https://frontend.lndo.site/sv/work/applikationer-serviceradgivare"/>
   <lastmod>2023-12-17T16:55:04+00:00</lastmod>
   <priority>0.5</priority>
  </url>
