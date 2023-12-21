@@ -1,14 +1,14 @@
-import React from 'react'
-import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
-import clsx from 'clsx'
+import React from "react";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import clsx from "clsx";
 
-import Checkmark from '@/styles/icons/checkmark.svg'
+import Checkmark from "@/styles/icons/checkmark.svg";
 
-import css from './checkbox.module.css'
+import css from "./checkbox.module.css";
 
 type CheckboxProps = React.ComponentPropsWithoutRef<
   typeof CheckboxPrimitive.Root
->
+>;
 
 export const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
@@ -18,9 +18,9 @@ export const Checkbox = React.forwardRef<
     ref={ref}
     className={clsx(
       css.checkbox,
-      'peer h-5 w-5 shrink-0 rounded border border-scapaflow',
-      'disabled:cursor-not-allowed disabled:border-graysuit',
-      className
+      "peer h-5 w-5 shrink-0 rounded border border-scapaflow",
+      "disabled:cursor-not-allowed disabled:border-graysuit",
+      className,
     )}
     {...props}
   >
@@ -28,5 +28,5 @@ export const Checkbox = React.forwardRef<
       <Checkmark />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
-))
-Checkbox.displayName = 'Checkbox'
+));
+Checkbox.displayName = "Checkbox";

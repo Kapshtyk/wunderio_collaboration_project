@@ -1,11 +1,11 @@
-uuid: 5651717c-80a8-4d61-9891-e492b1f3144f
+uuid: a8aabbe1-c6f2-497a-a983-8c071ad83e82
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_page_type
     - node.type.page
-    - taxonomy.vocabulary.page_type
+    - taxonomy.vocabulary.page_types
   module:
     - tmgmt_content
 third_party_settings:
@@ -15,7 +15,7 @@ id: node.page.field_page_type
 field_name: field_page_type
 entity_type: node
 bundle: page
-label: 'Page type'
+label: page_type
 description: ''
 required: false
 translatable: false
@@ -25,7 +25,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      page_type: page_type
+      page_types: page_types
     sort:
       field: name
       direction: asc

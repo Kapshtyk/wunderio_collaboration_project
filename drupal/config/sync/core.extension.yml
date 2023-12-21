@@ -7,10 +7,12 @@ module:
   block: 0
   breakpoint: 0
   ckeditor5: 0
+  ckeditor_div_manager: 0
   config: 0
   config_split: 0
   config_translation: 0
   consumers: 0
+  csv_serialization: 0
   datetime: 0
   datetime_range: 0
   dblog: 0
@@ -18,19 +20,29 @@ module:
   dynamic_page_cache: 0
   editor: 0
   entity_reference_revisions: 0
+  feeds: 0
+  feeds_log: 0
   field: 0
   field_ui: 0
   file: 0
   filter: 0
+  geocoder: 0
+  geocoder_ajax_prepopulate: 0
+  geocoder_field: 0
+  geocoder_geofield: 0
+  geofield: 0
+  geofield_map: 0
   help: 0
   image: 0
   jsonapi: 0
   jsonapi_extras: 0
   jsonapi_menu_items: 0
   jsonapi_resources: 0
+  jsonapi_views: 0
   language: 0
   link: 0
   locale: 0
+  matomo_reports: 0
   media: 0
   media_library: 0
   menu_link_attributes: 0
@@ -38,6 +50,8 @@ module:
   menu_ui: 0
   metatag: 0
   migrate: 0
+  migrate_drupal: 0
+  migrate_drupal_ui: 0
   migrate_plus: 0
   migrate_source_csv: 0
   migrate_tools: 0
@@ -49,6 +63,7 @@ module:
   page_cache: 0
   path: 0
   path_alias: 0
+  phpass: 0
   redirect: 0
   registration_role: 0
   require_login: 0
@@ -58,10 +73,12 @@ module:
   simple_oauth: 0
   simple_sitemap: 0
   simplei: 0
+  styled_google_map: 0
   subrequests: 0
   system: 0
   taxonomy: 0
   team2_cascade_deletion: 0
+  team2_cookies_consent: 0
   text: 0
   tmgmt: 0
   tmgmt_content: 0
@@ -71,6 +88,7 @@ module:
   tour: 0
   update: 0
   user: 0
+  views_data_export: 0
   views_ui: 0
   webform: 0
   webform_node: 0

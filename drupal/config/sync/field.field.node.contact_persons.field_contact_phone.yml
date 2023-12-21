@@ -1,0 +1,24 @@
+uuid: 441b7eb7-aeb6-419f-98b9-0ccf7fa03f7d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_contact_phone
+    - node.type.contact_persons
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.contact_persons.field_contact_phone
+field_name: field_contact_phone
+entity_type: node
+bundle: contact_persons
+label: 'Contact Phone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

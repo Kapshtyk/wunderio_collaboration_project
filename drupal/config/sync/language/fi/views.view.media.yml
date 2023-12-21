@@ -1,7 +1,9 @@
+label: Media
 display:
   default:
     display_title: Oletus
     display_options:
+      title: Media
       fields:
         media_bulk_form:
           action_title: Toiminto
@@ -13,6 +15,8 @@ display:
           label: Tila
           settings:
             format_custom_true: Julkaistu
+        changed:
+          label: Päivitetty
         operations:
           label: Toimenpiteet
       pager:
@@ -21,6 +25,7 @@ display:
             items_per_page_options_all_label: '- Kaikki -'
       exposed_form:
         options:
+          submit_button: Suodatus
           reset_button_label: Palauta
       filters:
         bundle:
@@ -34,3 +39,8 @@ display:
         langcode:
           expose:
             label: Kieli
+  media_page_list:
+    display_title: Media
+    display_options:
+      menu:
+        title: Media

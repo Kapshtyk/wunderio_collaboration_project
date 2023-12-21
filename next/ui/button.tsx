@@ -1,62 +1,60 @@
-import React from 'react'
-import clsx from 'clsx'
-import { cva } from 'cva'
+import React from "react";
+import clsx from "clsx";
+import { cva } from "cva";
 
 export const buttonVariants = cva(
-  'flex justify-center items-center border-2 rounded transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed',
+  "flex gap-2 items-center align-center justify-center rounded-lg transition-colors duration-200 active:scale-[0.98] disabled:cursor-not-allowed",
   {
     variants: {
+      size: {
+        xs: "text-xs h-8 font-semibold py-2 px-3",
+        sm: "text-sm h-9 font-semibold py-2 px-3",
+        md: "text-sm h-10 font-semibold py-[10px] px-4",
+        lg: "text-md h-12 font-semibold py-3 px-5 gap-2",
+        xl: "text-md h-14 font-semibold py-4 px-6 gap-2",
+      },
       variant: {
         primary: [
-          'bg-primary-600 border-primary-600 text-white',
-          'hover:bg-white hover:text-primary-600',
-          'active:bg-white active:text-primary-600',
-          'disabled:!border-primary-200 disabled:!text-white disabled:!bg-primary-200'
+          "bg-primary-500 text-white",
+          "hover:bg-primary-500/80 hover:text-white",
+          "disabled:!border-primary-500/20 disabled:!text-white/20 disabled:!bg-primary-500/20",
         ],
         secondary: [
-          'bg-white text-primary-600 border-primary-600',
-          'hover:bg-primary-600 hover:text-white',
-          'active:bg-primary-600 active:text-white',
-          'disabled:!border-primary-200 disabled:!text-primary-200 disabled:!bg-white'
+          "bg-background text-main border-main border",
+          "hover:bg-primary-50 hover:text-primary-500 hover:border-primary-500",
+          "disabled:!border-primary-200 disabled:!text-main disabled:!bg-finnishwinter/90",
         ],
         tertiary: [
-          'bg-transparent text-primary-600 border-transparent',
-          'hover:bg-primary-50 hover:text-primary-600 hover:border-transparent',
-          'active:bg-primary-50 active:text-primary-600 active:border-transparent',
-          'disabled:!border-transparent disabled:!text-primary-200'
-        ]
+          "bg-transparent !text-main !px-0 !justify-start",
+          "hover:hover:text-main/80 !px-0",
+          "focus:ring-0 focus:ring-offset-0 focus:ring-transparent focus:ring-offset-transparent",
+        ],
       },
-      size: {
-        sm: 'text-sm py-2 px-2.5',
-        md: 'text-md py-2.5 px-4',
-        lg: 'text-lg py-3 px-6'
-      }
-    }
-  }
-)
-
+    },
+  },
+);
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'tertiary'
-  size?: 'sm' | 'md' | 'lg'
-  children?: React.ReactNode
-  className?: string
+  variant?: "primary" | "secondary" | "tertiary";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  children?: React.ReactNode;
+  className?: string;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { variant = 'primary', size = 'md', children, className, ...props },
-    ref
+    { size = "md", variant = "primary", children, className, ...props },
+    ref,
   ) => {
     return (
       <button
-        className={clsx(buttonVariants({ variant, size }), className)}
+        className={clsx(buttonVariants({ size, variant }), className)}
         ref={ref}
         {...props}
       >
         {children}
       </button>
-    )
-  }
-)
-Button.displayName = 'Button'
+    );
+  },
+);
+Button.displayName = "Button";

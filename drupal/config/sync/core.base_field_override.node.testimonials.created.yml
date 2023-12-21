@@ -1,0 +1,18 @@
+uuid: cb2834fd-6b88-4db2-87d2-022f52d2c582
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.testimonials
+id: node.testimonials.created
+field_name: created
+entity_type: node
+bundle: testimonials
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

@@ -4,44 +4,44 @@ function getTermFilterValue(field, fieldValue) {
   // of the boolean value, so we need to convert it to a Boolean.
 
   // TODO We need better approach for boolean values
-  if (fieldValue === 'false' || fieldValue === 'true') {
-    return { [field]: fieldValue === 'true' }
+  if (fieldValue === "false" || fieldValue === "true") {
+    return { [field]: fieldValue === "true" };
   }
 
-  return { [`${field}`]: fieldValue }
+  return { [`${field}`]: fieldValue };
 }
 
 function getTermFilter(filter) {
-  if (filter.type === 'any') {
+  if (filter.type === "any") {
     return {
       bool: {
         should: filter.values.map((filterValue) => ({
-          term: getTermFilterValue(filter.field, filterValue)
+          term: getTermFilterValue(filter.field, filterValue),
         })),
-        minimum_should_match: 1
-      }
-    }
-  } else if (filter.type === 'all') {
+        minimum_should_match: 1,
+      },
+    };
+  } else if (filter.type === "all") {
     return {
       bool: {
         filter: filter.values.map((filterValue) => ({
-          term: getTermFilterValue(filter.field, filterValue)
-        }))
-      }
-    }
+          term: getTermFilterValue(filter.field, filterValue),
+        })),
+      },
+    };
   }
 }
 
 export function buildRequestFilter(filters) {
-  if (!filters) return
+  if (!filters) return;
 
   filters = filters.reduce((acc, filter) => {
-    if (['tags', 'content_type'].includes(filter.field)) {
-      return [...acc, getTermFilter(filter)]
+    if (["tags", "content_type"].includes(filter.field)) {
+      return [...acc, getTermFilter(filter)];
     }
-    return acc
-  }, [])
+    return acc;
+  }, []);
 
-  if (filters.length < 1) return
-  return filters
+  if (filters.length < 1) return;
+  return filters;
 }

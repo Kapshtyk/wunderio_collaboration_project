@@ -1,0 +1,11 @@
+uuid: 8dc2e1d1-c132-48c2-b136-6ee41b146786
+langcode: en
+status: true
+dependencies: {  }
+id: node.office_locations
+site_resolver: site_selector
+configuration:
+  sites:
+    frontend: frontend
+revalidator: ''
+revalidator_configuration: {  }

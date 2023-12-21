@@ -1,0 +1,24 @@
+uuid: e6613a47-8991-4bf5-b851-fdd0ff7c6295
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_suffix
+    - node.type.numbers
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.numbers.field_suffix
+field_name: field_suffix
+entity_type: node
+bundle: numbers
+label: Suffix
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

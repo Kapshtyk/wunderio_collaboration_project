@@ -1,0 +1,34 @@
+uuid: d85e6b41-a328-4ad7-8cff-bb29e3565ee5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_testimonials
+    - node.type.careers
+    - node.type.testimonials
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.careers.field_testimonials
+field_name: field_testimonials
+entity_type: node
+bundle: careers
+label: Testimonials
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      testimonials: testimonials
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

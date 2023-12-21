@@ -1,49 +1,52 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useTranslation } from 'next-i18next'
-import { useEffect, useState } from 'react'
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
 
 export interface BreadcrumbsProps {
   items: {
-    title: string
-    url?: string
-  }[]
+    title: string;
+    url?: string;
+  }[];
 }
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
+  const defaultBreadcrumbs = [
+    {
+      title: t("homepage-link"),
+      url: "/",
+    },
+  ];
+
   if (!items?.length) {
-    return null
+    return null;
   }
 
+  const breadCrumbs = [...defaultBreadcrumbs, ...items];
+
   return (
-    <nav className="py-4 text-text">
-      <ol className="flex">
-        {items.map((item, index) => (
-          <li key={index} className="flex items-center leading-none truncate">
+    <nav aria-label="Breadcrumb">
+      <ol className="hidden 2sm:flex pt-4">
+        {breadCrumbs.map((item, index) => (
+          <li
+            key={index}
+            className="flex items-center truncate !mb-0 last:after:border-r-0 after:content=['']  after:border-r-2 after:border-main after:h-4  after:ml-3 after:mr-3 after:-skew-x-12 transition duration-300 ease-in-out transform hover:scale-105"
+          >
             {item.url ? (
-              <Link className="underline text-link" href={item.url}>
+              <Link
+                className="text-main flex items-center"
+                href={item.url}
+                aria-current={
+                  index === breadCrumbs.length - 1 ? "page" : undefined
+                }
+              >
                 {item.title}
               </Link>
             ) : (
               item.title
             )}
-            {index !== items.length - 1 && (
-              <svg
-                className="w-3 h-3 mx-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m13 17 5-5-5-5M6 17l5-5-5-5" />
-              </svg>
-            )}
           </li>
         ))}
       </ol>
     </nav>
-  )
+  );
 }

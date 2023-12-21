@@ -1,0 +1,21 @@
+uuid: 1fbc0fe4-10ac-4634-894e-14e1de0b5aa5
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.numbers_tags
+  module:
+    - text
+id: taxonomy_term.numbers_tags.description
+field_name: description
+entity_type: taxonomy_term
+bundle: numbers_tags
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats: {  }
+field_type: text_long

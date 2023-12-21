@@ -1,7 +1,9 @@
-export function HeadingParagraph({ children }: { children: string }) {
-  return (
-    <h2 className="text-left text-heading-md font-bold text-steelgray md:text-heading-lg">
-      {children}
-    </h2>
-  )
+export function HeadingParagraph({
+  className,
+  children,
+}: {
+  children: string | JSX.Element;
+  className?: string;
+}) {
+  return <h2 className={className}>{children}</h2>;
 }

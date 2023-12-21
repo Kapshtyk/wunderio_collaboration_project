@@ -1,0 +1,8 @@
+uuid: a50d55ac-36c8-4b74-b262-0d5d60ab4b9a
+langcode: en
+status: true
+dependencies: {  }
+name: 'Services Types'
+vid: advisory
+description: 'List of services types'
+weight: 0

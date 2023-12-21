@@ -21,7 +21,7 @@ elements: |-
     '#title': Email
     '#required': true
     '#unique': true
-    '#unique_user': true
+    '#unique_error': asdadasdadadad
     '#format_items': comma
   name:
     '#type': textfield

@@ -1,146 +1,160 @@
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import { DrupalNode, DrupalTaxonomyTerm } from 'next-drupal'
-import { useTranslation } from 'next-i18next'
+import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { DrupalNode } from "next-drupal";
+import { useTranslation } from "next-i18next";
 
-import { ArticleTeasers } from '@/components/article-teasers'
-import { Breadcrumbs } from '@/components/breadcrumbs'
-import { LayoutProps } from '@/components/layout'
-import { LogoStrip } from '@/components/logo-strip'
-import { WorkCards } from '@/components/work-card'
-import { drupal } from '@/lib/drupal/drupal-client'
-import { getNodePageJsonApiParams } from '@/lib/drupal/get-node-page-json-api-params'
-import { getCommonPageProps } from '@/lib/get-common-page-props'
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { LayoutProps } from "@/components/layout";
+import { Meta } from "@/components/meta";
+import Numbers from "@/components/numbers";
+import { Paragraph } from "@/components/paragraph";
+import { WorkCards } from "@/components/work-cards";
+import { WorkArticleCard } from "@/components/workArticleCard";
+import { createLanguageLinks } from "@/lib/contexts/language-links-context";
+import { drupal } from "@/lib/drupal/drupal-client";
+import { getNodePageJsonApiParams } from "@/lib/drupal/get-node-page-json-api-params";
+import { getNodeTranslatedVersions } from "@/lib/drupal/get-node-translated-versions";
+import { getCommonPageProps } from "@/lib/get-common-page-props";
+import { Article, validateAndCleanupArticle } from "@/lib/zod/article";
 import {
-  ArticleTeaser,
-  validateAndCleanupArticleTeaser
-} from '@/lib/zod/article-teaser'
-import { Page as PageType, validateAndCleanupPage } from '@/lib/zod/page'
-import { HeadingSection } from '@/lib/zod/paragraph'
-import { validateAndCleanupWork, Work } from '@/lib/zod/work'
+  Numbers as NumbersType,
+  validateAndCleanupNumbers,
+} from "@/lib/zod/numbers";
+import { Page as PageType, validateAndCleanupPage } from "@/lib/zod/page";
+import { validateAndCleanupWork, Work } from "@/lib/zod/work";
 
 interface WorkPageProps extends LayoutProps {
-  mainPage: Work
-  allPages: PageType[]
-  tags: DrupalTaxonomyTerm[]
-  promotedArticleTeasers: ArticleTeaser[]
+  mainPage: Work;
+  allWorkPages: PageType[];
+  allArticles: Article[];
+  wunderNumbers: NumbersType[];
 }
 
 export default function WorkPage({
   mainPage,
-  allPages,
-  tags,
-  promotedArticleTeasers
+  allWorkPages,
+  allArticles,
+  wunderNumbers,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const { t } = useTranslation();
   const breadcrumbs = [
     {
-      title: 'Home',
-      url: '/'
+      title: t("work-link"),
+      url: "/work",
     },
-    {
-      title: 'Work',
-      url: '/work'
-    }
-  ]
-  console.log('workPages:', allPages)
-
-  const headingSection = mainPage.field_content_elements.find(
-    (element) => element.type === 'paragraph--heading_section'
-  ) as HeadingSection
+  ];
 
   return (
     <>
+      <Meta title={mainPage.title} metatags={mainPage.metatag} />
       <div className="container">
         {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
       </div>
-      <div className="h-70 bg-primary-400/40">
-        <div className="p-20 flex">
-          <h1 className="font-bold text-2xl mr-20">
-            {headingSection.field_heading}
-          </h1>
-          <span className="text-lg">{headingSection.field_excerpt}</span>
+      <div>
+        <div className="grid gap-4">
+          {mainPage.field_content_elements?.map((paragraph) => (
+            <Paragraph key={paragraph.id} paragraph={paragraph} />
+          ))}
         </div>
+      </div>
+      <div>
+        <h1 className="uppercase text-main font-bold text-lg my-6">
+          {t("wunder-in-numbers")}
+        </h1>
+        <Numbers numbers={wunderNumbers} />
       </div>
 
       <div>
-        {tags.map((tag) => (
-          <div className="grid grid-cols-3 gap-3" key={tag.id}>
-            {allPages
-              .filter(
-                (workPages) => workPages.field_page_type?.name === tag.name
-              )
-              .map((workPage) => (
-                <div key={workPage.id}>
-                  <WorkCards
-                    title={workPage.title}
-                    contentElements={workPage.field_content_elements}
-                    path={workPage.path.alias}
-                  />
-                </div>
-              ))}
-          </div>
-        ))}
+        <WorkCards allWorkPages={allWorkPages} />
       </div>
 
-      <LogoStrip />
-      <ArticleTeasers
-        articles={promotedArticleTeasers}
-        heading={'promoted-articles'}
-      />
+      {/* <div className="my-20">
+        <h1 className="font-bold">OUR CLIENTS</h1>
+        <LogoStrip />
+      </div> */}
+
+      <div className="my-12">
+        <h1 className="uppercase text-main font-bold text-lg mb-4">
+          {t("more-about-our-clients")}
+        </h1>
+        <div className="md:grid grid-cols-3 gap-3">
+          {allArticles
+            .filter(
+              (workArticles) =>
+                workArticles.field_tags?.some(
+                  (field_tag) => field_tag?.name === "Client",
+                ),
+            )
+            .sort(
+              (a, b) =>
+                new Date(b.created).getTime() - new Date(a.created).getTime(),
+            )
+            .slice(0, 3)
+            .map((workArticle) => (
+              <WorkArticleCard key={workArticle.id} workArticle={workArticle} />
+            ))}
+        </div>
+      </div>
     </>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps<WorkPageProps> = async (
-  context
+  context,
 ) => {
   const mainPage = (
     await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-      'node--work',
+      "node--work_main_page",
       context,
       {
-        params: getNodePageJsonApiParams('node--work').getQueryObject()
-      }
+        params: getNodePageJsonApiParams(
+          "node--work_main_page",
+        ).getQueryObject(),
+      },
     )
-  ).at(0)
+  ).at(0);
 
-  console.log('mainPage:' + mainPage)
+  const nodeTranslations = await getNodeTranslatedVersions(
+    mainPage,
+    context,
+    drupal,
+  );
 
-  const pages = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    'node--page',
+  const languageLinks = createLanguageLinks(nodeTranslations);
+
+  const allWorkPages = await drupal.getResourceCollectionFromContext<
+    DrupalNode[]
+  >("node--page", context, {
+    params: getNodePageJsonApiParams("node--page")
+      .addFilter("field_page_type.name", "Work")
+      .getQueryObject(),
+  });
+
+  const articles = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--article",
     context,
     {
-      params: getNodePageJsonApiParams('node--page').getQueryObject()
-    }
-  )
+      params: getNodePageJsonApiParams("node--article").getQueryObject(),
+    },
+  );
 
-  const tags = await drupal.getResourceCollectionFromContext<
-    DrupalTaxonomyTerm[]
-  >('taxonomy_term--page_type', context, {})
-  console.log('tags: ', tags)
-
-  const promotedArticleTeasers = await drupal.getResourceCollectionFromContext<
-    DrupalNode[]
-  >('node--article', context, {
-    params: {
-      'filter[status]': 1,
-      'filter[langcode]': context.locale,
-      'filter[promote]': 1,
-      'fields[node--article]': 'title,path,field_image,uid,created',
-      include: 'field_image,uid',
-      sort: '-sticky,-created',
-      'page[limit]': 3
-    }
-  })
+  const numbers = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    "node--numbers",
+    context,
+    {
+      params: getNodePageJsonApiParams("node--numbers")
+        .addFilter("field_numbers_type.name", "Wunder in Numbers")
+        .getQueryObject(),
+    },
+  );
 
   return {
     props: {
       ...(await getCommonPageProps(context)),
       mainPage: validateAndCleanupWork(mainPage),
-      allPages: pages.map((node) => validateAndCleanupPage(node)),
-      tags,
-      promotedArticleTeasers: promotedArticleTeasers.map((teaser) =>
-        validateAndCleanupArticleTeaser(teaser)
-      )
-    }
-  }
-}
+      allWorkPages: allWorkPages.map((node) => validateAndCleanupPage(node)),
+      allArticles: articles.map((node) => validateAndCleanupArticle(node)),
+      wunderNumbers: numbers.map((node) => validateAndCleanupNumbers(node)),
+      languageLinks,
+    },
+  };
+};

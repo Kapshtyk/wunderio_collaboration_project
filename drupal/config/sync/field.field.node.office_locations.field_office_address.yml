@@ -1,0 +1,24 @@
+uuid: a8d0654d-2ec7-4449-af8c-3e5a1ca5fad3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_office_address
+    - node.type.office_locations
+  module:
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.office_locations.field_office_address
+field_name: field_office_address
+entity_type: node
+bundle: office_locations
+label: 'Office address'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

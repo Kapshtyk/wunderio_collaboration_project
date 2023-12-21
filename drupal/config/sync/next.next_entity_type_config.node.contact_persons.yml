@@ -1,0 +1,11 @@
+uuid: 04ce04ae-9881-4584-881b-4864e2b961b5
+langcode: en
+status: true
+dependencies: {  }
+id: node.contact_persons
+site_resolver: site_selector
+configuration:
+  sites:
+    frontend: frontend
+revalidator: ''
+revalidator_configuration: {  }

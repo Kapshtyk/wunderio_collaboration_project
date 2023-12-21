@@ -1,0 +1,25 @@
+uuid: dea4da12-418d-462d-a0be-16b277089872
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.contact_us.field_contact_us_form
+    - field.field.node.contact_us.field_content_elements
+    - node.type.contact_us
+  module:
+    - user
+id: node.contact_us.teaser
+targetEntityType: node
+bundle: contact_us
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_contact_us_form: true
+  field_content_elements: true
+  langcode: true

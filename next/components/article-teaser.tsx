@@ -1,31 +1,29 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useTranslation } from 'next-i18next'
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
-import { absoluteUrl } from '@/lib/drupal/absolute-url'
-import { formatDate } from '@/lib/utils'
-import { ArticleTeaser } from '@/lib/zod/article-teaser'
+import { absoluteUrl } from "@/lib/drupal/absolute-url";
+import { formatDate } from "@/lib/utils";
+import { ArticleTeaser } from "@/lib/zod/article-teaser";
 
 interface ArticleTeaserProps {
-  article: ArticleTeaser
+  article: ArticleTeaser;
 }
 
 export function ArticleTeaser({ article }: ArticleTeaserProps) {
-  const { t } = useTranslation()
-  const author = article.uid?.display_name
-  const router = useRouter()
-  const date = formatDate(article.created, router.locale)
+  const { t } = useTranslation();
+  const author = article.uid?.display_name;
+  const router = useRouter();
+  const date = formatDate(article.created, router.locale);
   return (
     <Link
       href={article.path.alias}
-      className="relative grid h-full rounded border border-finnishwinter bg-white p-4 transition-all hover:shadow-md"
+      className="relative grid h-full rounded border border-finnishwinter bg-foreground p-4 transition-all hover:shadow-md"
     >
-      <h3 className="mb-2 line-clamp-2 text-heading-xs font-bold">
-        {article.title}
-      </h3>
+      <h3 className="mb-2 line-clamp-2">{article.title}</h3>
       <div className="mb-4 line-clamp-2 text-md text-scapaflow">
-        {author && <>{t('posted-by', { author })} - </>}
+        {author && <>{t("posted-by", { author })} - </>}
         {date}
       </div>
       {article.field_image && (
@@ -38,5 +36,5 @@ export function ArticleTeaser({ article }: ArticleTeaserProps) {
         />
       )}
     </Link>
-  )
+  );
 }

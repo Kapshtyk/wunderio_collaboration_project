@@ -31,7 +31,7 @@ bundle: page
 label: 'Content elements'
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
@@ -57,6 +57,9 @@ settings:
       accordion_item:
         weight: -12
         enabled: false
+      event_participants:
+        weight: 20
+        enabled: false
       file_attachments:
         weight: 10
         enabled: true
@@ -72,15 +75,24 @@ settings:
       image:
         weight: -13
         enabled: true
+      labelled_image:
+        weight: 26
+        enabled: false
       links:
         weight: -10
         enabled: true
-      links_service_page:
-        weight: 21
-        enabled: false
       listing_articles:
         weight: 9
         enabled: true
+      photos:
+        weight: 29
+        enabled: false
+      services_taxonomy:
+        weight: 30
+        enabled: false
+      sub_heading_section:
+        weight: 31
+        enabled: false
       testimonials:
         weight: 23
         enabled: true
@@ -90,7 +102,4 @@ settings:
       work_card:
         weight: 15
         enabled: true
-      work_listing:
-        weight: 26
-        enabled: false
 field_type: entity_reference_revisions

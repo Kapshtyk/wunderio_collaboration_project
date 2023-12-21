@@ -1,0 +1,5 @@
+cookies_consent.consent_list:
+  title: 'Cookies consents'
+  description: 'A list of cookie permissions generated using POST requests to the /cookies_consent/add-consent endpoint from the Next.js application.'
+  route_name: cookies_consent.consent_list
+  parent: system.admin_reports

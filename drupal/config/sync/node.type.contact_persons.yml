@@ -1,0 +1,18 @@
+uuid: 8b41ba92-9eff-4987-ae4f-ca4b8fd69940
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+name: 'Contact Persons'
+type: contact_persons
+description: 'create content related to contact persons'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 interface ContentLinkProps {
-  href: string
-  children: React.ReactNode
+  href: string;
+  children: React.ReactNode;
 }
 
 export function SkipToContentLink({ href, children }: ContentLinkProps) {
@@ -15,5 +15,5 @@ export function SkipToContentLink({ href, children }: ContentLinkProps) {
     >
       {children}
     </Link>
-  )
+  );
 }

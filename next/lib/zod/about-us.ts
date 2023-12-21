@@ -1,7 +1,7 @@
-import { DrupalNode } from 'next-drupal'
-import { z } from 'zod'
+import { DrupalNode } from "next-drupal";
+import { z } from "zod";
 
-import { MetatagsSchema } from '@/lib/zod/metatag'
+import { MetatagsSchema } from "@/lib/zod/metatag";
 import {
   AccordionSchema,
   FileAttachmentsSchema,
@@ -11,10 +11,12 @@ import {
   ImageSchema,
   LinksSchema,
   ListingArticlesSchema,
-  VideoSchema
-} from '@/lib/zod/paragraph'
+  TestimonialsSchema,
+  VideoSchema,
+  WorkCardSchema,
+} from "@/lib/zod/paragraph";
 
-const AboutUsElementsSchema = z.discriminatedUnion('type', [
+const AboutElementsSchema = z.discriminatedUnion("type", [
   FormattedTextSchema,
   ImageSchema,
   VideoSchema,
@@ -23,52 +25,62 @@ const AboutUsElementsSchema = z.discriminatedUnion('type', [
   HeroSchema,
   ListingArticlesSchema,
   FileAttachmentsSchema,
-  HeadingSectionSchema
-])
+  HeadingSectionSchema,
+  TestimonialsSchema,
+  WorkCardSchema,
+]);
 
-export const AboutUsSchema = z.object({
-  type: z.literal('node--about_us'),
+export const AboutSchema = z.object({
+  type: z.literal("node--about_us"),
   id: z.string(),
   title: z.string(),
-  field_content_elements: z.array(AboutUsElementsSchema),
-  metatag: MetatagsSchema.optional()
-})
+  field_content_elements: z.array(AboutElementsSchema),
+  path: z.object({
+    alias: z.string(),
+  }),
+  body: z.object({
+    value: z.string(),
+    format: z.string(),
+    processed: z.string(),
+  }),
+  metatag: MetatagsSchema.optional(),
+});
 
-export function validateAndCleanupAboutUs(page: DrupalNode): AboutUs | null {
+export function validateAndCleanupAbout(about: DrupalNode): About | null {
   try {
     // Validate the top level fields first.
-    const topLevelAboutUsData = AboutUsSchema.omit({
-      field_content_elements: true
-    }).parse(page)
+    const topLevelAboutData = AboutSchema.omit({
+      field_content_elements: true,
+    }).parse(about);
 
     // Validate the field_content_elements separately, one by one.
     // This way, if one of them is invalid, we can still return the rest of the page contents.
-    const validatedParagraphs = page.field_content_elements
+    const validatedParagraphs = about.field_content_elements
       .map((paragraph: any) => {
-        const result = AboutUsElementsSchema.safeParse(paragraph)
+        const result = AboutElementsSchema.safeParse(paragraph);
 
         switch (result.success) {
           case true:
-            return result.data
+            return result.data;
           case false:
             console.log(
               `Error validating page paragraph ${paragraph.type}: `,
-              JSON.stringify(result.error, null, 2)
-            )
-            return null
+              JSON.stringify(result.error, null, 2),
+            );
+            return null;
         }
       })
-      .filter(Boolean)
+      .filter(Boolean);
 
     return {
-      ...topLevelAboutUsData,
-      field_content_elements: validatedParagraphs
-    }
+      ...topLevelAboutData,
+      field_content_elements: validatedParagraphs,
+    };
   } catch (error) {
-    const { name = 'ZodError', issues = [] } = error
-    console.log(JSON.stringify({ name, issues, page }, null, 2))
-    return null
+    const { name = "ZodError About us", issues = [] } = error;
+    console.log(JSON.stringify({ name, issues, about }, null, 2));
+    return null;
   }
 }
 
-export type AboutUs = z.infer<typeof AboutUsSchema>
+export type About = z.infer<typeof AboutSchema>;
