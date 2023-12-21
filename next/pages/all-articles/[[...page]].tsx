@@ -17,6 +17,7 @@ import {
   ArticleTeaser as ArticleTeaserType,
   validateAndCleanupArticleTeaser,
 } from "@/lib/zod/article-teaser";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 interface AllArticlesPageProps extends LayoutProps {
   articleTeasers: ArticleTeaserType[];
@@ -29,10 +30,19 @@ export default function AllArticlesPage({
   paginationProps,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation();
+  const breadcrumbs = [
+    {
+      title: t("all-articles-link"),
+      url: "/all-articles",
+    },
+  ];
   const focusRef = useRef<HTMLDivElement>(null);
   return (
     <>
       <Meta title={t("all-articles")} metatags={[]} />
+      <div className="container">
+        {breadcrumbs?.length ? <Breadcrumbs items={breadcrumbs} /> : null}
+      </div>
       <div ref={focusRef} tabIndex={-1} />
       <HeadingPage title={t("all-articles")} />
       <ul className="mt-4">

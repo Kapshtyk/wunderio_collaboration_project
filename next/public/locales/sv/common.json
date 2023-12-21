@@ -79,6 +79,7 @@
   "modal-close": "Stäng",
   "image-of": "Bild av {{name}}",
   "all-articles": "Alla artiklar",
+  "all-articles-link": "Artiklar",
   "downloadable-files": "Lista över nedladdningsbara filer",
   "download": "Ladda ner",
   "password-updated-login-below": "Ditt lösenord har uppdaterats. Du kan logga in med formuläret nedan.",
@@ -141,6 +142,7 @@
   "this-is-what-we-do": "Det här är vad vi gör",
   "our-offices": "Våra kontor",
   "meet-our-team": "Träffa vårt team",
+  "wunder-in-numbers": "Wunders Nummers",
   "services": "Tjänster",
   "form-contact-title": "Kontakta oss",
   "contact-us": "Kontakta oss"

@@ -58,6 +58,7 @@ export default function WorkPage({
         </div>
       </div>
       <div>
+        <h1 className="uppercase text-main font-bold text-lg my-6">{t("wunder-in-numbers")}</h1>
         <Numbers numbers={wunderNumbers} />
       </div>
 
@@ -70,10 +71,8 @@ export default function WorkPage({
         <LogoStrip />
       </div> */}
 
-      <div>
-        <h1 className="uppercase text-main font-bold text-lg mb-4">
-          {t("more-about-our-clients")}
-        </h1>
+      <div className="my-12">
+        <h1 className="uppercase text-main font-bold text-lg mb-4">{t("more-about-our-clients")}</h1>
         <div className="md:grid grid-cols-3 gap-3">
           {allArticles
             .filter(

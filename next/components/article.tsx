@@ -22,7 +22,7 @@ export function Article({ article, ...props }: ArticleProps) {
   const breadcrumbs = [
     {
       //TODO: fix link and style ALL ARTICLES page
-      title: t("articles-link"),
+      title: t("all-articles-link"),
       url: "/all-articles",
     },
     {
@@ -40,30 +40,35 @@ export function Article({ article, ...props }: ArticleProps) {
       {article.field_excerpt && (
         <div className="my-4 text-xl">{article.field_excerpt}</div>
       )}
-      <div className="mb-4 flex items-center bg-primary-50 p-2 rounded-full w-6/12">
+
+      <div className="flex items-center justify-center bg-primary-50 p-2 rounded-md shadow-md mb-4">
         {article.uid?.field_profile_picture?.uri && (
-          <div>
+          <div className="w-12 h-12">
             <Image
               src={absoluteUrl(article.uid?.field_profile_picture?.uri.url)}
               width={100}
               height={100}
-              layout="fixed"
-              className="rounded-full w-16 h-16 mr-3"
-              alt={article.uid?.field_profile_picture.resourceIdObjMeta.alt}
+              alt="Author Image"
+              className="w-full h-full rounded-full object-cover"
             />
           </div>
         )}
-        <div>
+
+        <div className="flex-grow ml-4 h-6">
           {article.uid?.display_name && (
-            <span className="text-accent-hugs">
-              {t("posted-by", { author: article.uid?.display_name })} -{" "}
-            </span>
+            <p className="text-lg font-semibold text-accent-hugs">
+              {t("posted-by", { author: article.uid?.display_name })}
+            </p>
           )}
-          <span className="text-accent-hugs">
+        </div>
+
+        <div>
+          <p className="text-accent-hugs text-sm h-0">
             {formatDate(article.created, router.locale)}
-          </span>
+          </p>
         </div>
       </div>
+
       {article.field_image && (
         <figure>
           <Image
