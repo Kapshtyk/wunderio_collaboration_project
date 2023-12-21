@@ -8,9 +8,9 @@ export function ParagraphLabelledImage({
 }) {
   return (
     <>
-     <div className="mt-8 mb-8">
-      <Media media={paragraph.field_image} priority={true} />
-      <p className="text-stone text-sm">{paragraph.field_label}</p>
+      <div className="mt-8 mb-8">
+        <Media media={paragraph.field_image} priority={true} />
+        <p className="text-stone text-sm">{paragraph.field_label}</p>
       </div>
     </>
   );

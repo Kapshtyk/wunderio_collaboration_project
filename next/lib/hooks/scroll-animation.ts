@@ -1,4 +1,4 @@
-import { useEffect} from 'react';
+import { useEffect } from "react";
 
 const useScrollReveal = (ref: React.MutableRefObject<HTMLElement | null>) => {
   useEffect(() => {
@@ -8,16 +8,16 @@ const useScrollReveal = (ref: React.MutableRefObject<HTMLElement | null>) => {
         const windowHeight = window.innerHeight;
 
         if (revealPosition < windowHeight) {
-          ref.current.classList.add('animate-fadeIn');
+          ref.current.classList.add("animate-fadeIn");
         } else {
-          ref.current.classList.remove('animate-fadeIn');
+          ref.current.classList.remove("animate-fadeIn");
         }
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [ref]);
 };

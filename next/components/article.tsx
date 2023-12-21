@@ -59,7 +59,9 @@ export function Article({ article, ...props }: ArticleProps) {
               {t("posted-by", { author: article.uid?.display_name })} -{" "}
             </span>
           )}
-          <span className="text-accent-hugs">{formatDate(article.created, router.locale)}</span>
+          <span className="text-accent-hugs">
+            {formatDate(article.created, router.locale)}
+          </span>
         </div>
       </div>
       {article.field_image && (

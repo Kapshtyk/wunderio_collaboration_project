@@ -35,6 +35,18 @@ const nextConfig = {
           source: "/tjänster",
           destination: "/services",
         },
+        {
+          source: "/ota-yhteytta",
+          destination: "/contact-us",
+        },
+        {
+          source: "/kontakta-oss",
+          destination: "/contact-us",
+        },
+        {
+          source: "/contact-us",
+          destination: "/contact-us",
+        },
       ],
     };
   },
