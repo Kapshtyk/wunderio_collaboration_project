@@ -18,7 +18,7 @@ interface HeaderProps {
 export function Header({ menu }: HeaderProps) {
   return (
     <header className="z-50 flex-shrink-0 border-b bg-background border-foreground/15 md:sticky md:top-0">
-      <div className="mx-auto relative flex px-6 sm:px-28 h-20 flex-row items-center justify-between">
+      <div className="mx-auto relative flex px-6 md:px-16 lg:px-28 h-20 flex-row items-center justify-between">
         <HomeLink />
         <NavigationMenuDesktop menu={menu} />
         <MobMenu menu={menu} />

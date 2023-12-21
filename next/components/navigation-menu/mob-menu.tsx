@@ -4,8 +4,8 @@ import React from "react";
 import { Menu } from "@/lib/zod/menu";
 import Hamburger from "@/styles/icons/menu.svg";
 
-import { DarkModeToggle } from "../header/dark-mode-toggle";
-import { LanguageSwitcher } from "../header/language-switcher";
+import { DarkModeToggle } from "@/components/header/dark-mode-toggle";
+import { LanguageSwitcher } from "@/components/header/language-switcher";
 
 import {
   Sheet,
@@ -15,6 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/ui/sheet";
+import { useTranslation } from "next-i18next";
 
 interface NavigationMenuProps {
   menu: Menu;
@@ -22,6 +23,7 @@ interface NavigationMenuProps {
 
 const MobMenu = ({ menu }: NavigationMenuProps) => {
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
@@ -33,9 +35,9 @@ const MobMenu = ({ menu }: NavigationMenuProps) => {
       </SheetTrigger>
       <SheetContent side="bottom">
         <SheetHeader>
-          <SheetTitle>Menu</SheetTitle>
+          <SheetTitle>{t('menu')}</SheetTitle>
           <SheetDescription>
-            <ul className="flex w-full flex-col items-center">
+            <ul className="flex w-full flex-col pl-4">
               {menu.map((item) => (
                 <Link
                   key={item.id}
@@ -48,13 +50,12 @@ const MobMenu = ({ menu }: NavigationMenuProps) => {
             </ul>
           </SheetDescription>
         </SheetHeader>
-        <SheetTitle>Preferences</SheetTitle>
+        <SheetTitle>{t("preferences")}</SheetTitle>
         <SheetDescription>
-          Here you can change your preferences related to the language and theme
-        </SheetDescription>
-        <SheetTitle>Theme switcher</SheetTitle>
+          {t("preferences_description")}        </SheetDescription>
+        <SheetTitle>{t("theme_switcher")}</SheetTitle>
         <DarkModeToggle />
-        <SheetTitle>Language switcher</SheetTitle>
+        <SheetTitle>{t("language_switcher")}</SheetTitle>
         <LanguageSwitcher />
       </SheetContent>
     </Sheet>
