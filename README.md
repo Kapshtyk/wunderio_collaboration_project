@@ -1,5 +1,7 @@
 # Collaboration project with Wunder
 
+<img width="1509" alt="Screenshot 2024-05-14 at 00 55 24" src="https://github.com/Kapshtyk/wunderio_collaboration_project/assets/114028017/255cf508-ac1f-40b4-b715-4eaf9d88c4dc">
+
 This project is a final group work within the Full Stack Developer program at Business College Helsinki and it was done in collaboration with [Wunder](https://wunder.io). The main goal of this project was rebuilding a website using headless Drupal with Next.js on the frontend based on [next-drupal-starterkit](https://github.com/wunderio/next-drupal-starterkit), an innovation by Mario Vercellotti from Wunder. 
 
 ## Project description
@@ -62,5 +64,13 @@ The frontend works as a normal Next.js application, so you can just prefix the n
 - Tailwind
 - Next-auth
 - Next-i18next
+
+## Contributors
+
+- Nailya Philippova [@nailaphilip](https://github.com/nailaphilip)
+- Shree Ram Bhusal [shree0007](https://github.com/shree0007)
+- Sahil Thapa [@sahilt2](https://github.com/sahilt2)
+- Oliver Janhunen [@OliverOsmoSamuel](https://github.com/OliverOsmoSamuel)
+- Arseniiy Kapshtyk [@Kapshtyk](https://github.com/Kapshtyk)
 
 
