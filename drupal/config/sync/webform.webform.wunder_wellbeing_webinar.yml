@@ -1,4 +1,4 @@
-uuid: fe3c42a2-1d5d-4976-b773-5020d2aa96f3
+uuid: abd60257-b65d-4907-b1cd-633b7b422598
 langcode: en
 status: open
 dependencies: {  }
@@ -16,18 +16,18 @@ description: ''
 categories:
   - events
 elements: |-
-  name:
-    '#type': textfield
-    '#title': Name
-    '#required': true
-    '#unique': true
-    '#format_items': comma
   email:
     '#type': email
     '#title': Email
     '#required': true
     '#unique': true
     '#unique_entity': true
+    '#format_items': comma
+  name:
+    '#type': textfield
+    '#title': Name
+    '#required': true
+    '#unique': true
     '#format_items': comma
   actions:
     '#type': webform_actions

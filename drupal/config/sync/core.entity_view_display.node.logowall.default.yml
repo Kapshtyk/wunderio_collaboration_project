@@ -1,0 +1,48 @@
+uuid: 1289cf99-d4ce-4cb2-96f8-1733818bf840
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.logowall.field_field_link_client_site
+    - field.field.node.logowall.field_image
+    - image.style.wide
+    - node.type.logowall
+  module:
+    - image
+    - link
+    - user
+id: node.logowall.default
+targetEntityType: node
+bundle: logowall
+mode: default
+content:
+  field_field_link_client_site:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: wide
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: -1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  langcode: true

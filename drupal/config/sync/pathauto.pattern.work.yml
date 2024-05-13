@@ -1,18 +1,18 @@
 uuid: 865f4b8f-4604-4273-b083-ca68903715f0
 langcode: en
-status: true
+status: false
 dependencies:
   module:
     - node
 id: work
 label: Work
 type: 'canonical_entities:node'
-pattern: '[node:field_page_type_tag]'
+pattern: '/[node:field_page_type_tag]'
 selection_criteria:
-  fe689680-dd5f-48f9-9792-1531805a7ef0:
+  d379804c-7ba9-4cc0-91db-43e7a43f9745:
     id: 'entity_bundle:node'
     negate: false
-    uuid: fe689680-dd5f-48f9-9792-1531805a7ef0
+    uuid: d379804c-7ba9-4cc0-91db-43e7a43f9745
     context_mapping:
       node: node
     bundles:

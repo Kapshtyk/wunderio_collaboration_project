@@ -1,0 +1,22 @@
+uuid: 286943fa-c379-4815-bb00-009b10b93582
+langcode: sv
+status: true
+dependencies:
+  module:
+    - node
+id: about_us
+label: 'About us'
+type: 'canonical_entities:node'
+pattern: '/[node:title]'
+selection_criteria:
+  7fd1a161-f86a-470e-85d6-ad7cecd277c3:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 7fd1a161-f86a-470e-85d6-ad7cecd277c3
+    context_mapping:
+      node: node
+    bundles:
+      about_us: about_us
+selection_logic: and
+weight: -5
+relationships: {  }

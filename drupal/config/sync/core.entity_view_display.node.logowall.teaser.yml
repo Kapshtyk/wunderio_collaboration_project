@@ -1,0 +1,37 @@
+uuid: bd04f99a-34b9-48e1-867a-a27b7f58a8b1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.logowall.field_field_link_client_site
+    - field.field.node.logowall.field_image
+    - image.style.medium
+    - node.type.logowall
+  module:
+    - image
+    - user
+id: node.logowall.teaser
+targetEntityType: node
+bundle: logowall
+mode: teaser
+content:
+  field_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: medium
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: -1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_field_link_client_site: true
+  langcode: true

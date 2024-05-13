@@ -1,0 +1,27 @@
+uuid: f04badec-f15d-4f36-9030-9d8bccf415ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_field_link_client_site
+    - node.type.logowall
+  module:
+    - link
+    - tmgmt_content
+third_party_settings:
+  tmgmt_content:
+    excluded: false
+id: node.logowall.field_field_link_client_site
+field_name: field_field_link_client_site
+entity_type: node
+bundle: logowall
+label: 'field link client site'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 16
+field_type: link

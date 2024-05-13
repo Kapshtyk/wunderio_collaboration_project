@@ -1,0 +1,22 @@
+uuid: cbbfcee8-56db-4de5-80e3-95a305948277
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: work_title
+label: Work
+type: 'canonical_entities:node'
+pattern: '/[node:title]'
+selection_criteria:
+  82a150cf-6bb8-4257-ac83-5b958d2636f8:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 82a150cf-6bb8-4257-ac83-5b958d2636f8
+    context_mapping:
+      node: node
+    bundles:
+      work_main_page: work_main_page
+selection_logic: and
+weight: -5
+relationships: {  }

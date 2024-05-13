@@ -1,0 +1,18 @@
+uuid: 5ace745e-559a-453a-9fed-147067f1f8cc
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.logowall
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: false
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: node.logowall
+target_entity_type_id: node
+target_bundle: logowall
+default_langcode: site_default
+language_alterable: false

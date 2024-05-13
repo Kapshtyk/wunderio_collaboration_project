@@ -1,0 +1,22 @@
+uuid: efe00655-21fd-439a-8fc3-ac0b8c0daaa8
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.logowall
+id: node.logowall.promote
+field_name: promote
+entity_type: node
+bundle: logowall
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

@@ -1,0 +1,20 @@
+uuid: 5edf9cb4-01a6-4e0c-aaf0-dca5c7244c17
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.logowall
+  module:
+    - path
+id: node.logowall.path
+field_name: path
+entity_type: node
+bundle: logowall
+label: 'URL alias'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

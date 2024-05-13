@@ -1,0 +1,18 @@
+uuid: eaa7074f-86ef-4dc2-a22c-be3f279dd156
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.logowall
+id: node.logowall.created
+field_name: created
+entity_type: node
+bundle: logowall
+label: 'Authored on'
+description: 'The time that the node was created.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

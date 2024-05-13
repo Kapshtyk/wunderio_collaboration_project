@@ -5,13 +5,10 @@ import { useRef } from "react";
 
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { FormattedText } from "@/components/formatted-text";
-/* import { HeadingParagraph } from "@/components/heading--paragraph"; */
 import { Meta } from "@/components/meta";
 import { Paragraph } from "@/components/paragraph";
 import { ParagraphLabelledImage } from "@/components/paragraph--labelled-image";
 import { ParagraphVideo } from "@/components/paragraph--video";
-/* import { ParagraphHeadingSection } from "@/components/paragraph--heading-section";
-import { ParagraphText } from "@/components/paragraph--text"; */
 import ServicesTypes from "@/components/services-types";
 import { WorkWorkCard } from "@/components/workWorkCard";
 import {

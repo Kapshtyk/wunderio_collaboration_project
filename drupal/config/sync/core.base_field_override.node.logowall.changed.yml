@@ -1,0 +1,18 @@
+uuid: a3169f7b-b3ad-46b1-9054-3eb6dbd7c856
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.logowall
+id: node.logowall.changed
+field_name: changed
+entity_type: node
+bundle: logowall
+label: Changed
+description: 'The time that the node was last edited.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

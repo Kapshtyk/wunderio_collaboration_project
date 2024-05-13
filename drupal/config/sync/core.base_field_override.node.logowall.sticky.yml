@@ -1,0 +1,22 @@
+uuid: 5a4babda-137b-4753-b589-a0349a1af611
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.logowall
+id: node.logowall.sticky
+field_name: sticky
+entity_type: node
+bundle: logowall
+label: 'Sticky at top of lists'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
