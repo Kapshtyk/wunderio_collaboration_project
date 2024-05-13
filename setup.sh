@@ -11,10 +11,9 @@ commands=(
   "lando drush eshd -y"
   "lando drush eshs"
   "lando npm i"
+  "lando db-import database.sql.gz"
   "lando npm run build"
   "(lando npm run start&)"
-  "lando drush en wunder_democontent -y"
-  "lando drush mim --group=demo_content --execute-dependencies"
   "lando npm-stop || true"
 )
 
@@ -55,11 +54,24 @@ run_commands() {
     echo "➡️ Running command: $command"
     last_successful_command=$i
     echo $last_successful_command > $status_file
-    if eval "$command"; then
-      echo "✔ Command successful."
+    if [[ $command == "lando db-import database.sql.gz" ]]; then
+      output=$(eval "$command" 2>&1)
+      if [[ $output == *"Import complete"* ]]; then
+        echo "✔ Command successful."
+      elif [[ $output == *"/bin/sh: 1: drush: not found"* ]]; then
+        echo "⚠️ Drush not found, but continuing because the database import was successful."
+      else
+        echo "❌ Command $command failed."
+        echo "Output: $output"
+        exit 1
+      fi
     else
-      echo "❌ Command $command failed."
-      exit 1
+      if eval "$command"; then
+        echo "✔ Command successful."
+      else
+        echo "❌ Command $command failed."
+        exit 1
+      fi
     fi
   done
 
